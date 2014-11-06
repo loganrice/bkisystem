@@ -1,0 +1,154 @@
+%div.container              
+  %section#widget-grid
+    -# row -->
+    %div.row
+      -# NEW WIDGET START -->
+      %article.col-xs-12.col-sm-12.col-md-12.col-lg-12
+        -# Widget ID (each widget will need unique ID)-->
+        %div.jarviswidget#wid-id-0
+          -# widget options:
+          -# usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+          -#  data-widget-colorbutton="false"
+          -#  data-widget-editbutton="false"
+          -#  data-widget-togglebutton="false"
+          -# data-widget-deletebutton="false"
+          -#  data-widget-fullscreenbutton="false"
+          -#  data-widget-custombutton="false"
+          -#  data-widget-collapsed="true"
+          -#  data-widget-sortable="false"
+
+          %header
+            %span.widget-icon
+              %i.fa.fa-comments
+            %h2 World Flag
+          -# widget div-->
+          %div
+            -# widget edit box -->
+            %div.jarviswidget-editbox
+              -# This area used as dropdown edit box -->
+              %input.form-control{ :type => "text" }
+            -# end widget edit box -->
+            -# widget content -->
+            %div.widget-body
+              %div.alert.alert-info
+                %i.fa.fa-exclamation
+                Please note: flag images has a base class for image 
+                %code
+                  flag flag-*
+                A full example of this in use will be as follows: 
+                %code
+                  img class="flag flag-us" src="/Content/img/blank.gif"
+              %h2 Africa
+              %div.row
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-dz', alt: 'Algeria'
+                  Algeria
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-ao', alt: 'Angola'
+                  Angola
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-bj', alt: 'Benin'
+                  Benin
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-bw', alt: 'Botswana'
+                  Botswana
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-bf', alt: 'Burkina Faso'
+                  Burkina Faso
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-bi', alt: 'Burundi'
+                  Burundi
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-bi', alt: 'Burundi'
+                  Burundi             
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-cm', alt: 'Cameroon'
+                  Cameroon
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-cv', alt: 'Cape Verde'
+                  Cape Verde             
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-cf', alt: 'Central African Republic'
+                  Central African Republic 
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-td', alt: 'Chad'
+                  Chad
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-km', alt: 'Comoros'
+                  Comoros                             
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-cg', alt: 'Congo'
+                  Congo                             
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-cd', alt: 'Congo, The Democratic Republic of the'
+                  Congo, The Democratic Republic of the                          
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-cd', alt: "Côte d'Ivoire"
+                  Côte d'Ivoire                     
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-dj', alt: 'Djibouti'
+                  Djibouti  
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-eg', alt: 'Egypt'
+                  Egypt 
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-gq', alt: 'Equatorial Guinea'
+                  Equatorial Guinea 
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-er', alt: 'Eritrea'
+                  Eritrea
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-et', alt: 'Ethiopia'
+                  Ethiopia
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-ga', alt: 'Gabon'
+                  Gabon 
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-gm', alt: 'Gambia'
+                  Gambia
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-gh', alt: 'Ghana'
+                  Ghana   
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-gn', alt: 'Guinea'
+                  Guinea
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-gw', alt: 'Guinea-Bissau'
+                  Guinea-Bissau
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-ke', alt: 'Kenya'
+                  Kenya
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-ls', alt: 'Lesotho'
+                  Lesotho
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-lr', alt: 'Liberia'
+                  Liberia
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-ly', alt: 'Libya'
+                  Libya
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-mg', alt: 'Madagascar'
+                  Madagascar
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-mw', alt: 'Malawi'
+                  Malawi
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-ml', alt: 'Mali'
+                  Mali    
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-mr', alt: 'Mauritania'
+                  Mauritania 
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-mu', alt: 'Mauritius'
+                  Mauritius 
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-yt', alt: 'Mayotte'
+                  Mayotte  
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-ma', alt: 'Morocco'
+                  Morocco 
+                %div.col-xs-6.col-md-3.col-sm-4.demo-icon-font
+                  = image_tag 'blank.gif', class: 'flag flag-mz', alt: 'Mozambique'
+                  Mozambique 

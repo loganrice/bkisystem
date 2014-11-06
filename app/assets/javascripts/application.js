@@ -12,6 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap.min
+//= require jquery-ui
+//= require bootstrap
+//= require app.config
+//= require demo
+//= require smartwidgets/jarvis.widget
 //= require turbolinks
 
