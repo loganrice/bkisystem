@@ -1,0 +1,12 @@
+%div.ajax-dropdown
+  -#- the ID links are fetched via AJAX to the ajax container "ajax-notifications" -->
+  %div.btn-group.btn-group-justified{ "data-toggle" => "buttons" }
+    %label.btn.btn-default
+      %input{ :type => "radio", :name => "activity", :id => "ajax/notify/mail.html" }
+      Msgs (14)
+    %label.btn.btn-default
+      %input{ :type => "radio", :name => "activity", :id => "ajax/notify/notifications.html" }
+      notify (3)
+    %label.btn.btn-default
+      %input{ :type => "radio", :name => "activity", :id => "ajax/notify/tasks.html" }
+      Tasks (4)

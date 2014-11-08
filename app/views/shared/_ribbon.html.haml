@@ -1,0 +1,26 @@
+%div#ribbon
+  %span.ribbon-button-alignment
+    %span#refresh.btn.btn-ribbon{ "data-action" => "resetWidgets", "data-title" => "refresh", :rel => "tooltip", "data-placement" => "bottom", "data-original-title" => "<i class='text-warning fa fa-warning'></i> Warning! This will reset all your widget settings.", "data-html" => "true" }
+      %i.fa.fa-refresh
+  -# breadcrumb -->
+  %ol.breadcrumb
+    %li Home
+    %li Dashboard
+  -# end breadcrumb -->
+
+  -#- You can also add more buttons to the
+  -#ribbon for further usability
+  -#
+  -#Example below:
+  -#
+  %span.ribbon-button-alignment.pull-right
+  -#%span#search.btn.btn-ribbon.hidden-xs{ "data-title" => "search" }
+  -#  %i.fa-grid 
+  -#  Change Grid
+  -#%span#add.btn.btn-ribbon.hidden-xs.pull-right{ "data-title" => "add" }
+  -#  %i.fa-plus
+  -#  Add
+  -#%span#search.btn.btn-ribbon{ "data-title" => "search" }
+  -#  %i.fa-search
+  -#  %span.hidden-mobile Search
+  -#</span> -->

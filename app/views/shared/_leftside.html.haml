@@ -1,0 +1,171 @@
+-# Left panel : Navigation area -->
+-# Note: This width of the aside area can be adjusted through LESS variables -->
+%aside#left-panel
+  -#- User info -->
+  %div.login-info
+    %span 
+      -#!-- User image size is adjusted inside CSS, it should stay as it --> 
+      %a{ :href => "javascript:void(0);", :id => "show-shortcut", "data-action" => "toggleShortcut" }
+        = image_tag 'avatars/sunny.png', alt: "me", class: "online"
+        %span
+          john.doe 
+        %i.fa.fa-angle-down 
+  -# end user info -->
+
+  -#- NAVIGATION : This navigation is also responsive-->
+  %nav
+    %ul
+      %li.active
+        %a{ :href => "index.html", :title => "Dashboard" }
+          %i.fa.fa-lg.fa-fw.fa-home
+          %span.menu-item-parent Dashboard
+      %li
+        %a{ :href => "inbox.html" }
+          %i.fa.fa-lg.fa-fw.fa-inbox
+          %span.menu-item-parent Inbox
+          %span.badge.pull-right.inbox-badge 14
+      %li
+        %a{ :href => "#" }
+          %i.fa.fa-lg.fa-fw.fa-bar-chart-o 
+          %span.menu-item-parent Reports
+        %ul
+          %li
+            %a{ :href => "flot.html" } Flot Chart
+          %li
+            %a{ :href => "morris.html" } Morris Charts
+          %li
+            %a{ :href => "inline-charts.html" } Inline Charts
+          %li
+            %a{ :href => "dygraphs.html" } Dygraphs
+          %li
+            %a{ :href => "chartjs.html" }
+              Chart.js 
+              %span.badge.pull-right.inbox-badge.bg-color-yellow new
+      %li
+        %a{ :href => "#" }
+          %i.fa.fa-lg.fa-fw.fa-table
+          %span.menu-item-parent Contracts
+        %ul
+          %li
+            %a{ :href => "table.html" } Normal Tables
+          %li
+            %a{ :href => "datatables.html" }
+              Data Tables 
+              %span.badge.inbox-badge.bg-color-greenLight v1.10
+          %li
+            %a{ :href => "jqgrid.html" } Jquery Grid
+      %li
+        %a{ :href => "#" }
+          %i.fa.fa-lg.fa-fw.fa-pencil-square-o
+          %span.menu-item-parent Forms
+        %ul
+          %li
+            %a{ :href => "form-elements.html" } Smart Form Elements
+          %li
+            %a{ :href => "form-templates.html" } Smart Form Layouts
+          %li
+            %a{ :href => "validation.html" } Smart Form Validation
+          %li
+            %a{ :href => "bootstrap-forms.html" } Bootstrap Form Elements
+          %li
+            %a{ :href => "bootstrap-validator.html" } Bootstrap Form Validation
+          %li
+            %a{ :href => "plugins.html" } Form Plugins
+          %li
+            %a{ :href => "wizard.html" } Wizards
+          %li
+            %a{ :href => "other-editors.html" } Bootstrap Editors
+          %li
+            %a{ :href => "dropzone.html" } Dropzone
+          %li
+            %a{ :href => "image-editor.html" }
+              Image Cropping 
+              %span.badge.pull-right.inbox-badge.bg-color-yellow 
+                new
+      %li
+        %a{ :href => "#" }
+          %i.fa.fa-lg.fa-fw.fa-desktop
+          %span.menu-item-parent UI Elements
+        %ul
+          %li
+            %a{:href => "general-elements.html" } General Elements
+          %li
+            %a{ :href => "buttons.html" } Buttons
+
+          %li
+            %a{ :href => "#" } Icons
+            %ul
+              %li
+                %a{ :href => "fa.html" }
+                  %i.fa.fa-plane
+                  Font Awesome
+              %li
+                %a{ :href => "glyph.html" }
+                  %i.glyphicon.glyphicon-plane
+                  Glyph Icons
+              %li
+                %a{ :href => "flags.html" }
+                %i.fa.fa-flag
+                Flags
+          %li
+            %a{ :href => "grid.html" } Grid
+          %li
+            %a{ :href => "treeview.html" } Tree View
+          %li
+            %a{ :href => "nestable-list.html" } Nestable Lists
+          %li
+            %a{ :href => "jqui.html" } JQuery UI
+          %li
+            %a{ :href => "typography.html" } Typography
+          %li
+            %a{ :href => "#" } Six Level Menu
+            %ul
+              %li
+                %a{ :href => "#" }
+                  %i.fa.fa-fw.fa-folder-open
+                  Item #2
+                %ul
+                  %li
+                    %a{ :href => "#" }
+                      %i.fa.fa-fw.fa-folder-open
+                      Sub #2.1
+                    %ul
+                      %li
+                        %a{ :href => "#" }
+                        %i.fa.fa-fw.fa-file-text
+                        Item #2.1.1
+                      %li
+                        %a{ :href => "#" }
+                          %i.fa.fa-fw.fa-plus
+                          Expand
+                        %ul
+                          %li
+                            %a{ :href => "#" }
+                              %i.fa.fa-fw.fa-file-text
+                          %li
+                            %a{ :href => "#" }
+                            %i.fa.fa-fw.fa-trash-o
+                            Delete
+              %li
+                %a{ :href => "#" }
+                  %i.fa.fa-fw.fa-folder-open
+                  Item #3
+
+                %ul
+                  %li
+                    %a{ :href => "#"}
+                      %i.fa.fa-fw.fa-folder-open
+                      3ed Level
+                    %ul
+                      %li
+                        %a{ :href => "#" }
+                          %i.fa.fa-fw.fa-file-text
+                          File
+                      %li
+                        %a{ :href => "#" }
+                          %i.fa.fa-fw.fa-file-text
+                          File
+ 
+  %span.minifyme{ "data-action" => "minifyMenu" }
+    %i.fa.fa-arrow-circle-left.hit
+      

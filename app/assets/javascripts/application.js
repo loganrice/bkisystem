@@ -13,9 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require bootstrap
 //= require app.config
+//= require plugin/jquery-touch/jquery.ui.touch-punch
+//= require bootstrap
+//= require notification/SmartNotification
 //= require demo
 //= require smartwidgets/jarvis.widget
-//= require turbolinks
 
+//= require plugin/jquery-validate/jquery.validate
+//= speech/voicecommand
+//= require turbolinks
