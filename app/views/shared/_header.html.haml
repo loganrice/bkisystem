@@ -3,7 +3,8 @@
     -# PLACE YOUR LOGO HERE -->
     %span#logo
       -#=image_tag 'logo.png', alt: "BKISystem"
-      =image_tag 'bki_logo.png', alt: "BKISystem"
+      =image_tag 'bki_logo.png'
+      %small BKI Systems
     -# END LOGO PLACEHOLDER -->
 
     -# Note: The activity badge color changes when clicked and resets the number to 0
@@ -55,9 +56,6 @@
         %a{ :href => "javascript:void(0);" }
           Winston | Sams Market
           %small About 2 days
-      %li
-        %a{ :href => "javascript:void(0);" }
-          Assesment Report for merchant account
       %li.divider
       %li
         %a.fa.fa-power-off{ :href => "javascript:void(0);" }
@@ -113,7 +111,7 @@
     %div#logout.btn-header.transparent.pull-right
       %span 
         %a{ :href => '@Url.Action("login", "account")', :title => "Sign Out", "data-action" => "userLogout", "data-logout-msg" => "You can improve your security further after logging out by closing this opened browser" }
-        %i.fa.fa-sign-out
+          %i.fa.fa-sign-out
     -# end logout button -->
     -# search mobile button (this is hidden till mobile view port) -->
     %div#search-mobile.btn-header.transparent.pull-right
@@ -134,86 +132,8 @@
         %a{ :href => "javascript:void(0);", "data-action" => "launchFullscreen", :title => "Full Screen" }
           %i.fa.fa-arrows-alt
     -# end fullscreen button -->
-    -# #Voice Command: Start Speech -->
-    %div#speech-btn.btn-header.transparent.pull-right.hidden-sm.hidden-xs
-      %div
-        %a{ :href => "javascript:void(0)", :title => "Voice Command", "data-action" => "voiceCommand" }
-          %i.fa.fa-microphone
-        %div.popover.bottom
-          %div.arrow
-          %div.popover-content
-            %h4.vc-title
-              Voice command activated 
-              %br
-              %small
-                Please speak clearly into the mic
-            %h4.vc-title-error.text-center
-              %i.fa.fa-microphone-slash
-              Voice command failed
-              %br
-              %small.txt-color-red
-                Must 
-                %strong "Allow"
-                Microphone
-              %br
-              %small.txt-color-red
-                Must have
-                %strong
-                  Internet Connection
-            %a{ :href => "javascript:void(0);", :class => "btn btn-success", :onclick => "commands.help()" }
-              See Commands
-            %a{ :href => "javascript:void(0);", :class => "btn bg-color-purple txt-color-white", :onclick => "$('#speech-btn .popover').fadeOut(50);" }
-              Close Popup
-    -# end voice command -->    
-    -# multiple lang dropdown : find all flags in the flags page -->
-    %ul.header-dropdown-list.hidden-xs
-      %li
-        %a{ :href => "#", :class => "dropdown-toggle", "data-toggle" => "dropdown" }
-          = image_tag 'blank.gif', class: 'flag flag-us', alt: 'United States' 
-          %span English (US)
-          %i.fa.fa-angle-down
-        %ul.dropdown-menu.pull-right
-          %li.active
-            %a{ :href => "javascript:void(0);" }
-              = image_tag 'blank.gif', class: 'flag flag-us', alt: 'United States'
-              English (US)
-          %li
-            %a{ :href => "javascript:void(0);" }
-              = image_tag 'blank.gif', class: 'flag flag-fr', alt: 'France' 
-              Français
-          %li
-            %a{ :href => "javascript:void(0);" }
-              = image_tag 'blank.gif', class: 'flag flag-es', alt: 'Spanish' 
-              Español
-          %li
-            %a{ :href => "javascript:void(0);" }
-              = image_tag 'blank.gif', class: 'flag flag-de', alt: 'German' 
-              Deutsch
-          %li
-            %a{ :href => "javascript:void(0);" }
-              = image_tag 'blank.gif', class: 'flag flag-jp', alt: 'Japan' 
-              日本語
-          %li
-            %a{ :href => "javascript:void(0);" }
-              = image_tag 'blank.gif', class: 'flag flag-cn', alt: 'China' 
-              中文                   
-          %li
-            %a{ :href => "javascript:void(0);" }
-              = image_tag 'blank.gif', class: 'flag flag-it', alt: 'Italy' 
-              Italiano   
-          %li
-            %a{ :href => "javascript:void(0);" }
-              = image_tag 'blank.gif', class: 'flag flag-pt', alt: 'Portugal' 
-              Portugal   
-          %li
-            %a{ :href => "javascript:void(0);" }
-              = image_tag 'blank.gif', class: 'flag flag-ru', alt: 'Russia' 
-              Русский язык   
-          %li
-            %a{ :href => "javascript:void(0);" }
-              = image_tag 'blank.gif', class: 'flag flag-kr', alt: 'Korea' 
-              한국어      
-    -# end multiple lang -->      
+
+    
     
   -#- end pulled right: nav area -->
 -#- END HEADER -->

@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  root 'contracts#index'
+  root 'contracts#home'
+  resources :contracts
   get 'ui(/:action)', controller: 'ui'
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

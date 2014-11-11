@@ -23,11 +23,16 @@
     %link{ :rel => "apple-touch-startup-image", :href => "assets/splash/iphone.png", :media => "screen and (max-device-width: 320px)" }
     
 
-    %title Bkisystem
+    %title Bki Systems
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
+    = render 'shared/header'
+    = render 'shared/leftside'
 
-= yield 
+    %div#main{ :role => "main" }
+      = render 'shared/ribbon' 
+
+      = yield 
 

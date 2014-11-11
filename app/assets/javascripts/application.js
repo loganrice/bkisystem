@@ -14,12 +14,25 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require bootstrap
-//= require app.config
 //= require plugin/jquery-touch/jquery.ui.touch-punch
 //= require notification/SmartNotification
 //= require demo
 //= require smartwidgets/jarvis.widget
-//= require main
+//= require plugin/sparkline/jquery.sparkline
 //= require plugin/jquery-validate/jquery.validate
+//= require plugin/easy-pie-chart/jquery.easy-pie-chart
+//= require plugin/bootstrap-timepicker/bootstrap-timepicker
+//= require plugin/flot/jquery.flot.cust
+//= require plugin/flot/jquery.flot.resize
+//= require plugin/flot/jquery.flot.time
+//= require plugin/moment/moment
+//= require plugin/fullcalendar/jquery.fullcalendar.backup
+//= require plugin/fullcalendar/jquery.fullcalendar
+
 //= speech/voicecommand
+//= require app.config
+//= require app.js
+
+//= require main
+
 //= require turbolinks
