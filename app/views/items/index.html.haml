@@ -1,0 +1,10 @@
+%table#items
+  %thead
+    %tr
+      %th ID
+      %th Description
+  %tbody
+    - @items.each do |item|
+      %tr
+        %td= item.id
+        %td= item.description

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   root 'contracts#home'
   resources :contracts
+  resources :items
   get 'ui(/:action)', controller: 'ui'
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
