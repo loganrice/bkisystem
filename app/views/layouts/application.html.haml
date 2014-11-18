@@ -1,38 +1,39 @@
 <!DOCTYPE html>
 %html
-  %head
-    = favicon_link_tag 'favicon/favicon.ico', rel: 'shortcut icon', type: 'image/x-icon'
-    = favicon_link_tag 'favicon/favicon.ico', rel: 'icon', type: 'image/x-icon'
+	%head
+		= favicon_link_tag 'favicon/favicon.ico', rel: 'shortcut icon', type: 'image/x-icon'
+		= favicon_link_tag 'favicon/favicon.ico', rel: 'icon', type: 'image/x-icon'
 
-    %link{ :rel => "stylesheet", :href => "http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700" }
-    -# Specifying a Webpage Icon for Web Clip 
-    -#     Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
-    = favicon_link_tag 'splash/sptouch-icon-iphone.png', rel: 'apple-touch-icon', type: 'image/png'
-    = favicon_link_tag 'splash/sptouch-icon-ipad.png', rel: 'apple-touch-icon', type: 'image/png', sizes: "76x76"
-    = favicon_link_tag 'splash/sptouch-icon-iphone-retina.png', rel: 'apple-touch-icon', type: 'image/png', sizes: "120x120"
-    = favicon_link_tag 'splash/sptouch-icon-ipad-retina.png', rel: 'apple-touch-icon', type: 'image/png', sizes: "152x152"
+		%link{ :rel => "stylesheet", :href => "http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700" }
+		-# Specifying a Webpage Icon for Web Clip 
+		-#     Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
+		= favicon_link_tag 'splash/sptouch-icon-iphone.png', rel: 'apple-touch-icon', type: 'image/png'
+		= favicon_link_tag 'splash/sptouch-icon-ipad.png', rel: 'apple-touch-icon', type: 'image/png', sizes: "76x76"
+		= favicon_link_tag 'splash/sptouch-icon-iphone-retina.png', rel: 'apple-touch-icon', type: 'image/png', sizes: "120x120"
+		= favicon_link_tag 'splash/sptouch-icon-ipad-retina.png', rel: 'apple-touch-icon', type: 'image/png', sizes: "152x152"
 
-    -# iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
-    %meta{ :name => "apple-mobile-web-app-capable", :content => "yes" }
-    %meta{ :name => "apple-mobile-web-app-status-bar-style", :content => "black" }
-      
-    -# Startup image for web apps -->
-    
-    %link{ :rel => "apple-touch-startup-image", :href => "assets/splash/ipad-landscape.png", :media => "screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)" }
-    %link{ :rel => "apple-touch-startup-image", :href => "assets/splash/ipad-portrait.png", :media => "screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)" }
-    %link{ :rel => "apple-touch-startup-image", :href => "assets/splash/iphone.png", :media => "screen and (max-device-width: 320px)" }
-    
+		-# iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
+		%meta{ :name => "apple-mobile-web-app-capable", :content => "yes" }
+		%meta{ :name => "apple-mobile-web-app-status-bar-style", :content => "black" }
 
-    %title Bki Systems
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
-    = csrf_meta_tags
-  %body
-    = render 'shared/header'
-    = render 'shared/leftside'
+		-# Startup image for web apps -->
 
-    %div#main{ :role => "main" }
-      = render 'shared/ribbon' 
+		%link{ :rel => "apple-touch-startup-image", :href => "assets/splash/ipad-landscape.png", :media => "screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)" }
+		%link{ :rel => "apple-touch-startup-image", :href => "assets/splash/ipad-portrait.png", :media => "screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)" }
+		%link{ :rel => "apple-touch-startup-image", :href => "assets/splash/iphone.png", :media => "screen and (max-device-width: 320px)" }
 
-      = yield 
+
+		%title Bki Systems
+		= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+		= javascript_include_tag 'application', 'data-turbolinks-track' => true
+		= csrf_meta_tags
+	%body
+		= render 'shared/header'
+		= render 'shared/leftside'
+
+		%div#main{ :role => "main" }
+			= render 'shared/ribbon' 
+
+			= yield
+
 

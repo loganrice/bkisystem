@@ -7,7 +7,7 @@
       %article.col-xs-12.col-sm-12.col-md-12.col-lg-12
         -#- end widget -->
         -#- Widget ID (each widget will need unique ID)-->
-        %div.jarviswidget.jarviswidget-color-blueDark#itemlist{ "data-widget-editbutton" => "false", "data-widget-colorbutton" => "false" }
+        %div.jarviswidget.jarviswidget-color-blueDark#itemindex{ "data-widget-editbutton" => "false" }
           -# widget options:
           -#usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
           -#data-widget-colorbutton="false"
@@ -21,7 +21,7 @@
           %header
             %span.widget-icon
               %i.fa.fa-table
-            %h2 Column Filters
+            %h2= @item.description
           -#- widget div-->
           %div
             -# widget edit box -->
@@ -29,15 +29,9 @@
               -# This area used as dropdown edit box -->
             -#- end widget edit box -->
             -#- widget content -->
-            %div.widget-body
-              %table#items.table.table-striped.table-bordered.table-hover{ :width => "100%" }
-                %thead
-                  %tr
-                    %th ID
-                    %th Description
-                %tbody
-                  - @items.each do |item|
-                    %tr
-                      %td= item.id
-                      %td
-                        = link_to item.description, item_path(item)
+            %div.widget-body.no-padding
+              = bootstrap_form_for(@item) do |f|
+                = f.text_field :description
+                = f.submit "Update"
+                
+= javascript_include_tag 'main' 
