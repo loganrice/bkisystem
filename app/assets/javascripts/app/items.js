@@ -10,4 +10,5 @@ $(document).ready(function() {
     // Check dataTables documentation to learn more about available options.
     // http://datatables.net/reference/option/pagingType
   });
+
 });

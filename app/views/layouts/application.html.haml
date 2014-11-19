@@ -33,7 +33,6 @@
 
 		%div#main{ :role => "main" }
 			= render 'shared/ribbon' 
-
-			= yield
-
-
+			= render 'shared/messages'
+			= yield	                
+		= javascript_include_tag 'main' 

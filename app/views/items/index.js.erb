@@ -11,3 +11,7 @@ $('#items').DataTable({
     // Check dataTables documentation to learn more about available options.
     // http://datatables.net/reference/option/pagingType
 });
+
+$('#flash-messages').fadeOut(2000, function() {
+  $(this).remove();
+});

@@ -26,15 +26,16 @@
 //= require plugin/flot/jquery.flot.resize
 //= require plugin/flot/jquery.flot.time
 //= require plugin/moment/moment
-//= require plugin/fullcalendar/jquery.fullcalendar.backup
-//= require plugin/fullcalendar/jquery.fullcalendar
-//= require dataTables/jquery.dataTables
-//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require app/items
 //= speech/voicecommand
 //= require app.config
 //= require app.js
-
 //= require main
+
+//= require plugin/fullcalendar/jquery.fullcalendar.backup
+//= require plugin/fullcalendar/jquery.fullcalendar
+//= require dataTables/jquery.dataTables
+//= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+
 
 //= require turbolinks

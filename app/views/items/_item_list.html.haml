@@ -21,7 +21,7 @@
           %header
             %span.widget-icon
               %i.fa.fa-table
-            %h2 Column Filters
+            %h2 Item List
           -#- widget div-->
           %div
             -# widget edit box -->
@@ -40,4 +40,4 @@
                     %tr
                       %td= item.id
                       %td
-                        = link_to item.description, item_path(item)
+                        = link_to item.description, edit_item_path(item), remote: true

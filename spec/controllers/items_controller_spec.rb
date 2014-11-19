@@ -10,18 +10,47 @@ describe ItemsController do
     end
   end
 
-  describe 'GET show' do 
-    it "sets @item" do 
-      item = Item.create(description: "Item one")
-      get :show, id: item.id 
+  describe 'GET edit' do 
+    it "sets @item" do
+      item = Fabricate(:item)
+      xhr :get, :edit, id: item.id 
       assigns(:item).should == item 
     end
 
-    it "renders the show template" do 
+    it "renders the edit template" do 
       item = Item.create(description: "Item one")
-      get :show, id: item.id
-      response.should render_template :show
+      xhr :get, :edit, id: item.id
+      response.should render_template :edit
     end
-    it "responds to js"
+  end
+
+  describe "PUT update" do
+    let(:item) { Fabricate(:item) }
+    
+    it "sets @item" do
+      put :update, { "id" => item.id, "item" => { description: "A new description" } }
+      item.reload
+      item.description.should eq("A new description")
+    end
+
+    it "changes @item attributes" do 
+      put :update, { "id" => item.id, "item" => { description: "A new description" } }
+      assigns(:item).should eq(item)
+    end
+
+    it "redireccts to the @item edit page" do 
+      put :update, { "id" => item.id, "item" => { description: "A new description" } }
+      response.should redirect_to edit_item_path(item)
+    end
+
+    it "sets the flash success message" do 
+      put :update, { "id" => item.id, "item" => { description: "A new description" } }
+      flash[:success].should be_present
+    end
+
+    it "sets the flash error message" do 
+      put :update, { "id" => item.id, "item" => { description: nil } }
+      flash[:error].should be_present
+    end
   end
 end

@@ -40,6 +40,7 @@ group :test do
   gem 'vcr'
   gem 'webmock'
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers', require: false
   # gem 'capybara-email' waiting for new release cuz open email errors
   gem 'capybara-email', github: 'dockyard/capybara-email'
 end
