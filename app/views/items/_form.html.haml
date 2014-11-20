@@ -30,6 +30,7 @@
             -#- end widget edit box -->
             -#- widget content -->
             %div.widget-body.no-padding
-              = bootstrap_form_for(@item, remote: true) do |f|
+              = bootstrap_form_for(@item, label_errors: true, remote: true) do |f|
                 = f.text_field :description
-                = f.submit "Update"
+                = f.submit @item.new_record? ? "Create new item" : "Update item"
+
