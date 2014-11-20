@@ -1,6 +1,8 @@
 $('#content').replaceWith( '<%= j render("form") %>');
-$('#content').before('<%= j render("shared/messages") %>');
+<%= unless flash.empty? %>
+  $('#content').before('<%= j render("shared/messages") %>');
+<%= end %>
 setTimeout(function() {
-  $('#flash-messages').remove();
+  $('.flash-messages').remove();
 }, 10000);
 pageSetUp();

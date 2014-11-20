@@ -16,10 +16,10 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      redirect_to items_path
       flash[:success] = "Item Created"
+      redirect_to items_path
     else
-      flash[:error] = "Sorry, something went wrong. The item was not created."
+      flash.now[:error] = "Sorry, something went wrong. The item was not created."
       render :new
     end
   end
@@ -34,7 +34,7 @@ class ItemsController < ApplicationController
       flash[:success] = "Item Updated"
       redirect_to edit_item_path(@item)
     else
-      flash[:error] = "Sorry, something went wrong. The item was not updated."
+      flash.now[:error] = "Sorry, something went wrong. The item was not updated."
       render :edit
     end
   end

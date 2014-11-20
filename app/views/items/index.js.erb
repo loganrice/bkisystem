@@ -1,4 +1,5 @@
 $('#content').replaceWith( '<%= j render("item_list") %>');
+$('#content').before('<%= j render("shared/messages", flash: flash) %>');
 pageSetUp();
 initApp.leftNav();
 $('#items').DataTable({
@@ -14,5 +15,5 @@ $('#items').DataTable({
 });
 
 setTimeout(function() {
-  $('#flash-messages').remove();
+  $('.flash-messages').remove();
 }, 10000);
