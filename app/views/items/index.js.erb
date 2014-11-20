@@ -1,5 +1,6 @@
 $('#content').replaceWith( '<%= j render("item_list") %>');
 pageSetUp();
+initApp.leftNav();
 $('#items').DataTable({
     // ajax: ...,
     // autoWidth: false,
@@ -12,6 +13,6 @@ $('#items').DataTable({
     // http://datatables.net/reference/option/pagingType
 });
 
-$('#flash-messages').fadeOut(2000, function() {
-  $(this).remove();
-});
+setTimeout(function() {
+  $('#flash-messages').remove();
+}, 10000);

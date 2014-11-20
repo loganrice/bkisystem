@@ -7,7 +7,7 @@
       %article.col-xs-12.col-sm-12.col-md-12.col-lg-12
         -#- end widget -->
         -#- Widget ID (each widget will need unique ID)-->
-        %div.jarviswidget.jarviswidget-color-blueDark#itemlist{ "data-widget-editbutton" => "false", "data-widget-colorbutton" => "false" }
+        %div.jarviswidget.jarviswidget-color-blueDark#itemlist{ "data-widget-editbutton" => "true", "data-widget-colorbutton" => "false" }
           -# widget options:
           -#usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
           -#data-widget-colorbutton="false"
@@ -30,6 +30,10 @@
             -#- end widget edit box -->
             -#- widget content -->
             %div.widget-body
+              %div.widget-body-toolbar
+                = link_to new_item_path, class: "btn btn-success", remote: true do 
+                  %i.fa.fa-plus
+                  %span New Item
               %table#items.table.table-striped.table-bordered.table-hover{ :width => "100%" }
                 %thead
                   %tr
