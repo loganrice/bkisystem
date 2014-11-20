@@ -32,5 +32,6 @@
             %div.widget-body.no-padding
               = bootstrap_form_for(@item, label_errors: true, remote: true) do |f|
                 = f.text_field :description
+                = f.select :commodity_id, options_for_select(Commodity.all.map { |commodity| [commodity.description, commodity.id]}, selected: f.object.commodity_id )
                 = f.submit @item.new_record? ? "Create new item" : "Update item"
 

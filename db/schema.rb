@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141120193635) do
+ActiveRecord::Schema.define(version: 20141120202030) do
 
   create_table "commodities", force: true do |t|
     t.string   "description"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20141120193635) do
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "commodity_id"
   end
 
 end
