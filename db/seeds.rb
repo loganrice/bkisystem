@@ -9,9 +9,26 @@
 # Clear Table
 Item.delete_all
 Commodity.delete_all
+Size.delete_all
 
 almonds = Commodity.create(description: "Almonds")
 walnuts = Commodity.create(description: "Walnuts")
+
+Size.create(name: "16/18")
+Size.create(name: "18/20")
+Size.create(name: "20/22")
+Size.create(name: "22/24")
+Size.create(name: "23/25")
+Size.create(name: "24/26")
+Size.create(name: "26/28")
+Size.create(name: "27/30")
+Size.create(name: "30/34")
+Size.create(name: "34/40")
+Size.create(name: "40/50")
+Size.create(name: "50 AOS")
+Size.create(name: "inshell")
+Size.create(name: "pieces")
+Size.create(name: "UNS")
 
 item1 = Item.create(description: "Nonpareil U.S. Fancy 16/18", commodity_id: almonds.id)
 item2 = Item.create(description: "Nonpareil U.S. Fancy 18/20", commodity_id: almonds.id)

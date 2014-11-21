@@ -81,10 +81,17 @@ describe ItemsController do
     end
 
     it "assigns a commodity to an item" do
-      medium_almond = Item.create(description: "Medium Almond")
       almond = Commodity.create(description: "Almonds")
-      xhr :put, :update, { "id" => item.id, "item" => { description: medium_almond.description, commodity_id: almond.id } }
-      medium_almond.commodity eq(almond)
+      xhr :put, :update, { "id" => item.id, "item" => { description: item.description, commodity_id: almond.id } }
+      item.reload
+      expect(item.commodity).to eq(almond)
+    end
+
+    it "assigns a size to an item" do 
+      medium = Fabricate(:size, name: "medium")
+      xhr :put, :update, { "id" => item.id, "item" => { description: item.description, commodity_id: item.commodity.id, size_id: medium.id } }
+      item.reload
+      expect(item.size).to eq(medium)
     end
 
     it "redirects to the @item edit page" do 
