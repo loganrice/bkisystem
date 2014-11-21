@@ -6,6 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+# Clear Table
+Item.delete_all
+Commodity.delete_all
+
 item1 = Item.create(description: "Nonpareil U.S. Fancy 16/18")
 item2 = Item.create(description: "Nonpareil U.S. Fancy 18/20")
 item3 = Item.create(description: "Nonpareil U.S. Fancy 20/22")
@@ -22,3 +26,6 @@ item13 = Item.create(description: "Nonpareil U.S. Standard Sheller Run 18/20")
 item14 = Item.create(description: "Nonpareil U.S. Standard Sheller Run 20/22")
 item15 = Item.create(description: "Nonpareil U.S. Standard Sheller Run 22/24")
 item16 = Item.create(description: "Nonpareil U.S. Standard Sheller Run 23/25")
+
+almonds = Commodity.create(description: "Almonds")
+walnuts = Commodity.create(description: "Walnuts")

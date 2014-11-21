@@ -21,7 +21,7 @@
           %header
             %span.widget-icon
               %i.fa.fa-table
-            %h2= @item.description
+            %h2= @commodity.description
           -#- widget div-->
           %div
             -# widget edit box -->
@@ -30,6 +30,7 @@
             -#- end widget edit box -->
             -#- widget content -->
             %div.widget-body.no-padding
-              = bootstrap_form_for(@item) do |f|
+              = bootstrap_form_for(@commodity, label_errors: true, remote: true) do |f|
                 = f.text_field :description
-                = f.submit "Update"
+                = f.submit @commodity.new_record? ? "Add" : "Update"
+

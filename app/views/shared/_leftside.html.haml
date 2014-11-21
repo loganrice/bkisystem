@@ -13,43 +13,45 @@
   -# end user info -->
 
   -#- NAVIGATION : This navigation is also responsive-->
-  %nav
+  %nav#leftnav
     %ul
-      %li.active
+      %li.nav-item.active
         = link_to root_path, remote: true do 
           %i.fa.fa-lg.fa-fw.fa-home
           %span.menu-item-parent Dashboard
-      %li
+      %li.nav-item
         = link_to contracts_path, remote: true do 
           %i.fa.fa-lg.fa-fw.fa-table
           %span.menu-item-parent Contracts          
-      %li
+      %li.nav-item
         %a{ :href => "#" }
           %i.fa.fa-lg.fa-fw.fa-bar-chart-o 
           %span.menu-item-parent Reports
         %ul
-          %li
+          %li.nav-item
             %a{ :href => "flot.html" } Sales Summary Report
-          %li
+          %li.nav-item
             %a{ :href => "morris.html" } Contract Status Report
-          %li
+          %li.nav-item
             %a{ :href => "inline-charts.html" } Grower Pay Report
-          %li
+          %li.nav-item
             %a{ :href => "dygraphs.html" } Pay Report
-          %li
+          %li.nav-item
             %a{ :href => "chartjs.html" }
               Shipping Report
               %span.badge.pull-right.inbox-badge.bg-color-yellow new
 
-      %li
+      %li.nav-item
         %a{ :href => "#" }
           %i.fa.fa-lg.fa-fw.fa-pencil-square-o
           %span.menu-item-parent Forms
         %ul
-          %li
+          %li.nav-item
             = link_to 'New Contract', new_contract_path, remote: true
-          %li
+          %li.nav-item
             = link_to 'Item List', items_path, remote: true
+          %li.nav-item
+            = link_to 'Commdity List', commodities_path, remote: true
 
  
   %span.minifyme{ "data-action" => "minifyMenu" }

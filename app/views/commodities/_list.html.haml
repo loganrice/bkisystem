@@ -7,7 +7,7 @@
       %article.col-xs-12.col-sm-12.col-md-12.col-lg-12
         -#- end widget -->
         -#- Widget ID (each widget will need unique ID)-->
-        %div.jarviswidget.jarviswidget-color-blueDark#itemindex{ "data-widget-editbutton" => "false" }
+        %div.jarviswidget.jarviswidget-color-blueDark#itemlist{ "data-widget-editbutton" => "true", "data-widget-colorbutton" => "false" }
           -# widget options:
           -#usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
           -#data-widget-colorbutton="false"
@@ -21,7 +21,7 @@
           %header
             %span.widget-icon
               %i.fa.fa-table
-            %h2= @item.description
+            %h2 Commodity List
           -#- widget div-->
           %div
             -# widget edit box -->
@@ -29,9 +29,19 @@
               -# This area used as dropdown edit box -->
             -#- end widget edit box -->
             -#- widget content -->
-            %div.widget-body.no-padding
-              = bootstrap_form_for(@item, label_errors: true, remote: true) do |f|
-                = f.text_field :description
-                = f.select :commodity_id, options_for_select(Commodity.all.map { |commodity| [commodity.description, commodity.id]}, selected: f.object.commodity_id )
-                = f.submit @item.new_record? ? "Create new item" : "Update item"
-
+            %div.widget-body
+              %div.widget-body-toolbar
+                = link_to new_commodity_path, class: "btn btn-success", remote: true do 
+                  %i.fa.fa-plus
+                  %span New Commodity
+              %table#commodities.table.table-striped.table-bordered.table-hover{ :width => "100%" }
+                %thead
+                  %tr
+                    %th ID
+                    %th Description
+                %tbody
+                  - @commodities.each do |commodity|
+                    %tr
+                      %td= commodity.id
+                      %td
+                        = link_to commodity.description, edit_commodity_path(commodity), remote: true

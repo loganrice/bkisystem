@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root 'contracts#home'
   resources :contracts
   resources :items
+  resources :commodities
   get 'ui(/:action)', controller: 'ui'
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

@@ -11,6 +11,10 @@ $(document).ready(function() {
 	// http://datatables.net/reference/option/pagingType
   });
 
+  $('.nav-item').on('click', function() {
+  	$('.nav-item').removeClass('active');
+  	$(this).addClass('active');
+  });
 });
 
 

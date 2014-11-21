@@ -1,8 +1,7 @@
-$('#content').replaceWith( '<%= j render("item_list") %>');
+$('#content').replaceWith( '<%= j render("list") %>');
 $('#content').before('<%= j render("shared/messages", flash: flash) %>');
 pageSetUp();
-// initApp.leftNav();
-$('#items').DataTable({
+$('#commodities').DataTable({
     // ajax: ...,
     // autoWidth: false,
     // pagingType: 'full_numbers',
