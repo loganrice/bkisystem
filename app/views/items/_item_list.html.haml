@@ -46,4 +46,4 @@
                       %td= item.id
                       %td
                         = link_to item.description, edit_item_path(item), remote: true
-                      %td= item.commodity
+                      %td= item.commodity.description
