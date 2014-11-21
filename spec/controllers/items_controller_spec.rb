@@ -69,7 +69,7 @@ describe ItemsController do
   describe "PUT update" do
     let(:item) { Fabricate(:item) }
     
-    it "sets @item" do
+    it "sets @item with the updated item instance" do
       xhr :put, :update, { "id" => item.id, "item" => { description: "A new description" } }
       item.reload
       item.description.should eq("A new description")
@@ -87,7 +87,7 @@ describe ItemsController do
       medium_almond.commodity eq(almond)
     end
 
-    it "redireccts to the @item edit page" do 
+    it "redirects to the @item edit page" do 
       xhr :put, :update, { "id" => item.id, "item" => { description: "A new description" } }
       response.should redirect_to edit_item_path(item)
     end
