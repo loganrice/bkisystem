@@ -10,6 +10,7 @@
 Item.delete_all
 Commodity.delete_all
 Size.delete_all
+Variety.delete_all
 
 almonds = Commodity.create(description: "Almonds")
 walnuts = Commodity.create(description: "Walnuts")
@@ -46,4 +47,22 @@ item13 = Item.create(description: "Nonpareil U.S. Standard Sheller Run 18/20", c
 item14 = Item.create(description: "Nonpareil U.S. Standard Sheller Run 20/22", commodity_id: almonds.id)
 item15 = Item.create(description: "Nonpareil U.S. Standard Sheller Run 22/24", commodity_id: almonds.id)
 item16 = Item.create(description: "Nonpareil U.S. Standard Sheller Run 23/25", commodity_id: almonds.id)
+
+Variety.create(name: "nonpareil")
+Variety.create(name: "butte")
+Variety.create(name: "carmel")
+Variety.create(name: "fritz")
+Variety.create(name: "mission")
+Variety.create(name: "monterey")
+Variety.create(name: "padre")
+Variety.create(name: "peerless")
+Variety.create(name: "price")
+Variety.create(name: "sonora")
+
+
+
+
+
+
+
 
