@@ -1,0 +1,36 @@
+%div#content
+  -# widget grid -->
+  %section#widget-grid
+    -# row -->
+    %div.row
+      -# NEW WIDGET START -->
+      %article.col-xs-12.col-sm-12.col-md-12.col-lg-12
+        -#- end widget -->
+        -#- Widget ID (each widget will need unique ID)-->
+        %div.jarviswidget.jarviswidget-color-blueDark#itemindex{ "data-widget-editbutton" => "false" }
+          -# widget options:
+          -#usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+          -#data-widget-colorbutton="false"
+          -#data-widget-editbutton="false"
+          -#data-widget-togglebutton="false"
+          -#data-widget-deletebutton="false"
+          -#data-widget-fullscreenbutton="false"
+          -#data-widget-custombutton="false"
+          -#data-widget-collapsed="true"
+          -#data-widget-sortable="false"
+          %header
+            %span.widget-icon
+              %i.fa.fa-table
+            %h2= @size.name
+          -#- widget div-->
+          %div
+            -# widget edit box -->
+            %div.jarviswidget-editbox
+              -# This area used as dropdown edit box -->
+            -#- end widget edit box -->
+            -#- widget content -->
+            %div.widget-body.no-padding
+              = bootstrap_form_for(@size, label_errors: true, remote: true) do |f|
+                = f.text_field :name
+                = f.submit @size.new_record? ? "Add" : "Update"
+

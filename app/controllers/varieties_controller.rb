@@ -16,7 +16,7 @@ class VarietiesController < ApplicationController
       redirect_to varieties_path
     else
       flash[:error] = "Sorry, something went wrong. The variety was not updated."
-      render :edit
+      render :new
     end
   end
 

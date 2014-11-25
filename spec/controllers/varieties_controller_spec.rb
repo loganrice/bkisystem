@@ -54,9 +54,9 @@ describe VarietiesController do
       end
     end
     context "with invalid input" do 
-      it "renders the edit template" do 
+      it "renders the new template" do 
         xhr :post, :create, variety: { name: nil }
-        expect(response).to render_template :edit 
+        expect(response).to render_template :new 
       end
       it "does not create a variety" do 
         xhr :post, :create, variety: { name: nil }

@@ -2,3 +2,4 @@
   %div.flash-messages.fade.in.alert{ :class => "#{bootstrap_class_for(type)}" }
     %button.close(data-dismiss='alert') &#215;
     = content_tag :div, msg, :id => "flash_#{type}" if msg.is_a?(String)
+  - flash.discard
