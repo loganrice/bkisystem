@@ -24,7 +24,7 @@ describe CommoditiesController do
 
   describe "POST create" do
     context "with valid input" do
-      it "redirects to the commodity path" do 
+      it "redirects to the commodities path" do 
         xhr :post, :create, commodity: { description: "almonds" }
         response.should redirect_to commodities_path
       end

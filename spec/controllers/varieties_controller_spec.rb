@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe VarietiesController do 
+describe VarietiesController do
   describe "GET index" do 
     it "sets the variety instance variable" do 
       carmel = Fabricate(:variety)
@@ -36,10 +36,43 @@ describe VarietiesController do
     end
   end
 
-  describe "PUT update" do 
-    let(:mission) { Fabricate(:variety) }
+  describe "POST create" do
+    context "with valid input" do    
+      it "redirects to the varieties path" do
+        xhr :post, :create, variety: { name: "carmel" }
+        expect(Variety.first.name).to eq("carmel")
+      end
+        
+      it "creates a variety" do
+        xhr :post, :create, variety: { name: "carmel" }
+        expect(Variety.count).to eq(1)
+      end
 
-    context "with valid input" do 
+      it "sets the flash success message" do
+        xhr :post, :create, variety: { name: "carmel" }
+        expect(flash[:success]).to be_present
+      end
+    end
+    context "with invalid input" do 
+      it "renders the edit template" do 
+        xhr :post, :create, variety: { name: nil }
+        expect(response).to render_template :edit 
+      end
+      it "does not create a variety" do 
+        xhr :post, :create, variety: { name: nil }
+        expect(Variety.count).to eq(0)
+      end
+      it "sets the flash error message" do
+        xhr :post, :create, variety: { name: nil }
+        expect(flash[:error]).to be_present
+      end
+    end
+  end
+
+  describe "PUT update" do
+    context "with valid input" do
+      let(:mission) { Fabricate(:variety) }
+
       it "sets @variety with the updated variety instance" do 
         xhr :put, :update, { "id" => mission.id, "variety" => { name: "mission"}}
         mission.reload
@@ -56,9 +89,14 @@ describe VarietiesController do
         expect(flash[:success]).to be_present
       end
     end
+
     context "with invalid input" do
-      it "sets @variety with the updated variety instance" do 
-        xhr :put, :update, { "id" => mission.id, "variety" => { name: nil } }
+      let(:mission) { Fabricate(:variety) }
+
+      it "sets @variety with the updated variety instance" do
+        mission = Variety.create(name: "test")
+        mission.save
+        xhr :put, :update, { "id" => mission.id, "variety" => {name: nil}}
         mission.reload
         expect(assigns(:variety)).to be_present
       end
