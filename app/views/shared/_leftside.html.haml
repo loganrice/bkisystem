@@ -29,33 +29,33 @@
           %span.menu-item-parent Reports
         %ul
           %li.nav-item
-            %a{ :href => "flot.html" } Sales Summary Report
+            %a{ :href => "#" } Sales Summary Report
           %li.nav-item
-            %a{ :href => "morris.html" } Contract Status Report
+            %a{ :href => "#" } Contract Status Report
           %li.nav-item
-            %a{ :href => "inline-charts.html" } Grower Pay Report
+            %a{ :href => "#" } Grower Pay Report
           %li.nav-item
-            %a{ :href => "dygraphs.html" } Pay Report
+            %a{ :href => "#" } Pay Report
           %li.nav-item
-            %a{ :href => "chartjs.html" }
+            %a{ :href => "#" }
               Shipping Report
               %span.badge.pull-right.inbox-badge.bg-color-yellow new
 
       %li.nav-item
         %a{ :href => "#" }
           %i.fa.fa-lg.fa-fw.fa-pencil-square-o
-          %span.menu-item-parent Forms
+          %span.menu-item-parent Item Master
         %ul
+          -#%li.nav-item
+            -#= link_to 'New Contract', new_contract_path, remote: true
           %li.nav-item
-            = link_to 'New Contract', new_contract_path, remote: true
+            = link_to 'Items', items_path, remote: true
           %li.nav-item
-            = link_to 'Item List', items_path, remote: true
+            = link_to 'Commodities', commodities_path, remote: true
           %li.nav-item
-            = link_to 'Commdity List', commodities_path, remote: true
+            = link_to 'Sizes', sizes_path, remote: true
           %li.nav-item
-            = link_to 'Size List', sizes_path, remote: true
-          %li.nav-item
-            = link_to 'Variety List', varieties_path, remote: true
+            = link_to 'Varieties', varieties_path, remote: true
 
  
   %span.minifyme{ "data-action" => "minifyMenu" }
