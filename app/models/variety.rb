@@ -1,3 +1,4 @@
 class Variety < ActiveRecord::Base
-  has_many :items  
+  has_many :items
+  validates_presence_of :name
 end
