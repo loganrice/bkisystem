@@ -94,6 +94,13 @@ describe ItemsController do
       expect(item.size).to eq(medium)
     end
 
+    it "assigns a variety to an item" do 
+      carmel = Variety.create(name: "carmel")
+      xhr :put, :update, { "id" => item.id, "item" => { description: item.description, variety_id: carmel.id } }
+      item.reload
+      expect(item.variety).to eq(carmel)
+    end
+
     it "redirects to the @item edit page" do 
       xhr :put, :update, { "id" => item.id, "item" => { description: "A new description" } }
       response.should redirect_to edit_item_path(item)

@@ -33,6 +33,7 @@
               = bootstrap_form_for(@item, label_errors: true, remote: true) do |f|
                 = f.text_field :description
                 = f.select :commodity_id, options_for_select(Commodity.all.map { |commodity| [commodity.description, commodity.id]}, selected: f.object.commodity_id )
+                = f.select :variety_id, options_for_select(Variety.all.map { |variety| [variety.name, variety.id]}, selected: f.object.variety_id )
                 = f.select :size_id, options_for_select(Size.all.map { |size| [size.name, size.id]}, selected: f.object.size_id )
                 = f.submit @item.new_record? ? "Create new item" : "Update item"
 

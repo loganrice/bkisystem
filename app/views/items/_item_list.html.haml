@@ -40,6 +40,8 @@
                     %th ID
                     %th Description
                     %th Commodity
+                    %th Variety
+                    %th Size
                 %tbody
                   - @items.each do |item|
                     %tr
@@ -47,3 +49,7 @@
                       %td
                         = link_to item.description, edit_item_path(item), remote: true
                       %td= item.commodity.description
+                      %td= item.variety.name
+                      %td= item.size.name
+
+

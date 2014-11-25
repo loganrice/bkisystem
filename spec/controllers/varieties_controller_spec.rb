@@ -11,7 +11,7 @@ describe VarietiesController do
 
     it "renders the index template" do 
       xhr :get, :index
-      expect(response).to render :index
+      expect(response).to render_template :index
     end
   end
 
