@@ -1,21 +1,11 @@
 class ContractsController < ApplicationController
-
-  def home
-    respond_to do |format|
-      format.html
-      format.js
-    end
-  end
+  respond_to :js
   
   def index
-    respond_to do |format|
-      format.js
-    end
+    @contracts = Contract.all
   end
 
   def new
-    respond_to do |format|
-      format.js
-    end
+    @contract = Contract.new
   end
 end
