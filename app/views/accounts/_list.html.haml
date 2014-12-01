@@ -1,0 +1,57 @@
+%div#content
+  -# widget grid -->
+  %section#widget-grid
+    -# row -->
+    %div.row
+      -# NEW WIDGET START -->
+      %article.col-xs-12.col-sm-12.col-md-12.col-lg-12
+        -#- end widget -->
+        -#- Widget ID (each widget will need unique ID)-->
+        %div.jarviswidget.jarviswidget-color-blueDark#itemlist{ "data-widget-editbutton" => "true", "data-widget-colorbutton" => "false" }
+          -# widget options:
+          -#usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+          -#data-widget-colorbutton="false"
+          -#data-widget-editbutton="false"
+          -#data-widget-togglebutton="false"
+          -#data-widget-deletebutton="false"
+          -#data-widget-fullscreenbutton="false"
+          -#data-widget-custombutton="false"
+          -#data-widget-collapsed="true"
+          -#data-widget-sortable="false"
+          %header
+            %span.widget-icon
+              %i.fa.fa-table
+            %h2 Account List
+          -#- widget div-->
+          %div
+            -# widget edit box -->
+            %div.jarviswidget-editbox
+              -# This area used as dropdown edit box -->
+            -#- end widget edit box -->
+            -#- widget content -->
+            %div.widget-body
+              %div.widget-body-toolbar
+                = link_to new_account_path, class: "btn btn-success", remote: true do 
+                  %i.fa.fa-plus
+                  %span New Account
+              %table#acounts.table.table-striped.table-bordered.table-hover{ :width => "100%" }
+                %thead
+                  %tr
+                    %th ID
+                    %th Name
+                    %th First Name
+                    %th Last Name
+                    %th Email
+                    %th Phone
+                %tbody
+                  - @accounts.each do |account|
+                    %tr
+                      %td= account.id
+                      %td
+                        = link_to account.name, edit_account_path(account), remote: true
+                      %td= account.first_name
+                      %td= account.last_name
+                      %td= account.email
+                      %td= account.phone1
+
+

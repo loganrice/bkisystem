@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :commodities
   resources :sizes
   resources :varieties
+  resources :accounts
   get 'ui(/:action)', controller: 'ui'
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

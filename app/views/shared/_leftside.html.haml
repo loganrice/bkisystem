@@ -56,7 +56,10 @@
             = link_to 'Sizes', sizes_path, remote: true
           %li.nav-item
             = link_to 'Varieties', varieties_path, remote: true
-
+      %li.nav-item
+        = link_to accounts_path, remote: true do 
+          %i.fa.fa-lg.fa-fw.fa-users
+          %span Accounts
  
   %span.minifyme{ "data-action" => "minifyMenu" }
     = link_to :back do 
