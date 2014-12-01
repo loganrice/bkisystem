@@ -38,7 +38,7 @@
                 %thead
                   %tr
                     %th ID
-                    %th Description
+                    %th Name
                     %th Commodity
                     %th Variety
                     %th Size
@@ -47,8 +47,8 @@
                     %tr
                       %td= item.id
                       %td
-                        = link_to item.description, edit_item_path(item), remote: true
-                      %td= item.commodity.description
+                        = link_to item.name, edit_item_path(item), remote: true
+                      %td= item.commodity.name
                       %td= item.variety.name
                       %td= item.size.name
 

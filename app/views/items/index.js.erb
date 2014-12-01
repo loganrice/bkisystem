@@ -1,21 +1,9 @@
-
 $('#content').replaceWith( '<%= j render("item_list") %>');
 $('#content').before('<%= j render("shared/messages", flash: flash) %>');
 pageSetUp();
-// initApp.leftNav();
-$('#items').DataTable({
-    // ajax: ...,
-    // autoWidth: false,
-    // pagingType: 'full_numbers',
-    // processing: true,
-    // serverSide: true,
 
-    // Optional, if you want full pagination controls.
-    // Check dataTables documentation to learn more about available options.
-    // http://datatables.net/reference/option/pagingType
-});
+$('#items').DataTable({});
 
 setTimeout(function() {
   $('.flash-messages').remove();
 }, 10000);
-

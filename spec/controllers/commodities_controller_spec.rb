@@ -25,15 +25,15 @@ describe CommoditiesController do
   describe "POST create" do
     context "with valid input" do
       it "redirects to the commodities path" do 
-        xhr :post, :create, commodity: { description: "almonds" }
+        xhr :post, :create, commodity: { name: "almonds" }
         response.should redirect_to commodities_path
       end
       it "creates an commodity" do
-        xhr :post, :create, commodity: { description: "almonds" }
+        xhr :post, :create, commodity: { name: "almonds" }
         Commodity.count.should eq(1)
       end
       it "sets the flash success message" do
-        xhr :post, :create, commodity: { description: "almonds" }
+        xhr :post, :create, commodity: { name: "almonds" }
         flash[:success].should be_present
       end
 
@@ -74,23 +74,23 @@ describe CommoditiesController do
     
     context "with valid input" do 
       it "sets @commodity with the updated commodity instance" do
-        xhr :put, :update, { "id" => almonds.id, "commodity" => { description: "A new description" } }
+        xhr :put, :update, { "id" => almonds.id, "commodity" => { name: "A new name" } }
         almonds.reload
-        almonds.description.should eq("A new description")
+        almonds.name.should eq("A new name")
       end
 
-      it "changes @commodity description" do 
-        xhr :put, :update, { "id" => almonds.id, "commodity" => { description: "A new description" } }
+      it "changes @commodity name" do 
+        xhr :put, :update, { "id" => almonds.id, "commodity" => { name: "A new name" } }
         assigns(:commodity).should eq(almonds)
       end
 
       it "redirects to the @commodity edit page" do 
-        xhr :put, :update, { "id" => almonds.id, "commodity" => { description: "A new description" } }
+        xhr :put, :update, { "id" => almonds.id, "commodity" => { name: "A new name" } }
         response.should redirect_to edit_commodity_path(almonds)
       end
 
       it "sets the flash success message" do 
-        xhr :put, :update, { "id" => almonds.id, "commodity" => { description: "A new description" } }
+        xhr :put, :update, { "id" => almonds.id, "commodity" => { name: "A new name" } }
         flash[:success].should be_present
       end
     end
@@ -99,12 +99,12 @@ describe CommoditiesController do
       let(:almonds) { Fabricate(:commodity) }
 
       it "sets the flash error message" do 
-        xhr :put, :update, { "id" => almonds.id, "commodity" => { description: nil } }
-        flash[:error].should be_present
+        xhr :put, :update, { "id" => almonds.id, "commodity" => { name: nil } }
+        flash[:error].should 
       end
 
       it "renders the edit template" do 
-        xhr :put, :update, { "id" => almonds.id, "commodity" => { description: nil } }
+        xhr :put, :update, { "id" => almonds.id, "commodity" => { name: nil } }
         response.should render_template :edit
       end
     end

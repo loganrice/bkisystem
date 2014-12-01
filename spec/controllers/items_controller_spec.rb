@@ -36,15 +36,15 @@ describe ItemsController do
       let(:almond) { Fabricate(:commodity) }
 
       it "redirects to the items path" do 
-        xhr :post, :create, item: { description: "5lb box", commodity_id: almond.id }
+        xhr :post, :create, item: { name: "5lb box", commodity_id: almond.id }
         response.should redirect_to items_path
       end
       it "creates an item" do
-        xhr :post, :create, item: { description: "5lb box", commodity_id: almond.id }
+        xhr :post, :create, item: { name: "5lb box", commodity_id: almond.id }
         Item.count.should eq(1)
       end
       it "sets the flash success message" do
-        xhr :post, :create, item: { description: "5lb box", commodity_id: almond.id }
+        xhr :post, :create, item: { name: "5lb box", commodity_id: almond.id }
         flash[:success].should be_present
       end
 
@@ -70,49 +70,49 @@ describe ItemsController do
     let(:item) { Fabricate(:item) }
     
     it "sets @item with the updated item instance" do
-      xhr :put, :update, { "id" => item.id, "item" => { description: "A new description" } }
+      xhr :put, :update, { "id" => item.id, "item" => { name: "A new name" } }
       item.reload
-      item.description.should eq("A new description")
+      item.name.should eq("A new name")
     end
 
-    it "changes @item description" do 
-      xhr :put, :update, { "id" => item.id, "item" => { description: "A new description" } }
+    it "changes @item name" do 
+      xhr :put, :update, { "id" => item.id, "item" => { name: "A new name" } }
       assigns(:item).should eq(item)
     end
 
     it "assigns a commodity to an item" do
-      almond = Commodity.create(description: "Almonds")
-      xhr :put, :update, { "id" => item.id, "item" => { description: item.description, commodity_id: almond.id } }
+      almond = Commodity.create(name: "Almonds")
+      xhr :put, :update, { "id" => item.id, "item" => { description: item.name, commodity_id: almond.id } }
       item.reload
       expect(item.commodity).to eq(almond)
     end
 
     it "assigns a size to an item" do 
       medium = Fabricate(:size, name: "medium")
-      xhr :put, :update, { "id" => item.id, "item" => { description: item.description, commodity_id: item.commodity.id, size_id: medium.id } }
+      xhr :put, :update, { "id" => item.id, "item" => { name: item.name, commodity_id: item.commodity.id, size_id: medium.id } }
       item.reload
       expect(item.size).to eq(medium)
     end
 
     it "assigns a variety to an item" do 
       carmel = Variety.create(name: "carmel")
-      xhr :put, :update, { "id" => item.id, "item" => { description: item.description, variety_id: carmel.id } }
+      xhr :put, :update, { "id" => item.id, "item" => { name: item.name, variety_id: carmel.id } }
       item.reload
       expect(item.variety).to eq(carmel)
     end
 
     it "redirects to the @item edit page" do 
-      xhr :put, :update, { "id" => item.id, "item" => { description: "A new description" } }
+      xhr :put, :update, { "id" => item.id, "item" => { name: "A new name" } }
       response.should redirect_to edit_item_path(item)
     end
 
     it "sets the flash success message" do 
-      xhr :put, :update, { "id" => item.id, "item" => { description: "A new description" } }
+      xhr :put, :update, { "id" => item.id, "item" => { name: "A new name" } }
       flash[:success].should be_present
     end
 
     it "sets the flash error message" do 
-      xhr :put, :update, { "id" => item.id, "item" => { description: nil } }
+      xhr :put, :update, { "id" => item.id, "item" => { name: nil } }
       flash[:error].should be_present
     end
   end

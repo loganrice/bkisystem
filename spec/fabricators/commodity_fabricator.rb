@@ -1,3 +1,3 @@
 Fabricator(:commodity) do 
-  description { Faker::Lorem.word }
+  name { Faker::Lorem.word }
 end

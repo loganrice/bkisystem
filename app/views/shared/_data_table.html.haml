@@ -8,20 +8,10 @@
         -#- end widget -->
         -#- Widget ID (each widget will need unique ID)-->
         %div.jarviswidget.jarviswidget-color-blueDark#itemlist{ "data-widget-editbutton" => "true", "data-widget-colorbutton" => "false" }
-          -# widget options:
-          -#usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-          -#data-widget-colorbutton="false"
-          -#data-widget-editbutton="false"
-          -#data-widget-togglebutton="false"
-          -#data-widget-deletebutton="false"
-          -#data-widget-fullscreenbutton="false"
-          -#data-widget-custombutton="false"
-          -#data-widget-collapsed="true"
-          -#data-widget-sortable="false"
           %header
             %span.widget-icon
               %i.fa.fa-table
-            %h2 Commodity List
+            %h2= "#{data.first.class.name} List"
           -#- widget div-->
           %div
             -# widget edit box -->
@@ -31,17 +21,20 @@
             -#- widget content -->
             %div.widget-body
               %div.widget-body-toolbar
-                = link_to new_commodity_path, class: "btn btn-success", remote: true do 
+                = link_to new_polymorphic_path(data.first), class: "btn btn-success", remote: true do 
                   %i.fa.fa-plus
-                  %span New Commodity
-              %table#commodities.table.table-striped.table-bordered.table-hover{ :width => "100%" }
+                  %span= "New #{data.first.class.name}"
+
+              %table#recordTable.table.table-striped.table-bordered.table-hover{ :width => "100%" }
                 %thead
                   %tr
                     %th ID
-                    %th Description
+                    %th Name
                 %tbody
-                  - @commodities.each do |commodity|
+                  - data.each do |record|
                     %tr
-                      %td= commodity.id
+                      %td= record.id
                       %td
-                        = link_to commodity.description, edit_commodity_path(commodity), remote: true
+                        = link_to record.name, edit_polymorphic_path(record), remote: true
+
+

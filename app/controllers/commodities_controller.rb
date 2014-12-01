@@ -37,6 +37,6 @@ class CommoditiesController < ApplicationController
   private
 
   def commodity_params 
-    params.require(:commodity).permit(:description) if params[:commodity]
+    params.require(:commodity).permit(:name) if params[:commodity]
   end
 end

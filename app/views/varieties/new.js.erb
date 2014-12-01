@@ -1,4 +1,5 @@
-$('#content').replaceWith( '<%= j render("form") %>');
+$('#content').replaceWith( '<%= j render("shared/update_data", data_object: @variety) %>');
+
 pageSetUp();
 
 <% if flash.any? %>

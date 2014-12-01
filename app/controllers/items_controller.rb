@@ -42,6 +42,6 @@ class ItemsController < ApplicationController
 
   private
     def item_params
-      params.require(:item).permit(:description, :commodity_id, :size_id, :variety_id) if params[:item]
+      params.require(:item).permit(:name, :commodity_id, :size_id, :variety_id) if params[:item]
     end
 end
