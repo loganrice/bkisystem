@@ -16,6 +16,7 @@ Size.delete_all
 Variety.delete_all
 Contract.delete_all
 Account.delete_all
+Address.delete_all
 
 almonds = Commodity.create(name: "Almonds")
 walnuts = Commodity.create(name: "Walnuts")
@@ -175,17 +176,12 @@ Contract.create(buyer_contract: Faker::Number.number(4), buyer_po: Faker::Number
 Contract.create(buyer_contract: Faker::Number.number(4), buyer_po: Faker::Number.number(6), seller_contract: Faker::Number.number(7), date: Faker::Date.between(30.days.ago, Date.today))
 Contract.create(buyer_contract: Faker::Number.number(4), buyer_po: Faker::Number.number(6), seller_contract: Faker::Number.number(7), date: Faker::Date.between(30.days.ago, Date.today))
 
-Account.create(
+almond_ace = Account.create(
   name: "Almond Ace",
   phone1: "209-559-7444",
   phone2: "",
   fax: "209-599-7445",
   email: "miguel@almondace.com",
-  address_1_line_1: "1555 Warren Road",
-  address_1_city: "Ripon",
-  address_1_state: "CA",
-  address_1_zip: "95336",
-  address_1_country: "USA",
   notes: "",
   bank_1_name: "Oak Valley Community Bank, 1910 McHeny Ave, Escalon, CA 95230",
   bank_1_aba: "121042484",
@@ -193,4 +189,15 @@ Account.create(
   bank_1_swift_code: "PCBBUS66",
   bank_1_attention: "BKI Exports Inc."
 )
+
+almond_ace.addresses.create(
+  line1: "1555 Warren Road",
+  line2: "",
+  line3: "",
+  city: "Ripon",
+  state: "CA",
+  zip: "95336",
+  country: "USA"
+)
+
 

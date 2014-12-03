@@ -42,9 +42,15 @@
               %div{ "role" => "tabpanel" }
   
                 %div.tab-content
-                  %div.tab-pane.fade.active#home{ "role" => "tabpanel" }
+                  %div.tab-pane.fade.in.active#home{ "role" => "tabpanel" }
                     %div.widget-body-toolbar.bg-color-white
-                    %p Cool this is tab 1
+                      = bootstrap_form_for(@account, label_errors: true, remote: true) do |f|
+                        = f.submit @account.new_record? ? "Create new account" : "Update account", class: "btn btn-info"
+
+                        = f.text_field :name, icon: "user"
+                        = f.fields_for :addresses do |builder|
+                          = render 'address_fields', f: builder
+                      
                   %div.tab-pane.fade#profile{ "role" => "tabpanel" }
                     %p Cool this is tab 2
                   %div.tab-pane.fade#messages{ "role" => "tabpanel" }
@@ -59,13 +65,6 @@
                         = f.text_field :first_name
                         = f.text_field :last_name
                         = f.email_field :email, icon: "envelope"
-                        = f.text_field :address_1_line_1, control_col: "col-sm-6"
-                        = f.text_field :address_1_line_2
-                        = f.text_field :address_1_line_3
-                        = f.text_field :address_1_city
-                        = f.text_field :address_1_state
-                        = f.text_field :address_1_zip
-                        = f.text_field :address_1_country
                     
                         = f.submit @account.new_record? ? "Create new account" : "Update account"
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141201192044) do
+ActiveRecord::Schema.define(version: 20141203193736) do
 
   create_table "accounts", force: true do |t|
     t.string "name"
@@ -34,6 +34,20 @@ ActiveRecord::Schema.define(version: 20141201192044) do
     t.string "bank_1_account"
     t.string "bank_1_swift_code"
     t.string "bank_1_attention"
+  end
+
+  create_table "addresses", force: true do |t|
+    t.string   "line1"
+    t.string   "line2"
+    t.string   "line3"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.integer  "addressable_id"
+    t.string   "addressable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "country"
   end
 
   create_table "commodities", force: true do |t|
