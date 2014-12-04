@@ -26,9 +26,9 @@
               %li.active{ "role" => "presentation" }
                 %a{ "href" => "#profile", "aria-controls" => "profile", "role" => "tab", "data-toggle" => "tab" } Profile
               %li{ "role" => "presentation" }
-                %a{ "href" => "#address", "aria-controls" => "address", "role" => "tab", "data-toggle" => "tab" } Profile
+                %a{ "href" => "#address", "aria-controls" => "address", "role" => "tab", "data-toggle" => "tab" } Address
               %li{ "role" => "presentation" }
-                %a{ "href" => "#messages", "aria-controls" => "messages", "role" => "tab", "data-toggle" => "tab" } Messages
+                %a{ "href" => "#messages", "aria-controls" => "bank", "role" => "tab", "data-toggle" => "tab" } Bank
               %li{ "role" => "presentation" }
                 %a{ "href" => "#settings", "aria-controls" => "settings", "role" => "tab", "data-toggle" => "tab" }Settings            
           -#- widget div-->
@@ -39,12 +39,15 @@
             -#- end widget edit box -->
             -#- widget content -->
             %div.widget-body
-              %div{ "role" => "tabpanel" }
-  
-                %div.tab-content
-                  %div.tab-pane.fade.in.active#profile{ "role" => "tabpanel" }
-                    %div.widget-body-toolbar.bg-color-white
-                      = bootstrap_form_for(@account, layout: :horizontal, label_errors: true, remote: true) do |f|
+              = bootstrap_form_for(@account, layout: :horizontal, label_errors: true, remote: true) do |f|
+                %br
+                = button_tag(type: 'submit', class: "btn btn-primary") do
+                  %i.fa.fa-lg.fa-fw.fa-refresh
+
+                %div.well{ "role" => "tabpanel" }
+                  %div.tab-content
+                    %div.tab-pane.fade.in.active#profile{ "role" => "tabpanel" }
+                      %div.widget-body-toolbar.bg-color-white
                         = f.text_field :name, icon: "user"
                         = f.phone_field :phone1, icon: "phone-alt"
                         = f.telephone_field :phone2, icon: "phone-alt"
@@ -52,17 +55,11 @@
                         = f.text_field :first_name
                         = f.text_field :last_name
                         = f.email_field :email, icon: "envelope"
-                    
-                        = f.submit @account.new_record? ? "Create new account" : "Update account"
-                  %div.tab-pane.fade#address{ "role" => "tabpanel" }
-                    %div.widget-body-toolbar.bg-color-white
-                      = bootstrap_form_for(@account, label_errors: true, remote: true) do |f|
-                        = f.submit @account.new_record? ? "Create new account" : "Update account", class: "btn btn-info"
-
-                        = f.text_field :name, icon: "user"
+                    %div.tab-pane.fade#address{ "role" => "tabpanel" }
+                      %div.widget-body-toolbar.bg-color-white
                         = f.fields_for :addresses do |builder|
                           = render 'address_fields', f: builder
-
-                  %div.tab-pane.fade#messages{ "role" => "tabpanel" }
-                    %p Cool this is tab 3
-                  %div.tab-pane.fade#settings{ "role" => "tabpanel" }
+                      = link_to_add_fields "Add Address", f, :addresses
+                    %div.tab-pane.fade#bank{ "role" => "tabpanel" }
+                      %p Cool this is tab 3
+                    %div.tab-pane.fade#settings{ "role" => "tabpanel" }

@@ -40,6 +40,28 @@ describe AccountsController do
     end
   end
 
+  describe 'DELETE destroy' do
+    context "with valid input" do
+      it "deletes an account" do 
+        xcorp = Fabricate(:account)
+        xhr :delete, :destroy, id: xcorp.id
+        expect(Account.count).to eq(0)
+      end
+
+      it "redirects to accounts path" do 
+        xcorp = Fabricate(:account)
+        xhr :delete, :destroy, id: xcorp.id
+        expect(response).to redirect_to accounts_path
+      end
+
+      it "sets the flash success message" do 
+        xcorp = Fabricate(:account)
+        xhr :delete, :destroy, id: xcorp.id
+        expect(flash[:success]).to be_present
+      end
+    end
+  end
+
   describe 'POST create' do    
     context "with valid input" do
       let(:new_account_attributes) { Fabricate.attributes_for(:account) }
@@ -48,7 +70,7 @@ describe AccountsController do
         xhr :post, :create, account: new_account_attributes
         expect(Account.count).to eq(1)
       end
-      it "redirects to the accounts path" do 
+      it "redirect to the accounts path" do 
         xhr :post, :create, account: new_account_attributes
         expect(response).to redirect_to accounts_path
       end
@@ -84,10 +106,10 @@ describe AccountsController do
         expect(Account.first.name).to eq("X Corp")
       end
 
-      it "redirects to the accounts path" do
+      it "render edit template" do
         xcorp = Account.first
         xhr :put, :update, id: xcorp.id, account: xcorp.attributes
-        expect(response).to redirect_to accounts_path
+        expect(response).to render_template :edit
       end
       it "sets the flash success message" do
         xcorp = Account.first
@@ -97,23 +119,5 @@ describe AccountsController do
       end
     end
 
-    context "with invalid input" do 
-      it "should render the edit template" do
-        xcorp = Account.first
-        xhr :put, :update, id: xcorp.id, account: {name: nil }
-        expect(response).to render_template :edit
-      end
-      it "does not update account name" do
-        xcorp = Account.first
-        xhr :put, :update, id: xcorp.id, account: {name: nil }
-        expect(Account.first.name).to_not be_nil
-      end
-
-      it "sets the flash error message" do
-        xcorp = Account.first
-        xhr :put, :update, id: xcorp.id, account: {name: nil }
-        expect(flash[:error]).to be_present
-      end
-    end
   end
 end

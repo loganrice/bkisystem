@@ -25,15 +25,23 @@ class AccountsController < ApplicationController
   end
 
   def update
-    binding.pry
     @account = Account.find(params[:id])
-    if @account.update(account_params)
+    # binding.pry
+    if @account.update_attributes(account_params)
       flash[:success] = "Updated"
-      redirect_to accounts_path
+      render :edit 
     else
       flash[:error] = "Sorry, something went wrong. The commodity was not created."
       render :edit
     end
+  end
+
+  def destroy
+    account = Account.find(params[:id])
+    if account.destroy
+      flash[:success] = "Updated"
+    end
+    redirect_to accounts_path
   end
 
   private
@@ -41,9 +49,8 @@ class AccountsController < ApplicationController
   def account_params
     params.require(:account).permit(
       :name, :phone1, :phone2, :fax, :first_name, :last_name,
-      :email, :address_1_line_1, :address_1_line_2, :address_1_line_3,
-      :address_1_city, :address_1_state, :address_1_zip, 
-      :address_1_country
+      :email, addresses_attributes: 
+      [:line1, :line2, :line3, :city, :country, :zip, :id, :_destroy]
       )
   end
 end
