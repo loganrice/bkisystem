@@ -8,3 +8,10 @@ pageSetUp();
 setTimeout(function() {
   $('.flash-messages').remove();
 }, 10000);
+
+$('#country-select').on('change', function(event) {
+  var country_code = $('#country-select').val().toLowerCase();
+  $('#flag').removeClass();
+  $('#flag').addClass("flag flag-" + country_code);
+  alert(x);
+});

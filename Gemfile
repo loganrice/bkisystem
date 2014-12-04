@@ -16,6 +16,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 gem 'jquery-datatables-rails', '~> 3.0.0'
 gem 'bootstrap_form'
+gem 'country_select'
 
 group :development do
   gem 'sqlite3'

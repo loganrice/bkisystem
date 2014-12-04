@@ -25,6 +25,7 @@ class AccountsController < ApplicationController
   end
 
   def update
+    binding.pry
     @account = Account.find(params[:id])
     if @account.update(account_params)
       flash[:success] = "Updated"

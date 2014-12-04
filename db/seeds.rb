@@ -9,6 +9,8 @@
 # Clear Table
 
 require 'faker'
+require 'open-uri'
+require 'csv'
 
 Item.delete_all
 Commodity.delete_all
@@ -16,7 +18,7 @@ Size.delete_all
 Variety.delete_all
 Contract.delete_all
 Account.delete_all
-Address.delete_all
+Address.delete_all 
 
 almonds = Commodity.create(name: "Almonds")
 walnuts = Commodity.create(name: "Walnuts")
@@ -199,5 +201,7 @@ almond_ace.addresses.create(
   zip: "95336",
   country: "USA"
 )
+
+
 
 

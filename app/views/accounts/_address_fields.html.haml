@@ -1,10 +1,11 @@
 %div.well.bg-color-darken
   %div.row
-    %fieldset
+    = f.form_group layout: :horizontal do 
       = f.text_field :line1
       = f.text_field :line2
       = f.text_field :line3
-      = f.text_field :country
+      = image_tag 'blank.gif', id: "flag", class: 'flag flag-us', alt: 'United States'
+      = f.country_select :country, ["US"], {include_blank: true, selected: "US" }, { class: "form-control", id: "country-select" }
   %div.row
     %a.btn.btn-danger.pull-right{"href" => "#"}
       %i.fa.fa-remove
