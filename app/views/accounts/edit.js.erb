@@ -9,16 +9,9 @@ setTimeout(function() {
   $('.flash-messages').remove();
 }, 10000);
 
-$('#country-select').on('change', function(event) {
-  var country_code = $('#country-select').val().toLowerCase();
-  $('#flag').removeClass();
-  $('#flag').addClass("flag flag-" + country_code);
-  alert(x);
-});
-
 $('form').on('click', '.remove_fields', function(event) {
   $(this).prev('input[type=hidden]').val('1');
-  $(this).closest('fieldset').hide();
+  $(this).closest('fieldset').hide("slow");
   event.preventDefault();
 })
 

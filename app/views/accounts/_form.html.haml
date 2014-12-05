@@ -28,7 +28,7 @@
               %li{ "role" => "presentation" }
                 %a{ "href" => "#address", "aria-controls" => "address", "role" => "tab", "data-toggle" => "tab" } Address
               %li{ "role" => "presentation" }
-                %a{ "href" => "#messages", "aria-controls" => "bank", "role" => "tab", "data-toggle" => "tab" } Bank
+                %a{ "href" => "#bank", "aria-controls" => "bank", "role" => "tab", "data-toggle" => "tab" } Bank
               %li{ "role" => "presentation" }
                 %a{ "href" => "#settings", "aria-controls" => "settings", "role" => "tab", "data-toggle" => "tab" }Settings            
           -#- widget div-->
@@ -39,21 +39,19 @@
             -#- end widget edit box -->
             -#- widget content -->
             %div.widget-body
+              %br
               = bootstrap_form_for(@account, layout: :horizontal, label_errors: true, remote: true) do |f|
-                %br
-                = button_tag(type: 'submit', class: "btn btn-primary") do
-                  %i.fa.fa-lg.fa-fw.fa-refresh
 
                 %div.well{ "role" => "tabpanel" }
                   %div.tab-content
                     %div.tab-pane.fade.in.active#profile{ "role" => "tabpanel" }
                       %div.widget-body-toolbar.bg-color-white
-                        = f.text_field :name, icon: "user"
+                        = f.text_field :name, icon: "briefcase"
                         = f.phone_field :phone1, icon: "phone-alt"
                         = f.telephone_field :phone2, icon: "phone-alt"
-                        = f.telephone_field :fax
-                        = f.text_field :first_name
-                        = f.text_field :last_name
+                        = f.telephone_field :fax, icon: "phone-alt"
+                        = f.text_field :first_name, icon: "user"
+                        = f.text_field :last_name, icon: "user"
                         = f.email_field :email, icon: "envelope"
                     %div.tab-pane.fade#address{ "role" => "tabpanel" }
                       %div.widget-body-toolbar.bg-color-white
@@ -61,5 +59,12 @@
                           = render 'address_fields', f: builder
                       = link_to_add_fields "Add Address", f, :addresses
                     %div.tab-pane.fade#bank{ "role" => "tabpanel" }
-                      %p Cool this is tab 3
+                      %div.widget-body-toolbar.bg-color-white
+                        = f.fields_for :banks do |builder|
+                          = render 'bank_fields', f: builder
+                          = link_to_add_fields "Add Bank", f, :banks
+
                     %div.tab-pane.fade#settings{ "role" => "tabpanel" }
+                = button_tag(type: 'submit', class: "btn btn-primary btn-lg btn-block") do
+                  %i.fa.fa-lg.fa-fw.fa-save
+                  %span Save

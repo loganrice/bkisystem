@@ -202,6 +202,13 @@ almond_ace.addresses.create(
   country: "USA"
 )
 
+almond_ace.banks.create(
+  name: "Oak Valley Community Bank",
+  aba: "1532",
+  swift: "2325",
+  attention: "Mike Smith"
+)
+
 
 
 
