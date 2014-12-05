@@ -15,6 +15,8 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 gem 'jquery-datatables-rails', '~> 3.0.0'
+gem 'bootstrap-sass', '~> 3.3.1'
+gem 'autoprefixer-rails'
 gem 'bootstrap_form'
 gem 'country_select'
 
