@@ -1,0 +1,30 @@
+%div#content
+  -# widget grid -->
+  %section#widget-grid
+    -# row -->
+    %div.row
+      -# NEW WIDGET START -->
+      %article.col-xs-12.col-sm-12.col-md-12.col-lg-12
+        -#- end widget -->
+        -#- Widget ID (each widget will need unique ID)-->
+        %div.jarviswidget.jarviswidget-color-blueDark#newuser{ "data-widget-editbutton" => "false" }
+          %header
+            %span.widget-icon
+              %i.fa.fa-table
+            %h2 New User
+          -#- widget div-->
+          %div
+            -# widget edit box -->
+            %div.jarviswidget-editbox
+              -# This area used as dropdown edit box -->
+            -#- end widget edit box -->
+            -#- widget content -->
+            %div.widget-body.no-padding
+              %div.well
+                = bootstrap_form_for(@user, class: "login-form smart-form client-form", layout: :horizontal, label_errors: true, remote: true) do |f|
+
+                  = f.text_field :name, icon: "user"
+                  = f.email_field :email, icon: "envelope"
+                  = f.password_field :password, icon: "lock"
+
+                  = f.submit @user.new_record? ? "Add" : "Update"

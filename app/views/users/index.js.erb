@@ -1,0 +1,9 @@
+$('#content').replaceWith( '<%= j render("list") %>');
+
+$('#content').before('<%= j render("shared/messages", flash: flash) %>');
+
+pageSetUp();
+$('#usersTable').DataTable({});
+setTimeout(function() {
+  $('.flash-messages').remove();
+}, 10000);

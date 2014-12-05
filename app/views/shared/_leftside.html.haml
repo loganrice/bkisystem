@@ -60,9 +60,14 @@
         = link_to accounts_path, remote: true do 
           %i.fa.fa-lg.fa-fw.fa-users
           %span Accounts
- 
+      %li.nav-item
+        = link_to users_path, remote: true do
+          %i.fa.fa-lg.fa-fw.fa-user
+          %span.menu-item-parent User
+
   %span.minifyme{ "data-action" => "minifyMenu" }
-    = link_to :back do 
+    = link_to new_session_path, remote: true do 
       %i.fa.fa-arrow-circle-left.hit
+      %span Login
 
       
