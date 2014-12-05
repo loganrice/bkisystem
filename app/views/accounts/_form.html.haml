@@ -61,5 +61,6 @@
                           = render 'address_fields', f: builder
                       = link_to_add_fields "Add Address", f, :addresses
                     %div.tab-pane.fade#bank{ "role" => "tabpanel" }
-                      %p Cool this is tab 3
+                      = f.fields_for :banks do |builder|
+                        = render 'bank_fields', f: builder
                     %div.tab-pane.fade#settings{ "role" => "tabpanel" }
