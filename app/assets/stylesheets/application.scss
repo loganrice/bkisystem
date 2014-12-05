@@ -15,6 +15,7 @@
  *= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
  *= require rails_bootstrap_forms
  */
+@import 'bootstrap-sprockets';
 @import 'bootstrap';
 @import 'library/fontawesome/font-awesome';
 @import 'smartadmin-production-plugins';
