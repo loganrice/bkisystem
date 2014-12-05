@@ -7,8 +7,8 @@
         = f.text_field :line3
         = f.text_field :city
         = f.text_field :zip
-        %container.pull-right
-          = image_tag 'blank.gif', id: "flag", class: 'flag flag-us', alt: 'United States'
+        %div.form-group.pull-right
+          %label Country
           = f.country_select :country, ["US"], {include_blank: true, selected: f.object.country }, { class: "form-control", id: "country-select" }
     %div.row
       = f.hidden_field :_destroy
