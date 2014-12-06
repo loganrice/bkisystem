@@ -1,0 +1,43 @@
+%header#header
+  %div#logo-group
+    %span#logo
+      =image_tag 'bki_logo.png'
+      %span BKI Systems
+  %span#extr-page-header-space
+    %span.hidden-mobile.hiddex-xs
+      Need an account?
+    %a.btn.btn-danger{ "href" => "register.html" }
+      Create account
+%div.container
+  %div.row
+    %div.col-md-7.hidden-xs.hidden-sm
+      %h1.txt-color-red.login-header-big
+        BKI Systems
+      %div.hero
+        %div.pull-left.login-desc-box-l
+          %h4.paragraph-header
+            Get connected to your account anywhere you go.
+          = image_tag "bkibanner.png", class: "img-responsive img-rounded"
+      %div.row
+        %div.col-md-6.col-lg-6
+          %h5.about-heading
+            About BKI Systems - Are you up to date?
+          %p
+            Get connected like never before, with the latest updates to your account. Anywhere, anytime. 
+        %div.col-md-6.col-lg-6
+          %h5.about-heading
+            Secure Account Information
+          %p
+            Your account information is kept secure. While making it easy for your team to collaborate.
+    %div.col-md-5
+      %h1.txt-color-red.login-header-big
+        Log In
+      %div.well
+        = bootstrap_form_tag url: sessions_path do |f|
+          = f.text_field :name
+          = f.email_field :email, icon: "envelope"
+          = f.password_field :password, icon: "lock"
+
+          = submit_tag "Log In", class: "btn btn-primary btn-lg"
+
+

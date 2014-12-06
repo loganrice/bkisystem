@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-  root to: 'contracts#home'
+  # root to: 'contracts#home'
+  root 'sessions#new'
   get 'home', to: 'videos#index'
   
   resources :contracts

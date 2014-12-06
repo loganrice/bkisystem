@@ -28,11 +28,14 @@
 		= javascript_include_tag 'application', 'data-turbolinks-track' => true
 		= csrf_meta_tags
 	%body
-		= render 'shared/header'
-		= render 'shared/leftside'
+		- if current_user
+			= render 'shared/header'
+			= render 'shared/leftside'
 
-		%div#main{ :role => "main" }
-			= render 'shared/ribbon' 
-			= render 'shared/messages'
-			= yield	                
+			%div#main{ :role => "main" }
+				= render 'shared/ribbon' 
+				= render 'shared/messages'
+				= yield
+		- else
+			= yield
 		= javascript_include_tag 'main' 
