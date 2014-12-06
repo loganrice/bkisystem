@@ -109,9 +109,10 @@
                 ogout
     -# logout button -->
     %div#logout.btn-header.transparent.pull-right
-      %span 
-        %a{ :href => '@Url.Action("login", "account")', :title => "Sign Out", "data-action" => "userLogout", "data-logout-msg" => "You can improve your security further after logging out by closing this opened browser" }
+      %span
+        = link_to sign_out_path do
           %i.fa.fa-sign-out
+
     -# end logout button -->
     -# search mobile button (this is hidden till mobile view port) -->
     %div#search-mobile.btn-header.transparent.pull-right

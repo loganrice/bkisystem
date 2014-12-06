@@ -16,7 +16,7 @@
       %div.hero
         %div.pull-left.login-desc-box-l
           %h4.paragraph-header
-            Get connected to your account anywhere you go.
+            Get connected to your account everywhere you go.
           = image_tag "bkibanner.png", class: "img-responsive img-rounded"
       %div.row
         %div.col-md-6.col-lg-6
@@ -34,7 +34,6 @@
         Log In
       %div.well
         = bootstrap_form_tag url: sessions_path do |f|
-          = f.text_field :name
           = f.email_field :email, icon: "envelope"
           = f.password_field :password, icon: "lock"
 

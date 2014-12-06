@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   # root to: 'contracts#home'
   root 'sessions#new'
-  get 'home', to: 'videos#index'
+  get 'home', to: 'contracts#home'
   
   resources :contracts
   resources :items
@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   resources :accounts
   resources :users
   resources :sessions
-  get 'login' => 'pages#login' 
+  get 'login' => 'sessions#new'
+  get 'sign_out' => 'sessions#destroy'
   get 'ui(/:action)', controller: 'ui'
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
