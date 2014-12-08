@@ -19,6 +19,7 @@ gem 'bootstrap-sass', '~> 3.3.1'
 gem 'autoprefixer-rails'
 gem 'bootstrap_form'
 gem 'country_select'
+gem 'faker'
 
 group :development do
   gem 'sqlite3'
@@ -37,7 +38,6 @@ group :test do
   gem 'database_cleaner', '1.3.0'
   gem 'shoulda-matchers', require: false
   gem 'fabrication'
-  gem 'faker'
   gem 'capybara'
   gem 'launchy'
   gem 'vcr'
