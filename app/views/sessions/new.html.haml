@@ -1,13 +1,18 @@
 %header#header
   %div#logo-group
-    %span#logo
+    %span#logo.hidden-sm.hidden-xs
       =image_tag 'bki_logo.png'
-      %span BKI Systems
+      %small
+        BKI Systems
   %span#extr-page-header-space
     %span.hidden-mobile.hiddex-xs
       Need an account?
-    %a.btn.btn-danger{ "href" => "register.html" }
+    %a.btn.btn-danger{ "href" => "#" }
       Create account
+  %span.hidden-md.hidden-lg
+    =image_tag 'bki_logo.png'
+    %small
+      BKI Systems
 %div.container
   %div.row
     %div.col-md-7.hidden-xs.hidden-sm
