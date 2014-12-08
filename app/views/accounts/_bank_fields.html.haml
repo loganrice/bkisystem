@@ -1,12 +1,11 @@
 %fieldset.well.bg-color-darken
-  %fielset
-    = f.form_group  do 
-      = f.text_field :name
-      = f.text_field :aba
-      = f.text_field :swift
-      = f.text_field :attention
-  %fieldset
-    = f.hidden_field :_destroy
-    %a.btn.btn-danger.pull-right.remove_fields{"href" => "#"}
-      %i.fa.fa-remove
-        Delete
+  = f.form_group  do 
+    = f.text_field :name
+    = f.text_field :aba
+    = f.text_field :swift
+    = f.text_field :attention
+
+  = f.hidden_field :_destroy
+  %a.btn.btn-danger.pull-right.remove_fields{"href" => "#"}
+    %i.fa.fa-remove
+      Delete

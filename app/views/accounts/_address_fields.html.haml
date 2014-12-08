@@ -1,16 +1,14 @@
 %fieldset.well.bg-color-darken
-  %fieldset
-    = f.form_group  do 
-      = f.text_field :line1
-      = f.text_field :line2
-      = f.text_field :line3
-      = f.text_field :city
-      = f.text_field :zip
-      %div.form-group.pull-right
-        %label Country
-        = f.country_select :country, ["US"], {include_blank: true, selected: f.object.country }, { class: "form-control", id: "country-select" }
-  %fieldset
-    = f.hidden_field :_destroy
-    %a.btn.btn-danger.pull-right.remove_fields{"href" => "#"}
-      %i.fa.fa-remove
-        Delete
+  = f.form_group  do 
+    = f.text_field :line1
+    = f.text_field :line2
+    = f.text_field :line3
+    = f.text_field :city
+    = f.text_field :zip
+    %div.form-group.pull-right
+      %label Country
+      = f.country_select :country, ["US"], {include_blank: true, selected: f.object.country }, { class: "form-control", id: "country-select" }
+  = f.hidden_field :_destroy
+  %a.btn.btn-danger.pull-right.remove_fields{"href" => "#"}
+    %i.fa.fa-remove
+      Delete
