@@ -209,6 +209,11 @@ almond_ace.banks.create(
   attention: "Mike Smith"
 )
 
+logan = User.create(name: "Logan Rice", email: "logan.rice@sigmagroup.solutions", password: "bki")
+mark = User.create(name: "Mark Duroy", email: "mark.duroy@sigmagroup.solutions", password: "bki")
+brad = User.create(name: "Brad Klump", email: "brad@bkiexports.com", password: "bki")
+steve = User.create(name: "Steve Bava", email: "steve@bkiexports.com", password: "bki")
+brad = User.create(name: "Jenny", email: "jenny@bkiexports.com", password: "bki")
 
 
 
