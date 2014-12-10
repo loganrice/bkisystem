@@ -15,6 +15,51 @@ describe ContractsController do
       xhr :get, :new
       expect(assigns(:contract)).to be_instance_of(Contract)
     end
+
+    it "renders the new template" do
+      xhr :get, :new
+      expect(response).to render_template :new
+    end
+  end
+
+  describe "GET edit" do
+    let(:contract) { Fabricate(:contract)} 
+
+    it "sets @contract" do 
+      xhr :get, :edit, id: contract.id
+      expect(assigns(:contract)).to be_instance_of(Contract)
+    end
+    it "renders the edit template" do
+      xhr :get, :edit, id: contract.id
+      expect(response).to render_template :edit
+    end
+  end
+
+  describe "PUT update" do
+    context "with valid input" do
+      let(:contract) { Fabricate(:contract) }
+
+      it "sets @contract with updated buyer po" do
+        xhr :put, :update, id: contract.id, contract: { buyer_po: "5555" }
+        contract.reload
+        expect(contract.buyer_po).to eq("5555")
+      end
+
+      it "redirects to the contacts path" do
+        xhr :put, :update, id: contract.id, contract: { buyer_po: "5555" }
+        expect(response).to redirect_to contracts_path
+      end
+      it "sets the flash success message" do 
+        xhr :put, :update, id: contract.id, contract: { buyer_po: "5555" }
+        expect(flash[:success]).to_not be_nil
+      end
+    end
+
+    context "with invalid input" do 
+      it "does not update the buyer po"
+      it "renders the edit template"
+      it "sets the flash error message"
+    end
   end
 
   describe "POST create" do

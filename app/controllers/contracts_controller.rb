@@ -9,6 +9,17 @@ class ContractsController < ApplicationController
     @contract = Contract.new
   end
 
+  def edit
+    @contract = Contract.find(params[:id])
+  end
+
+  def update
+    @contract = Contract.find(params[:id])
+    @contract.update(contract_params)
+    flash[:success] = "Updated"
+    redirect_to contracts_path
+  end
+
   def create
     @contract = Contract.new(contract_params)
     @contract.save

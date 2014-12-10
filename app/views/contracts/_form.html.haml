@@ -29,10 +29,15 @@
               -# This area used as dropdown edit box -->
             -#- end widget edit box -->
             -#- widget content -->
-            %div.widget-body.no-padding
-              = bootstrap_form_for(@contract, label_errors: true, remote: true) do |f|
-                = f.text_field :buyer_contract
-                = f.text_field :buyer_po
-                = f.text_field :seller_contract
-                = f.submit @contract.new_record? ? "Add" : "Update"
+            %div.widget-body
+              = bootstrap_form_for(@contract, layout: :default, control_col: "col-sm-4", label_errors: true, remote: true) do |f|
+                %div.row
+                  %section.col-sm-4
+                    = f.text_field :buyer_contract
+                  %section.col-sm-4
+                    = f.text_field :buyer_po
+                  %section.col-sm-4
+                    = f.text_field :seller_contract
+                = f.form_group do 
+                  = f.submit @contract.new_record? ? "Add" : "Update", layout: :horizontal
 
