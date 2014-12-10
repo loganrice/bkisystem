@@ -30,6 +30,6 @@ class ContractsController < ApplicationController
   private
 
   def contract_params
-    params.require(:contract).permit(:buyer_contract, :buyer_po, :seller_contract, :date)
+    params.require(:contract).permit(:buyer_contract, :buyer_po, :seller_contract, :date, :buyer_id, :seller_id)
   end
 end

@@ -45,6 +45,20 @@ describe ContractsController do
         expect(contract.buyer_po).to eq("5555")
       end
 
+      it "updates the contract buyer id" do
+        new_buyer = Fabricate(:account)
+        xhr :put, :update, id: contract.id, contract: { buyer_id: new_buyer.id }
+        contract.reload
+        expect(contract.buyer).to eq(new_buyer)
+      end
+
+      it "updates the contract seller id" do 
+        new_seller = Fabricate(:account)
+        xhr :put, :update, id: contract.id, contract: { seller_id: new_seller.id }
+        contract.reload
+        expect(contract.seller).to eq(new_seller)
+      end
+
       it "redirects to the contacts path" do
         xhr :put, :update, id: contract.id, contract: { buyer_po: "5555" }
         expect(response).to redirect_to contracts_path

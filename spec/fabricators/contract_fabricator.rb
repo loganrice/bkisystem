@@ -1,4 +1,6 @@
-Fabricator(:contract) do 
+Fabricator(:contract) do
+  buyer_id { Fabricate(:account).id }
+  seller_id { Fabricate(:account).id }
   buyer_contract { Faker::Number.number(10) }
   buyer_po { Faker::Number.number(10) }
   seller_contract { Faker::Number.number(10) }

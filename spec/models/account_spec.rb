@@ -1,3 +1,4 @@
+
 require 'spec_helper'
 
 describe Account do
@@ -6,4 +7,7 @@ describe Account do
   it { should accept_nested_attributes_for(:addresses) }
   it { should accept_nested_attributes_for(:banks) }
   it { should have_many(:banks) }
+  it { should have_many(:selling_contracts)}
+  it { should have_many(:buying_contracts)}
+
 end

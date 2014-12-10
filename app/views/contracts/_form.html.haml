@@ -32,6 +32,12 @@
             %div.widget-body
               = bootstrap_form_for(@contract, layout: :default, control_col: "col-sm-4", label_errors: true, remote: true) do |f|
                 %div.row
+                  %section.col-sm-6
+                    = f.select :buyer_id, options_for_select(Account.all.map { |buyer| [buyer.name, buyer.id]}, selected: f.object.buyer_id )
+                  %section.col-sm-6
+                    = f.select :seller_id, options_for_select(Account.all.map { |seller| [seller.name, seller.id]}, selected: f.object.seller_id )
+
+                %div.row
                   %section.col-sm-4
                     = f.text_field :buyer_contract
                   %section.col-sm-4
