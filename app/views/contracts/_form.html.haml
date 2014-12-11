@@ -7,21 +7,17 @@
       %article.col-xs-12.col-sm-12.col-md-12.col-lg-12
         -#- end widget -->
         -#- Widget ID (each widget will need unique ID)-->
-        %div.jarviswidget.jarviswidget-color-blueDark#itemindex{ "data-widget-editbutton" => "false" }
-          -# widget options:
-          -#usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-          -#data-widget-colorbutton="false"
-          -#data-widget-editbutton="false"
-          -#data-widget-togglebutton="false"
-          -#data-widget-deletebutton="false"
-          -#data-widget-fullscreenbutton="false"
-          -#data-widget-custombutton="false"
-          -#data-widget-collapsed="true"
-          -#data-widget-sortable="false"
+        %div.jarviswidget.jarviswidget-color-blueDark#contractsindex{ "data-widget-editbutton" => "false",  "data-widget-colorbutton" => "false", "data-widget-deletebutton" => "false" }
           %header
             %span.widget-icon
               %i.fa.fa-table
             %h2= @contract.id
+            %ul.nav.nav-tabs.pull-right{ "role" => "tablist" }
+              %li.active{ "role" => "presentation"}
+                %a{ "href" => "#contract-profile", "aria-controls" => "contract-profile", "role" => "tab", "data-toggle" => "tab" } Contract Profile
+              %li{ "role" => "presentation" }
+                %a{ "href" => "#shipment", "aria-controls" => "shipment", "role" => "tab", "data-toggle" => "tab" } Shipments
+
           -#- widget div-->
           %div
             -# widget edit box -->
@@ -31,19 +27,26 @@
             -#- widget content -->
             %div.widget-body
               = bootstrap_form_for(@contract, layout: :default, control_col: "col-sm-4", label_errors: true, remote: true) do |f|
-                %div.row
-                  %section.col-sm-6
-                    = f.select :buyer_id, options_for_select(Account.all.map { |buyer| [buyer.name, buyer.id]}, selected: f.object.buyer_id )
-                  %section.col-sm-6
-                    = f.select :seller_id, options_for_select(Account.all.map { |seller| [seller.name, seller.id]}, selected: f.object.seller_id )
+                %div.well{ "role" => "tabpanel" }
+                  %div.tab-content
+                    %div.tab-pane.fade.in.active#contract-profile{ "role" => "tabpanel" }
+                      %div.row
+                        %section.col-sm-6
+                          = f.select :buyer_id, options_for_select(Account.all.map { |buyer| [buyer.name, buyer.id]}, selected: f.object.buyer_id )
+                        %section.col-sm-6
+                          = f.select :seller_id, options_for_select(Account.all.map { |seller| [seller.name, seller.id]}, selected: f.object.seller_id )
 
-                %div.row
-                  %section.col-sm-4
-                    = f.text_field :buyer_contract
-                  %section.col-sm-4
-                    = f.text_field :buyer_po
-                  %section.col-sm-4
-                    = f.text_field :seller_contract
-                = f.form_group do 
-                  = f.submit @contract.new_record? ? "Add" : "Update", layout: :horizontal
+                      %div.row
+                        %section.col-sm-4
+                          = f.text_field :buyer_contract
+                        %section.col-sm-4
+                          = f.text_field :buyer_po
+                        %section.col-sm-4
+                          = f.text_field :seller_contract
+                    %div.tab-pane.fade#shipment
+                      = f.fields_for :shipments do |builder|
+                        = render 'shipment_fields', f: builder
+
+                    = f.form_group do 
+                      = f.submit @contract.new_record? ? "Add" : "Update", layout: :horizontal
 

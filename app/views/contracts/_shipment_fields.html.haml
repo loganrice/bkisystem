@@ -1,0 +1,36 @@
+%div.row
+  %section.col-sm-4
+    = f.date_field :ship_date
+  %section.col-sm-4
+    = f.date_field :last_received_date
+  %section.col-sm-4
+    = f.date_field :doc_cut_off
+%div.row
+  %section.col-sm-4
+    = f.date_field :estimated_arrival_date
+  %section.col-sm-4
+    = f.text_field :shipping_company
+  %section.col-sm-4
+    = f.text_field :voyage
+%div.row
+  %section.col-sm-4
+    = f.text_field :port_of_discharge
+  %section.col-sm-4
+    = f.text_field :vessel
+  %section.col-sm-4
+    = f.text_field :booking_number
+%div.row
+  %section.col-sm-4
+    = f.text_field :commodity
+  %section.col-sm-4
+    = f.date_field :estimated_arrival_date
+  %section.col-sm-4
+    = f.text_field :shipping_company_reference_number
+%div.row
+  %section.col-sm-4
+    = f.text_field :automated_export_number
+
+= f.text_area :payment_terms
+= f.text_area :remarks
+= f.text_area :ship_pick_up
+= f.text_area :ship_delivery
