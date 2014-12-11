@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141210184442) do
+ActiveRecord::Schema.define(version: 20141211025923) do
 
   create_table "accounts", force: true do |t|
     t.string "name"
@@ -84,6 +84,28 @@ ActiveRecord::Schema.define(version: 20141210184442) do
     t.integer  "commodity_id"
     t.integer  "size_id"
     t.integer  "variety_id"
+  end
+
+  create_table "shipments", force: true do |t|
+    t.date     "ship_date"
+    t.date     "last_received_date"
+    t.date     "doc_cut_off"
+    t.date     "estimated_arrival_date"
+    t.string   "shipping_company"
+    t.string   "voyage"
+    t.string   "port_of_discharge"
+    t.string   "vessel"
+    t.string   "ship_in_name_of"
+    t.string   "booking_number"
+    t.string   "commodity"
+    t.string   "shipping_company_reference_number"
+    t.string   "automated_export_number"
+    t.text     "payment_terms"
+    t.text     "remarks"
+    t.text     "ship_pick_up"
+    t.text     "ship_delivery"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "sizes", force: true do |t|
