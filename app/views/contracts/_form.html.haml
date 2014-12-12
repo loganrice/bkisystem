@@ -50,7 +50,9 @@
                       %div.panel-group#accordion{ "role" => "tablist", "aria-multiselectable" => "true" }
                         = f.fields_for :shipments do |builder|
                           = render 'shipment_fields', f: builder
-
+                    %div.well
+                      = f.fields_for :containers do |builder|
+                        = render 'container_fields', f: builder
                     = button_tag(type: 'submit', class: "btn btn-primary btn-lg btn-block") do
                       %i.fa.fa-lg.fa-fw.fa-save
                       %span Save

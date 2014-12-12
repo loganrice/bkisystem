@@ -8,4 +8,16 @@ class Container < ActiveRecord::Base
   def price_dollars
     self.price_cents.to_f / 100
   end
+
+  def shipment_date
+    self.shipment.ship_date
+  end
+
+  def load
+    self.shipment.containers.index(self) + 1
+  end
+
+  def load=(shipment)
+    self.shipment = shipment 
+  end
 end

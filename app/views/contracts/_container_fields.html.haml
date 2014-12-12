@@ -1,0 +1,12 @@
+%fieldset
+  %div.row
+    %section.col-sm-3
+      = f.select :item_id, options_for_select(Item.all.map { |item| [item.name, item.id]}, selected: f.object.item_id)
+    %section.col-sm-3
+      = f.select :load, options_for_select(f.object.shipment.containers.map { |container| [container.load, container.load]}, selected: f.object.load)
+    %section.col-sm-3
+      = f.text_field :shipment_date
+    %section.col-sm-3
+      = f.text_field :price_dollars, prepend: "$"
+
+      
