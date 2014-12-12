@@ -59,10 +59,6 @@ describe ContractsController do
         expect(contract.seller).to eq(new_seller)
       end
 
-      it "creates a shipment" do 
-        
-      end
-
       it "redirects to the contacts path" do
         xhr :put, :update, id: contract.id, contract: { buyer_po: "5555" }
         expect(response).to redirect_to contracts_path

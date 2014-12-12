@@ -1,36 +1,46 @@
-%div.row
-  %section.col-sm-4
-    = f.date_field :ship_date
-  %section.col-sm-4
-    = f.date_field :last_received_date
-  %section.col-sm-4
-    = f.date_field :doc_cut_off
-%div.row
-  %section.col-sm-4
-    = f.date_field :estimated_arrival_date
-  %section.col-sm-4
-    = f.text_field :shipping_company
-  %section.col-sm-4
-    = f.text_field :voyage
-%div.row
-  %section.col-sm-4
-    = f.text_field :port_of_discharge
-  %section.col-sm-4
-    = f.text_field :vessel
-  %section.col-sm-4
-    = f.text_field :booking_number
-%div.row
-  %section.col-sm-4
-    = f.text_field :commodity
-  %section.col-sm-4
-    = f.date_field :estimated_arrival_date
-  %section.col-sm-4
-    = f.text_field :shipping_company_reference_number
-%div.row
-  %section.col-sm-4
-    = f.text_field :automated_export_number
+%div.panel.panel-default
+  %div.panel-heading{ "role" => "tab", "id" => "heading#{f.object.id}" }
+    %h4.panel-title
+      %a.collapsed{ "data-toggle" => "collapse", "data-parent" => "#accordion", "href" => "#collapse#{f.object.id}", "aria-expanded" => "false", "aria-controls" => "collapse#{f.object.id}" }
+        %i.fa.fa-lg.fa-plus-circle
+        %span.text-info= "Shipment #{f.object.id} Ship Date #{f.object.ship_date}"
+  %div.panel-collapse.collapse{ "id" => "collapse#{f.object.id}", "role" => "tabpanel", "aria-labelledby" => "heading#{f.object.id}" }
+    %div.panel-body
+      %fieldset
+        %div.row
+          %section.col-sm-4
+            = f.date_field :ship_date
+          %section.col-sm-4
+            = f.date_field :last_received_date
+          %section.col-sm-4
+            = f.date_field :doc_cut_off
+        %div.row
+          %section.col-sm-4
+            = f.date_field :estimated_arrival_date
+          %section.col-sm-4
+            = f.text_field :shipping_company
+          %section.col-sm-4
+            = f.text_field :voyage
+        %div.row
+          %section.col-sm-4
+            = f.text_field :port_of_discharge
+          %section.col-sm-4
+            = f.text_field :vessel
+          %section.col-sm-4
+            = f.text_field :booking_number
+        %div.row
+          %section.col-sm-4
+            = f.text_field :commodity
+          %section.col-sm-4
+            = f.text_field :shipping_company_reference_number
+          %section.col-sm-4
+            = f.text_field :automated_export_number
 
-= f.text_area :payment_terms
-= f.text_area :remarks
-= f.text_area :ship_pick_up
-= f.text_area :ship_delivery
+        = f.text_area :payment_terms
+        = f.text_area :remarks
+        = f.text_area :ship_pick_up
+        = f.text_area :ship_delivery
+        = f.hidden_field :_destroy
+        %a.btn.btn-danger.pull-right.remove_fields{"href" => "#"}
+          %i.fa.fa-remove
+            Delete

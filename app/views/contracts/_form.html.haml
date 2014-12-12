@@ -16,7 +16,10 @@
               %li.active{ "role" => "presentation"}
                 %a{ "href" => "#contract-profile", "aria-controls" => "contract-profile", "role" => "tab", "data-toggle" => "tab" } Contract Profile
               %li{ "role" => "presentation" }
-                %a{ "href" => "#shipment", "aria-controls" => "shipment", "role" => "tab", "data-toggle" => "tab" } Shipments
+                %a{ "href" => "#shipment", "aria-controls" => "shipment", "role" => "tab", "data-toggle" => "tab" }
+                  %span Shipments
+                  %span.badge.bg-color-greenLight.pull-right
+                    = @contract.shipments.count
 
           -#- widget div-->
           %div
@@ -44,9 +47,10 @@
                         %section.col-sm-4
                           = f.text_field :seller_contract
                     %div.tab-pane.fade#shipment
-                      = f.fields_for :shipments do |builder|
-                        = render 'shipment_fields', f: builder
+                      %div.panel-group#accordion{ "role" => "tablist", "aria-multiselectable" => "true" }
+                        = f.fields_for :shipments do |builder|
+                          = render 'shipment_fields', f: builder
 
-                    = f.form_group do 
-                      = f.submit @contract.new_record? ? "Add" : "Update", layout: :horizontal
-
+                    = button_tag(type: 'submit', class: "btn btn-primary btn-lg btn-block") do
+                      %i.fa.fa-lg.fa-fw.fa-save
+                      %span Save
