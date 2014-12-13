@@ -50,7 +50,7 @@ describe SessionsController do
     context "unauthenticated user" do
       it "redirects to login_path" do
         post :create
-        response.should redirect_to login_path
+        response.should redirect_to sign_in_path
       end
     end
   end

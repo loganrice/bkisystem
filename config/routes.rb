@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   resources :accounts
   resources :users
   resources :sessions
-  get 'login' => 'sessions#new'
+  get 'sign_in' => 'sessions#new'
   get 'sign_out' => 'sessions#destroy'
   get 'ui(/:action)', controller: 'ui'
   # You can have the root of your site routed with "root"

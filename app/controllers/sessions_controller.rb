@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to home_path
     else
-      redirect_to login_path
+      redirect_to sign_in_path
     end
   end
 
