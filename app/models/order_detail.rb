@@ -1,5 +1,5 @@
-class Container < ActiveRecord::Base
-  belongs_to :shipment
+class OrderDetail < ActiveRecord::Base
+  belongs_to :order
   
   def price_dollars=(dollars)
     self.price_cents = dollars * 100
@@ -10,14 +10,14 @@ class Container < ActiveRecord::Base
   end
 
   def shipment_date
-    self.shipment.ship_date
+    self.order.ship_date
   end
 
   def load
-    self.shipment.containers.index(self) + 1
+    self.order.order_details.index(self) + 1
   end
 
-  def load=(shipment)
-    self.shipment = shipment 
+  def load=(order)
+    self.order = order 
   end
 end

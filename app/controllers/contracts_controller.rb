@@ -14,7 +14,6 @@ class ContractsController < ApplicationController
   end
 
   def update
-    binding.pry
     @contract = Contract.find(params[:id])
     @contract.update(contract_params)
     flash[:success] = "Updated"
