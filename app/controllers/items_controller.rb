@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  before_filter :require_user
   respond_to :js
   
   def index

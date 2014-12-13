@@ -26,7 +26,7 @@ describe AccountsController do
   describe 'GET new' do
     context "with unauthenticated user" do 
       it_behaves_like "require_sign_in" do
-        let(:action) { xhr :get, :index }
+        let(:action) { xhr :get, :new }
       end
     end
     context "with authenticated user" do
@@ -47,7 +47,7 @@ describe AccountsController do
   describe 'GET edit' do
     context "with unauthenticated user" do 
       it_behaves_like "require_sign_in" do
-        let(:action) { xhr :get, :index }
+        let(:action) { xhr :get, :edit, id: Fabricate(:account).id }
       end
     end
     context "with authenticated user" do
@@ -70,7 +70,7 @@ describe AccountsController do
   describe 'DELETE destroy' do
     context "with unauthenticated user" do 
       it_behaves_like "require_sign_in" do
-        let(:action) { xhr :get, :index }
+        let(:action) { xhr :delete, :destroy, id: Fabricate(:account).id }
       end
     end
     context "with authenticated user" do
@@ -100,7 +100,7 @@ describe AccountsController do
   describe 'POST create' do
     context "with unauthenticated user" do 
       it_behaves_like "require_sign_in" do
-        let(:action) { xhr :get, :index }
+        let(:action) { xhr :post, :create, account: Fabricate.attributes_for(:account) }
       end
     end
     context "with authenticated user" do
@@ -143,7 +143,7 @@ describe AccountsController do
     before(:each) { Fabricate(:account) }
     context "with unauthenticated user" do 
       it_behaves_like "require_sign_in" do
-        let(:action) { xhr :get, :index }
+        let(:action) { xhr :put, :update, id: Fabricate(:account).id }
       end
     end
     context "with authenticated user" do

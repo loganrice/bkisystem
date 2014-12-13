@@ -1,5 +1,6 @@
 class CommoditiesController < ApplicationController
-
+  before_filter :require_user
+  
   def index
     @commodities = Commodity.all
   end
