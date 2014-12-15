@@ -3,7 +3,7 @@
     %h4.panel-title
       %a.collapsed{ "data-toggle" => "collapse", "data-parent" => "#accordion", "href" => "#collapse#{f.object.id}", "aria-expanded" => "false", "aria-controls" => "collapse#{f.object.id}" }
         %i.fa.fa-lg.fa-plus-circle
-        %span.text-info= "Shipment #{f.object.id} Ship Date #{f.object.ship_date}"
+        %span.text-info= "Order #{f.object.id} Ship Date #{f.object.ship_date}"
   %div.panel-collapse.collapse{ "id" => "collapse#{f.object.id}", "role" => "tabpanel", "aria-labelledby" => "heading#{f.object.id}" }
     %div.panel-body
       %fieldset

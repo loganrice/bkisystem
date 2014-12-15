@@ -1,0 +1,55 @@
+%div#content
+  -# widget grid -->
+  %section#widget-grid
+    -# row -->
+    %div.row
+      -# NEW WIDGET START -->
+      %article.col-xs-12.col-sm-12.col-md-12.col-lg-12
+        -#- end widget -->
+        -#- Widget ID (each widget will need unique ID)-->
+        %div.jarviswidget.jarviswidget-color-blueDark#itemindex{ "data-widget-editbutton" => "false" }
+          -# widget options:
+          -#usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+          -#data-widget-colorbutton="false"
+          -#data-widget-editbutton="false"
+          -#data-widget-togglebutton="false"
+          -#data-widget-deletebutton="false"
+          -#data-widget-fullscreenbutton="false"
+          -#data-widget-custombutton="false"
+          -#data-widget-collapsed="true"
+          -#data-widget-sortable="false"
+          %header
+            %span.widget-icon
+              %i.fa.fa-table
+            %h2 Order
+          -#- widget div-->
+          %div
+            -# widget edit box -->
+            %div.jarviswidget-editbox
+              -# This area used as dropdown edit box -->
+            -#- end widget edit box -->
+            -#- widget content -->
+            %div.widget-body
+              = bootstrap_form_for(@order, label_errors: true, remote: true) do |f|
+                = f.text_field :ship_date
+                = f.text_field :last_received_date
+                = f.text_field :estimated_arrival_date
+                = f.text_field :shipping_company
+                %div.panel.panel-primary
+                  %div.panel-heading 
+                    Order Details
+                  %table.table
+                    %thead
+                      %tr
+                        %th #
+                        %th price_cents
+                        %th size indicator
+                        %th Delete
+                    %tbody
+                      = f.fields_for :order_details do |builder|
+                        = render 'order_detail_fields', f: builder
+
+                  = link_to_add_fields "Add Item", f, :order_details
+                = button_tag(type: 'submit', class: "btn btn-primary btn-lg btn-block") do
+                  %i.fa.fa-lg.fa-fw.fa-save
+                  %span Save

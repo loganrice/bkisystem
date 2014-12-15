@@ -1,12 +1,14 @@
 %fieldset
   %div.row
-    %section.col-sm-3
+    %section.col-sm-2
       = f.select :item_id, options_for_select(Item.all.map { |item| [item.name, item.id]}, selected: f.object.item_id)
-    %section.col-sm-3
+    %section.col-sm-2
+      = link_to f.object.order.id, edit_order_path(f.object.order), remote: true
+    %section.col-sm-2
       = f.select :load, options_for_select(f.object.order.order_details.map { |detail| [detail.load, detail.load]}, selected: f.object.load)
-    %section.col-sm-3
+    %section.col-sm-2
       = f.text_field :shipment_date
-    %section.col-sm-3
+    %section.col-sm-2
       = f.text_field :price_dollars, prepend: "$"
 
       

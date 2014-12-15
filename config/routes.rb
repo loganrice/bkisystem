@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :accounts
   resources :users
   resources :sessions
+  resources :orders
   get 'sign_in' => 'sessions#new'
   get 'sign_out' => 'sessions#destroy'
   get 'ui(/:action)', controller: 'ui'
