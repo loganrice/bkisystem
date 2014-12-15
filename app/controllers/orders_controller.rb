@@ -36,7 +36,7 @@ class OrdersController < ApplicationController
       :ship_pick_up,
       :ship_delivery,
       :contract_id, 
-      order_details_attributes: [:item_id, :price_cents, :size_indicator_id, :_destroy, :id]
+      order_details_attributes: [:item_id, :price_cents, :size_indicator_id, :id, :_destroy]
     )
   end
 end

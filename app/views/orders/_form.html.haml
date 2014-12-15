@@ -7,7 +7,7 @@
       %article.col-xs-12.col-sm-12.col-md-12.col-lg-12
         -#- end widget -->
         -#- Widget ID (each widget will need unique ID)-->
-        %div.jarviswidget.jarviswidget-color-blueDark#itemindex{ "data-widget-editbutton" => "false" }
+        %div.jarviswidget.jarviswidget-color-blueDark#orderdetail{ "data-widget-editbutton" => "false" }
           -# widget options:
           -#usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
           -#data-widget-colorbutton="false"
@@ -39,15 +39,9 @@
                   %div.panel-heading 
                     Order Details
                   %table.table
-                    %thead
-                      %tr
-                        %th #
-                        %th price_cents
-                        %th size indicator
-                        %th Delete
                     %tbody
-                      = f.fields_for :order_details do |builder|
-                        = render 'order_detail_fields', f: builder
+                  = f.fields_for :order_details do |builder|
+                    = render 'order_detail_fields', f: builder
 
                   = link_to_add_fields "Add Item", f, :order_details
                 = button_tag(type: 'submit', class: "btn btn-primary btn-lg btn-block") do
