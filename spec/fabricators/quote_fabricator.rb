@@ -1,0 +1,2 @@
+Fabricator(:quote) do
+end

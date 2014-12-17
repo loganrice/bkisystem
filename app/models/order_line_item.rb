@@ -1,5 +1,7 @@
-class OrderDetail < ActiveRecord::Base
+class OrderLineItem < ActiveRecord::Base
   belongs_to :order
+  belongs_to :item 
+  belongs_to :quote_line_item
   
   def price_dollars=(dollars)
     self.price_cents = dollars * 100
@@ -13,11 +15,4 @@ class OrderDetail < ActiveRecord::Base
     self.order.ship_date
   end
 
-  def load
-    self.order.order_details.index(self) + 1
-  end
-
-  def load=(order)
-    self.order = order 
-  end
 end

@@ -3,12 +3,10 @@
     %thead
     %tbody
       %tr
-        %td.col-md-2
-          = f.select :item_id, options_for_select(Item.all.map { |item| [item.name, item.id]}, selected: f.object.item_id), hide_label: true
+        %td.col-md-2 
+          = f.select :quote_line_item_id, options_for_select(@contract.quote_line_items.all.map { |line|[ "#{line.item.name} @ #{line.price_cents}", line.id] }, f.object.quote_line_item_id), hide_label: true
         %td.col-md-2
           = f.text_field :price_dollars,  hide_label: true, prepend: "$"
-        %td.col-md-2
-          = f.text_field :size_indicator_id,  hide_label: true
         %td.col-md-2
           = f.hidden_field :_destroy
           %a.btn.btn-danger.pull-right.remove_fields{"href" => "#"}

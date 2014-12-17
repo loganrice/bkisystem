@@ -8,6 +8,8 @@ class ContractsController < ApplicationController
 
   def new
     @contract = Contract.new
+    @contract.orders.build
+    @contract.quotes.build
   end
 
   def edit
@@ -32,8 +34,18 @@ class ContractsController < ApplicationController
 
   def contract_params
     params.require(:contract).permit(
-      :buyer_contract, :buyer_po, :seller_contract, :date, :buyer_id, :seller_id,
-      shipments_attributes: [:ship_date, :id, :_destroy]
+      :buyer_contract, 
+      :buyer_po, 
+      :seller_contract, 
+      :date, 
+      :buyer_id, 
+      :seller_id,
+      orders_attributes: [:ship_date, :id, :_destroy,
+        order_line_items_attributes: [:item_id, :price_cents, :quote_line_item_id, :id, :_destroy]
+      ],
+      quotes_attributes: [:id, :_destroy,
+        quote_line_items_attributes: [:item_id, :price_cents, :id, :_destroy]
+      ]
     )
   end
 end
