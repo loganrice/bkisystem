@@ -17,6 +17,7 @@ class ContractsController < ApplicationController
   end
 
   def update
+    binding.pry
     @contract = Contract.find(params[:id])
     @contract.update(contract_params)
     flash[:success] = "Updated"
@@ -41,7 +42,7 @@ class ContractsController < ApplicationController
       :buyer_id, 
       :seller_id,
       orders_attributes: [:ship_date, :id, :_destroy,
-        order_line_items_attributes: [:item_id, :price_cents, :quote_line_item_id, :id, :_destroy]
+        order_line_items_attributes: [:item_id, :price_cents, :quote_line_item_id, :weight_grams, :weight_pounds, :id, :_destroy]
       ],
       quotes_attributes: [:id, :_destroy,
         quote_line_items_attributes: [:item_id, :price_cents, :id, :_destroy]

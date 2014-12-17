@@ -28,4 +28,34 @@ describe OrderLineItem do
     end
   end
 
+  describe "#weight_kilograms" do
+    it "displays 1000 grams as 1 kilogram" do 
+      item = OrderLineItem.create(weight_grams: 1000)
+      expect(item.weight_kilograms).to eq(1)
+    end
+  end
+
+  describe "#weight_kilograms=" do
+    it "updates weight_grams to 1000 grams" do 
+      item = OrderLineItem.create()
+      item.weight_kilograms = 1
+      expect(item.weight_grams).to eq(1000)
+    end
+  end
+
+  describe "#weight_pounds" do 
+    it "displays 1000 grams as 2.20462262185 pounds" do 
+      item = OrderLineItem.create(weight_grams: 1000)
+      expect(item.weight_pounds).to eq(2.20462262185)
+    end
+  end
+
+  describe "#weight_pounds=" do 
+    it "displays 1000 grams as 2.20462262185 pounds" do 
+      item = OrderLineItem.create()
+      item.weight_pounds = 2.20462262185
+      expect(item.weight_grams).to eq(1000)
+    end
+  end
+
 end

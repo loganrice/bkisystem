@@ -15,4 +15,19 @@ class OrderLineItem < ActiveRecord::Base
     self.order.ship_date
   end
 
+  def weight_kilograms
+    self.weight_grams.to_f / 1000
+  end
+
+  def weight_kilograms=(kilograms)
+    self.weight_grams = kilograms * 1000
+  end
+
+  def weight_pounds
+    self.weight_grams.to_f * 0.00220462262185
+  end
+
+  def weight_pounds=(pounds)
+    self.weight_grams = pounds / 0.00220462262185
+  end
 end
