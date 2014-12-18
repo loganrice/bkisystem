@@ -24,6 +24,7 @@ Quote.delete_all
 OrderLineItem.delete_all
 QuoteLineItem.delete_all
 Weight.delete_all
+User.delete_all
 
 almonds = Commodity.create(name: "Almonds")
 walnuts = Commodity.create(name: "Walnuts")
