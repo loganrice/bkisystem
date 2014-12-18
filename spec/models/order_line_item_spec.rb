@@ -12,6 +12,13 @@ describe OrderLineItem do
       amount.price_dollars = 12.93
       expect(amount.price_cents).to eq(1293)
     end
+
+    it "does not update if can not convert dollars to float" do 
+      amount = QuoteLineItem.create()
+      amount.price_dollars = "1"
+      amount.price_dollars = "1abc"
+      expect(amount.price_cents).to eq(100)
+    end
   end
 
   describe "#price_dollars" do 

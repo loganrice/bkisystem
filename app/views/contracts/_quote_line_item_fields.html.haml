@@ -6,7 +6,7 @@
         %td.col-md-2
           = f.select :item_id, options_for_select(Item.all.map { |item| [item.name, item.id]}, selected: f.object.item_id)
         %td.col-md-2
-          = f.text_field :price_dollars, prepend: "$"
+          = f.text_field :price_dollars, prepend: "$", value: number_to_currency(f.object.price_dollars || 0.00)
         %td.col-md-2
           = f.text_field :weight_grams
         %td.col-md-2

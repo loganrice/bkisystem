@@ -11,12 +11,30 @@ describe QuoteLineItem do
       amount.price_dollars = 12.93
       expect(amount.price_cents).to eq(1293)
     end
+
+    it "converts $1 dollar to 100 cents" do 
+      amount = QuoteLineItem.create()
+      amount.price_dollars = "1"
+      expect(amount.price_cents).to eq(100)
+    end
+
+    it "does not update if can not convert dollars to float" do 
+      amount = QuoteLineItem.create()
+      amount.price_dollars = "1"
+      amount.price_dollars = "1abc"
+      expect(amount.price_cents).to eq(100)
+    end
   end
 
   describe "#price_dollars" do 
     it "displays 1293 cents as 12.93" do 
       amount = QuoteLineItem.create(price_cents: 1293)
       expect(amount.price_dollars).to eq(12.93)
+    end
+
+    it "displays 100 cents as 1" do 
+      amount = QuoteLineItem.create(price_cents: 100)
+      expect(amount.price_dollars).to eq(1)
     end
   end
 
