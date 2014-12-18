@@ -4,9 +4,11 @@
     %tbody
       %tr
         %td.col-md-2
-          = f.select :item_id, options_for_select(Item.all.map { |item| [item.name, item.id]}, selected: f.object.item_id), hide_label: true
+          = f.select :item_id, options_for_select(Item.all.map { |item| [item.name, item.id]}, selected: f.object.item_id)
         %td.col-md-2
-          = f.text_field :price_dollars,  hide_label: true, prepend: "$"
+          = f.text_field :price_dollars, prepend: "$"
+        %td.col-md-2
+          = f.text_field :weight_grams
         %td.col-md-2
           = f.hidden_field :_destroy
           %a.btn.btn-danger.pull-right.remove_fields{"href" => "#"}
