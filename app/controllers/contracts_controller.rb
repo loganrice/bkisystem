@@ -9,7 +9,7 @@ class ContractsController < ApplicationController
   def new
     @contract = Contract.new
     @contract.orders.build
-    @contract.quotes.build
+    @contract.quote.build
   end
 
   def edit

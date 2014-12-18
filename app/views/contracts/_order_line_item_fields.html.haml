@@ -3,8 +3,6 @@
     %thead
     %tbody
       %tr
-        %td.col-md-4
-          = f.select :quote_line_item_id, options_for_select(@contract.quote_line_items.all.map { |line|[ "#{line.item.name} @ #{line.price_dollars}", line.id] }, f.object.quote_line_item_id)
         %td.col-md-2
           = f.text_field :price_dollars, prepend: "$"
         %td.col-md-2

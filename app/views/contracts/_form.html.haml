@@ -51,8 +51,8 @@
                           Quote
                         %table.table
                           %tbody
-                        = f.fields_for :quotes do |builder|
-                          = render 'quote_fields', f: builder  
+                        = f.fields_for :quote do |builder|
+                          = render 'quote_fields', f: builder                          
 
                     %div.tab-pane.fade#shipment
                       %div.panel-group#accordion{ "role" => "tablist", "aria-multiselectable" => "true" }
