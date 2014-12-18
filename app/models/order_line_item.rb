@@ -2,6 +2,7 @@ class OrderLineItem < ActiveRecord::Base
   belongs_to :order
   belongs_to :item 
   belongs_to :quote_line_item
+  belongs_to :weight
   
   def price_dollars=(dollars)
     self.price_cents = dollars * 100

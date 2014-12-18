@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141217212950) do
+ActiveRecord::Schema.define(version: 20141217224127) do
 
   create_table "accounts", force: true do |t|
     t.string "name"
@@ -95,6 +95,7 @@ ActiveRecord::Schema.define(version: 20141217212950) do
     t.integer  "order_id"
     t.integer  "quote_line_item_id"
     t.integer  "weight_grams"
+    t.integer  "weight_id"
   end
 
   create_table "orders", force: true do |t|
@@ -151,6 +152,12 @@ ActiveRecord::Schema.define(version: 20141217212950) do
 
   create_table "varieties", force: true do |t|
     t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "weights", force: true do |t|
+    t.string   "weight_unit_of_measure"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

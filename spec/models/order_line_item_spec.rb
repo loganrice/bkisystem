@@ -3,7 +3,9 @@ require 'spec_helper'
 describe OrderLineItem do 
   it { should belong_to(:order) }
   it { should belong_to(:item) }
-  it { should belong_to(:quote_line_item)}
+  it { should belong_to(:quote_line_item) }
+  it { should belong_to(:weight) }
+
   describe "#price_dollars=" do
     it "converts $12.93 dollars to 1293 cents" do 
       amount = OrderLineItem.create()

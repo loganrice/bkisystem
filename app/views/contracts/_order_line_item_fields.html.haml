@@ -3,16 +3,18 @@
     %thead
     %tbody
       %tr
-        %td.col-md-2 
+        %td.col-md-4
           = f.select :quote_line_item_id, options_for_select(@contract.quote_line_items.all.map { |line|[ "#{line.item.name} @ #{line.price_dollars}", line.id] }, f.object.quote_line_item_id), hide_label: true
         %td.col-md-2
           = f.text_field :price_dollars,  hide_label: true, prepend: "$"
         %td.col-md-2
           = f.text_field :weight_grams, hide_label: true
         %td.col-md-2
-          = f.text_field :weight_pounds, hide_label: true
-        %td.col-md-2
           = f.hidden_field :_destroy
+        %td.col-md-2
+          = select_tag :weight_id, options_for_select(Weight.all.map { |unit| [ unit.weight_unit_of_measure, unit.id] }, f.object.weight_id), hide_label: true
+        %td.col-md-2
           %a.btn.btn-danger.pull-right.remove_fields{"href" => "#"}
             %i.fa.fa-remove
               Delete
+

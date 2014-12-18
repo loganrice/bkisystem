@@ -23,6 +23,7 @@ Order.delete_all
 Quote.delete_all
 OrderLineItem.delete_all
 QuoteLineItem.delete_all
+Weight.delete_all
 
 almonds = Commodity.create(name: "Almonds")
 walnuts = Commodity.create(name: "Walnuts")
@@ -243,6 +244,8 @@ steve = User.create(name: "Steve Bava", email: "steve@bkiexports.com", password:
 brad = User.create(name: "Jenny", email: "jenny@bkiexports.com", password: "bki")
 
 
+Weight.create(weight_unit_of_measure: "kilograms")
+Weight.create(weight_unit_of_measure: "pounds")
 
 
 

@@ -49,4 +49,6 @@ class ContractsController < ApplicationController
       ]
     )
   end
+
+  
 end
