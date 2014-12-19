@@ -183,16 +183,7 @@ contract_4 = Contract.create(buyer_contract: Faker::Number.number(4), buyer_po: 
 contract_5 = Contract.create(buyer_contract: Faker::Number.number(4), buyer_po: Faker::Number.number(6), seller_contract: Faker::Number.number(7), date: Faker::Date.between(30.days.ago, Date.today))
 contract_6 = Contract.create(buyer_contract: Faker::Number.number(4), buyer_po: Faker::Number.number(6), seller_contract: Faker::Number.number(7), date: Faker::Date.between(30.days.ago, Date.today))
 contract_7 = Contract.create(buyer_contract: Faker::Number.number(4), buyer_po: Faker::Number.number(6), seller_contract: Faker::Number.number(7), date: Faker::Date.between(30.days.ago, Date.today))
-contract_3.quotes.create()
-contract_4.quotes.create()
-contract_5.quotes.create()
-contract_6.quotes.create()
-contract_7.quotes.create()
-contract_3.orders.create()
-contract_4.orders.create()
-contract_5.orders.create()
-contract_6.orders.create()
-contract_7.orders.create()
+
 
 
 quote_1 = Quote.create(contract_id: contract_1.id)

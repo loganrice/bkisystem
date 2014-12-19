@@ -4,6 +4,14 @@ describe QuoteLineItem do
   it { should belong_to(:quote) }
   it { should belong_to(:item) }
   it { should have_many(:order_line_items)}
+  it "should delete accociate order line items" do
+    quote_line_item = Fabricate(:quote_line_item)
+    order_line_item = Fabricate(:order_line_item, quote_line_item_id: quote_line_item.id)
+    quote_line_item.destroy
+
+    expect(QuoteLineItem.count).to eq(0)
+    expect(OrderLineItem.count).to eq(0)
+  end
 
   describe "#price_dollars=" do
     it "converts $12.93 dollars to 1293 cents" do 

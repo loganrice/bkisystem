@@ -4,16 +4,13 @@
     %tbody
       %tr
         %td.col-md-4
-          = f.select :item_id, options_for_select(@contract.quote.quote_line_items.all.map { |item| [Item.find(item.item_id).name, item.item_id]}, selected: f.object.item_id)
-        %td.col-md-2
-          = f.text_field :price_dollars, prepend: "$", value: number_to_currency(f.object.price_dollars || 0.00)
+          = f.select :quote_line_item_id, options_for_select(@contract.quote.quote_line_items.all.map { |quote_line_item| [Item.find(quote_line_item.item_id).name, quote_line_item.id]}, selected: f.object.quote_line_item_id)
         %td.col-md-2
           = f.text_field :weight_grams
         %td.col-md-2
-          = f.hidden_field :_destroy
-        %td.col-md-2
           = select_tag :weight_id, options_for_select(Weight.all.map { |unit| [ unit.weight_unit_of_measure, unit.id] }, f.object.weight_id), hide_label: true
         %td.col-md-2
+          = f.hidden_field :_destroy
           %a.btn.btn-danger.pull-right.remove_fields{"href" => "#"}
             %i.fa.fa-remove
               Delete
