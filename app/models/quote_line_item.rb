@@ -1,6 +1,7 @@
 class QuoteLineItem < ActiveRecord::Base
   belongs_to :quote
   belongs_to :item
+  belongs_to :item_size_indicator
   has_many :order_line_items, dependent: :destroy
 
   before_destroy :destroy_order_line_items

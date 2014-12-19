@@ -25,6 +25,7 @@ OrderLineItem.delete_all
 QuoteLineItem.delete_all
 Weight.delete_all
 User.delete_all
+ItemSizeIndicator.delete_all
 
 almonds = Commodity.create(name: "Almonds")
 walnuts = Commodity.create(name: "Walnuts")
@@ -278,6 +279,11 @@ brad = User.create(name: "Jenny", email: "jenny@bkiexports.com", password: "bki"
 
 Weight.create(weight_unit_of_measure: "kilograms")
 Weight.create(weight_unit_of_measure: "pounds")
+
+ItemSizeIndicator.create(name: "AOL", description: "and or larger")
+ItemSizeIndicator.create(name: "SC", description: "Straight Count")
+ItemSizeIndicator.create(name: "-", description: "-")
+ItemSizeIndicator.create(name: "|", description: "|")
 
 
 
