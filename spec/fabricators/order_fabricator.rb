@@ -1,4 +1,5 @@
-Fabricator(:order) do 
+Fabricator(:order) do
+  contract_id { Fabricate(:contract).id }
   ship_date { Faker::Date.between(30.days.ago, Date.today) }
   last_received_date { Faker::Date.between(30.days.ago, Date.today) }
   doc_cut_off { Faker::Date.between(30.days.ago, Date.today) }

@@ -6,6 +6,19 @@ describe OrderLineItem do
   it { should belong_to(:quote_line_item) }
   it { should belong_to(:weight) }
 
+  it "should call set_price_if_blank before save" do
+    order_line_item = Fabricate(:order_line_item)
+    (order_line_item).should_receive(:set_price_if_blank).and_return(2)
+    order_line_item.save
+  end
+
+  describe "#set_price_if_blank" do
+    it "sets the price cents to 0 if blank" do 
+      line_item = Fabricate(:order_line_item, price_cents: nil)
+      expect(line_item.price_cents).to eq(0)
+    end
+  end
+
   describe "#price_dollars=" do
     it "converts $12.93 dollars to 1293 cents" do 
       amount = OrderLineItem.create()

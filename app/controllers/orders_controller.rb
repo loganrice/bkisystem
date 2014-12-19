@@ -1,8 +1,14 @@
 class OrdersController < ApplicationController
   before_filter :require_user
+  respond_to :js
+
+  def index
+    @orders = Order.all
+  end
 
   def edit
     @order = Order.find(params[:id])
+    # @quote_line_items = quote_items(@order)
   end
 
   def update
@@ -16,6 +22,13 @@ class OrdersController < ApplicationController
   end
 
   private
+
+  def quote_items(order)
+    get_quote_line = QuoteLineItem.where(id: @order.quote_line_item)
+    get_quote = get_quote_line.quote
+    quote = Quote.find_by(id: get_quote.id)
+    quote.line_items
+  end
 
   def order_params
     params.require(:order).permit(

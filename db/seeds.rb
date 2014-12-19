@@ -176,10 +176,19 @@ Item.create(name: "sonora 30/34", commodity_id: almonds.id, size_id: a30a34.id, 
 Item.create(name: "sonora 34/40", commodity_id: almonds.id, size_id: a34a40.id, variety_id: sonora.id)
 Item.create(name: "sonora 40/50", commodity_id: almonds.id, size_id: a40a50.id, variety_id: sonora.id)
 
-contract_1 = Contract.create(buyer_contract: Faker::Number.number(4), buyer_po: Faker::Number.number(6), seller_contract: Faker::Number.number(7), date: Faker::Date.between(30.days.ago, Date.today))
-contract_2 = Contract.create(buyer_contract: Faker::Number.number(4), buyer_po: Faker::Number.number(6), seller_contract: Faker::Number.number(7), date: Faker::Date.between(30.days.ago, Date.today))
-contract_3 = Contract.create(buyer_contract: Faker::Number.number(4), buyer_po: Faker::Number.number(6), seller_contract: Faker::Number.number(7), date: Faker::Date.between(30.days.ago, Date.today))
-contract_4 = Contract.create(buyer_contract: Faker::Number.number(4), buyer_po: Faker::Number.number(6), seller_contract: Faker::Number.number(7), date: Faker::Date.between(30.days.ago, Date.today))
+company_1 = Account.create(name: Faker::Company.name)
+company_2 = Account.create(name: Faker::Company.name)
+company_3 = Account.create(name: Faker::Company.name)
+company_4 = Account.create(name: Faker::Company.name)
+company_5 = Account.create(name: Faker::Company.name)
+company_6 = Account.create(name: Faker::Company.name)
+company_7 = Account.create(name: Faker::Company.name)
+company_8 = Account.create(name: Faker::Company.name)
+
+contract_1 = Contract.create(buyer_id: company_1.id, seller_id: company_2.id, buyer_contract: Faker::Number.number(4), buyer_po: Faker::Number.number(6), seller_contract: Faker::Number.number(7), date: Faker::Date.between(30.days.ago, Date.today))
+contract_2 = Contract.create(buyer_id: company_3.id, seller_id: company_4.id,buyer_contract: Faker::Number.number(4), buyer_po: Faker::Number.number(6), seller_contract: Faker::Number.number(7), date: Faker::Date.between(30.days.ago, Date.today))
+contract_3 = Contract.create(buyer_id: company_5.id, seller_id: company_6.id,buyer_contract: Faker::Number.number(4), buyer_po: Faker::Number.number(6), seller_contract: Faker::Number.number(7), date: Faker::Date.between(30.days.ago, Date.today))
+contract_4 = Contract.create(buyer_id: company_7.id, seller_id: company_8.id,buyer_contract: Faker::Number.number(4), buyer_po: Faker::Number.number(6), seller_contract: Faker::Number.number(7), date: Faker::Date.between(30.days.ago, Date.today))
 contract_5 = Contract.create(buyer_contract: Faker::Number.number(4), buyer_po: Faker::Number.number(6), seller_contract: Faker::Number.number(7), date: Faker::Date.between(30.days.ago, Date.today))
 contract_6 = Contract.create(buyer_contract: Faker::Number.number(4), buyer_po: Faker::Number.number(6), seller_contract: Faker::Number.number(7), date: Faker::Date.between(30.days.ago, Date.today))
 contract_7 = Contract.create(buyer_contract: Faker::Number.number(4), buyer_po: Faker::Number.number(6), seller_contract: Faker::Number.number(7), date: Faker::Date.between(30.days.ago, Date.today))
@@ -204,6 +213,37 @@ almond_ace = Account.create(
   phone2: "",
   fax: "209-599-9000",
   email: "miguel@almondkings.com",
+  notes: "",
+  bank_1_name: "Oak Valley Community Bank, 1000 Lion Ave, San Diego, CA 95000",
+  bank_1_aba: "555552222",
+  bank_1_account: "123412341234",
+  bank_1_swift_code: "PCB153551",
+  bank_1_attention: "Export Inc."
+)
+
+almond_ace.addresses.create(
+  line1: "1555 Litt Road",
+  line2: "",
+  line3: "",
+  city: "Sonora",
+  state: "CA",
+  zip: "95533",
+  country: "USA"
+)
+
+almond_ace.banks.create(
+  name: "Oak Valley Community Bank",
+  aba: "1532",
+  swift: "2325",
+  attention: "Mike Smith"
+)
+
+nut_pros = Account.create(
+  name: "Nut Pros",
+  phone1: "209-559-9000",
+  phone2: "",
+  fax: "209-599-9000",
+  email: "bob@nut_pros.com",
   notes: "",
   bank_1_name: "Oak Valley Community Bank, 1000 Lion Ave, San Diego, CA 95000",
   bank_1_aba: "555552222",

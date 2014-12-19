@@ -5,6 +5,8 @@
       %tr
         %td.col-md-4
           = f.select :quote_line_item_id, options_for_select(@contract.quote.quote_line_items.all.map { |quote_line_item| [Item.find(quote_line_item.item_id).name, quote_line_item.id]}, selected: f.object.quote_line_item_id)
+        %td.col-md-4
+          = f.text_field :price_cents
         %td.col-md-2
           = f.text_field :weight_grams
         %td.col-md-2

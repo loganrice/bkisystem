@@ -45,7 +45,6 @@
             = render 'order_line_item_fields', f: builder 
           = link_to_add_fields "Add Item", f, :order_line_items
           
-        = f.text_area :payment_terms
         = f.text_area :remarks
         = f.text_area :ship_pick_up
         = f.text_area :ship_delivery

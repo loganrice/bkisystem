@@ -21,7 +21,7 @@
           %header
             %span.widget-icon
               %i.fa.fa-table
-            %h2 Contract List
+            %h2 Load List
           -#- widget div-->
           %div
             -# widget edit box -->
@@ -33,21 +33,32 @@
               %div.widget-body-toolbar
                 = link_to new_contract_path, class: "btn btn-success", remote: true do 
                   %i.fa.fa-plus
-                  %span New Variety
-              %table#varieties.table.table-striped.table-bordered.table-hover{ :width => "100%" }
+                  %span New Contract
+              %table#orders.table.table-striped.table-bordered.table-hover{ :width => "100%" }
                 %thead
                   %tr
-                    %th ID
-                    %th Buyer
                     %th Seller
-                    %th Seller Contract
+                    %th Contract #
+                    %th Load #
                     %th Date
+                    %th Buyer
+                    %th Total lbs
+                    %th Sale
+
                 %tbody
-                  - @contracts.each do |contract|
+                  - @orders.each do |order|
                     %tr
                       %td
-                        = link_to contract.id, edit_contract_path(contract), remote: true
-                      %td= contract.buyer.try(:name)
-                      %td= contract.seller.try(:name)
-                      %td= contract.seller_contract 
-                      %td= contract.date
+                        = order.contract.seller.name
+                      %td
+                        = link_to order.contract.id, edit_contract_path(order.contract), remote: true
+                      %td
+                        = link_to order.row_on_contract, edit_order_path(order), remote: true
+                      %td 
+                        = order.contract.date
+                      %td
+                        = order.contract.buyer.name
+                      %td
+                        = number_with_precision(order.total_pounds, precision: 2)
+                      %td
+                        = number_to_currency(order.total_price)

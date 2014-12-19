@@ -1,6 +1,31 @@
 require 'spec_helper'
 
-describe OrdersController do 
+describe OrdersController do
+  describe "GET index" do
+    context "with unauthenticated user" do 
+      it_behaves_like "require_sign_in" do
+        let(:action) { xhr :get, :edit, id: Fabricate(:order).id }
+      end
+    end
+
+    context "with authenticated user" do
+      before { set_current_user }   
+
+      it "renders the index template" do 
+        xhr :get, :index
+        expect(response).to render_template(:index)
+      end
+
+      it "sets @orders" do
+        order1 = Fabricate(:order)
+        order2 = Fabricate(:order)
+        order3 = Fabricate(:order)
+        xhr :get, :index
+        expect(assigns(:orders)).to match_array([order1, order2, order3])
+      end
+    end
+  end
+
   describe "GET edit" do
     context "with unauthenticated user" do 
       it_behaves_like "require_sign_in" do
@@ -21,6 +46,7 @@ describe OrdersController do
         xhr :get, :edit, id: order.id
         expect(assigns(:order)).to eq(order)
       end
+
     end
   end
 
