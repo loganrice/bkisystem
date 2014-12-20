@@ -44,10 +44,9 @@ class ContractsController < ApplicationController
         order_line_items_attributes: [:item_id, :price_cents, :quote_line_item_id, :weight_grams, :weight_pounds, :id, :_destroy]
       ],
       quote_attributes: [:id, :_destroy,
-        quote_line_items_attributes: [:item_id, :price_dollars, :id, :_destroy]
+        quote_line_items_attributes: [:item_id, :price_dollars, :weight_id, :pack_weight_pounds, :item_size_indicator_id, :pack_weight_kilograms, :pack_type_id, :id, :_destroy]
       ]
     )
-  end
-
+  end 
   
 end

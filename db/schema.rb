@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141219200712) do
+ActiveRecord::Schema.define(version: 20141219233257) do
 
   create_table "accounts", force: true do |t|
     t.string "name"
@@ -77,6 +77,13 @@ ActiveRecord::Schema.define(version: 20141219200712) do
     t.integer  "seller_id"
   end
 
+  create_table "grades", force: true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "item_size_indicators", force: true do |t|
     t.string   "name"
     t.string   "description"
@@ -91,6 +98,7 @@ ActiveRecord::Schema.define(version: 20141219200712) do
     t.integer  "commodity_id"
     t.integer  "size_id"
     t.integer  "variety_id"
+    t.integer  "grade_id"
   end
 
   create_table "order_line_items", force: true do |t|
@@ -128,14 +136,22 @@ ActiveRecord::Schema.define(version: 20141219200712) do
     t.integer  "contract_id"
   end
 
+  create_table "pack_types", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "quote_line_items", force: true do |t|
     t.integer  "quote_id"
     t.integer  "item_id"
     t.integer  "price_cents"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "weight_grams"
     t.integer  "item_size_indicator_id"
+    t.integer  "pack_weight_grams"
+    t.integer  "pack_type_id"
+    t.integer  "weight_id"
   end
 
   create_table "quotes", force: true do |t|

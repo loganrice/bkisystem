@@ -22,7 +22,7 @@ class OrderLineItem < ActiveRecord::Base
   end
 
   def weight_kilograms=(kilograms)
-    self.weight_grams = kilograms * 1000
+    self.weight_grams = kilograms.to_f * 1000
   end
 
   def weight_pounds
@@ -30,7 +30,7 @@ class OrderLineItem < ActiveRecord::Base
   end
 
   def weight_pounds=(pounds)
-    self.weight_grams = pounds / 0.00220462262185
+    self.weight_grams = pounds.to_f / 0.00220462262185
   end
 
   private

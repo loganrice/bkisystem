@@ -7,8 +7,16 @@
           = f.select :item_id, options_for_select(Item.all.map { |item| [item.name, item.id]}, selected: f.object.item_id)
         %td.col-md-2
           = f.collection_select :item_size_indicator_id, ItemSizeIndicator.all, :id, :name
+        
+        - if f.object.weight_id == Weight.find_by(weight_unit_of_measure: "kilograms").id
+          %td.col-md-2
+            = f.text_field :pack_weight_kilograms
+        - else
+          %td.col-md-2
+            = f.text_field :pack_weight_pounds
         %td.col-md-2
-          = f.text_field :price_dollars, prepend: "$", value: number_to_currency(f.object.price_dollars || 0.00)
+          = f.collection_select :weight_id, Weight.all, :id, :weight_unit_of_measure
         %td.col-md-2
-          = f.text_field :weight_grams
-
+          = f.collection_select :pack_type_id, PackType.all, :id, :name
+        %td.col-md-2
+          = f.text_field :price_dollars, prepend: "$", value: f.object.price_dollars ||= 0.00

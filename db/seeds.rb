@@ -26,6 +26,7 @@ QuoteLineItem.delete_all
 Weight.delete_all
 User.delete_all
 ItemSizeIndicator.delete_all
+PackType.delete_all
 
 almonds = Commodity.create(name: "Almonds")
 walnuts = Commodity.create(name: "Walnuts")
@@ -57,10 +58,46 @@ peerless = Variety.create(name: "peerless")
 price = Variety.create(name: "price")
 sonora = Variety.create(name: "sonora")
 
-item1 = Item.create(name: "nonpareil 16/18", commodity_id: almonds.id, size_id: a16a18.id, variety_id: nonpareil.id)
-item2 = Item.create(name: "nonpareil 18/20", commodity_id: almonds.id, size_id: a18a20.id, variety_id: nonpareil.id)
-item3 = Item.create(name: "nonpareil 20/22", commodity_id: almonds.id, size_id: a20a22.id, variety_id: nonpareil.id)
-item4 = Item.create(name: "nonpareil 22/24", commodity_id: almonds.id, size_id: a22a24.id, variety_id: nonpareil.id)
+fancy = Grade.create(name: "US Fancy", description: "US Fancy")
+usno1 = Grade.create(name: "Extra No. 1", description: "US Extra No. 1")
+sup = Grade.create(name: "SUP", description: "US No. 1 (Supreme")
+ssr = Grade.create(name: "SSR", description: "US Select Sheller Run")
+std = Grade.create(name: "Std 5%", description: "US Standard Sheller Run")
+whole_broken = Grade.create(name: "Whole and Broken", description: "US No. 1 Whole & Broken")
+pieces = Grade.create(name: "US No. 1 Pieces", description: "US No. 1 Pieces")
+
+item1 = Item.create(name: "nonpareil 16/18 US Fancy", commodity_id: almonds.id, size_id: a16a18.id, variety_id: nonpareil.id, grade_id: fancy.id )
+item1a = Item.create(name: "nonpareil 16/18 Extra No. 1", commodity_id: almonds.id, size_id: a16a18.id, variety_id: nonpareil.id, grade_id: usno1.id )
+item1b = Item.create(name: "nonpareil 16/18 US No. 1 (Supreme)", commodity_id: almonds.id, size_id: a16a18.id, variety_id: nonpareil.id, grade_id: sup.id )
+item1c = Item.create(name: "nonpareil 16/18 US Select Sheller Run", commodity_id: almonds.id, size_id: a16a18.id, variety_id: nonpareil.id, grade_id: ssr.id )
+item1d = Item.create(name: "nonpareil 16/18 US Standard Sheller Run", commodity_id: almonds.id, size_id: a16a18.id, variety_id: nonpareil.id, grade_id: std.id )
+item1e = Item.create(name: "nonpareil 16/18 US No. 1 Whole & Broken", commodity_id: almonds.id, size_id: a16a18.id, variety_id: nonpareil.id, grade_id: whole_broken.id)
+item1f = Item.create(name: "nonpareil 16/18 US No. 1 Pieces", commodity_id: almonds.id, size_id: a16a18.id, variety_id: nonpareil.id, grade_id: pieces.id )
+
+item2 = Item.create(name: "nonpareil 18/20 US Fancy", commodity_id: almonds.id, size_id: a18a20.id, variety_id: nonpareil.id, grade_id: fancy.id )
+item2a = Item.create(name: "onpareil 18/20 Extra No. 1", commodity_id: almonds.id, size_id: a18a20.id, variety_id: nonpareil.id, grade_id: usno1.id )
+item2b = Item.create(name: "nonpareil 18/20 US No. 1 (Supreme)", commodity_id: almonds.id, size_id: a18a20.id, variety_id: nonpareil.id, grade_id: sup.id )
+item2c = Item.create(name: "nonpareil 18/20 US Select Sheller Run", commodity_id: almonds.id, size_id: a18a20.id, variety_id: nonpareil.id, grade_id: ssr.id )
+item2d = Item.create(name: "nonpareil 18/20 US Standard Sheller Run", commodity_id: almonds.id, size_id: a18a20.id, variety_id: nonpareil.id, grade_id: std.id )
+item2e = Item.create(name: "nonpareil 18/20 US No. 1 Whole & Broken", commodity_id: almonds.id, size_id: a18a20.id, variety_id: nonpareil.id, grade_id: whole_broken.id)
+item2f = Item.create(name: "nonpareil 18/20 US No. 1 Pieces", commodity_id: almonds.id, size_id: a18a20.id, variety_id: nonpareil.id, grade_id: pieces.id )
+
+item3 = Item.create(name: "nonpareil 20/22 US Fancy", commodity_id: almonds.id, size_id: a20a22.id, variety_id: nonpareil.id, grade_id: fancy.id )
+item3a = Item.create(name: "nonpareil 20/22 Extra No. 1", commodity_id: almonds.id, size_id: a20a22.id, variety_id: nonpareil.id, grade_id: usno1.id )
+item3b = Item.create(name: "nonpareil 20/22 US No. 1 (Supreme)", commodity_id: almonds.id, size_id: a20a22.id, variety_id: nonpareil.id, grade_id: sup.id )
+item3c = Item.create(name: "nonpareil 20/22 US Select Sheller Run", commodity_id: almonds.id, size_id: a20a22.id, variety_id: nonpareil.id, grade_id: ssr.id )
+item3d = Item.create(name: "nonpareil 20/22 US Standard Sheller Run", commodity_id: almonds.id, size_id: a20a22.id, variety_id: nonpareil.id, grade_id: std.id )
+item3e = Item.create(name: "nonpareil 20/22 US No. 1 Whole & Broken", commodity_id: almonds.id, size_id: a20a22.id, variety_id: nonpareil.id, grade_id: whole_broken.id)
+item3f = Item.create(name: "nonpareil 20/22 US No. 1 Pieces", commodity_id: almonds.id, size_id: a20a22.id, variety_id: nonpareil.id, grade_id: pieces.id )
+
+item4 = Item.create(name: "nonpareil 22/24 US Fancy", commodity_id: almonds.id, size_id: a22a24.id, variety_id: nonpareil.id, grade_id: fancy.id )
+item4a = Item.create(name: "nonpareil 22/24 Extra No. 1", commodity_id: almonds.id, size_id: a22a24.id, variety_id: nonpareil.id, grade_id: usno1.id )
+item4b = Item.create(name: "nonpareil 22/24 US No. 1 (Supreme)", commodity_id: almonds.id, size_id: a22a24.id, variety_id: nonpareil.id, grade_id: sup.id )
+item4c = Item.create(name: "nonpareil 22/24 US Select Sheller Run", commodity_id: almonds.id, size_id: a22a24.id, variety_id: nonpareil.id, grade_id: ssr.id )
+item4d = Item.create(name: "nonpareil 22/24 US Standard Sheller Run", commodity_id: almonds.id, size_id: a22a24.id, variety_id: nonpareil.id, grade_id: std.id )
+item4e = Item.create(name: "nonpareil 22/24 US No. 1 Whole & Broken", commodity_id: almonds.id, size_id: a22a24.id, variety_id: nonpareil.id, grade_id: whole_broken.id)
+item4f = Item.create(name: "nonpareil 22/24 US No. 1 Pieces", commodity_id: almonds.id, size_id: a22a24.id, variety_id: nonpareil.id, grade_id: pieces.id )
+
 item5 = Item.create(name: "nonpareil 23/25", commodity_id: almonds.id, size_id: a23a25.id, variety_id: nonpareil.id)
 item6 = Item.create(name: "nonpareil 24/26", commodity_id: almonds.id, size_id: a24a26.id, variety_id: nonpareil.id)
 item7 = Item.create(name: "nonpareil 26/28", commodity_id: almonds.id, size_id: a26a28.id, variety_id: nonpareil.id)
@@ -177,6 +214,9 @@ Item.create(name: "sonora 30/34", commodity_id: almonds.id, size_id: a30a34.id, 
 Item.create(name: "sonora 34/40", commodity_id: almonds.id, size_id: a34a40.id, variety_id: sonora.id)
 Item.create(name: "sonora 40/50", commodity_id: almonds.id, size_id: a40a50.id, variety_id: sonora.id)
 
+
+
+
 company_1 = Account.create(name: Faker::Company.name)
 company_2 = Account.create(name: Faker::Company.name)
 company_3 = Account.create(name: Faker::Company.name)
@@ -202,8 +242,8 @@ quote_2 = Quote.create(contract_id: contract_2.id)
 order_1 = Order.create(contract_id: contract_1.id)
 order_2 = Order.create(contract_id: contract_2.id)
 
-quote_line_item_1 = QuoteLineItem.create(item_id: Item.first.id, quote_id: quote_1.id, price_cents: 13559, weight_grams: 1000 )
-quote_line_item_2 = QuoteLineItem.create(item_id: Item.last.id, quote_id: quote_2.id, price_cents: 55555, weight_grams: 2000 )
+quote_line_item_1 = QuoteLineItem.create(item_id: Item.first.id, quote_id: quote_1.id, price_cents: 13559, pack_weight_grams: 1000 )
+quote_line_item_2 = QuoteLineItem.create(item_id: Item.last.id, quote_id: quote_2.id, price_cents: 55555, pack_weight_grams: 2000 )
 
 order_line_item_1 = OrderLineItem.create(order_id: order_1.id, quote_line_item_id: quote_line_item_1, weight_grams: 500)
 order_line_item_2 = OrderLineItem.create(order_id: order_2.id, quote_line_item_id: quote_line_item_2, weight_grams: 1000)
@@ -285,5 +325,9 @@ ItemSizeIndicator.create(name: "SC", description: "Straight Count")
 ItemSizeIndicator.create(name: "-", description: "-")
 ItemSizeIndicator.create(name: "|", description: "|")
 
-
+PackType.create(name: "Bin")
+PackType.create(name: "Carton")
+PackType.create(name: "Bags")
+PackType.create(name: "Big Bags")
+PackType.create(name: "b/ss")
 

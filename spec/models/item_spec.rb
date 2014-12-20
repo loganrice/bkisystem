@@ -4,6 +4,7 @@ describe Item do
   it { should belong_to(:commodity) }
   it { should belong_to(:size) }
   it { should belong_to(:variety) }
+  it { should belong_to(:grade) }
   it { should have_many(:quote_line_items)}
   it { should have_many(:order_line_items)}
   it { should validate_presence_of(:name) }
