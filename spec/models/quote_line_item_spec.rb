@@ -16,36 +16,28 @@ describe QuoteLineItem do
     expect(OrderLineItem.count).to eq(0)
   end
 
+  it "converts 5000 kgs to pounds and then back to 5000 kgs" do 
+    item = QuoteLineItem.create()
+    item.pack_weight_kilograms = 5000
+    item.save
+    expect(item.pack_weight_kilograms).to eq(5000)
+  end
+
   describe "#pack_weight_kilograms" do 
-    it "displays 1000 grams as 1 kilogram" do 
-      item = QuoteLineItem.create(pack_weight_grams: 1000)
-      expect(item.pack_weight_kilograms).to eq(1)
+    it "displays 5000 pounds as 2267.962 kilogram" do 
+      item = QuoteLineItem.create(pack_weight_pounds: 5000)
+      expect(item.pack_weight_kilograms.to_s).to eq("2267.962")
     end
   end
 
   describe "#pack_weight_kilograms=" do
-    it "updates pack weight grams to 1000 grams" do 
+    it "updates pack weight pounds to 5000 pounds" do 
       item = QuoteLineItem.create()
-      item.pack_weight_kilograms = 1
-      expect(item.pack_weight_grams).to eq(1000)
+      item.pack_weight_kilograms = 5000
+      expect(item.pack_weight_pounds.to_s).to eq("11023.113")
     end
   end
-
-  describe "#pack_weight_pounds" do 
-    it "displays 1000 grams as 2.20462262185 pounds" do 
-      item = QuoteLineItem.create(pack_weight_grams: 1000)
-      expect(item.pack_weight_pounds).to eq(2.20462262185)
-    end
-  end
-
-  describe "#weight_pounds=" do 
-    it "displays 1000 grams as 2.20462262185 pounds" do 
-      item = QuoteLineItem.create()
-      item.pack_weight_pounds = 2.20462262185
-      expect(item.pack_weight_grams).to eq(1000)
-    end
-  end
-
+  
   describe "#price_dollars=" do
     it "converts $12.93 dollars to 1293 cents" do 
       amount = QuoteLineItem.create()

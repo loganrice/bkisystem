@@ -4,7 +4,7 @@ class QuoteLineItem < ActiveRecord::Base
   belongs_to :item_size_indicator
   has_many :order_line_items, dependent: :destroy
   belongs_to :pack_type
-  before_destroy :destroy_order_line_items
+  before_destroy :destroy_order_line_items 
 
   def price_dollars=(dollars)
     self.price_cents = (dollars.to_f * 100).to_i
@@ -19,19 +19,24 @@ class QuoteLineItem < ActiveRecord::Base
   end
 
   def pack_weight_kilograms
-    self.pack_weight_grams.to_f / 1000
+    to_kg(self.pack_weight_pounds)
   end
 
   def pack_weight_kilograms=(kilograms)
-    self.pack_weight_grams = kilograms.to_f * 1000
+    kilograms = BigDecimal(kilograms)
+    self.pack_weight_pounds = to_lbs(kilograms)
   end
 
-  def pack_weight_pounds
-    self.pack_weight_grams.to_f * 0.00220462262185
+  def to_kg(pounds)
+    convert_rate = BigDecimal("0.45359237")
+    near_exact = BigDecimal(pounds * convert_rate)
+    near_exact.round(3)
   end
 
-  def pack_weight_pounds=(pounds)
-    self.pack_weight_grams = pounds.to_f / 0.00220462262185
+  def to_lbs(kilograms)
+    convert_rate = BigDecimal("0.45359237")
+    near_exact = BigDecimal(kilograms / convert_rate)
+    near_exact.round(3)
   end
 
 end
