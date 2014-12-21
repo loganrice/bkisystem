@@ -6,7 +6,7 @@ describe QuoteLineItem do
   it { should have_many(:order_line_items)}
   it { should belong_to(:item_size_indicator)}
   it { should belong_to(:pack_type)}
-  
+
   it "should delete accociate order line items" do
     quote_line_item = Fabricate(:quote_line_item)
     order_line_item = Fabricate(:order_line_item, quote_line_item_id: quote_line_item.id)
@@ -36,8 +36,9 @@ describe QuoteLineItem do
       item.pack_weight_kilograms = 5000
       expect(item.pack_weight_pounds.to_s).to eq("11023.113")
     end
+
   end
-  
+
   describe "#price_dollars=" do
     it "converts $12.93 dollars to 1293 cents" do 
       amount = QuoteLineItem.create()
@@ -68,6 +69,18 @@ describe QuoteLineItem do
     it "displays 100 cents as 1" do 
       amount = QuoteLineItem.create(price_cents: 100)
       expect(amount.price_dollars).to eq(1)
+    end
+  end
+
+  describe "#default_values" do 
+    it "sets pack_count to 0 if nil" do 
+      quote_line_item = QuoteLineItem.create()
+      expect(quote_line_item.pack_count).to eq(0)
+    end
+
+    it "sets pack_weight_pounds to 0 if nil" do 
+      quote_line_item = QuoteLineItem.create()
+      expect(quote_line_item.pack_weight_pounds).to eq(0)
     end
   end
 

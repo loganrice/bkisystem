@@ -5,6 +5,12 @@ class QuoteLineItem < ActiveRecord::Base
   has_many :order_line_items, dependent: :destroy
   belongs_to :pack_type
   before_destroy :destroy_order_line_items 
+  before_save :default_values
+
+  def default_values
+    self.pack_count ||= 0
+    self.pack_weight_pounds ||= 0
+  end
 
   def price_dollars=(dollars)
     self.price_cents = (dollars.to_f * 100).to_i

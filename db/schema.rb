@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141220204118) do
+ActiveRecord::Schema.define(version: 20141220224552) do
 
   create_table "accounts", force: true do |t|
     t.string "name"
@@ -152,6 +152,7 @@ ActiveRecord::Schema.define(version: 20141220204118) do
     t.decimal  "pack_weight_pounds",     precision: 16, scale: 2
     t.integer  "pack_type_id"
     t.integer  "weight_id"
+    t.integer  "pack_count"
   end
 
   create_table "quotes", force: true do |t|
