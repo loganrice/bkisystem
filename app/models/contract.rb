@@ -7,8 +7,13 @@ class Contract < ActiveRecord::Base
   accepts_nested_attributes_for :orders, allow_destroy: true
   accepts_nested_attributes_for :quote, allow_destroy: true
   after_save :update_order_line_items_from_quote_line_items
+  before_save :set_default_quote_object
 
   private 
+
+  def set_default_quote_object
+    self.quote ||= Quote.create()
+  end
 
   def update_order_line_items_from_quote_line_items
     self.orders.each do |order|
