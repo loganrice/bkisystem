@@ -12,24 +12,20 @@ class Order < ActiveRecord::Base
     end
   end
 
+  def total_pounds
+    pounds = BigDecimal("0")
+    self.order_line_items.each do |line_item|
+      pounds += line_item.pack_weight_pounds
+    end
+    pounds
+  end
+
   def total_price
     cents = 0
     self.order_line_items.each do |line_item|
       cents += line_item.price_cents
     end
     price_dollars(cents)
-  end
-
-  def total_pounds
-    grams = 0
-    self.order_line_items.each do |line_item|
-      grams += line_item.weight_grams
-    end
-    weight_pounds(grams)
-  end
-
-  def weight_pounds(grams)
-    grams.to_f * 0.00220462262185
   end
 
   def price_dollars(cents)

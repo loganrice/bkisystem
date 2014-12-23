@@ -28,12 +28,11 @@ describe Order do
   end
 
   describe "#total_pounds" do 
-    it "sums up all of the weights in pounds of the order line items" do 
+    it "sums up all the pounds in the order line items" do 
       order = Fabricate(:order)
-      line_item1 = Fabricate(:order_line_item, order_id: order.id, weight_grams: 1000)
-      line_item2 = Fabricate(:order_line_item, order_id: order.id, weight_grams: 1000)
-
-      expect(order.total_pounds).to eq(4.4092452437)
+      line_item1 = Fabricate(:order_line_item, order_id: order.id, pack_weight_pounds: 1000)
+      line_item2 = Fabricate(:order_line_item, order_id: order.id, pack_weight_pounds: 1000) 
+      expect(order.total_pounds).to eq(2000)     
     end
   end
 

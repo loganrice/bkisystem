@@ -1,0 +1,16 @@
+%fieldset
+  %table.table.order_detail_table
+    %thead
+    %tbody
+      %tr
+        %td.col-xs-5
+          = f.select :item_id, options_for_select(Item.all.map { |item| [item.name, item.id]}, selected: f.object.item_id), hide_label: true
+        %td.col-xs-2
+          = f.collection_select :item_size_indicator_id, ItemSizeIndicator.all, :id, :name, hide_label: true
+        %td.col-xs-2
+          = f.text_field :price_dollars, prepend: "$", value: f.object.price_dollars ||= 0.00, hide_label: true
+        %td.col-md-2
+          = f.hidden_field :_destroy
+          %a.btn.btn-danger.pull-right.remove_fields{"href" => "#"}
+            %i.fa.fa-remove
+              Delete        

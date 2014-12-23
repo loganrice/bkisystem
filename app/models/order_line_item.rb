@@ -3,7 +3,7 @@ class OrderLineItem < ActiveRecord::Base
   belongs_to :item 
   belongs_to :quote_line_item
   belongs_to :weight
-  before_save :set_price_if_blank
+  before_save :default_values
 
   def price_dollars=(dollars)
     self.price_cents = (dollars.to_f * 100).to_i
@@ -17,25 +17,30 @@ class OrderLineItem < ActiveRecord::Base
     self.order.ship_date
   end
 
-  def weight_kilograms
-    self.weight_grams.to_f / 1000
+  def pack_weight_kilograms
+    to_kg(self.pack_weight_pounds)
   end
 
-  def weight_kilograms=(kilograms)
-    self.weight_grams = kilograms.to_f * 1000
+  def pack_weight_kilograms=(kilograms)
+    kilograms = BigDecimal(kilograms)
+    self.pack_weight_pounds = to_lbs(kilograms)
   end
 
-  def weight_pounds
-    self.weight_grams.to_f * 0.00220462262185
+  def to_kg(pounds)
+    convert_rate = BigDecimal("0.45359237")
+    near_exact = BigDecimal(pounds * convert_rate)
+    near_exact.round(3)
   end
 
-  def weight_pounds=(pounds)
-    self.weight_grams = pounds.to_f / 0.00220462262185
+  def to_lbs(kilograms)
+    convert_rate = BigDecimal("0.45359237")
+    near_exact = BigDecimal(kilograms / convert_rate)
+    near_exact.round(3)
   end
-
+  
   private
 
-  def set_price_if_blank
+  def default_values
     self.price_cents ||= 0
   end
 

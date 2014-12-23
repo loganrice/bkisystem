@@ -1,7 +1,0 @@
-%fieldset
-  %table.table.order_detail_table
-    %thead
-    %tbody
-      %tr
-        %td.col-xs-2
-          = f.select :quote_line_item_id, options_for_select(@order.contract.quote.quote_line_items.all.map { |quote_line_item| [Item.find(quote_line_item.item_id).name, quote_line_item.id]}, selected: f.object.quote_line_item_id)

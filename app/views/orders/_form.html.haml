@@ -41,8 +41,9 @@
                   %table.table
                     %tbody
                   = f.fields_for :order_line_items do |builder|
-                    = render 'order_line_items_fields', f: builder
-
+                    = render 'order_line_item_fields', f: builder
+                  = link_to_add_fields "Add Item", f, :order_line_items
+                  
                 = button_tag(type: 'submit', class: "btn btn-primary btn-lg btn-block") do
                   %i.fa.fa-lg.fa-fw.fa-save
                   %span Save

@@ -245,8 +245,8 @@ order_2 = Order.create(contract_id: contract_2.id)
 quote_line_item_1 = QuoteLineItem.create(item_id: Item.first.id, quote_id: quote_1.id, price_cents: 13559, pack_weight_pounds: 1000 )
 quote_line_item_2 = QuoteLineItem.create(item_id: Item.last.id, quote_id: quote_2.id, price_cents: 55555, pack_weight_pounds: 2000 )
 
-order_line_item_1 = OrderLineItem.create(order_id: order_1.id, quote_line_item_id: quote_line_item_1, weight_grams: 500)
-order_line_item_2 = OrderLineItem.create(order_id: order_2.id, quote_line_item_id: quote_line_item_2, weight_grams: 1000)
+order_line_item_1 = OrderLineItem.create(order_id: order_1.id, quote_line_item_id: quote_line_item_1, pack_weight_pounds: 500)
+order_line_item_2 = OrderLineItem.create(order_id: order_2.id, quote_line_item_id: quote_line_item_2, pack_weight_pounds: 1000)
 
 almond_ace = Account.create(
   name: "Almond Kings",

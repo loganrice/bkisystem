@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141222225924) do
+ActiveRecord::Schema.define(version: 20141223204926) do
 
   create_table "accounts", force: true do |t|
     t.string "name"
@@ -104,13 +104,14 @@ ActiveRecord::Schema.define(version: 20141222225924) do
   create_table "order_line_items", force: true do |t|
     t.integer  "item_id"
     t.integer  "price_cents"
-    t.integer  "size_indicator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "order_id"
     t.integer  "quote_line_item_id"
-    t.integer  "weight_grams"
     t.integer  "weight_id"
+    t.integer  "item_size_indicator_id"
+    t.decimal  "pack_weight_pounds"
+    t.integer  "pack_count"
   end
 
   create_table "orders", force: true do |t|

@@ -6,9 +6,17 @@ describe OrderLineItem do
   it { should belong_to(:quote_line_item) }
   it { should belong_to(:weight) }
 
-  it "should call set_price_if_blank before save" do
+
+  it "converts 5000 kgs to pounds and then back to 5000 kgs" do 
+    item = OrderLineItem.create()
+    item.pack_weight_kilograms = 5000
+    item.save
+    expect(item.pack_weight_kilograms).to eq(5000)
+  end
+
+  it "should set price_cents to 0 if blank before save" do
     order_line_item = Fabricate(:order_line_item)
-    (order_line_item).should_receive(:set_price_if_blank).and_return(2)
+    (order_line_item).should_receive(:default_values).and_return(2)
     order_line_item.save
   end
 
@@ -16,6 +24,11 @@ describe OrderLineItem do
     it "sets the price cents to 0 if blank" do 
       line_item = Fabricate(:order_line_item, price_cents: nil)
       expect(line_item.price_cents).to eq(0)
+    end
+
+    it "sets weight_pounds to 0 if blank" do 
+      line_item = Fabricate(:order_line_item, pack_weight_pounds: nil)
+
     end
   end
 
@@ -50,34 +63,18 @@ describe OrderLineItem do
     end
   end
 
-  describe "#weight_kilograms" do
-    it "displays 1000 grams as 1 kilogram" do 
-      item = OrderLineItem.create(weight_grams: 1000)
-      expect(item.weight_kilograms).to eq(1)
+  describe "#pack_weight_kilograms" do 
+    it "displays 5000 pounds as 2267.962 kilogram" do 
+      item = OrderLineItem.create(pack_weight_pounds: 5000)
+      expect(item.pack_weight_kilograms.to_s).to eq("2267.962")
     end
   end
 
-  describe "#weight_kilograms=" do
-    it "updates weight_grams to 1000 grams" do 
+  describe "#pack_weight_kilograms=" do
+    it "updates pack weight pounds to 5000 pounds" do 
       item = OrderLineItem.create()
-      item.weight_kilograms = 1
-      expect(item.weight_grams).to eq(1000)
+      item.pack_weight_kilograms = 5000
+      expect(item.pack_weight_pounds.to_s).to eq("11023.113")
     end
   end
-
-  describe "#weight_pounds" do 
-    it "displays 1000 grams as 2.20462262185 pounds" do 
-      item = OrderLineItem.create(weight_grams: 1000)
-      expect(item.weight_pounds).to eq(2.20462262185)
-    end
-  end
-
-  describe "#weight_pounds=" do 
-    it "displays 1000 grams as 2.20462262185 pounds" do 
-      item = OrderLineItem.create()
-      item.weight_pounds = 2.20462262185
-      expect(item.weight_grams).to eq(1000)
-    end
-  end
-
 end
