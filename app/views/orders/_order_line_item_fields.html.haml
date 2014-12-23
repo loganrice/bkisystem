@@ -1,16 +1,41 @@
-%fieldset
-  %table.table.order_detail_table
-    %thead
-    %tbody
-      %tr
-        %td.col-xs-5
-          = f.select :item_id, options_for_select(Item.all.map { |item| [item.name, item.id]}, selected: f.object.item_id), hide_label: true
-        %td.col-xs-2
-          = f.collection_select :item_size_indicator_id, ItemSizeIndicator.all, :id, :name, hide_label: true
-        %td.col-xs-2
-          = f.text_field :price_dollars, prepend: "$", value: f.object.price_dollars ||= 0.00, hide_label: true
-        %td.col-md-2
-          = f.hidden_field :_destroy
-          %a.btn.btn-danger.pull-right.remove_fields{"href" => "#"}
-            %i.fa.fa-remove
-              Delete        
+%div.well.bg-info
+  %fieldset
+    %table.table.order_detail_table
+      %thead
+      %tbody
+        %tr
+          %td.col-xs-5
+            = f.select :item_id, options_for_select(Item.all.map { |item| [item.name, item.id]}, selected: f.object.item_id), hide_label: true
+          %td.col-xs-2
+            = f.collection_select :item_size_indicator_id, ItemSizeIndicator.all, :id, :name, hide_label: true
+          %td.col-xs-2
+            = f.text_field :price_dollars, prepend: "$", value: f.object.price_dollars ||= 0.00, hide_label: true
+          %td.col-md-2
+            = f.hidden_field :_destroy
+            %a.btn.btn-danger.pull-right.remove_fields{"href" => "#"}
+              %i.fa.fa-remove
+                Delete        
+
+
+
+    %div.panel.panel-default
+      %table.table
+        %tbody
+          %tr
+            %td.col-xs-2
+              = f.text_field :pack_count
+            - if f.object.weight_id == Weight.find_by(weight_unit_of_measure: "kilograms").id
+              %td.col-xs-2
+                = f.number_field :pack_weight_kilograms, value: number_with_precision(f.object.pack_weight_kilograms, precision: 3), step: 0.001
+            - else
+              %td.col-xs-2
+                = f.number_field :pack_weight_pounds, step: 0.001
+            %td.col-xs-2
+              = f.collection_select :weight_id, Weight.all, :id, :weight_unit_of_measure
+
+            %td.col-xs-2
+              = f.collection_select :pack_type_id, PackType.all, :id, :name
+            %td.col-xs-2
+              %div.form-group
+                %label Adj Total
+                %div $100

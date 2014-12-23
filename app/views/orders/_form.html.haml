@@ -7,7 +7,7 @@
       %article.col-xs-12.col-sm-12.col-md-12.col-lg-12
         -#- end widget -->
         -#- Widget ID (each widget will need unique ID)-->
-        %div.jarviswidget.jarviswidget-color-blueDark#orderdetail{ "data-widget-editbutton" => "false" }
+        %div.jarviswidget.jarviswidget-color-blueDark#orderdetail{ "data-widget-togglebutton" => "false", "data-widget-editbutton" => "false", "data-widget-fullscreenbutton" => "false", "data-widget-colorbutton" => "false", "data-widget-deletebutton" => "false" }
           -# widget options:
           -#usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
           -#data-widget-colorbutton="false"
@@ -22,8 +22,21 @@
             %span.widget-icon
               %i.fa.fa-table
             %h2 Order
+            %ul.nav.nav-tabs.pull-right.in#order-tab-content
+              %li.active{ "role" => "presentation" }
+                %a{ "href" => "#home", "role" => "tab", "data-toggle" => "tab" }
+                  Home
+              %li{ "role" => "presentation" }
+                %a{ "href" => "#commission", "role" => "tab", "data-toggle" => "tab" }
+                  Commission
+              %li{ "role" => "presentation" }
+                %a{ "href" => "#messages", "role" => "tab", "data-toggle" => "tab" }
+                  Messages
+              %li{ "role" => "presentation" }
+                %a{ "href" => "#settings", "role" => "tab", "data-toggle" => "tab" }
+                  Settings
           -#- widget div-->
-          %div
+          %div.no-padding
             -# widget edit box -->
             %div.jarviswidget-editbox
               -# This area used as dropdown edit box -->
@@ -31,19 +44,32 @@
             -#- widget content -->
             %div.widget-body
               = bootstrap_form_for(@order, label_errors: true, remote: true) do |f|
-                = f.text_field :ship_date
-                = f.text_field :last_received_date
-                = f.text_field :estimated_arrival_date
-                = f.text_field :shipping_company
-                %div.panel.panel-primary
-                  %div.panel-heading 
-                    Order Details
-                  %table.table
-                    %tbody
-                  = f.fields_for :order_line_items do |builder|
-                    = render 'order_line_item_fields', f: builder
-                  = link_to_add_fields "Add Item", f, :order_line_items
-                  
-                = button_tag(type: 'submit', class: "btn btn-primary btn-lg btn-block") do
-                  %i.fa.fa-lg.fa-fw.fa-save
-                  %span Save
+
+                %div#orderTab.tab-content
+                  %div#home.tab-pane.active.in{ "role" => "tabpanel" }
+                    %div.widget-body-toolbar.bg-color-white
+                      = f.text_field :ship_date
+                      = f.text_field :last_received_date
+                      = f.text_field :estimated_arrival_date
+                      = f.text_field :shipping_company
+                      %div.panel.panel-primary
+                        %div.panel-heading 
+                          Order Details
+                        %table.table
+                          %tbody
+                        = f.fields_for :order_line_items do |builder|
+                          = render 'order_line_item_fields', f: builder
+                        = link_to_add_fields "Add Item", f, :order_line_items
+                        
+                      = button_tag(type: 'submit', class: "btn btn-primary btn-lg btn-block") do
+                        %i.fa.fa-lg.fa-fw.fa-save
+                        %span Save
+                  %div#commission.tab-pane.fade{ "role" => "tabpanel" }
+                    %div.widget-body-toolbar.bg-color-white
+                      %p Commmission
+                  %div#messages.tab-pane.fade{ "role" => "tabpanel" }
+                    %div.widget-body-toolbar.bg-color-white
+                      %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus aliquid a itaque, accusantium sed quis assumenda ducimus tempora aspernatur facere necessitatibus corrupti, inventore dolorem iure natus impedit, nemo fuga ipsam!
+                  %div#settings.tab-pane{ "role" => "tabpanel" }
+                    %div.widget-body-toolbar.bg-color-white
+                      %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus aliquid a itaque, accusantium sed quis assumenda ducimus tempora aspernatur facere necessitatibus corrupti, inventore dolorem iure natus impedit, nemo fuga ipsam!
