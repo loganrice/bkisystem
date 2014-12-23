@@ -100,6 +100,23 @@ describe ContractsController do
           xhr :put, :update, id: contract.id, contract: { buyer_po: "5555" }
           expect(flash[:success]).to_not be_nil
         end
+
+        it "changes the pack_weight_pounds params key to pack_weight_kilograms if weight id is kg " do
+          item = Fabricate(:item)
+          quote = Fabricate(:quote)
+          kg = Weight.create(weight_unit_of_measure: "kilograms")
+          lb = Weight.create(weight_unit_of_measure: "pounds")
+          line_item = QuoteLineItem.create()
+          contract.quote = quote
+          contract.quote.quote_line_items << line_item
+          contract.save
+          line_attributes = {"0" => {item_id: line_item.id, pack_weight_pounds: "1", weight_id: kg.id, id: line_item.id}}
+          q_attributes = { "quote_line_items_attributes" => line_attributes, "id" => quote.id }
+          xhr :put, :update, { "id" => contract.id, "contract" => { "buyer_po" => "5555", "quote_attributes" => q_attributes}}
+
+          expect(QuoteLineItem.first.pack_weight_kilograms).to eq(BigDecimal("1"))
+        end
+
       end
 
       context "with invalid input" do 
