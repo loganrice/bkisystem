@@ -8,6 +8,9 @@ class OrdersController < ApplicationController
 
   def edit
     @order = Order.find(params[:id])
+    if @order.commissions.count == 0
+      @order.commissions.create()
+    end
     # @quote_line_items = quote_items(@order)
   end
 

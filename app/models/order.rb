@@ -2,8 +2,14 @@ class Order < ActiveRecord::Base
   belongs_to :contract
   validates_presence_of :contract
   has_many :order_line_items, -> { order("created_at DESC")}
+  has_many :commissions
   accepts_nested_attributes_for :order_line_items, allow_destroy: true
-  
+  before_save :default_values
+
+  def default_values
+
+  end
+
   def row_on_contract
     self.contract.orders.each_with_index do |order, index|
       if order == self

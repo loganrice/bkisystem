@@ -9,5 +9,5 @@ describe Account do
   it { should have_many(:banks) }
   it { should have_many(:selling_contracts)}
   it { should have_many(:buying_contracts)}
-
+  it { should have_many(:commissions) }
 end

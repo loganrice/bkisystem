@@ -67,6 +67,9 @@
                   %div#commission.tab-pane.fade{ "role" => "tabpanel" }
                     %div.widget-body-toolbar.bg-color-white
                       %p Commmission
+                      = f.fields_for :commissions do |builder|
+                        = render 'commission_fields', f: builder
+                        
                   %div#messages.tab-pane.fade{ "role" => "tabpanel" }
                     %div.widget-body-toolbar.bg-color-white
                       %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus aliquid a itaque, accusantium sed quis assumenda ducimus tempora aspernatur facere necessitatibus corrupti, inventore dolorem iure natus impedit, nemo fuga ipsam!

@@ -47,6 +47,13 @@ describe OrdersController do
         expect(assigns(:order)).to eq(order)
       end
 
+      it "builds a commission if blank" do 
+
+        order = Fabricate(:order)
+        xhr :get, :edit, id: order.id
+        expect(assigns(:order).commissions.count).to eq(1)
+      end
+
     end
   end
 
