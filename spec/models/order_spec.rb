@@ -6,7 +6,8 @@ describe Order do
   it { should accept_nested_attributes_for(:order_line_items) }
   it { should validate_presence_of(:contract)}
   it { should have_many(:commissions) }
-
+  it { should accept_nested_attributes_for(:commissions) }
+  
   it "it should call set default values before save" do
     order = Fabricate(:order)
     (order).should_receive(:default_values).and_return(2)

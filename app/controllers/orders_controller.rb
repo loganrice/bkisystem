@@ -52,7 +52,8 @@ class OrdersController < ApplicationController
       :ship_pick_up,
       :ship_delivery,
       :contract_id, 
-      order_line_items_attributes: [:item_id, :price_dollars, :weight_id, :pack_weight_pounds, :item_size_indicator_id, :pack_weight_kilograms, :pack_count, :pack_type_id, :id, :_destroy]
+      order_line_items_attributes: [:item_id, :price_dollars, :weight_id, :pack_weight_pounds, :item_size_indicator_id, :pack_weight_kilograms, :pack_count, :pack_type_id, :id, :_destroy],
+      commissions_attributes: [ :broker_id, :dollars_per_pound, :percent, :dollars, :id, :_destroy]
     )
   end
 end

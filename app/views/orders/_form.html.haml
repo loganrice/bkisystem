@@ -30,8 +30,8 @@
                 %a{ "href" => "#commission", "role" => "tab", "data-toggle" => "tab" }
                   Commission
               %li{ "role" => "presentation" }
-                %a{ "href" => "#messages", "role" => "tab", "data-toggle" => "tab" }
-                  Messages
+                %a{ "href" => "#invoice", "role" => "tab", "data-toggle" => "tab" }
+                  Invoice
               %li{ "role" => "presentation" }
                 %a{ "href" => "#settings", "role" => "tab", "data-toggle" => "tab" }
                   Settings
@@ -70,9 +70,9 @@
                       = f.fields_for :commissions do |builder|
                         = render 'commission_fields', f: builder
                         
-                  %div#messages.tab-pane.fade{ "role" => "tabpanel" }
+                  %div#invoice.tab-pane.fade{ "role" => "tabpanel" }
                     %div.widget-body-toolbar.bg-color-white
-                      %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus aliquid a itaque, accusantium sed quis assumenda ducimus tempora aspernatur facere necessitatibus corrupti, inventore dolorem iure natus impedit, nemo fuga ipsam!
+                      = render 'invoice'
                   %div#settings.tab-pane{ "role" => "tabpanel" }
                     %div.widget-body-toolbar.bg-color-white
                       %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus aliquid a itaque, accusantium sed quis assumenda ducimus tempora aspernatur facere necessitatibus corrupti, inventore dolorem iure natus impedit, nemo fuga ipsam!

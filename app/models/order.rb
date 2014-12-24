@@ -4,6 +4,7 @@ class Order < ActiveRecord::Base
   has_many :order_line_items, -> { order("created_at DESC")}
   has_many :commissions
   accepts_nested_attributes_for :order_line_items, allow_destroy: true
+  accepts_nested_attributes_for :commissions, allow_destroy: true
   before_save :default_values
 
   def default_values

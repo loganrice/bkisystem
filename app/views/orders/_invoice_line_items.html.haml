@@ -1,0 +1,18 @@
+%tr
+  %td.text-center
+    - if Weight.find_by(id: line_item.weight_id).weight_unit_of_measure == "pounds"
+      %strong= "#{line_item.pack_weight_pounds} lbs"
+    - elsif Weight.find_by(id: line_item.weight_id).weight_unit_of_measure == "kilograms"
+      %strong= "#{line_item.pack_weight_kilograms} kgs"
+  %td
+    %strong= line_item.item.name
+  %td
+    = line_item.price_dollars
+  %td
+    - if Weight.find_by(id: line_item.weight_id).weight_unit_of_measure == "pounds"
+      = number_to_currency(line_item.price_dollars * line_item.pack_weight_pounds)
+    - elsif Weight.find_by(id: line_item.weight_id).weight_unit_of_measure == "kilograms"
+      = number_to_currency(line_item.price_dollars * line_item.pack_weight_kilograms)
+
+  %td
+    $1,300.00
