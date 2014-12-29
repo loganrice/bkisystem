@@ -1,0 +1,3 @@
+Fabricator(:commission) do 
+
+end

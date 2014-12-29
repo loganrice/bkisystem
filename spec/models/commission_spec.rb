@@ -27,6 +27,6 @@ describe Commission do
       amount.dollars = 12.93999
       expect(amount.cents).to eq(1293)
     end
-
   end
+
 end

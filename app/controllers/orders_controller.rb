@@ -15,6 +15,7 @@ class OrdersController < ApplicationController
   end
 
   def update
+    binding.pry
     @order = Order.find(params[:id])
     if @order.update(order_params)
       flash[:success] = "Updated"

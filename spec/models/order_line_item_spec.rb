@@ -5,7 +5,7 @@ describe OrderLineItem do
   it { should belong_to(:item) }
   it { should belong_to(:quote_line_item) }
   it { should belong_to(:weight) }
-
+  it { should have_many(:commissions).through(:order)}
 
   it "converts 5000 kgs to pounds and then back to 5000 kgs" do 
     item = OrderLineItem.create()
@@ -76,5 +76,80 @@ describe OrderLineItem do
       item.pack_weight_kilograms = 5000
       expect(item.pack_weight_pounds.to_s).to eq("11023.113")
     end
+  end
+
+  describe "#total_commission_cents_per_pound" do 
+    it "gets all of the associated Commissions and adds the cents per pound fields" do 
+      order = Fabricate(:order)
+      item = OrderLineItem.create(order_id: order.id)
+      commission1 = Commission.create(cents_per_pound: 30, broker_id: Fabricate(:account).id)
+      commission2 = Commission.create(cents_per_pound: 5, broker_id: Fabricate(:account).id)
+      order.commissions << commission1
+      order.commissions << commission2
+      order.save
+      expect(item.total_commission_cents_per_pound).to eq(35)
+    end
+  end
+
+  describe "#total_commission_percent" do 
+    it "gets all of the associated Commissions and adds the percent fields" do 
+      order = Fabricate(:order)
+      item = OrderLineItem.create(order_id: order.id)
+      commission1 = Commission.create(percent: BigDecimal.new("2.0"), broker_id: Fabricate(:account).id)
+      commission2 = Commission.create(percent: BigDecimal.new("2.0"), broker_id: Fabricate(:account).id)
+      order.commissions << commission1
+      order.commissions << commission2
+      order.save
+      expect(item.total_commission_percent).to eq(4)
+    end
+  end
+
+  describe "#total_commission_cents" do 
+    it "gets all of the associated Commissions and adds the cents fields" do 
+      order = Fabricate(:order)
+      item = OrderLineItem.create(order_id: order.id)
+      commission1 = Commission.create(cents: 100, broker_id: Fabricate(:account).id)
+      commission2 = Commission.create(cents: 150, broker_id: Fabricate(:account).id)
+      order.commissions << commission1
+      order.commissions << commission2
+      order.save
+      expect(item.total_commission_cents).to eq(250)
+    end
+  end
+  describe "#total_commission_percent_as_decimal" do 
+    it "converts percent to decimal form i.e. 2.0 eq .02" do 
+      order = Fabricate(:order)
+      item = OrderLineItem.create(order_id: order.id)
+      commission1 = Commission.create(percent: BigDecimal.new("2.0"), broker_id: Fabricate(:account).id)
+      commission2 = Commission.create(percent: BigDecimal.new("2.0"), broker_id: Fabricate(:account).id)
+      order.commissions << commission1
+      order.commissions << commission2
+      order.save
+      expect(item.total_commission_percent_as_decimal).to eq(BigDecimal.new("0.04"))
+    end
+  end
+
+  describe "#adjusted_price" do 
+    it "multiplies the price_cents by total_commission_percent_as_decimal" do 
+      order = Fabricate(:order)
+      item = OrderLineItem.create(order_id: order.id, price_cents: 151)
+      commission1 = Commission.create(percent: BigDecimal.new("2.0"), broker_id: Fabricate(:account).id)
+      commission2 = Commission.create(percent: BigDecimal.new("2.0"), broker_id: Fabricate(:account).id)
+      order.commissions << commission1
+      order.commissions << commission2
+      order.save
+      expect(item.adjusted_price).to eq(144)
+    end
+    it "deducts the total_commission_cents_per_pound from price_cents" do 
+      order = Fabricate(:order)
+      item = OrderLineItem.create(order_id: order.id, price_cents: 100)
+      commission1 = Commission.create(cents_per_pound: 3, broker_id: Fabricate(:account).id)
+      commission2 = Commission.create(cents_per_pound: 3, broker_id: Fabricate(:account).id)
+      order.commissions << commission1
+      order.commissions << commission2
+      order.save
+      expect(item.adjusted_price).to eq(94)
+    end
+
   end
 end
