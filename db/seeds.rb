@@ -8,7 +8,6 @@
 
 # Clear Table
 
-require 'faker'
 require 'open-uri'
 require 'csv'
 
@@ -214,39 +213,23 @@ Item.create(name: "sonora 30/34", commodity_id: almonds.id, size_id: a30a34.id, 
 Item.create(name: "sonora 34/40", commodity_id: almonds.id, size_id: a34a40.id, variety_id: sonora.id)
 Item.create(name: "sonora 40/50", commodity_id: almonds.id, size_id: a40a50.id, variety_id: sonora.id)
 
+nonpareil_inshell = Item.create(name: "nonpareil inshell", commodity_id: almonds.id, variety_id: nonpareil.id)
 
 
+roche = Account.create(
+  name: "Roche Brothers",
+  phone1: "209-559-9000",
+)
 
-company_1 = Account.create(name: Faker::Company.name)
-company_2 = Account.create(name: Faker::Company.name)
-company_3 = Account.create(name: Faker::Company.name)
-company_4 = Account.create(name: Faker::Company.name)
-company_5 = Account.create(name: Faker::Company.name)
-company_6 = Account.create(name: Faker::Company.name)
-company_7 = Account.create(name: Faker::Company.name)
-company_8 = Account.create(name: Faker::Company.name)
+dynasty = Account.create(
+  name: "Roche Brothers",
+  phone1: "209-559-9000",
+)
 
-contract_1 = Contract.create(buyer_id: company_1.id, seller_id: company_2.id, buyer_contract: Faker::Number.number(4), buyer_po: Faker::Number.number(6), seller_contract: Faker::Number.number(7), date: Faker::Date.between(30.days.ago, Date.today))
-contract_2 = Contract.create(buyer_id: company_3.id, seller_id: company_4.id,buyer_contract: Faker::Number.number(4), buyer_po: Faker::Number.number(6), seller_contract: Faker::Number.number(7), date: Faker::Date.between(30.days.ago, Date.today))
-contract_3 = Contract.create(buyer_id: company_5.id, seller_id: company_6.id,buyer_contract: Faker::Number.number(4), buyer_po: Faker::Number.number(6), seller_contract: Faker::Number.number(7), date: Faker::Date.between(30.days.ago, Date.today))
-contract_4 = Contract.create(buyer_id: company_7.id, seller_id: company_8.id,buyer_contract: Faker::Number.number(4), buyer_po: Faker::Number.number(6), seller_contract: Faker::Number.number(7), date: Faker::Date.between(30.days.ago, Date.today))
-contract_5 = Contract.create(buyer_contract: Faker::Number.number(4), buyer_po: Faker::Number.number(6), seller_contract: Faker::Number.number(7), date: Faker::Date.between(30.days.ago, Date.today))
-contract_6 = Contract.create(buyer_contract: Faker::Number.number(4), buyer_po: Faker::Number.number(6), seller_contract: Faker::Number.number(7), date: Faker::Date.between(30.days.ago, Date.today))
-contract_7 = Contract.create(buyer_contract: Faker::Number.number(4), buyer_po: Faker::Number.number(6), seller_contract: Faker::Number.number(7), date: Faker::Date.between(30.days.ago, Date.today))
-
-
-
-quote_1 = Quote.create(contract_id: contract_1.id)
-quote_2 = Quote.create(contract_id: contract_2.id)
-
-order_1 = Order.create(contract_id: contract_1.id)
-order_2 = Order.create(contract_id: contract_2.id)
-
-quote_line_item_1 = QuoteLineItem.create(item_id: Item.first.id, quote_id: quote_1.id, price_cents: 13559, pack_weight_pounds: 1000 )
-quote_line_item_2 = QuoteLineItem.create(item_id: Item.last.id, quote_id: quote_2.id, price_cents: 55555, pack_weight_pounds: 2000 )
-
-order_line_item_1 = OrderLineItem.create(order_id: order_1.id, quote_line_item_id: quote_line_item_1, pack_weight_pounds: 500)
-order_line_item_2 = OrderLineItem.create(order_id: order_2.id, quote_line_item_id: quote_line_item_2, pack_weight_pounds: 1000)
+bki = Account.create(
+  name: "BKI",
+  phone1: "209-559-9000",
+)
 
 almond_ace = Account.create(
   name: "Almond Kings",
@@ -317,8 +300,8 @@ steve = User.create(name: "Steve Bava", email: "steve@bkiexports.com", password:
 brad = User.create(name: "Jenny", email: "jenny@bkiexports.com", password: "bki")
 
 
-Weight.create(weight_unit_of_measure: "kilograms")
-Weight.create(weight_unit_of_measure: "pounds")
+kilograms = Weight.create(weight_unit_of_measure: "kilograms")
+pounds = Weight.create(weight_unit_of_measure: "pounds")
 
 ItemSizeIndicator.create(name: "AOL", description: "and or larger")
 ItemSizeIndicator.create(name: "SC", description: "Straight Count")
@@ -331,3 +314,14 @@ PackType.create(name: "Bags")
 PackType.create(name: "Big Bags")
 PackType.create(name: "b/ss")
 
+
+a14_193 = Contract.create(buyer_id: dynasty.id, seller_id: roche.id, date: Date.new(2014,12,22))
+a14_193_load_1 = Order.create(contract_id: a14_193.id)
+a14_193_commission = Commission.create(cents_per_pound: 3, order_id: a14_193_load_1.id, broker_id: bki.id)
+a14_193_load_1_line_1 = OrderLineItem.create(
+  order_id: a14_193_load_1.id, 
+  item_id: nonpareil_inshell.id,
+  weight_id: pounds.id,
+  pack_weight_pounds: 50,
+  pack_count: 900,
+  price_cents: 316)
