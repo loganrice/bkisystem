@@ -1,18 +1,16 @@
 %tr
   %td.text-center
+    = line_item.pack_count
+  %td.text-center
     - if Weight.find_by(id: line_item.weight_id).weight_unit_of_measure == "pounds"
-      %strong= "#{line_item.pack_weight_pounds} lbs"
+      = "#{line_item.pack_weight_pounds} lbs"
     - elsif Weight.find_by(id: line_item.weight_id).weight_unit_of_measure == "kilograms"
-      %strong= "#{line_item.pack_weight_kilograms} kgs"
+      = "#{line_item.pack_weight_kilograms} kgs"
   %td
     %strong= line_item.item.name
   %td
-    = line_item.price_dollars
+    = number_to_currency line_item.price_dollars
   %td
-    - if Weight.find_by(id: line_item.weight_id).weight_unit_of_measure == "pounds"
-      = number_to_currency(line_item.price_dollars * line_item.pack_weight_pounds)
-    - elsif Weight.find_by(id: line_item.weight_id).weight_unit_of_measure == "kilograms"
-      = number_to_currency(line_item.price_dollars * line_item.pack_weight_kilograms)
-
+    = number_to_currency to_dollars(line_item.commission_total)
   %td
-    $1,300.00
+    %strong= number_to_currency(to_dollars(line_item.invoice_total))

@@ -30,4 +30,9 @@ module ApplicationHelper
     end
     link_to(name, "#", class: "add_fields btn btn-primary", data: {id: id, fields: fields.gsub("\n", "")})  
   end
+
+  def to_dollars(cents)
+    cents / 100
+  end
+  
 end

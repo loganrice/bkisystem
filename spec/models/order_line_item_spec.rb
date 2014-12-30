@@ -20,6 +20,23 @@ describe OrderLineItem do
     order_line_item.save
   end
 
+  it "should match contract AA 72029 load 1 commission $5,297.60" do 
+      order = Fabricate(:order)
+      item1 = OrderLineItem.create(order_id: order.id, price_cents: 452, pack_weight_pounds: 50, pack_count: 447)
+      item2 = OrderLineItem.create(order_id: order.id, price_cents: 452, pack_weight_pounds: 50, pack_count: 433)
+
+      commission1 = Commission.create(cents_per_pound: 3, broker_id: Fabricate(:account).id)
+      commission2 = Commission.create(percent: 2, broker_id: Fabricate(:account).id)
+      order.commissions << commission1
+      order.commissions << commission2
+      order.save
+      expect(item1.commission_total).to eq(BigDecimal.new("269094"))
+      expect(item2.commission_total).to eq(BigDecimal.new("260666"))
+      total_commission = item1.commission_total + item2.commission_total
+      expect(total_commission).to eq(BigDecimal.new("529760"))
+
+  end
+
   describe "#set_price_if_blank" do
     it "sets the price cents to 0 if blank" do 
       line_item = Fabricate(:order_line_item, price_cents: nil)
@@ -45,12 +62,19 @@ describe OrderLineItem do
       amount.price_dollars = "1abc"
       expect(amount.price_cents).to eq(100)
     end
+
   end
 
   describe "#price_dollars" do 
     it "displays 1293 cents as 12.93" do 
       amount = OrderLineItem.create(price_cents: 1293)
       expect(amount.price_dollars).to eq(12.93)
+    end
+
+    it "after price_dollars= converts 4.52 to cents it displays 4.52 cents" do 
+      amount = OrderLineItem.create()
+      amount.price_dollars = 4.52
+      expect(amount.price_cents).to eq(452)
     end
   end
 
@@ -130,16 +154,6 @@ describe OrderLineItem do
   end
 
   describe "#adjusted_price" do 
-    it "multiplies the price_cents by total_commission_percent_as_decimal" do 
-      order = Fabricate(:order)
-      item = OrderLineItem.create(order_id: order.id, price_cents: 151)
-      commission1 = Commission.create(percent: BigDecimal.new("2.0"), broker_id: Fabricate(:account).id)
-      commission2 = Commission.create(percent: BigDecimal.new("2.0"), broker_id: Fabricate(:account).id)
-      order.commissions << commission1
-      order.commissions << commission2
-      order.save
-      expect(item.adjusted_price).to eq(144)
-    end
     it "deducts the total_commission_cents_per_pound from price_cents" do 
       order = Fabricate(:order)
       item = OrderLineItem.create(order_id: order.id, price_cents: 100)
@@ -150,6 +164,63 @@ describe OrderLineItem do
       order.save
       expect(item.adjusted_price).to eq(94)
     end
+    it "deducts the total_commission_cents_per_pound from price_cents" do 
+      order = Fabricate(:order)
+      item = OrderLineItem.create(order_id: order.id, price_cents: 452, pack_weight_pounds: 50, pack_count: 447)
+      commission1 = Commission.create(cents_per_pound: 3, broker_id: Fabricate(:account).id)
+      commission2 = Commission.create(percent: 2, broker_id: Fabricate(:account).id)
+      order.commissions << commission1
+      order.commissions << commission2
+      order.save
+      expect(item.adjusted_price).to eq(BigDecimal.new("439.96"))
+    end
+  end
 
+  describe "#adjusted_total" do
+    it "multiplies the adjusted_price by the total_weight" do 
+      order = Fabricate(:order)
+      item = OrderLineItem.create(order_id: order.id, price_cents: 452, pack_weight_pounds: 50, pack_count: 447)
+      commission1 = Commission.create(percent: 2, broker_id: Fabricate(:account).id)
+      commission2 = Commission.create(cents_per_pound: 3, broker_id: Fabricate(:account).id)
+      order.commissions << commission1
+      order.commissions << commission2
+      order.save
+      expect(item.adjusted_total).to eq(9833106) 
+    end
+  end
+
+  describe "#invoice_total" do 
+    it "calculates the total price based on weight x price_cents" do 
+      order = Fabricate(:order)
+      item = OrderLineItem.create(order_id: order.id, price_cents: 452, pack_weight_pounds: 50, pack_count: 447)
+      commission1 = Commission.create(percent: 2, broker_id: Fabricate(:account).id)
+      commission2 = Commission.create(cents_per_pound: 3, broker_id: Fabricate(:account).id)
+      order.commissions << commission1
+      order.commissions << commission2
+      order.save
+      expect(item.invoice_total).to eq(BigDecimal.new("10102200.00"))     
+    end
+  end
+
+  describe "#commission_total" do 
+    it "calculates the total price based on weight x price_cents" do 
+      require 'pry';
+      order = Fabricate(:order)
+      item = OrderLineItem.create(order_id: order.id, price_cents: 452, pack_weight_pounds: 50, pack_count: 447)
+      commission1 = Commission.create(percent: 2, broker_id: Fabricate(:account).id)
+      commission2 = Commission.create(cents_per_pound: 3, broker_id: Fabricate(:account).id)
+      order.commissions << commission1
+      order.commissions << commission2
+      order.save
+      expect(item.commission_total).to eq(269094)     
+    end
+  end
+
+  describe "#weight_total" do 
+    it "calculates the total weight by pack_weight_pounds x pack_count" do 
+      order = Fabricate(:order)
+      item = OrderLineItem.create(order_id: order.id, price_cents: 452, pack_weight_pounds: 50, pack_count: 447)
+      expect(item.weight_total).to eq(BigDecimal.new("22350")) 
+    end
   end
 end

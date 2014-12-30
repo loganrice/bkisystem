@@ -61,9 +61,11 @@
     %thead
       %tr
         %th.text-center QTY
+        %th.text-center WEIGHT
         %th ITEM
         %th PRICE
-        %th SUBTOTAL
+        %th COMMISSION
+        %th TOTAL
     %tbody
       - @order.order_line_items.each do |line_item|
         =render 'invoice_line_items', line_item: line_item
