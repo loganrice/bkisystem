@@ -21,7 +21,7 @@
           %header
             %span.widget-icon
               %i.fa.fa-table
-            %h2 Order
+            %h2= "Contract: #{@order.contract.id} - Seller: #{@order.contract.seller.name} - Buyer: #{@order.contract.buyer.name}"
             %ul.nav.nav-tabs.pull-right.in#order-tab-content
               %li.active{ "role" => "presentation" }
                 %a{ "href" => "#home", "role" => "tab", "data-toggle" => "tab" }
@@ -33,8 +33,8 @@
                 %a{ "href" => "#invoice", "role" => "tab", "data-toggle" => "tab" }
                   Invoice
               %li{ "role" => "presentation" }
-                %a{ "href" => "#settings", "role" => "tab", "data-toggle" => "tab" }
-                  Settings
+                %a{ "href" => "#terms", "role" => "tab", "data-toggle" => "tab" }
+                  Terms
           -#- widget div-->
           %div.no-padding
             -# widget edit box -->
@@ -48,10 +48,8 @@
                 %div#orderTab.tab-content
                   %div#home.tab-pane.active.in{ "role" => "tabpanel" }
                     %div.widget-body-toolbar.bg-color-white
-                      = f.text_field :ship_date
-                      = f.text_field :last_received_date
-                      = f.text_field :estimated_arrival_date
-                      = f.text_field :shipping_company
+                      = render 'order_fields', f: f
+
                       %div.panel.panel-primary
                         %div.panel-heading 
                           Order Details
@@ -69,9 +67,22 @@
                       %p Commmission
                       = f.fields_for :commissions do |builder|
                         = render 'commission_fields', f: builder
-                        
+                      = link_to_add_fields "Add Item", f, :commissions
+                      
                   %div#invoice.tab-pane.fade{ "role" => "tabpanel" }
                     = render 'invoice'
-                  %div#settings.tab-pane{ "role" => "tabpanel" }
+                  %div#terms.tab-pane{ "role" => "tabpanel" }
                     %div.widget-body-toolbar.bg-color-white
-                      %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus aliquid a itaque, accusantium sed quis assumenda ducimus tempora aspernatur facere necessitatibus corrupti, inventore dolorem iure natus impedit, nemo fuga ipsam!
+                      %div.panel.panel-primary
+                        %div.panel-heading 
+                          Order Details
+                        %table.table
+                          %tbody
+                            %tr
+                              %td= f.text_area :payment_terms
+                            %tr
+                              %td= f.text_area :remarks
+                            %tr
+                              %td= f.text_area :ship_pick_up
+                            %tr
+                              %td= f.text_area :ship_delivery

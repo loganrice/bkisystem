@@ -39,8 +39,8 @@ describe Order do
   describe "#total_pounds" do 
     it "sums up all the pounds in the order line items" do 
       order = Fabricate(:order)
-      line_item1 = Fabricate(:order_line_item, order_id: order.id, pack_weight_pounds: 1000)
-      line_item2 = Fabricate(:order_line_item, order_id: order.id, pack_weight_pounds: 1000) 
+      line_item1 = Fabricate(:order_line_item, order_id: order.id, pack_count: 1, pack_weight_pounds: 1000)
+      line_item2 = Fabricate(:order_line_item, order_id: order.id, pack_count: 1, pack_weight_pounds: 1000) 
       expect(order.total_pounds).to eq(2000)     
     end
   end
@@ -48,10 +48,13 @@ describe Order do
   describe "#total_price" do 
     it "sums up all the price in dollars of the order line items" do 
       order = Fabricate(:order)
-      line_item1 = Fabricate(:order_line_item, order_id: order.id, price_cents: 1000)
-      line_item2 = Fabricate(:order_line_item, order_id: order.id, price_cents: 293)
-
-      expect(order.total_price).to eq(12.93)
+      item = OrderLineItem.create(order_id: order.id, price_cents: 452, pack_weight_pounds: 50, pack_count: 447)
+      commission1 = Commission.create(percent: 2, broker_id: Fabricate(:account).id)
+      commission2 = Commission.create(cents_per_pound: 3, broker_id: Fabricate(:account).id)
+      order.commissions << commission1
+      order.commissions << commission2
+      order.save
+      expect(order.total_price).to eq(10102200)     
     end
   end
 end

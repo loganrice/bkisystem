@@ -1,0 +1,39 @@
+%table.table.table-hover
+  %thead
+
+  %tbody
+    %tr
+      %td
+        = f.date_field :ship_date
+      %td
+        = f.date_field :last_received_date
+      %td 
+        = f.date_field :estimated_arrival_date
+      %td 
+        = f.date_field :doc_cut_off
+    %tr
+      %td
+        = f.text_field :shipping_company
+      %td
+        = f.text_field :voyage
+      %td
+        = f.text_field :port_of_discharge
+      %td
+        = f.text_field :vessel
+    %tr
+      %td
+        = f.text_field :ship_in_name_of
+      %td
+        = f.text_field :booking_number
+      %td
+        = f.text_field :commodity
+      %td
+        = f.date_field :estimated_arrival_date
+    %tr
+      %td
+        = f.text_field :shipping_company_reference_number
+      %td
+        = f.text_field :automated_export_number
+
+        
+

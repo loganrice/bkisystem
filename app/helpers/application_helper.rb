@@ -32,7 +32,7 @@ module ApplicationHelper
   end
 
   def to_dollars(cents)
-    cents / 100
+    number_to_currency (cents / 100)
   end
   
 end

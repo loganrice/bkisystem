@@ -22,7 +22,7 @@ class Order < ActiveRecord::Base
   def total_pounds
     pounds = BigDecimal("0")
     self.order_line_items.each do |line_item|
-      pounds += line_item.pack_weight_pounds
+      pounds += line_item.weight_total
     end
     pounds
   end
@@ -30,9 +30,9 @@ class Order < ActiveRecord::Base
   def total_price
     cents = 0
     self.order_line_items.each do |line_item|
-      cents += line_item.price_cents
+      cents += line_item.invoice_total
     end
-    price_dollars(cents)
+    cents
   end
 
   def price_dollars(cents)
