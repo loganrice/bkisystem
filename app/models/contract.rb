@@ -7,7 +7,7 @@ class Contract < ActiveRecord::Base
   accepts_nested_attributes_for :orders, allow_destroy: true
   accepts_nested_attributes_for :quote, allow_destroy: true
   before_create :create_quote
-
+  validates_presence_of :buyer, :seller
   private 
 
   def create_quote

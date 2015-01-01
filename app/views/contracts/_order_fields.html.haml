@@ -13,11 +13,12 @@
             %th.col-md-2
               Total Sale
             %th.col-md-2
-            
+
         %tbody
           %tr
             %td
-              = link_to f.object.id, "/orders/#{f.object.id}/edit", remote: true
+              - unless @contract.new_record?
+                = link_to f.object.id, "/orders/#{f.object.id}/edit", remote: true
             %td
               = f.date_field :ship_date, hide_label: :true
             %td

@@ -111,6 +111,8 @@ class OrderLineItem < ActiveRecord::Base
 
   def default_values
     self.price_cents ||= 0
+    self.pack_count ||= 0
+    self.pack_weight_pounds ||= 0
   end
 
 end

@@ -222,5 +222,11 @@ describe OrderLineItem do
       item = OrderLineItem.create(order_id: order.id, price_cents: 452, pack_weight_pounds: 50, pack_count: 447)
       expect(item.weight_total).to eq(BigDecimal.new("22350")) 
     end
+
+    it "equals zero if pack_count or pack_weight_pounds is nil" do 
+      order = Fabricate(:order)
+      item = OrderLineItem.create(order_id: order.id, price_cents: 452, pack_count: 447)
+      expect(item.weight_total).to eq(BigDecimal.new("0")) 
+    end
   end
 end

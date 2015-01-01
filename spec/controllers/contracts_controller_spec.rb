@@ -138,17 +138,35 @@ describe ContractsController do
 
       context "with valid input" do 
         it "creates a contract" do 
-          xhr :post, :create, contract: { buyer_contract: '1234', buyer_po: '23432', seller_contract: 'aa1345', date: Time.new.to_date }
+          xhr :post, :create, contract: { buyer_id: Fabricate(:account).id, seller_id: Fabricate(:account) }
           expect(Contract.count).to eq(1)
         end
-        it "sets the flash success message" do 
-          xhr :post, :create, contract: { buyer_contract: '1234', buyer_po: '23432', seller_contract: 'aa1345', date: Time.new.to_date }
+        it "sets the flash success message" do
+          xhr :post, :create, contract: { buyer_id: Fabricate(:account).id, seller_id: Fabricate(:account) }
           expect(flash[:success]).to be_present
         end
-        it "redirects to the contracts path" do 
-          xhr :post, :create, contract: { buyer_contract: '1234', buyer_po: '23432', seller_contract: 'aa1345', date: Time.new.to_date }
+        it "redirects to the contracts path" do
+          xhr :post, :create, contract: { buyer_id: Fabricate(:account).id, seller_id: Fabricate(:account) }          
           expect(response).to redirect_to contracts_path
         end
+      end
+
+      context "with invalid input" do
+        it "renders the new view" do 
+          xhr :post, :create, contract: { buyer_contract: '1234', buyer_po: '23432', seller_contract: 'aa1345', date: Time.new.to_date }
+          expect(response).to render_template :new       
+        end
+
+        it "does not create a contract" do 
+          xhr :post, :create, contract: { buyer_contract: '1234', buyer_po: '23432', seller_contract: 'aa1345', date: Time.new.to_date }
+          expect(Contract.count).to eq(0)
+        end
+
+        it "sets the flash error message" do 
+          xhr :post, :create, contract: { buyer_contract: '1234', buyer_po: '23432', seller_contract: 'aa1345', date: Time.new.to_date }
+          expect(flash[:error]).to be_present
+        end
+
       end
     end
   end

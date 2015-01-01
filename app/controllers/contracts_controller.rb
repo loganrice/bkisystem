@@ -8,8 +8,6 @@ class ContractsController < ApplicationController
 
   def new
     @contract = Contract.new
-    @contract.orders.build
-    @contract.quote = Quote.new
   end
 
   def edit
@@ -29,10 +27,15 @@ class ContractsController < ApplicationController
   end
 
   def create
+    binding.pry
     @contract = Contract.new(contract_params)
-    @contract.save
-    flash[:success] = "Updated"
-    redirect_to contracts_path
+    if @contract.save
+      flash[:success] = "Updated"
+      redirect_to contracts_path
+    else
+      flash[:error] = @contract.errors.full_messages.to_sentence
+      render :new
+    end
   end
 
   private

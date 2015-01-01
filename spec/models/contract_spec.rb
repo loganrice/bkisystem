@@ -7,9 +7,11 @@ describe Contract do
   it { should have_many(:quote_line_items).through(:quote)}
   it { should have_many(:orders) }
   it { should accept_nested_attributes_for(:orders) }
+  it { should validate_presence_of(:buyer)}
+  it { should validate_presence_of(:seller)}
 
   it "creates a quote before savinging if one has not already been created" do 
-    contract = Contract.create()
+    contract = Fabricate(:contract)
     expect(contract.quote).to be_instance_of(Quote)
   end
 

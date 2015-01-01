@@ -1,16 +1,21 @@
 %tr
-  %td.text-center
-    = line_item.pack_count
-  %td.text-center
-    - if Weight.find_by(id: line_item.weight_id).weight_unit_of_measure == "pounds"
-      = "#{line_item.pack_weight_pounds} lbs"
-    - elsif Weight.find_by(id: line_item.weight_id).weight_unit_of_measure == "kilograms"
-      = "#{line_item.pack_weight_kilograms} kgs"
-  %td
-    %strong= line_item.item.name
-  %td
-    = number_to_currency line_item.price_dollars
-  %td
-    = to_dollars(line_item.commission_total)
-  %td
-    %strong= to_dollars(line_item.invoice_total)
+  -if line_item
+    binding.pry
+    %td.text-center
+      = line_item.pack_count
+    %td.text-center
+      - if line_item.weight_id
+        - if Weight.find_by(id: line_item.weight_id).weight_unit_of_measure == "pounds"
+          = "#{line_item.pack_weight_pounds} lbs"
+        - elsif Weight.find_by(id: line_item.weight_id).weight_unit_of_measure == "kilograms"
+          = "#{line_item.pack_weight_kilograms} kgs"
+
+    %td
+      - if line_item.item
+        %strong= line_item.item.name
+    %td
+      = number_to_currency line_item.price_dollars
+    %td
+      = to_dollars(line_item.commission_total)
+    %td
+      %strong= to_dollars(line_item.invoice_total)
