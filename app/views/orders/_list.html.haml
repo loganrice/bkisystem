@@ -61,4 +61,4 @@
                       %td
                         = number_with_precision(order.total_pounds, precision: 2)
                       %td
-                        = number_to_currency(order.total_price)
+                        = to_dollars(order.total_price) 
