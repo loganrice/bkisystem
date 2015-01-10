@@ -27,7 +27,6 @@ class ContractsController < ApplicationController
   end
 
   def create
-    binding.pry
     @contract = Contract.new(contract_params)
     if @contract.save
       flash[:success] = "Updated"
