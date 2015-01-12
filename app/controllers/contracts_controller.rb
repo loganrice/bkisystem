@@ -19,7 +19,7 @@ class ContractsController < ApplicationController
     @contract = Contract.find(params[:id])
     if @contract.update(contract_params)
       flash[:success] = "Updated"
-      redirect_to contracts_path
+      redirect_to edit_contract_path(@contract)
     else
       flash[:error] = "Something went wrong"
       render :edit
@@ -30,7 +30,7 @@ class ContractsController < ApplicationController
     @contract = Contract.new(contract_params)
     if @contract.save
       flash[:success] = "Updated"
-      redirect_to contracts_path
+      redirect_to edit_contract_path(@contract)
     else
       flash[:error] = @contract.errors.full_messages.to_sentence
       render :new

@@ -94,8 +94,9 @@ describe ContractsController do
 
         it "redirects to the contacts path" do
           xhr :put, :update, id: contract.id, contract: { buyer_po: "5555" }
-          expect(response).to redirect_to contracts_path
+          expect(response).to redirect_to edit_contract_path(contract.id)
         end
+
         it "sets the flash success message" do 
           xhr :put, :update, id: contract.id, contract: { buyer_po: "5555" }
           expect(flash[:success]).to_not be_nil
@@ -147,7 +148,8 @@ describe ContractsController do
         end
         it "redirects to the contracts path" do
           xhr :post, :create, contract: { buyer_id: Fabricate(:account).id, seller_id: Fabricate(:account) }          
-          expect(response).to redirect_to contracts_path
+          contract = Contract.last
+          expect(response).to redirect_to edit_contract_path(contract)
         end
       end
 

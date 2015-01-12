@@ -48,8 +48,8 @@
                       %td= item.id
                       %td
                         = link_to item.name, edit_item_path(item), remote: true
-                      %td= item.commodity.name
-                      %td= item.variety.name
-                      %td= item.size.name
+                      %td= item.commodity.name if item.commodity
+                      %td= item.variety.name if item.variety
+                      %td= item.size.name if item.size
 
 
