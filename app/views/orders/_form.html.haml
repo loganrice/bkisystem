@@ -43,6 +43,7 @@
             -#- end widget edit box -->
             -#- widget content -->
             %div.widget-body
+              = link_to "Edit Contract #{@order.contract.id}", edit_contract_path(@order.contract), remote: true
               = bootstrap_form_for(@order, label_errors: true, remote: true) do |f|
 
                 %div#orderTab.tab-content
