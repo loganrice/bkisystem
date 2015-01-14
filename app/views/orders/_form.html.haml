@@ -24,8 +24,8 @@
             %h2= "Contract: #{@order.contract.id} - Seller: #{@order.contract.seller.name} - Buyer: #{@order.contract.buyer.name}"
             %ul.nav.nav-tabs.pull-right.in#order-tab-content
               %li.active{ "role" => "presentation" }
-                %a{ "href" => "#home", "role" => "tab", "data-toggle" => "tab" }
-                  Home
+                %a{ "href" => "#items", "role" => "tab", "data-toggle" => "tab" }
+                  Items
               %li{ "role" => "presentation" }
                 %a{ "href" => "#commission", "role" => "tab", "data-toggle" => "tab" }
                   Commission
@@ -33,8 +33,8 @@
                 %a{ "href" => "#invoice", "role" => "tab", "data-toggle" => "tab" }
                   Invoice
               %li{ "role" => "presentation" }
-                %a{ "href" => "#terms", "role" => "tab", "data-toggle" => "tab" }
-                  Terms
+                %a{ "href" => "#shipping-info", "role" => "tab", "data-toggle" => "tab" }
+                  Shipping Info
           -#- widget div-->
           %div.no-padding
             -# widget edit box -->
@@ -47,10 +47,8 @@
               = bootstrap_form_for(@order, label_errors: true, remote: true) do |f|
 
                 %div#orderTab.tab-content
-                  %div#home.tab-pane.active.in{ "role" => "tabpanel" }
+                  %div#items.tab-pane.active.in{ "role" => "tabpanel" }
                     %div.widget-body-toolbar.bg-color-white
-                      = render 'order_fields', f: f
-
                       %div.panel.panel-primary
                         %div.panel-heading 
                           Order Details
@@ -59,7 +57,7 @@
                         = f.fields_for :order_line_items do |builder|
                           = render 'order_line_item_fields', f: builder
                         = link_to_add_fields "Add Item", f, :order_line_items
-                        
+                                              
                       = button_tag(type: 'submit', class: "btn btn-primary btn-lg btn-block") do
                         %i.fa.fa-lg.fa-fw.fa-save
                         %span Save
@@ -72,11 +70,13 @@
                       
                   %div#invoice.tab-pane.fade{ "role" => "tabpanel" }
                     = render 'invoice'
-                  %div#terms.tab-pane{ "role" => "tabpanel" }
+                  %div#shipping-info.tab-pane{ "role" => "tabpanel" }
                     %div.widget-body-toolbar.bg-color-white
                       %div.panel.panel-primary
                         %div.panel-heading 
                           Order Details
+                        = render 'order_fields', f: f
+
                         %table.table
                           %tbody
                             %tr
