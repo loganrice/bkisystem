@@ -5,4 +5,8 @@ Fabricator(:contract) do
   buyer_po { Faker::Number.number(10) }
   seller_contract { Faker::Number.number(10) }
   date { Faker::Date.between(30.days.ago, Date.today) }
+  payment_terms { Faker::Lorem.word }
+  remarks { Faker::Lorem.word }
+  ship_pick_up { Faker::Lorem.word }
+  ship_delivery { Faker::Lorem.word }
 end
