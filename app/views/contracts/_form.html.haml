@@ -16,11 +16,8 @@
               %li.active{ "role" => "presentation"}
                 %a{ "href" => "#contract-profile", "aria-controls" => "contract-profile", "role" => "tab", "data-toggle" => "tab" } Contract Profile
               %li{ "role" => "presentation" }
-                %a{ "href" => "#shipment", "aria-controls" => "shipment", "role" => "tab", "data-toggle" => "tab" }
-                  %span Orders
-                  %span.badge.bg-color-greenLight.pull-right
-                    = @contract.orders.count
-
+                %a{ "href" => "#terms", "aria-controls" => "terms", "role" => "tab", "data-toggle" => "tab" }
+                  %span Terms
           -#- widget div-->
           %div
             -# widget edit box -->
@@ -55,9 +52,9 @@
                           = render 'order_fields', f: builder                          
                         = link_to_add_fields "Add Load", f, :orders
                         
-                    %div.tab-pane.fade#shipment
+                    %div.tab-pane.fade#terms
                       %div.panel-group#accordion{ "role" => "tablist", "aria-multiselectable" => "true" }
-
+                        = render 'terms', f: f
                     = button_tag(type: 'submit', class: "btn btn-primary btn-lg btn-block") do
                       %i.fa.fa-lg.fa-fw.fa-save
                       %span Save

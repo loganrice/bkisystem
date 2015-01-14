@@ -7,8 +7,6 @@
             %th.col-md-2
               Load
             %th.col-md-2
-              Ship Date
-            %th.col-md-2
               Pounds
             %th.col-md-2
               Total Sale
@@ -19,8 +17,6 @@
             %td
               - unless @contract.new_record?
                 = link_to f.object.id, "/orders/#{f.object.id}/edit", remote: true
-            %td
-              = f.date_field :ship_date, hide_label: :true
             %td
               = f.object.total_pounds
             %td
