@@ -37,6 +37,10 @@ class ContractsController < ApplicationController
     end
   end
 
+  def add_order
+
+  end
+  
   private
 
   def contract_params

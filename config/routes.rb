@@ -17,6 +17,10 @@ Rails.application.routes.draw do
   get 'sign_in' => 'sessions#new'
   get 'sign_out' => 'sessions#destroy'
   get 'ui(/:action)', controller: 'ui'
+  patch 'contract/:id/add_order' => 'contracts#add_order'
+  resources :contracts do
+    resource :orders
+  end
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 

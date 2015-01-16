@@ -25,6 +25,30 @@ describe OrdersController do
       end
     end
   end
+ 
+  describe "GET new" do 
+    context "with unauthenticated user" do 
+      it_behaves_like "require_sign_in" do
+        let(:action) { xhr :get, :new, id: Fabricate(:contract).id }
+      end
+    end
+
+    context "with authenticated user" do
+      context "witn valid input" do 
+        before { set_current_user }  
+        let(:contract) { Fabricate(:contract) }
+        it "redirects to the contract edit path" do 
+          xhr :get, :new, contract_id: contract.id
+          expect(response).to redirect_to edit_order_path(contract.orders.last)
+        end
+
+        it "creates an order accociated with a contract" do 
+          xhr :get, :new, contract_id: contract.id
+          expect(contract.orders.count).to eq(1) 
+        end
+      end
+    end
+  end
 
   describe "GET edit" do
     context "with unauthenticated user" do 

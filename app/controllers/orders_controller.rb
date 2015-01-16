@@ -6,6 +6,16 @@ class OrdersController < ApplicationController
     @orders = Order.all
   end
 
+  def new
+    contract = Contract.find(params[:contract_id])
+    if contract
+      @order = contract.orders.create()
+      redirect_to edit_order_path(@order)
+    else
+      redirect_to root_path
+    end 
+  end
+
   def edit
     @order = Order.find(params[:id])
     if @order.commissions.count == 0
