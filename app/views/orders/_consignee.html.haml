@@ -1,0 +1,28 @@
+%table.table.table-hover
+  %thead
+
+  %tbody
+    %tr
+      %td
+        = f.text_field :consignee, icon: "user"
+      %td
+        = f.text_area :shipping_instructions
+    %tr
+      %td
+        = f.text_field :line1
+      %td
+        = f.text_field :line2
+    %tr
+      %td
+        = f.text_field :line3
+    %tr
+      %td
+        = f.text_field :city
+      %td
+        = f.text_field :state
+    %tr
+      %td
+        = f.text_field :zip
+      %td
+        %label Country
+        = f.country_select :country, ["US"], {include_blank: true, selected: f.object.country }, { class: "form-control", id: "country-select" }
