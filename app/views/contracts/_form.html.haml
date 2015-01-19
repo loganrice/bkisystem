@@ -11,7 +11,7 @@
           %header
             %span.widget-icon
               %i.fa.fa-table
-            %h2= @contract.id
+            %h2= @contract.id if @contract.id
             %ul.nav.nav-tabs.pull-right{ "role" => "tablist" }
               %li.active{ "role" => "presentation"}
                 %a{ "href" => "#contract-profile", "aria-controls" => "contract-profile", "role" => "tab", "data-toggle" => "tab" } Contract Profile
@@ -44,13 +44,25 @@
                         %section.col-sm-4
                           = f.text_field :seller_contract
                       %div.panel.panel-default
-                        %div.panel-heading 
-                          Loads
-                        %table.table
-                          %tbody
-                        = f.fields_for :orders do |builder|
-                          = render 'order_fields', f: builder                          
-                        = link_to "Add Load", new_contract_orders_path(@contract), class: 'btn btn-primary', remote: true
+                        %div.panel-heading
+                          - if !@contract.new_record?
+                            = link_to new_contract_orders_path(@contract), class: 'btn btn-primary', remote: true do
+                              %i.fa.fa-plus
+                              %span LOAD
+                          - else
+                            
+                      %fieldset
+                        %div.panel.panel-primary
+                          %table.table.table-hover
+                            %thead
+                              %tr
+                                %th LOAD
+                                %th WEIGHT
+                                %th TOTAL SALE
+                                %th 
+                            %tbody
+                              = f.fields_for :orders do |builder|
+                                = render 'order_fields', f: builder                          
                         
                     %div.tab-pane.fade#terms
                       %div.panel-group#accordion{ "role" => "tablist", "aria-multiselectable" => "true" }

@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   root 'sessions#new'
   get 'home', to: 'contracts#home'
   
-  resources :contracts
   resources :items
   resources :commodities
   resources :sizes
@@ -17,7 +16,6 @@ Rails.application.routes.draw do
   get 'sign_in' => 'sessions#new'
   get 'sign_out' => 'sessions#destroy'
   get 'ui(/:action)', controller: 'ui'
-  patch 'contract/:id/add_order' => 'contracts#add_order'
   resources :contracts do
     resource :orders
   end

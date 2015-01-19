@@ -57,4 +57,44 @@ describe Order do
       expect(order.total_price).to eq(10102200)     
     end
   end
+  describe "#copy_first_order_line_items" do 
+    it "copies the fields from the first order on the contract" do
+      order = Fabricate(:order)
+      item = Fabricate(:item)
+      lb = Weight.create(weight_unit_of_measure: "lbs")
+      order.order_line_items << OrderLineItem.create(item_id: item.id, price_cents: 100,
+                                                      order_id: order.id, weight_id: lb.id,
+                                                      pack_weight_pounds: 50, pack_count: 10 ) 
+      contract = Fabricate(:contract)
+      contract.orders << order
+      new_order = contract.orders.create()
+      # all attributes except for id and created dates should copy
+      # only testing the item item_id for brevity
+      old_order_last_item = order.order_line_items.last.attributes
+      new_order_last_item = new_order.order_line_items.last.attributes
+   
+      expect(new_order_last_item["item_id"]).to eq(old_order_last_item["item_id"])
+    end
+  end
+
+  describe "#copy_first_order_commissions" do 
+    it "copies the commissions from the first order on the contract" do
+      contract = Fabricate(:contract)
+      order = Fabricate(:order, contract_id: contract.id)
+      item = Fabricate(:item)
+      lb = Weight.create(weight_unit_of_measure: "lbs")
+      order.order_line_items << OrderLineItem.create(item_id: item.id, price_cents: 100,
+                                                      order_id: order.id, weight_id: lb.id,
+                                                      pack_weight_pounds: 50, pack_count: 10 ) 
+      commission = Fabricate(:commission, order_id: order.id)
+      new_order = contract.orders.create()
+
+      first_order_last_commission = order.commissions.last.attributes
+      new_order_last_commission = new_order.commissions.last.attributes
+      # all attributes except for id and created dates should copy
+      # only testing the cents_per_pound for brevity
+      expect(new_order_last_commission["cents_per_pound"]).to eq(first_order_last_commission["cents_per_pound"])
+    end
+  end
+
 end

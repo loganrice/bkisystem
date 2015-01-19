@@ -1,28 +1,14 @@
-%div.well.bg-info
-  %fieldset
-    %div.panel.panel-primary
-      %table.table
-        %thead
-          %tr
-            %th.col-md-2
-              Load
-            %th.col-md-2
-              Pounds
-            %th.col-md-2
-              Total Sale
-            %th.col-md-2
+%tr
+  %td
+    - unless @contract.new_record?
+      = link_to f.object.id, "/orders/#{f.object.id}/edit", remote: true
+  %td
+    = f.object.total_pounds
+  %td
+    %strong= to_dollars( f.object.total_price )
+  %td.col-md-2
+    = f.hidden_field :_destroy
+    %a.btn.btn-danger.pull-right.remove_fields{"href" => "#"}
+      %i.fa.fa-remove
+        Delete    
 
-        %tbody
-          %tr
-            %td
-              - unless @contract.new_record?
-                = link_to f.object.id, "/orders/#{f.object.id}/edit", remote: true
-            %td
-              = f.object.total_pounds
-            %td
-              %strong= to_dollars( f.object.total_price )
-            %td.col-md-2
-              = f.hidden_field :_destroy
-              %a.btn.btn-danger.pull-right.remove_fields{"href" => "#"}
-                %i.fa.fa-remove
-                  Delete     

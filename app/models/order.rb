@@ -6,6 +6,7 @@ class Order < ActiveRecord::Base
   accepts_nested_attributes_for :order_line_items, allow_destroy: true
   accepts_nested_attributes_for :commissions, allow_destroy: true
   before_save :default_values
+  after_create :copy_first_order_line_items_on_contract, :copy_first_order_commissions
 
   def default_values
 
@@ -37,5 +38,37 @@ class Order < ActiveRecord::Base
 
   def price_dollars(cents)
     cents.to_f / 100
+  end
+
+  def copy_first_order_line_items_on_contract
+    if contract_has_at_least_1_order?
+      self.copy_line_items(first_order_on_contract)
+    end
+  end
+
+  def copy_first_order_commissions
+    if contract_has_at_least_1_order?
+      self.copy_commissions(first_order_on_contract)
+    end
+  end
+
+  def copy_commissions(order)
+    order.commissions.each do |commission|
+      self.commissions << commission.dup
+    end
+  end
+
+  def copy_line_items(order)
+    order.order_line_items.each do |line_item|
+      self.order_line_items << line_item.dup
+    end
+  end
+
+  def contract_has_at_least_1_order?
+    self.contract.orders.count > 0
+  end
+
+  def first_order_on_contract
+    self.contract.orders.first
   end
 end
