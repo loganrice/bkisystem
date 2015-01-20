@@ -1,7 +1,7 @@
 %tr
   %td
     - unless @contract.new_record?
-      = link_to f.object.id, "/orders/#{f.object.id}/edit", remote: true
+      = link_to f.object.row_on_contract, "/orders/#{f.object.id}/edit", remote: true
   %td
     = f.object.total_pounds
   %td
