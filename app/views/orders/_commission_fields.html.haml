@@ -5,7 +5,7 @@
       %tbody
         %tr
           %td.col-xs-5
-            = f.collection_select(:broker_id, Account.all, :id, :name)
+            = f.collection_select(:broker_id, Account.all.order("name ASC"), :id, :name)
           %td.col-xs-2
             = f.text_field :dollars_per_pound, prepend: "$", label: "$ per Lb"
           %td.col-md-2

@@ -1,11 +1,11 @@
-%div.well.bg-info
-  %fieldset
+%fieldset
+  %div.well.bg-info
     %table.table.order_detail_table
       %thead
       %tbody
         %tr
           %td.col-xs-5
-            = f.select :item_id, options_for_select(Item.all.map { |item| [item.name, item.id]}, selected: f.object.item_id), hide_label: true
+            = f.select :item_id, options_for_select(Item.all.order("name ASC").map { |item| [item.name, item.id]}, selected: f.object.item_id), hide_label: true
           %td.col-xs-2
             = f.collection_select :item_size_indicator_id, ItemSizeIndicator.all, :id, :name, hide_label: true
           %td.col-xs-2
