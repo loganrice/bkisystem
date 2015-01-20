@@ -3,6 +3,8 @@ class Order < ActiveRecord::Base
   validates_presence_of :contract
   has_many :order_line_items, -> { order("created_at DESC")}
   has_many :commissions
+  has_many :document_orders 
+  has_many :documents, :through => :document_orders
   accepts_nested_attributes_for :order_line_items, allow_destroy: true
   accepts_nested_attributes_for :commissions, allow_destroy: true
   before_save :default_values

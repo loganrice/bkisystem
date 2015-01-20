@@ -68,7 +68,11 @@
         = link_to users_path, remote: true do
           %i.fa.fa-lg.fa-fw.fa-user
           %span.menu-item-parent User
-
+      %li.nav-item
+        = link_to documents_path, remote: true do
+          %i.fa.fa-lg.fa-fw.fa-user
+          %span.menu-item-parent Documents
+          
   %span.minifyme{ "data-action" => "minifyMenu" }
     = link_to sign_in_path, remote: true do 
       %i.fa.fa-arrow-circle-left.hit
