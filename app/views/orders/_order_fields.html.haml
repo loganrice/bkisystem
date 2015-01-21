@@ -37,6 +37,38 @@
         = f.text_field :shipping_company_reference_number
       %td
         = f.text_field :automated_export_number
+%div.well
+  = f.collection_check_boxes(:document_ids, Document.all, :id, :name)
 
-        
+%table.table.table-hover
+  %thead
+
+  %tbody
+    %tr
+      %td
+        = f.text_field :container_number
+      %td 
+        = f.text_field :seal_number
+      %td
+        = f.text_field :gross_weight
+      %td
+        = f.text_field :container_number
+    %tr
+      %td
+        = f.date_field :container_out
+      %td
+        = f.date_field :docs_in
+      %td
+        = f.date_field :docs_out
+      %td
+        = f.text_field :invoice_number
+    %tr
+      %td
+        = f.date_field :expected_pay
+      %td
+        = f.date_field :received_pay
+      %td
+        = f.text_field :amount_received
+
+
 

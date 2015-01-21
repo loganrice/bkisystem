@@ -26,6 +26,7 @@ Weight.delete_all
 User.delete_all
 ItemSizeIndicator.delete_all
 PackType.delete_all
+Document.delete_all
 
 almonds = Commodity.create(name: "Almonds")
 walnuts = Commodity.create(name: "Walnuts")
@@ -325,3 +326,52 @@ a14_193_load_1_line_1 = OrderLineItem.create(
   pack_weight_pounds: 50,
   pack_count: 900,
   price_cents: 316)
+
+
+Document.create(name: "Fumigation Certificate")
+Document.create(name: "Aflaxtoxin Certificate")
+Document.create(name: "Certificate of Origin")
+Document.create(name: "USDA / DFA")
+Document.create(name: "Weight Certificate")
+Document.create(name: "QC Certification")
+Document.create(name: "Phytosanitary Certificate")
+Document.create(name: "No Wood Certificate")
+Document.create(name: "Salmonella")
+Document.create(name: "Production and Expiration")
+Document.create(name: "Clean Container Certificate")
+Document.create(name: "GMO Statement")
+Document.create(name: "Health Certificate")
+Document.create(name: "VASP")
+Document.create(name: "Certificate of Analysis")
+Document.create(name: "Wooden Pallet Certificate")
+Document.create(name: "Chamber Certificate of Origin")
+Document.create(name: "Truck Bill of Lading")
+Document.create(name: "Pesticide Cert")
+Document.create(name: "Ocean Bill of Lading")
+Document.create(name: "Canadian Invoice")
+Document.create(name: "Canadian Load Lock Form")
+Document.create(name: "Price List")
+Document.create(name: "EU Pallet Cert")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

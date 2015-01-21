@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150120223835) do
+ActiveRecord::Schema.define(version: 20150121164753) do
 
   create_table "accounts", force: true do |t|
     t.string "name"
@@ -170,6 +170,16 @@ ActiveRecord::Schema.define(version: 20150120223835) do
     t.string   "state"
     t.string   "zip"
     t.string   "country"
+    t.string   "container_number"
+    t.string   "seal_number"
+    t.string   "gross_weight"
+    t.date     "container_out"
+    t.date     "docs_in"
+    t.date     "docs_out"
+    t.string   "invoice_number"
+    t.date     "expected_pay"
+    t.date     "received_pay"
+    t.string   "amount_received"
   end
 
   create_table "pack_types", force: true do |t|

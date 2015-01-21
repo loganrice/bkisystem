@@ -30,14 +30,14 @@
                 %a{ "href" => "#commission", "role" => "tab", "data-toggle" => "tab" }
                   Commission
               %li{ "role" => "presentation" }
-                %a{ "href" => "#invoice", "role" => "tab", "data-toggle" => "tab" }
-                  Invoice
-              %li{ "role" => "presentation" }
                 %a{ "href" => "#shipping-info", "role" => "tab", "data-toggle" => "tab" }
                   Shipping Info
               %li{ "role" => "presentation" }
                 %a{ "href" => "#consignee", "role" => "tab", "data-toggle" => "tab" }
                   Consignee
+              %li{ "role" => "presentation" }
+                %a{ "href" => "#invoice", "role" => "tab", "data-toggle" => "tab" }
+                  Invoice
           -#- widget div-->
           %div.no-padding
             -# widget edit box -->
@@ -53,8 +53,6 @@
                     %i.fa.fa-lg.fa-fw.fa-pencil-square-o
                     %span.menu-item-parent 
                       = "Contract - #{@order.contract.id}"
-                  - Document.all.each do |document|
-                    %p= Test
 
                   = button_tag(type: 'submit', class: "btn btn-primary") do
                     %i.fa.fa-lg.fa-fw.fa-save
