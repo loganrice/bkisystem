@@ -35,12 +35,11 @@ class OrdersController < ApplicationController
   end
 
   def invoice
-    @order = Order.find(params[:id])
+    order = Order.find(params[:id])
     respond_to do |format|
       format.pdf do 
-        pdf = OrderPdf.new(@order)
-        pdf.text "HEllo World"
-        send_data pdf.render, filename: "order_#{@order.id}.pdf",
+        pdf = OrderPdf.new(order, view_context)
+        send_data pdf.render, filename: "order_#{order.id}.pdf",
                               type: "application/pdf",
                               disposition: "inline"
       end

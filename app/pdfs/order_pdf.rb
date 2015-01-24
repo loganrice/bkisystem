@@ -1,20 +1,31 @@
+
 class OrderPdf
   include Prawn::View
 
-  def initialize(order)
+  def initialize(order, view)
+    @view = view
     @order = order
-    order_number
+    header
     line_items
   end
 
-  def order_number
-    text "Order #{@order.id}", size: 30, style: :bold
+  def header
+    bounding_box([0, 700], :width => 500, :height => 220) do
+      text "Sales Contract", size: 30, style: :bold, align: :center
+      # text "Order #{@order.id}", size: 30, style: :bold
+    end
+    bounding_box([0, 700], :width => 250, :height => 220) do
+      image "#{Rails.root}/app/assets/images/bki_logo.png", :valign => :center
+    end
+    line [0, 650], [600, 650]
+    stroke
     stroke_axis
   end
 
   def line_items
-    move_down 20
-    text "WTF"
+    text "Date: #{@order.contract.date}"
+    text "Contract No:"
+    text "Customer Contract No:"
   end
 
   def line_item_rows
