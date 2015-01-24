@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions
   resources :orders
+  get 'orders/:id/invoice' => 'orders#invoice', as: :invoice
   resources :documents
   get 'sign_in' => 'sessions#new'
   get 'sign_out' => 'sessions#destroy'

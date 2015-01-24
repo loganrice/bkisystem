@@ -46,7 +46,8 @@
             -#- end widget edit box -->
             -#- widget content -->
             %div.widget-body
-              
+              = link_to "Invoice", invoice_path(@order, format: "pdf"), target: "_blank"
+
               = bootstrap_form_for(@order, label_errors: true, remote: true) do |f|
                 %div.well.well-sm.bg-color-darken.txt-color-white.no-border
                   = link_to edit_contract_path(@order.contract), remote: true, class: "btn btn-info" do 

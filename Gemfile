@@ -20,6 +20,8 @@ gem 'autoprefixer-rails'
 gem 'bootstrap_form'
 gem 'country_select'
 gem 'faker'
+gem 'prawn'
+gem 'prawn-table'
 
 group :development do
   gem 'sqlite3'
