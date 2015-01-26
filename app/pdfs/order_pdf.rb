@@ -5,27 +5,52 @@ class OrderPdf
   def initialize(order, view)
     @view = view
     @order = order
+    create_contract_report
+  end
+
+  def create_contract_report
+    define_grid(columns: 5, rows: 12, gutter: 10)
     header
-    line_items
+    move_down 20
+    contract_number
+    # seller_buyer_name_address
+
+    grid.show_all
+
   end
 
   def header
-    bounding_box([0, 700], :width => 500, :height => 220) do
-      text "Sales Contract", size: 30, style: :bold, align: :center
-      # text "Order #{@order.id}", size: 30, style: :bold
-    end
-    bounding_box([0, 700], :width => 250, :height => 220) do
-      image "#{Rails.root}/app/assets/images/bki_logo.png", :valign => :center
-    end
-    line [0, 650], [600, 650]
+    line [0, 650], [650, 650]
     stroke
     stroke_axis
+    bounding_box([cursor, cursor], width: 200) do 
+      text "alskdfjasdf adslfjasdfkjasfd asldfijasdflkjasdf asldfjasldkfj asdflkj"
+    end
+    grid([0,0],[0,4]).bounding_box do
+      text "Sales Contract", size: 30, style: :bold, align: :center, valign: :bottom
+    end
+
+    grid(0,0).bounding_box do 
+      image "#{Rails.root}/app/assets/images/bki_logo.png", :valign => :bottom
+    end
+
   end
 
-  def line_items
-    text "Date: #{@order.contract.date}"
-    text "Contract No:"
-    text "Customer Contract No:"
+  def contract_number
+    text "<b>Date:</b> #{@order.contract.date}", inline_format: true
+    text "<b>Contract No:</b> #{@order.contract.id}", inline_format: true
+    text "<b>Customer Contract No:</b> #{@order.contract.buyer_contract}", inline_format: true
+  end
+
+  def seller_buyer_name_address
+    text "SELLER"
+    grid(1,3).bounding_box do
+      text "BUYER"
+    end
+    grid(6,3).bounding_box do
+      text "SOMETHING"
+    end
+    grid.show_all
   end
 
   def line_item_rows
