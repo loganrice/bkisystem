@@ -26,6 +26,9 @@
             -#- end widget edit box -->
             -#- widget content -->
             %div.widget-body
+              - unless @contract.new_record?
+                = link_to "Invoice", invoice_path(@contract, format: "pdf"), target: "_blank"
+
               = bootstrap_form_for(@contract, layout: :default, control_col: "col-sm-4", label_errors: true, remote: true) do |f|
                 %div.well{ "role" => "tabpanel" }
                   %div.tab-content

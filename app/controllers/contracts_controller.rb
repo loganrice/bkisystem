@@ -37,8 +37,17 @@ class ContractsController < ApplicationController
     end
   end
 
-  def add_order
+  def invoice
+    contract = Contract.find(params[:id])
+    respond_to do |format|
+      format.pdf do
+        pdf = OrderPdf.new(contract, view_context)
+        send_data pdf.render, filename: "order_#{contract.id}.pdf",
+                              type: "application/pdf",
+                              disposition: "inline"
+      end
 
+    end
   end
   
   private

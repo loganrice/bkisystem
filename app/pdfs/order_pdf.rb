@@ -2,22 +2,30 @@
 class OrderPdf
   include Prawn::View
 
-  def initialize(order, view)
+  def initialize(contract, view)
     @view = view
-    @order = order
+    @contract = contract
+    @contract_report = ContractReport.new(@contract)
+
     create_contract_report
   end
 
   def create_contract_report
-    stroke_axis
+    # stroke_axis
 
     header
     move_down 20
     contract_number
     move_down 20
-    seller_address
-    # buyer_address
-    # grid.show_all
+    # address
+    text_box "<b><u>SELLER</u></b>", inline_format: true, at: [0, cursor]
+    text_box "<b><u>BUYER</u></b>", inline_format: true, at: [300, cursor]
+    move_down 15
+
+    address(@contract.seller.addresses.first, 0, cursor) unless @contract.seller.addresses.blank?
+    address(@contract.buyer.addresses.first, 300, cursor) unless @contract.buyer.addresses.blank?
+    move_cursor_to 500
+    line_item_rows
 
   end
 
@@ -28,94 +36,54 @@ class OrderPdf
   end
 
   def contract_number
-    text "<b>Date:</b> #{@order.contract.date}", inline_format: true
-    text "<b>Contract No:</b> #{@order.contract.id}", inline_format: true
-    text "<b>Customer Contract No:</b> #{@order.contract.buyer_contract}", inline_format: true
+    text "<b>Date:</b> #{@contract.date}", inline_format: true
+    text "<b>Contract No:</b> #{@contract.id}", inline_format: true
+    text "<b>Customer Contract No:</b> #{@contract.buyer_contract}", inline_format: true
   end
 
-  def seller_address
-    text_box "<b><u>SELLER</u></b>", inline_format: true, at: [0, 600]
-    text_box "<b><u>BUYER</u></b>", inline_format: true, at: [300, 600]
-
-    move_down 15
-    buyer_y_base = cursor 
-    seller_y_base = cursor
-
-    text_box @order.contract.seller.name, inline_format: true, at: [0, cursor]
-    text_box @order.contract.buyer.name, inline_format: true, at: [300, buyer_y_base]
-
-    buyer_y_base -= 15
-    seller_y_base -= 15
-
-    unless @order.contract.seller.addresses.first.line1.blank?
-      text_box @order.contract.seller.addresses.first.line1, inline_format: true, at: [0, seller_y_base]
-      seller_y_base -= 15
+  def address(address, x_position, y_position)
+    unless address.line1.blank?
+      text_box address.line1, inline_format: true, at: [x_position, y_position]
+      y_position -= 15
     end
 
-    unless @order.contract.buyer.addresses.first.line1.blank?
-      text_box @order.contract.buyer.addresses.first.line1, inline_format: true, at: [300, buyer_y_base]
-      buyer_y_base -= 15
-    end
-    
-    unless @order.contract.seller.addresses.first.line2.blank?
-      text_box @order.contract.seller.addresses.first.line2, inline_format: true, at: [0, seller_y_base]
-      seller_y_base -= 15 
+    unless address.line2.blank?
+      text_box address.line2, inline_format: true, at: [x_position, y_position]
+      y_position -= 15 
     end
 
-    unless @order.contract.buyer.addresses.first.line2.blank?
-      text_box @order.contract.buyer.addresses.first.line2, inline_format: true, at: [300, buyer_y_base]
-      buyer_y_base -= 15   
+    unless address.line3.blank?
+      text_box address.line3, inline_format: true, at: [x_position, y_position]
+      y_position -= 15
     end
+    text_box "#{address.city} " +
+             "#{address.state} " +
+             "#{address.zip}", inline_format: true, at: [x_position, y_position]
 
-    move_down 15
-
-    unless @order.contract.seller.addresses.first.line3.blank?
-      text_box @order.contract.seller.addresses.first.line3, inline_format: true, at: [0, seller_y_base]
-      seller_y_base -= 15
-    end
-
-    unless @order.contract.buyer.addresses.first.line3.blank?
-      text_box @order.contract.buyer.addresses.first.line3, inline_format: true, at: [300, buyer_y_base]
-      buyer_y_base -= 15
-    end
-
-    text_box "#{@order.contract.seller.addresses.first.city} " +
-             "#{@order.contract.seller.addresses.first.state} " +
-             "#{@order.contract.seller.addresses.first.zip}", inline_format: true, at: [0, seller_y_base]
-    text_box "#{@order.contract.buyer.addresses.first.city} " +
-             "#{@order.contract.buyer.addresses.first.state} " +
-             "#{@order.contract.buyer.addresses.first.zip}", inline_format: true, at: [300, buyer_y_base]
   end
 
-  def buyer_address
-    text_box "<b><u>BUYER</u></b>", inline_format: true, at: [300, 600]
-    move_down 15
-
-    text_box @order.contract.buyer.name, inline_format: true, at: [300, cursor]
-    move_down 15
-
-    text_box @order.contract.buyer.addresses.first.line1, inline_format: true, at: [300, cursor]
-
-    unless @order.contract.buyer.addresses.first.line2.blank?
-      move_down 15
-      text_box @order.contract.buyer.addresses.first.line2, inline_format: true, at: [300, cursor]
-    end
-
-    unless @order.contract.buyer.addresses.first.line3.blank?
-      move_down 15
-      text_box @order.contract.buyer.addresses.first.line3, inline_format: true, at: [300, cursor]
-    end
-    move_down 15
-    text_box "#{@order.contract.buyer.addresses.first.city} " +
-             "#{@order.contract.buyer.addresses.first.state} " +
-             "#{@order.contract.buyer.addresses.first.zip}", inline_format: true, at: [300, cursor]
-  end
 
   def line_item_rows
-    items = [["Product", "Qty", "Unit Price", "Full Price"]] +
-    @order.order_line_items.map do |item|
-      [item.name, item.weight_total, item.price_dollars, item.invoice_total]
+    # items = [["Product", "Qty", "Unit Price", "Full Price"]] +
+    # @order.order_line_items.map do |line_item|
+    #   [line_item.item.name, line_item.weight_total, line_item.price_dollars, line_item.invoice_total]
+    # end
+    # text items.to_s
+    text "Commodity: California Shelled Almonds - 2014"
+
+    containers = "" 
+    @contract.order_container_sizes.each do |key, value|
+      containers += " #{value} X #{key}"
     end
-    items.to_s
+    text "Quantity: #{containers}"
+
+    text "Weight: About #{@view.number_with_precision(@contract.total_pounds, precision: 0, separator: ',', delimiter: ',')} in (#{@contract.orders.count}) shipments"
+    move_down 15
+
+    text "Quality: #{@contract_report.quality}"
+
+    @contract_report.packaging_message.each do |summary|
+      text summary
+    end
   end
 end

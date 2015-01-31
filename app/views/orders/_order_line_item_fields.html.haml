@@ -24,7 +24,7 @@
           %tr
             %td.col-xs-2
               = f.text_field :pack_count
-            - if f.object.weight_id == Weight.find_by(weight_unit_of_measure: "kilograms").id
+            - if f.object.weight_id == Weight.find_by(weight_unit_of_measure: "kgs").id
               %td.col-xs-2
                 = f.number_field :pack_weight_kilograms, value: number_with_precision(f.object.pack_weight_kilograms, precision: 3), step: 0.001
             - else

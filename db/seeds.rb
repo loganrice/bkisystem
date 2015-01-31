@@ -301,8 +301,8 @@ steve = User.create(name: "Steve Bava", email: "steve@bkiexports.com", password:
 brad = User.create(name: "Jenny", email: "jenny@bkiexports.com", password: "bki")
 
 
-kilograms = Weight.create(weight_unit_of_measure: "kilograms")
-pounds = Weight.create(weight_unit_of_measure: "pounds")
+kilograms = Weight.create(weight_unit_of_measure: "kgs")
+pounds = Weight.create(weight_unit_of_measure: "lbs")
 
 ItemSizeIndicator.create(name: "AOL", description: "and or larger")
 ItemSizeIndicator.create(name: "SC", description: "Straight Count")

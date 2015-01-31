@@ -30,7 +30,7 @@ class ItemsController < ApplicationController
   end
 
   def update
-    
+    binding.pry
     @item = Item.find(params[:id])
     if @item.update(item_params)
       flash[:success] = "Item Updated"
@@ -43,6 +43,6 @@ class ItemsController < ApplicationController
 
   private
     def item_params
-      params.require(:item).permit(:name, :commodity_id, :size_id, :variety_id) if params[:item]
+      params.require(:item).permit(:name, :commodity_id, :size_id, :variety_id, :grade_id) if params[:item]
     end
 end

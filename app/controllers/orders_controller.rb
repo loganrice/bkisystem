@@ -58,6 +58,8 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(
+      :container_size,
+      :ship_date_note,
       :ship_date,
       :last_received_date,
       :doc_cut_off,

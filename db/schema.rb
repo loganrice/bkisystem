@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150121164753) do
+ActiveRecord::Schema.define(version: 20150126174259) do
 
   create_table "accounts", force: true do |t|
     t.string "name"
@@ -180,6 +180,7 @@ ActiveRecord::Schema.define(version: 20150121164753) do
     t.date     "expected_pay"
     t.date     "received_pay"
     t.string   "amount_received"
+    t.string   "container_size"
   end
 
   create_table "pack_types", force: true do |t|
