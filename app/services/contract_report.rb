@@ -4,6 +4,7 @@ class ContractReport
     @line_items = each_line_item
     @order_items = order_items
     @items = all_items
+    @orders = @contract.orders
   end
 
   def each_line_item
@@ -16,6 +17,14 @@ class ContractReport
     items
   end
 
+  def ship_date_note
+    message = [] 
+    @orders.each do |order|
+      message << order.ship_date_note
+    end
+    message.uniq
+  end
+
   def number_of_shipments(item)
     shipment_count = 0 
     @items.each do |key, value|
@@ -24,6 +33,31 @@ class ContractReport
       end
     end
     shipments_count
+  end
+
+  def documents
+    documents = []
+    @orders.each do |order|
+      order.documents.each do |doc|
+        documents << doc.name
+      end
+    end
+    documents.uniq.join(", ") 
+  end
+
+  def signature
+    "A signed copy of this contract to be returned to #{@contract.seller.name}. " +
+    "Failure to do so, and retention of this contract constitutes acceptance of the contract."
+  end
+
+  def price
+    message = []
+    @items.each do |item|
+      message << "#{item[:grade]} #{item[:size]} #{item[:size_indicator]} " +
+                  "#{helpers.number_to_currency(item[:price_dollars])}/#{item[:uom]} " +
+                  "FAS Oakland"
+    end
+    message.uniq
   end
 
   def quantity
@@ -50,7 +84,7 @@ class ContractReport
         message << description 
       end 
     end
-    message.join
+    message
   end
 
   def all_items
@@ -155,7 +189,7 @@ class ContractReport
       item_properties[:uom] = uom
       item_properties[:order_id] = line_item.order.id
       item_properties[:line_item_id] = line_item.id 
-
+      item_properties[:price_dollars] = line_item.price_dollars
 
     end 
     item_properties

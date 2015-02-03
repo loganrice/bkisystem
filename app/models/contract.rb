@@ -36,5 +36,11 @@ class Contract < ActiveRecord::Base
   def create_quote
     self.quote ||= Quote.create()
   end
-
+  
+  def set_default
+    payment_terms = "" if payment_terms.blank?
+    ship_pick_up = "" if ship_pick_up.blank?
+    ship_delivery = "" if ship_delivery.blank?
+    remarks = "" if remarks.blank?
+  end
 end

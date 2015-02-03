@@ -352,6 +352,8 @@ Document.create(name: "Canadian Invoice")
 Document.create(name: "Canadian Load Lock Form")
 Document.create(name: "Price List")
 Document.create(name: "EU Pallet Cert")
+Document.create(name: "Packing Certificate")
+
 
 
 

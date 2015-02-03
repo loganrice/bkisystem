@@ -5,7 +5,8 @@ class OrderLineItem < ActiveRecord::Base
   belongs_to :weight
   before_save :default_values
   has_many :commissions, through: :order
-    
+  before_save :set_default
+  
   def price_dollars=(dollars)
     dollars = dollars.to_s
     dollars = BigDecimal.new(dollars)

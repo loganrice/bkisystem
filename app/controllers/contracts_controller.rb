@@ -1,7 +1,7 @@
 class ContractsController < ApplicationController
   before_filter :require_user
   respond_to :js
-  
+
   def index
     @contracts = Contract.all
   end
@@ -60,6 +60,9 @@ class ContractsController < ApplicationController
       :date, 
       :buyer_id, 
       :seller_id,
+      :payment_terms,
+      :remarks,
+      :ship_pick_up,
       orders_attributes: [:ship_date, :id, :_destroy,
         order_line_items_attributes: [:item_id, :price_dollars, :weight_id, :pack_weight_pounds, :item_size_indicator_id, :pack_weight_kilograms, :pack_count, :pack_type_id, :id, :_destroy]
       ],
