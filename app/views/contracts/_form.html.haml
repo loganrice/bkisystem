@@ -26,13 +26,18 @@
             -#- end widget edit box -->
             -#- widget content -->
             %div.widget-body
-              - unless @contract.new_record?
-                %div.list-group
-                  = link_to contract_report_path(@contract, format: "pdf"), target: "_blank", class: "list-group-item" do 
-                    %i.fa.fa-lg.fa-fw.fa-file-pdf-o
-                    %span.menu-item-parent Contract
 
               = bootstrap_form_for(@contract, layout: :default, control_col: "col-sm-4", label_errors: true, remote: true) do |f|
+                %div.well.well-sm.bg-color-darken.txt-color-white.no-border
+                  - unless @contract.new_record?
+                    = link_to contract_report_path(@contract, format: "pdf"), target: "_blank", class: "btn btn-default" do 
+                      %i.fa.fa-lg.fa-fw.fa-file-pdf-o
+                      %span.menu-item-parent Contract
+
+                  = button_tag(type: 'submit', class: "btn btn-primary") do
+                    %i.fa.fa-lg.fa-fw.fa-save
+                    %span Save
+
                 %div.well{ "role" => "tabpanel" }
                   %div.tab-content
                     %div.tab-pane.fade.in.active#contract-profile{ "role" => "tabpanel" }
@@ -53,7 +58,9 @@
                         %div.panel-heading
                           - if !@contract.new_record?
                             = link_to new_contract_orders_path(@contract), class: 'btn btn-success', remote: true do
+                              %i.fa.fa-truck
                               %i.fa.fa-plus
+
                               %span LOAD
                           - else
                             %i.fa.fa-floppy-o
@@ -74,6 +81,4 @@
                     %div.tab-pane.fade#terms
                       %div.panel-group#accordion{ "role" => "tablist", "aria-multiselectable" => "true" }
                         = render 'terms', f: f
-                    = button_tag(type: 'submit', class: "btn btn-primary btn-lg btn-block") do
-                      %i.fa.fa-lg.fa-fw.fa-save
-                      %span Save
+

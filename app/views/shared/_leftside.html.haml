@@ -3,13 +3,11 @@
 %aside#left-panel
   -#- User info -->
   %div.login-info
-    %span 
-      -#!-- User image size is adjusted inside CSS, it should stay as it --> 
-      %a{ :href => "javascript:void(0);", :id => "show-shortcut", "data-action" => "toggleShortcut" }
-        = image_tag 'avatars/sunny.png', alt: "me", class: "online"
-        %span
-          john.doe 
-        %i.fa.fa-angle-down 
+    %span
+      = link_to edit_user_path(current_user.id), remote: true do
+        = current_user.name
+        %i.fa.fa-lg.fa-fw.fa-gear
+
   -# end user info -->
 
   -#- NAVIGATION : This navigation is also responsive-->
@@ -21,11 +19,11 @@
           %span.menu-item-parent Dashboard
       %li.nav-item
         = link_to contracts_path, remote: true do 
-          %i.fa.fa-lg.fa-fw.fa-table
+          %i.fa.fa-lg.fa-fw.fa-pencil-square-o
           %span.menu-item-parent Contracts
       %li.nav-item
         = link_to orders_path, remote: true do 
-          %i.fa.fa-lg.fa-fw.fa-table
+          %i.fa.fa-lg.fa-fw.fa-truck
           %span.menu-item-parent Loads         
       %li.nav-item
         %a{ :href => "#" }
@@ -47,7 +45,7 @@
 
       %li.nav-item
         %a{ :href => "#" }
-          %i.fa.fa-lg.fa-fw.fa-pencil-square-o
+          %i.fa.fa-lg.fa-fw.fa-cubes
           %span.menu-item-parent Item Master
         %ul
           -#%li.nav-item
@@ -62,12 +60,12 @@
             = link_to 'Varieties', varieties_path, remote: true
       %li.nav-item
         = link_to accounts_path, remote: true do 
-          %i.fa.fa-lg.fa-fw.fa-users
+          %i.fa.fa-lg.fa-fw.fa-university
           %span Accounts
       %li.nav-item
         = link_to users_path, remote: true do
-          %i.fa.fa-lg.fa-fw.fa-user
-          %span.menu-item-parent User
+          %i.fa.fa-lg.fa-fw.fa-users        
+          %span.menu-item-parent Users
       %li.nav-item
         = link_to documents_path, remote: true do
           %i.fa.fa-lg.fa-fw.fa-file-text-o
