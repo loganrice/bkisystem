@@ -65,20 +65,20 @@ describe ItemsController do
     end
     context "with authenticated user" do
       before { set_current_user }  
-
+      let(:item_attributes) { Fabricate.attributes_for(:item)}
       context "with valid input" do
         let(:almond) { Fabricate(:commodity) }
 
         it "redirects to the items path" do 
-          xhr :post, :create, item: { name: "5lb box", commodity_id: almond.id }
+          xhr :post, :create, item: item_attributes
           response.should redirect_to items_path
         end
         it "creates an item" do
-          xhr :post, :create, item: { name: "5lb box", commodity_id: almond.id }
+          xhr :post, :create, item: item_attributes
           Item.count.should eq(1)
         end
         it "sets the flash success message" do
-          xhr :post, :create, item: { name: "5lb box", commodity_id: almond.id }
+          xhr :post, :create, item: item_attributes
           flash[:success].should be_present
         end
 

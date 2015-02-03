@@ -7,4 +7,9 @@ class Item < ActiveRecord::Base
   has_many :order_line_items
   validates_presence_of :name
   validates_presence_of :commodity_id
+  validates_presence_of :grade_id
+  validates_presence_of :size_id
+  validates_presence_of :variety_id
+
+
 end

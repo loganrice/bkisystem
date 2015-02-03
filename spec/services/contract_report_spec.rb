@@ -45,7 +45,7 @@ describe ContractReport do
   describe "#quality" do 
     it "lists the types of items included in each order" do 
       report = ContractReport.new(contract)
-      expect(report.quality).to eq("Nonpareil Almonds US Extra No. 1 22/24 AOL")
+      expect(report.quality).to eq(["Nonpareil Almonds US Extra No. 1 22/24 AOL"])
     end
   end
 

@@ -18,9 +18,14 @@ describe Contract do
   describe "#order_container_sizes" do 
     it "returns a hash of each orders container sizes and the number of occurances" do 
       contract = Fabricate(:contract)
-      order1 = Fabricate(:order, contract_id: contract.id, container_size: "40 FCL")
-      order2 = Fabricate(:order, contract_id: contract.id, container_size: "40 FCL")
-      order3 = Fabricate(:order, contract_id: contract.id, container_size: "20 FCL")
+      order1 = Fabricate(:order, contract_id: contract.id)
+      order2 = Fabricate(:order, contract_id: contract.id)
+      order3 = Fabricate(:order, contract_id: contract.id)
+      
+      order1.update_attribute(:container_size, "40 FCL")
+      order2.update_attribute(:container_size, "20 FCL")
+      order3.update_attribute(:container_size, "40 FCL")
+
       expect(contract.order_container_sizes).to eq({"40 FCL"=>2, "20 FCL"=>1})
     end
 
