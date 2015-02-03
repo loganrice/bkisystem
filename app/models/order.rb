@@ -11,7 +11,6 @@ class Order < ActiveRecord::Base
   after_create :copy_first_order_line_items_on_contract, :copy_first_order_commissions, :copy_first_order_values
 
   def default_values
-  
   end
 
   def row_on_contract

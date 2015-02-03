@@ -114,7 +114,7 @@ class OrderPdf
 
     text_box "<i><b>Quality:</b></i>", inline_format: true,  at: [0, y_position]
     @contract_report.quality.each do |quality_type|
-      text_box quality_type.titleize, at: [x_description_position, y_position]
+      text_box quality_type.to_s.titleize, at: [x_description_position, y_position]
       y_position -= line_space
     end
 
@@ -123,7 +123,7 @@ class OrderPdf
     text_box "<i><b>Packing:</b></i>", inline_format: true, at: [0, y_position]
 
     @contract_report.packaging_message.each do |summary|
-      text_box summary, at: [x_description_position, y_position]
+      text_box summary.to_s, at: [x_description_position, y_position]
       y_position -= line_space
     end
     
@@ -132,14 +132,14 @@ class OrderPdf
     text_box "<i><b>Shipment:</b></i>", inline_format: true, at: [0, y_position]
 
     @contract_report.ship_date_note.each do |date|
-      text_box date, at: [x_description_position, y_position]
+      text_box date.to_s, at: [x_description_position, y_position]
       y_position -= line_space
     end
 
     text_box "<i><b>Price:</b></i>", inline_format: true, at: [0, y_position]
 
     @contract_report.price.each do |price_line|
-      text_box price_line, at: [x_description_position, y_position]
+      text_box price_line.to_s, at: [x_description_position, y_position]
       y_position -= line_space
     end
 
@@ -151,11 +151,11 @@ class OrderPdf
     y_position -= line_space * 3
     
     text_box "<i><b>Payment:</b></i>", inline_format: true, at: [0, y_position]
-    text_box @contract.payment_terms, at: [x_description_position, y_position]
+    text_box @contract.payment_terms.to_s, at: [x_description_position, y_position]
     
     y_position -= line_space * 4
 
     text_box "<i><b>Remarks:</b></i>", inline_format: true, at: [0, y_position]
-    text_box @contract.remarks, at: [x_description_position, y_position]
+    text_box @contract.remarks.to_s, at: [x_description_position, y_position]
   end
 end
