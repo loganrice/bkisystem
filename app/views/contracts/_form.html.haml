@@ -27,7 +27,10 @@
             -#- widget content -->
             %div.widget-body
               - unless @contract.new_record?
-                = link_to "Contract", contract_report_path(@contract, format: "pdf"), target: "_blank"
+                %div.list-group
+                  = link_to contract_report_path(@contract, format: "pdf"), target: "_blank", class: "list-group-item" do 
+                    %i.fa.fa-lg.fa-fw.fa-file-pdf-o
+                    %span.menu-item-parent Contract
 
               = bootstrap_form_for(@contract, layout: :default, control_col: "col-sm-4", label_errors: true, remote: true) do |f|
                 %div.well{ "role" => "tabpanel" }
