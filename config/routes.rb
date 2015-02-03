@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions
   resources :orders
-  get 'contracts/:id/invoice' => 'contracts#invoice', as: :invoice
+  get 'contracts/:id/contract_report' => 'contracts#contract_report', as: :contract_report
+  
   resources :documents
   get 'sign_in' => 'sessions#new'
   get 'sign_out' => 'sessions#destroy'

@@ -37,7 +37,7 @@ class ContractsController < ApplicationController
     end
   end
 
-  def invoice
+  def contract_report
     contract = Contract.find(params[:id])
     respond_to do |format|
       format.pdf do
@@ -46,10 +46,9 @@ class ContractsController < ApplicationController
                               type: "application/pdf",
                               disposition: "inline"
       end
-
     end
   end
-  
+
   private
 
   def contract_params
