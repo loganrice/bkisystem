@@ -131,10 +131,9 @@ class OrderPdf
 
     text_box "<i><b>Shipment:</b></i>", inline_format: true, at: [0, y_position]
 
-    @contract_report.ship_date_note.each do |date|
-      text_box date.to_s, at: [x_description_position, y_position]
-      y_position -= line_space
-    end
+    text_box @contract.ship_date_note, at: [x_description_position, y_position] if @contract.ship_date_note
+    y_position -= line_space
+
 
     text_box "<i><b>Price:</b></i>", inline_format: true, at: [0, y_position]
 

@@ -54,6 +54,9 @@
                           = f.text_field :buyer_po
                         %section.col-sm-4
                           = f.text_field :seller_contract
+                      %div.row
+                        %section.col-sm-6
+                          = f.text_field :ship_date_note
                       %div.panel.panel-default
                         %div.panel-heading
                           - if !@contract.new_record?

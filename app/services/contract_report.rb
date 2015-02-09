@@ -17,14 +17,6 @@ class ContractReport
     items
   end
 
-  def ship_date_note
-    message = [] 
-    @orders.each do |order|
-      message << order.ship_date_note
-    end
-    message.uniq
-  end
-
   def number_of_shipments(item)
     shipment_count = 0 
     @items.each do |key, value|
