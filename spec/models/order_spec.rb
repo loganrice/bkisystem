@@ -98,4 +98,20 @@ describe Order do
     end
   end
 
+  describe "#copy_first_order" do 
+    it "Copies all of the documents from the first order on contract" do 
+      contract = Fabricate(:contract)
+      order = Fabricate(:order, contract_id: contract.id)
+      doc1 = Document.create(name: "doc1")
+      doc2 = Document.create(name: "doc2")
+      order.documents << doc1
+      order.documents << doc2
+      order.save
+
+      new_order = contract.orders.create()
+
+      expect(new_order.documents).to eq(order.documents)
+    end
+  end
+
 end

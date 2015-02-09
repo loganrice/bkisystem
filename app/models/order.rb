@@ -58,6 +58,10 @@ class Order < ActiveRecord::Base
       if first_order_on_contract.container_size
         copy_container_size(first_order_on_contract)
       end
+
+      if first_order_on_contract.documents
+        copy_documents(first_order_on_contract)
+      end
     end
   end
 
@@ -85,5 +89,9 @@ class Order < ActiveRecord::Base
 
   def copy_container_size(order)
     update_attribute(:container_size, order.container_size)
+  end
+
+  def copy_documents(order)
+    update_attribute(:documents, order.documents)
   end
 end
