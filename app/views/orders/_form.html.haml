@@ -7,7 +7,7 @@
       %article.col-xs-12.col-sm-12.col-md-12.col-lg-12
         -#- end widget -->
         -#- Widget ID (each widget will need unique ID)-->
-        %div.jarviswidget.jarviswidget-color-blueDark#orderdetail{ "data-widget-togglebutton" => "false", "data-widget-editbutton" => "false", "data-widget-fullscreenbutton" => "false", "data-widget-colorbutton" => "false", "data-widget-deletebutton" => "false" }
+        %div.jarviswidget.well#orderdetail{ "data-widget-togglebutton" => "false", "data-widget-editbutton" => "false", "data-widget-fullscreenbutton" => "false", "data-widget-colorbutton" => "false", "data-widget-deletebutton" => "false" }
           -# widget options:
           -#usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
           -#data-widget-colorbutton="false"
@@ -22,24 +22,9 @@
             %span.widget-icon
               %i.fa.fa-table
             %h2= "Contract: #{@order.contract.id} - Seller: #{@order.contract.seller.name} - Buyer: #{@order.contract.buyer.name}"
-            %ul.nav.nav-tabs.pull-right.in#order-tab-content
-              %li.active{ "role" => "presentation" }
-                %a{ "href" => "#items", "role" => "tab", "data-toggle" => "tab" }
-                  Items
-              %li{ "role" => "presentation" }
-                %a{ "href" => "#commission", "role" => "tab", "data-toggle" => "tab" }
-                  Commission
-              %li{ "role" => "presentation" }
-                %a{ "href" => "#shipping-info", "role" => "tab", "data-toggle" => "tab" }
-                  Shipping Info
-              %li{ "role" => "presentation" }
-                %a{ "href" => "#consignee", "role" => "tab", "data-toggle" => "tab" }
-                  Consignee
-              %li{ "role" => "presentation" }
-                %a{ "href" => "#invoice", "role" => "tab", "data-toggle" => "tab" }
-                  Invoice
+
           -#- widget div-->
-          %div.no-padding
+          %div
             -# widget edit box -->
             %div.jarviswidget-editbox
               -# This area used as dropdown edit box -->
@@ -48,6 +33,26 @@
             %div.widget-body
 
               = bootstrap_form_for(@order, label_errors: true, remote: true) do |f|
+                %ul.nav.nav-tabs.pull-right.in#order-tab-content
+                  %li.active{ "role" => "presentation" }
+                    %a{ "href" => "#items", "role" => "tab", "data-toggle" => "tab" }
+                      Items
+                  %li{ "role" => "presentation" }
+                    %a{ "href" => "#commission", "role" => "tab", "data-toggle" => "tab" }
+                      Commissions
+                  %li{ "role" => "presentation" }
+                    %a{ "href" => "#shipping-info", "role" => "tab", "data-toggle" => "tab" }
+                      Shipping Info
+                  %li{ "role" => "presentation" }
+                    %a{ "href" => "#documents", "role" => "tab", "data-toggle" => "tab" }
+                      Documents 
+                  %li{ "role" => "presentation" }
+                    %a{ "href" => "#consignee", "role" => "tab", "data-toggle" => "tab" }
+                      Consignee
+                  %li{ "role" => "presentation" }
+                    %a{ "href" => "#invoice", "role" => "tab", "data-toggle" => "tab" }
+                      Invoice
+                %div.clearfix
                 %div.well.well-sm.bg-color-darken.txt-color-white.no-border
                   = link_to edit_contract_path(@order.contract), remote: true, class: "btn btn-info" do 
                     %i.fa.fa-lg.fa-fw.fa-pencil-square-o
@@ -57,34 +62,50 @@
                   = button_tag(type: 'submit', class: "btn btn-primary") do
                     %i.fa.fa-lg.fa-fw.fa-save
                     %span Save
-                %div#orderTab.tab-content
-                  %div#items.tab-pane.active.in{ "role" => "tabpanel" }
-                    %div.widget-body-toolbar.bg-color-white
-                      %div.panel.panel-primary
-                        %div.panel-heading 
-                          Order Details
-                        %table.table
-                          %tbody
-                        = f.fields_for :order_line_items do |builder|
-                          = render 'order_line_item_fields', f: builder
-                        = link_to_add_fields "Add Item", f, :order_line_items                                    
-                  
+                %div#orderTab.tab-content.padding-10
+                  %div#items.tab-pane.fade.active.in{ "role" => "tabpanel" }
+                    %div.clearfix
+                    %div.panel.panel-primary
+                      %div.panel-heading 
+                        Items
+                      %table.table
+                        %tbody
+                      = f.fields_for :order_line_items do |builder|
+                        = render 'order_line_item_fields', f: builder
+                    = link_to_add_fields "Add Item", f, :order_line_items                                    
+              
                   %div#commission.tab-pane.fade{ "role" => "tabpanel" }
-                    %div.widget-body-toolbar.bg-color-white
-                      = f.fields_for :commissions do |builder|
-                        = render 'commission_fields', f: builder
-                      = link_to_add_fields "Add Item", f, :commissions
+                    %div.panel.panel-primary
+                      %div.panel-heading 
+                        Commissions
+                    %div.clearfix
+
+                    = f.fields_for :commissions do |builder|
+                      = render 'commission_fields', f: builder
+                    = link_to_add_fields "Add Item", f, :commissions
                   %div#invoice.tab-pane.fade{ "role" => "tabpanel" }
+                    %div.clearfix
+
                     = render 'invoice'
                   %div#shipping-info.tab-pane{ "role" => "tabpanel" }
-                    %div.widget-body-toolbar.bg-color-white
-                      %div.panel.panel-primary
-                        %div.panel-heading 
-                          Order Details
-                        = render 'order_fields', f: f
-                  %div#consignee.tab-pane{ "role" => "tabpanel" }
-                    %div.widget-body-toolbar.bg-color-white
-                      %div.panel.panel-primary
-                        %div.panel-heading 
-                          %p Consignee
-                        = render 'consignee', f: f
+                    %div.clearfix
+
+                    %div.panel.panel-primary
+                      %div.panel-heading 
+                        Order Details
+                      = render 'order_fields', f: f
+
+                  %div#documents.tab-pane{ "role" => "tabpanel" }
+                    %div.clearfix
+
+                    %div.panel.panel-primary
+                      %div.panel-heading 
+                        Documents
+                      = render 'documents', f: f
+                  %div#consignee.tab-pane.fade{ "role" => "tabpanel" }
+                    %div.clearfix
+
+                    %div.panel.panel-primary
+                      %div.panel-heading 
+                        Consignee
+                      = render 'consignee', f: f

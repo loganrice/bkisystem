@@ -40,8 +40,6 @@
         = f.text_field :shipping_company_reference_number
       %td
         = f.text_field :automated_export_number
-%div.well
-  = f.collection_check_boxes(:document_ids, Document.all, :id, :name)
 
 %table.table.table-hover
   %thead
