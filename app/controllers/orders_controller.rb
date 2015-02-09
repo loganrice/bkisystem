@@ -59,8 +59,6 @@ class OrdersController < ApplicationController
       :commodity,
       :shipping_company_reference_number,
       :automated_export_number,
-      :payment_terms,
-      :remarks,
       :ship_pick_up,
       :ship_delivery,
       :contract_id,
