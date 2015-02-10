@@ -62,6 +62,7 @@
                   = button_tag(type: 'submit', class: "btn btn-primary") do
                     %i.fa.fa-lg.fa-fw.fa-save
                     %span Save
+                  = link_to "Test", invoice_path(@order), format: :docx
                   %span.text-muted.pull-right
                     %em= "Load #{@order.row_on_contract} of #{@order.contract.orders.count}"
 

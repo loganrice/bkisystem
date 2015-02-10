@@ -34,6 +34,14 @@ class OrdersController < ApplicationController
     redirect_to edit_order_path(@order)
   end
 
+  def invoice
+    respond_to do |format|
+      format.docx do 
+        render :invoice
+      end
+    end
+  end
+
   private
 
   def quote_items(order)

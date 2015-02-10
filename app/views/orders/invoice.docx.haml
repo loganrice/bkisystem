@@ -1,0 +1,79 @@
+%div.jarviswidget.well.jarviswidget-color-darken#invoice-widget{ "data-widget-sortable" => "false", "data-widget-deletebutton" => "false", "data-widget-editbutton" => "false", "data-widget-colorbutton" => "false" }
+  %div.widget-body-toolbar.bg-color-white
+    %header
+      %span.widget-icon
+        %i.fa.fa-barcode
+      %h2
+        Item #44761
+    %div
+      %div.jarviswidget-editbox
+      %div.widget-body.no-padding
+        %div.padding-10
+          %br
+          %div.pull-left
+            =image_tag 'bki_logo.png', class: "img-responsive", id: "logo-image"
+            %address
+              %br
+              %strong
+                = @order.contract.seller.name
+              %br
+              231 Ajax Rd,
+              %br
+              Detroit MI - 48212, USA
+              %br
+              %abbr{ "title" => "Phone" }
+                P:
+              (123) 456-7890
+          %div.pull-right
+            %h1.font-400
+              invoice
+          %div.clearfix
+          %br
+          %br
+          %div.row
+            %div.col-sm-9
+              %h4.semi-bold
+                = @order.contract.buyer.name
+              %address
+                %strong
+                  Mr. Simon Hedger
+                %br
+                342 Mirlington Road,
+                %br
+                Calfornia, CA 431464
+                %br
+                %abbr{ "title" => "Phone" }
+                  P:
+                (467) 143-4317
+            %div.col-sm-3
+              %div
+                %div
+                  %strong
+                    INVOICE NO :
+                  %span.pull-right
+                    AA-454-4113-00
+              %div
+                %div.font-md
+                  %strong
+                    INVOICE DATE :
+                  %span.pull-right
+                    %i.fa.fa-calendar
+                    15/02/13
+              %br
+              %div.well.well-sm.bg-color-darken.txt-color-white.no-border
+                %div.fa-lg
+                  Total Due :
+                  %span.pull-right
+                    4,972 USD
+              %br
+              %br
+          %table.table.table-hover
+            %thead
+              %tr
+                %th.text-center QTY
+                %th.text-center WEIGHT
+                %th ITEM
+                %th PRICE
+                %th COMMISSION
+                %th TOTAL
+            %tbody
