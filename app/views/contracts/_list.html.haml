@@ -47,7 +47,7 @@
                   - @contracts.each do |contract|
                     %tr
                       %td
-                        = link_to contract.id, edit_contract_path(contract), remote: true
+                        = link_to contract.seller_contract, edit_contract_path(contract), remote: true
                       %td= contract.buyer.try(:name)
                       %td= contract.seller.try(:name)
                       %td= contract.seller_contract 

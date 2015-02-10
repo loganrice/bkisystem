@@ -62,6 +62,9 @@
                   = button_tag(type: 'submit', class: "btn btn-primary") do
                     %i.fa.fa-lg.fa-fw.fa-save
                     %span Save
+                  %span.text-muted.pull-right
+                    %em= "Load #{@order.row_on_contract} of #{@order.contract.orders.count}"
+
                 %div#orderTab.tab-content.padding-10
                   %div#items.tab-pane.fade.active.in{ "role" => "tabpanel" }
                     %div.clearfix
