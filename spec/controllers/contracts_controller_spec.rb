@@ -139,15 +139,15 @@ describe ContractsController do
 
       context "with valid input" do 
         it "creates a contract" do 
-          xhr :post, :create, contract: { buyer_id: Fabricate(:account).id, seller_id: Fabricate(:account) }
+          xhr :post, :create, contract: { buyer_id: Fabricate(:account).id, seller_id: Fabricate(:account), seller_contract: "xyz"}
           expect(Contract.count).to eq(1)
         end
         it "sets the flash success message" do
-          xhr :post, :create, contract: { buyer_id: Fabricate(:account).id, seller_id: Fabricate(:account) }
+          xhr :post, :create, contract: { buyer_id: Fabricate(:account).id, seller_id: Fabricate(:account), seller_contract: "xyz" }
           expect(flash[:success]).to be_present
         end
         it "redirects to the contracts path" do
-          xhr :post, :create, contract: { buyer_id: Fabricate(:account).id, seller_id: Fabricate(:account) }          
+          xhr :post, :create, contract: { buyer_id: Fabricate(:account).id, seller_id: Fabricate(:account), seller_contract: "xyz" }          
           contract = Contract.last
           expect(response).to redirect_to edit_contract_path(contract)
         end

@@ -9,7 +9,9 @@ describe Contract do
   it { should accept_nested_attributes_for(:orders) }
   it { should validate_presence_of(:buyer)}
   it { should validate_presence_of(:seller)}
-
+  it { should validate_presence_of(:seller_contract)}
+  it { should validate_uniqueness_of(:seller_contract)}
+  
   it "creates a quote before savinging if one has not already been created" do 
     contract = Fabricate(:contract)
     expect(contract.quote).to be_instance_of(Quote)
