@@ -62,9 +62,12 @@
                   = button_tag(type: 'submit', class: "btn btn-primary") do
                     %i.fa.fa-lg.fa-fw.fa-save
                     %span Save
-                  = link_to "Test", invoice_path(@order), format: :docx
+                  = link_to "Test", edit_invoice_path(@order), remote: true
                   %span.text-muted.pull-right
                     %em= "Load #{@order.row_on_contract} of #{@order.contract.orders.count}"
+                  = link_to shipping_report_path(@order, format: "pdf"), target: "_blank", class: "btn btn-default" do 
+                    %i.fa.fa-lg.fa-fw.fa-file-pdf-o
+                    %span.menu-item-parent Shipping Information
 
                 %div#orderTab.tab-content.padding-10
                   %div#items.tab-pane.fade.active.in{ "role" => "tabpanel" }

@@ -8,7 +8,11 @@ describe Order do
   it { should have_many(:commissions) }
   it { should accept_nested_attributes_for(:commissions) }
   it { should have_many(:documents).through(:document_orders)}
-
+  it { should belong_to(:bank) }
+  it { should belong_to(:address) }
+  it { should belong_to(:mail_to) }
+  it { should belong_to(:acting_seller) }
+    
   it "it should call set default values before save" do
     order = Fabricate(:order)
     (order).should_receive(:default_values).and_return(2)
@@ -25,7 +29,34 @@ describe Order do
     expect(order.order_line_items).to eq([hour_ago, day_ago, month_ago])
 
   end
-  
+
+  describe "#stakeholders" do 
+    it "returns an array of all the accounts on the contract" do 
+      buyer = Fabricate(:account)
+      seller = Fabricate(:account)
+      contract = Fabricate(:contract, buyer_id: buyer.id, seller_id: seller.id)
+      order = Fabricate(:order, contract_id: contract.id)
+
+      expect(order.stakeholders).to match_array [buyer, seller]
+    end
+
+    it "returns an array of all the brokers on the contract" do 
+      buyer = Fabricate(:account)
+      seller = Fabricate(:account)
+      broker1 = Fabricate(:account)
+      broker2 = Fabricate(:account)
+      commission1 = Commission.create(broker_id: broker1.id, cents_per_pound: 3)
+      commission2 = Commission.create(broker_id: broker2.id, cents_per_pound: 3)
+
+      contract = Fabricate(:contract, buyer_id: buyer.id, seller_id: seller.id)
+      order = Fabricate(:order, contract_id: contract.id)
+      order.commissions << commission1
+      order.commissions << commission2
+      
+      expect(order.stakeholders).to match_array [broker1, broker2, buyer, seller]
+    end
+  end
+
   describe "#row_on_contract" do 
     it "asks it's parent contract to return it's position in the array of orders" do
       contract = Fabricate(:contract)

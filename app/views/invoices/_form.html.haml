@@ -1,0 +1,9 @@
+%div#content
+  %h1= "Invoice" 
+  %h3= "Load #{@order.row_on_contract} on Contract #{@order.contract.seller_contract}"
+  = bootstrap_form_for @order do |f|
+    = f.collection_select :bank_id, f.object.contract.seller.banks, :id, :name
+    = f.collection_select :address_id, f.object.contract.seller.addresses, :id, :line1
+    = f.check_box :show_bank_wire_info
+    = f.submit
+

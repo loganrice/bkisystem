@@ -34,14 +34,18 @@ class OrdersController < ApplicationController
     redirect_to edit_order_path(@order)
   end
 
-  def invoice
+  def shipping_report
+    order = Order.find(params[:id])
     respond_to do |format|
-      format.docx do 
-        render :invoice
+      format.pdf do
+        pdf = ShippingPdf.new(order, view_context)
+        send_data pdf.render, filename: "shipping_#{order.id}.pdf",
+                              type: "application/pdf",
+                              disposition: "inline"
       end
     end
   end
-
+  
   private
 
   def quote_items(order)
@@ -68,6 +72,18 @@ class OrdersController < ApplicationController
       :automated_export_number,
       :ship_pick_up,
       :ship_delivery,
+      :port_of_discharge,
+      :container_number,
+      :consignee,
+      :line1,
+      :line2,
+      :line3,
+      :city,
+      :state,
+      :zip,
+      :mail_to_id,
+      :acting_seller_id,
+      :shipping_instructions,
       :contract_id,
       :document_ids => [],
       order_line_items_attributes: [:item_id, :price_dollars, :weight_id, :pack_weight_pounds, :item_size_indicator_id, :pack_weight_kilograms, :pack_count, :pack_type_id, :id, :_destroy],

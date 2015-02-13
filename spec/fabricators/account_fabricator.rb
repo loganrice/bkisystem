@@ -19,4 +19,5 @@ Fabricator(:account) do
   bank_1_account { Faker::Number.number(6) }
   bank_1_swift_code { Faker::Number.number(12) }
   bank_1_attention { Faker::Name.name }
+
 end

@@ -1,5 +1,9 @@
 class Order < ActiveRecord::Base
   belongs_to :contract
+  belongs_to :bank
+  belongs_to :address
+  belongs_to :mail_to, class_name: "Account"
+  belongs_to :acting_seller, class_name: "Account"
   validates_presence_of :contract
   has_many :order_line_items, -> { order("created_at DESC")}
   has_many :commissions
@@ -7,10 +11,12 @@ class Order < ActiveRecord::Base
   has_many :documents, :through => :document_orders
   accepts_nested_attributes_for :order_line_items, allow_destroy: true
   accepts_nested_attributes_for :commissions, allow_destroy: true
-  before_save :default_values
+  before_create :default_values
   after_create :copy_first_order_line_items_on_contract, :copy_first_order_commissions, :copy_first_order_values
 
   def default_values
+    acting_seller = self.contract.seller
+    mail_to = self.contract.seller 
   end
 
   def row_on_contract
@@ -19,6 +25,16 @@ class Order < ActiveRecord::Base
         return index + 1
       end
     end
+  end
+
+  def stakeholders
+    stake_hldrs = []
+    stake_hldrs << self.contract.seller
+    stake_hldrs << self.contract.buyer
+    self.commissions.each do |commission|
+      stake_hldrs << commission.broker
+    end 
+    stake_hldrs
   end
 
   def total_pounds

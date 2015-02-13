@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150209170334) do
+ActiveRecord::Schema.define(version: 20150213221357) do
 
   create_table "accounts", force: true do |t|
     t.string "name"
@@ -181,6 +181,11 @@ ActiveRecord::Schema.define(version: 20150209170334) do
     t.string   "container_size"
     t.text     "ship_delivery"
     t.text     "ship_pick_up"
+    t.integer  "bank_id"
+    t.integer  "address_id"
+    t.boolean  "show_bank_wire_info"
+    t.integer  "mail_to_id"
+    t.integer  "acting_seller_id"
   end
 
   create_table "pack_types", force: true do |t|

@@ -9,12 +9,15 @@ Rails.application.routes.draw do
   resources :commodities
   resources :sizes
   resources :varieties
+  resources :grades
   resources :accounts
   resources :users
   resources :sessions
   resources :orders
+  resources :invoices, only: [:edit, :update]
   get 'contracts/:id/contract_report' => 'contracts#contract_report', as: :contract_report
-  get 'orders/:id/invoice' => 'orders#invoice', as: :invoice  
+  get 'orders/:id/shipping_report' => 'orders#shipping_report', as: :shipping_report
+
   resources :documents
   get 'sign_in' => 'sessions#new'
   get 'sign_out' => 'sessions#destroy'
