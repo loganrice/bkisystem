@@ -110,7 +110,7 @@ class ShippingPdf
     line_space = 15
 
     text_box "<i><b>Shipping Co:</b></i>", inline_format: true, at: [0, y_position]
-    text_box @order.shipping_company, inline_format: true, at: [x_description_position, y_position]
+    text_box "#{@order.shipping_company}", inline_format: true, at: [x_description_position, y_position]
     y_position -= line_space
 
     text_box "<i><b>Vessel:</b></i>", inline_format: true, at: [0, y_position]
@@ -126,7 +126,9 @@ class ShippingPdf
     y_position -= line_space
 
     text_box "<i><b>Last Receiving:</b></i>", inline_format: true, at: [0, y_position]
-    text_box "#{@order.last_received_date.strftime("%m/%d/%Y")}", inline_format: true, at: [x_description_position, y_position]
+    if @order.last_received_date
+      text_box "#{@order.last_received_date.strftime("%m/%d/%Y")}", inline_format: true, at: [x_description_position, y_position]
+    end 
     y_position -= line_space
 
     text_box "<i><b>Pick Up:</b></i>", inline_format: true, at: [0, y_position]

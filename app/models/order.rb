@@ -15,8 +15,8 @@ class Order < ActiveRecord::Base
   after_create :copy_first_order_line_items_on_contract, :copy_first_order_commissions, :copy_first_order_values
 
   def default_values
-    acting_seller = self.contract.seller
-    mail_to = self.contract.seller 
+    acting_seller = self.contract.seller if row_on_contract == 1
+    mail_to = self.contract.seller if row_on_contract == 1 
   end
 
   def row_on_contract
@@ -63,6 +63,7 @@ class Order < ActiveRecord::Base
     end
   end
 
+
   def copy_first_order_commissions
     if contract_has_at_least_1_order?
       self.copy_commissions(first_order_on_contract)
@@ -78,6 +79,10 @@ class Order < ActiveRecord::Base
       if first_order_on_contract.documents
         copy_documents(first_order_on_contract)
       end
+
+      copy_mail_to(first_order_on_contract)
+      copy_acting_seller(first_order_on_contract)
+
     end
   end
 
@@ -109,5 +114,13 @@ class Order < ActiveRecord::Base
 
   def copy_documents(order)
     update_attribute(:documents, order.documents)
+  end
+
+  def copy_acting_seller(order)
+    update_attribute(:acting_seller_id, order.acting_seller_id)
+  end
+
+  def copy_mail_to(order)
+    update_attribute(:mail_to_id, order.mail_to_id)
   end
 end
