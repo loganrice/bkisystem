@@ -9,14 +9,14 @@ class Order < ActiveRecord::Base
   has_many :commissions
   has_many :document_orders 
   has_many :documents, :through => :document_orders
+  has_many :invoices
   accepts_nested_attributes_for :order_line_items, allow_destroy: true
   accepts_nested_attributes_for :commissions, allow_destroy: true
-  before_create :default_values
-  after_create :copy_first_order_line_items_on_contract, :copy_first_order_commissions, :copy_first_order_values
+  after_create :copy_first_order_line_items_on_contract, :copy_first_order_commissions, :copy_first_order_values, :default_values
 
   def default_values
-    acting_seller = self.contract.seller if row_on_contract == 1
-    mail_to = self.contract.seller if row_on_contract == 1 
+    self.acting_seller = self.contract.seller unless contract_has_at_least_1_order?
+    self.mail_to = self.contract.seller unless contract_has_at_least_1_order?
   end
 
   def row_on_contract
@@ -93,13 +93,15 @@ class Order < ActiveRecord::Base
   end
 
   def copy_line_items(order)
-    order.order_line_items.each do |line_item|
-      self.order_line_items << line_item.dup
+    if order.order_line_items
+      order.order_line_items.each do |line_item|
+        self.order_line_items << line_item.dup
+      end
     end
   end
 
   def contract_has_at_least_1_order?
-    self.contract.orders.count > 0
+    self.contract.orders.count > 1
   end
 
   def first_order_on_contract

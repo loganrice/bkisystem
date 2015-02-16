@@ -62,7 +62,7 @@
                   = button_tag(type: 'submit', class: "btn btn-primary") do
                     %i.fa.fa-lg.fa-fw.fa-save
                     %span Save
-                  = link_to "Test", edit_invoice_path(@order), remote: true
+                  = link_to "Add Invoice", new_invoice_path(order_id: @order.id), remote: true
                   %span.text-muted.pull-right
                     %em= "Load #{@order.row_on_contract} of #{@order.contract.orders.count}"
                   = link_to shipping_report_path(@order, format: "pdf"), target: "_blank", class: "btn btn-default" do 

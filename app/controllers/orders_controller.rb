@@ -22,6 +22,7 @@ class OrdersController < ApplicationController
       @order.commissions.create()
     end
     # @quote_line_items = quote_items(@order)
+    render :edit
   end
 
   def update

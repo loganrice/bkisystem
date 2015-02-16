@@ -12,4 +12,7 @@ describe Account do
   it { should have_many(:commissions) }
   it { should have_many(:mail_tos)}
   it { should have_many(:acting_sellers)}
+  it { should have_many(:payees)}
+  it { should have_many(:payers)}
+
 end

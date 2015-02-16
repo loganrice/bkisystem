@@ -35,4 +35,23 @@ module ApplicationHelper
     number_to_currency (cents / 100)
   end
   
+  def invoice_bank_collection(order)
+    collection = []
+    order.stakeholders.each do |account| 
+      unless account.banks.blank? 
+        account.banks.each { |bank| collection << ["#{account.name} - #{bank.name}", bank.id] }
+      end 
+    end 
+    collection
+  end
+
+  def invoice_address_collection(order)
+    collection = []
+    order.stakeholders.each do |account| 
+      unless account.addresses.blank? 
+        account.addresses.each { |address| collection << ["#{account.name} - #{address.line1}", address.id] }
+      end 
+    end 
+    collection
+  end
 end

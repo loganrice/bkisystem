@@ -12,13 +12,7 @@ describe Order do
   it { should belong_to(:address) }
   it { should belong_to(:mail_to) }
   it { should belong_to(:acting_seller) }
-    
-  it "it should call set default values before save" do
-    order = Fabricate(:order)
-    (order).should_receive(:default_values).and_return(2)
-    order.save
-  end
-
+  it { should have_many(:invoices) }
 
   it "sort OrderDetails sort descending order by creation date" do 
     order = Fabricate(:order)
@@ -59,6 +53,7 @@ describe Order do
 
   describe "#row_on_contract" do 
     it "asks it's parent contract to return it's position in the array of orders" do
+      require 'pry';
       contract = Fabricate(:contract)
       order1 = Fabricate(:order, contract_id: contract.id)
       order2 = Fabricate(:order, contract_id: contract.id)

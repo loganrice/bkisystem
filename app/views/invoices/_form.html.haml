@@ -1,9 +1,36 @@
 %div#content
-  %h1= "Invoice" 
-  %h3= "Load #{@order.row_on_contract} on Contract #{@order.contract.seller_contract}"
-  = bootstrap_form_for @order do |f|
-    = f.collection_select :bank_id, f.object.contract.seller.banks, :id, :name
-    = f.collection_select :address_id, f.object.contract.seller.addresses, :id, :line1
-    = f.check_box :show_bank_wire_info
-    = f.submit
-
+  -# widget grid -->
+  %section#widget-grid
+    -# row -->
+    %div.row
+      -# NEW WIDGET START -->
+      %article.col-xs-12.col-sm-12.col-md-12.col-lg-12
+        -#- end widget -->
+        -#- Widget ID (each widget will need unique ID)-->
+        %div.jarviswidget.jarviswidget-color-blueDark#itemindex{ "data-widget-editbutton" => "false" }
+          %header
+            %span.widget-icon
+              %i.fa.fa-table
+            %h2 Invoice
+          -#- widget div-->
+          %div
+            -# widget edit box -->
+            %div.jarviswidget-editbox
+              -# This area used as dropdown edit box -->
+            -#- end widget edit box -->
+            -#- widget content -->
+            %div.widget-body
+              %h1= "Invoice" 
+              %h3
+                = link_to "Load #{@order.row_on_contract}", edit_order_path(@order), remote: true
+                %span= "Contract #{@order.contract.seller_contract}"
+              = bootstrap_form_for @invoice, label_errors: true, remote: true do |f|
+                = f.hidden_field :order_id
+                = f.select :payer_id, @order.stakeholders.collect { |stakeholder| [stakeholder.name, stakeholder.id]}, label: "Bill to Account:"
+                = f.select :payee_id, @order.stakeholders.collect { |stakeholder| [stakeholder.name, stakeholder.id] }, label: "Remit Funds to Account:"
+                = f.select :bank_id, invoice_bank_collection(@order), include_blank: true, label: "Remit Funds to Bank"
+                = f.select :address_id, invoice_address_collection(@order) 
+                = button_tag(type: 'submit', class: "btn btn-primary") do
+                  %i.fa.fa-lg.fa-fw.fa-save
+                  %span Save
+                = f.submit @invoice.new_record? ? "Add" : "Update"

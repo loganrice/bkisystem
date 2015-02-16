@@ -24,7 +24,11 @@
       %li.nav-item
         = link_to orders_path, remote: true do 
           %i.fa.fa-lg.fa-fw.fa-truck
-          %span.menu-item-parent Loads         
+          %span.menu-item-parent Loads     
+      %li.nav-item
+        = link_to invoices_path, remote: true do 
+          %i.fa.fa-lg.fa-fw.fa-truck
+          %span.menu-item-parent Invoices      
       %li.nav-item
         %a{ :href => "#" }
           %i.fa.fa-lg.fa-fw.fa-bar-chart-o 

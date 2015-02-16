@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :users
   resources :sessions
   resources :orders
-  resources :invoices, only: [:edit, :update]
+  resources :invoices
   get 'contracts/:id/contract_report' => 'contracts#contract_report', as: :contract_report
   get 'orders/:id/shipping_report' => 'orders#shipping_report', as: :shipping_report
 
