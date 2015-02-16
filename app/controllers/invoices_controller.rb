@@ -10,6 +10,7 @@ class InvoicesController < ApplicationController
     @order = Order.find(params[:order_id])
 
     @invoice = Invoice.new(order_id: @order.id)
+    @invoice.invoice_line_items.new()
   end
 
   def create
@@ -46,6 +47,12 @@ class InvoicesController < ApplicationController
   private
 
   def invoice_params
-    params.require(:invoice).permit(:order_id, :bank_id, :address_id, :payee_id, :payer_id)
+    params.require(:invoice).permit(
+      :order_id, 
+      :bank_id, 
+      :address_id, 
+      :payee_id, 
+      :payer_id,
+      invoice_line_items_attributes: [:id, :amount_cents, :amount_dollars, :_destroy])
   end
 end
