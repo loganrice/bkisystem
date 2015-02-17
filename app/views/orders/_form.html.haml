@@ -58,6 +58,7 @@
                 %div#orderTab.tab-content.padding-10
                   %div#items.tab-pane.fade.active.in{ "role" => "tabpanel" }
                     %div.clearfix
+
                     %div.panel.panel-primary
                       %div.panel-heading 
                         Items
@@ -80,6 +81,7 @@
                     %div.clearfix
                     = f.select :mail_to_id, options_for_select(f.object.stakeholders.map { |stakeholder| [stakeholder.name, stakeholder.id]}, selected: f.object.mail_to_id )
                     = f.select :acting_seller_id, options_for_select(f.object.stakeholders.map { |stakeholder| [stakeholder.name, stakeholder.id]}, selected: f.object.acting_seller_id )
+                    = render 'discount', f: f
                     %fieldset
                       %div.panel.panel-primary
                         %table.table.table-hover

@@ -12,7 +12,7 @@
         %td.col-md-2
           = f.number_field :percent, append: "%", in: 1.0..100, step: 0.1
         %td.col-md-2
-          = f.number_field :dollars, append: "$"
+          = f.number_field :dollars, prepend: "$"
         %td.col-md-2
           = f.hidden_field :_destroy
           %a.btn.btn-danger.pull-right.remove_fields{"href" => "#"}

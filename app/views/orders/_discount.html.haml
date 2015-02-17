@@ -1,0 +1,16 @@
+%div.panel.panel-warning
+  %div.panel-heading
+    DISCOUNT
+%div.clearfix
+%div.well-bg-info
+  %table
+    %thead
+    %tbody
+      %tr.info
+        %td.col-xs-2
+          = f.text_field :discount_cents_per_pound, prepend: "$", label: "$ per Lb"
+        %td.col-xs-2
+          = f.number_field :discount_percent, append: "%", in: 1.0..100, step: 0.1
+        %td.col-xs-2
+          = f.number_field :discount_cents, prepend: "$"
+    

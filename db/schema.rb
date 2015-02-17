@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150216234350) do
+ActiveRecord::Schema.define(version: 20150217231505) do
 
   create_table "accounts", force: true do |t|
     t.string "name"
@@ -205,6 +205,9 @@ ActiveRecord::Schema.define(version: 20150216234350) do
     t.boolean  "show_bank_wire_info"
     t.integer  "mail_to_id"
     t.integer  "acting_seller_id"
+    t.decimal  "discount_percent"
+    t.integer  "discount_cents_per_pound"
+    t.integer  "discount_cents"
   end
 
   create_table "pack_types", force: true do |t|
