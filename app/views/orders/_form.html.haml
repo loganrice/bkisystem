@@ -78,6 +78,8 @@
                     = link_to_add_fields "Add Item", f, :commissions
                   %div#invoice.tab-pane.fade{ "role" => "tabpanel" }
                     %div.clearfix
+                    = f.select :mail_to_id, options_for_select(f.object.stakeholders.map { |stakeholder| [stakeholder.name, stakeholder.id]}, selected: f.object.mail_to_id )
+                    = f.select :acting_seller_id, options_for_select(f.object.stakeholders.map { |stakeholder| [stakeholder.name, stakeholder.id]}, selected: f.object.acting_seller_id )
                     %fieldset
                       %div.panel.panel-primary
                         %table.table.table-hover
@@ -86,6 +88,7 @@
                               %th BILL TO
                               %th REMIT FUNDS TO
                               %th INVOICE NUMBER
+                              %th TOTAL AMOUNT
                               %th 
                           %tbody
                             = f.fields_for :invoices do |builder|

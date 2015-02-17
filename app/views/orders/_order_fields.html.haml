@@ -2,11 +2,6 @@
   %thead
 
   %tbody
-    %tr
-      %td
-        = f.select :mail_to_id, options_for_select(f.object.stakeholders.map { |stakeholder| [stakeholder.name, stakeholder.id]}, selected: f.object.mail_to_id )
-      %td
-        = f.select :acting_seller_id, options_for_select(f.object.stakeholders.map { |stakeholder| [stakeholder.name, stakeholder.id]}, selected: f.object.acting_seller_id )
     %tr 
       %td
         = f.select :container_size, options_for_select(["20 FCL", "40 FCL", "Truck"], f.object.container_size)
