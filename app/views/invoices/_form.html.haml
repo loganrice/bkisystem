@@ -12,6 +12,7 @@
             %span.widget-icon
               %i.fa.fa-table
             %h2 Invoice
+
           -#- widget div-->
           %div
             -# widget edit box -->
@@ -20,38 +21,55 @@
             -#- end widget edit box -->
             -#- widget content -->
             %div.widget-body
+              %div.row
+                %div.col-sm-3
+                  %div
+                    %div.font-md
+                      %strong
+                        LOAD NO :
+                        = link_to @order.row_on_contract, edit_order_path(@order), remote: true
+                  %div
+                    %div.font-md
+                      %strong
+                        CONTRACT # :
+                        = link_to @order.contract.seller_contract, edit_contract_path(@order.contract), remote: true
+                  %div
+                    %div.font-md
+                      %strong
+                        INVOICE DATE :
+                        %i.fa.fa-calendar
+                        / = @invoice.created_at.strftime("%m/%d/%Y")
+
               = bootstrap_form_for @invoice, layout: :default, control_col: "col-sm-4", label_errors: true, remote: true do |f|
-                %div.well.well-sm.bg-color-darken.txt-color-white.no-border
-                  %h1= "Invoice" 
-                  %h3
-                    = link_to "Load #{@order.row_on_contract}", edit_order_path(@order), remote: true
-                    %span= "Contract #{@order.contract.seller_contract}"
-                    
+                = f.hidden_field :order_id
+                %div.padding-10
+                  %div.row
+                    %section.col-sm-3
+                      =f.text_field :invoice_number
+
+                %div.row
+                  %section.col-sm-6
+                    = f.select :payer_id, @order.stakeholders.collect { |stakeholder| [stakeholder.name, stakeholder.id]}, label: "Bill to Account:"
+                  %section.col-sm-6
+                    = f.select :payee_id, @order.stakeholders.collect { |stakeholder| [stakeholder.name, stakeholder.id] }, label: "Remit Funds to Account:"
+                %div.row
+                  %section.col-sm-6
+                    = f.select :bank_id, invoice_bank_collection(@order), include_blank: true, label: "Remit Funds to Bank"
+                  %section.col-sm-6
+                    = f.select :address_id, invoice_address_collection(@order) 
+
+                %table.table.table-hover
+                  %thead
+                    %tr
+                      %th.text-center QTY
+                      %th.text-center WEIGHT
+                      %th ITEM
+                      %th PRICE
+                      %th COMMISSION
+                      %th TOTAL
+                  %tbody
+                    = f.fields_for :invoice_line_items do |builder|
+                      = render 'invoice_line_item_fields', f: builder
                   = button_tag(type: 'submit', class: "btn btn-primary") do
                     %i.fa.fa-lg.fa-fw.fa-save
                     %span=  @invoice.new_record? ? "Save" : "Update"
-                = f.hidden_field :order_id
-
-                %div.well{ "role" => "tabpanel" }
-                  %div.tab-content
-                    %div.tab-pane.fade.in.active#contract-profile{ "role" => "tabpanel" }
-                      %div.row
-                        %section.col-sm-6
-                          = f.select :payer_id, @order.stakeholders.collect { |stakeholder| [stakeholder.name, stakeholder.id]}, label: "Bill to Account:"
-                        %section.col-sm-6
-                          = f.select :payee_id, @order.stakeholders.collect { |stakeholder| [stakeholder.name, stakeholder.id] }, label: "Remit Funds to Account:"
-                      %div.row
-                        %section.col-sm-6
-                          = f.select :bank_id, invoice_bank_collection(@order), include_blank: true, label: "Remit Funds to Bank"
-                        %section.col-sm-6
-                          = f.select :address_id, invoice_address_collection(@order) 
-
-                      %fieldset
-                        %div.panel.panel-primary
-                          %table.table.table-hover
-                            %thead
-                              %tr
-                                %th Amount
-                            %tbody
-                              = f.fields_for :invoice_line_items do |builder|
-                                = render 'invoice_line_item_fields', f: builder

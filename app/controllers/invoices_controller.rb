@@ -53,6 +53,7 @@ class InvoicesController < ApplicationController
       :address_id, 
       :payee_id, 
       :payer_id,
+      :invoice_number,
       invoice_line_items_attributes: [:id, :amount_cents, :amount_dollars, :_destroy])
   end
 end

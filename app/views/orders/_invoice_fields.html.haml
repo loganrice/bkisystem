@@ -1,0 +1,15 @@
+%fieldset
+
+  %tr
+    %td
+      = f.object.payer.name
+    %td
+      = f.object.payee.name
+    %td
+      = link_to f.object.invoice_number ||= f.object.id, edit_invoice_path(f.object), remote: true
+
+    %td.col-md-2
+      = f.hidden_field :_destroy
+      %a.btn.btn-danger.pull-right.remove_fields{"href" => "#"}
+        %i.fa.fa-remove
+          Delete    

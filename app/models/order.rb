@@ -12,6 +12,8 @@ class Order < ActiveRecord::Base
   has_many :invoices
   accepts_nested_attributes_for :order_line_items, allow_destroy: true
   accepts_nested_attributes_for :commissions, allow_destroy: true
+  accepts_nested_attributes_for :invoices, allow_destroy: true
+
   after_create :copy_first_order_line_items_on_contract, :copy_first_order_commissions, :copy_first_order_values, :default_values
 
   def default_values
