@@ -70,6 +70,11 @@
                   %tbody
                     = f.fields_for :invoice_line_items do |builder|
                       = render 'invoice_line_item_fields', f: builder
+
+                %h3
+                  %strong.pull-right.padding-10
+                    Total:
+                    %span.text-success= to_dollars(@order.total_price)
                   = button_tag(type: 'submit', class: "btn btn-primary") do
                     %i.fa.fa-lg.fa-fw.fa-save
                     %span=  @invoice.new_record? ? "Save" : "Update"
