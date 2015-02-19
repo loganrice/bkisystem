@@ -77,15 +77,29 @@
                     = f.fields_for :commissions do |builder|
                       = render 'commission_fields', f: builder
                     = link_to_add_fields "Add Item", f, :commissions
+                    %h3
+                      %strong.pull-right.padding-10
+                        Commission(s):
+                        %span.text-success= to_dollars(@order.total_commission_cents)
                   %div#invoice.tab-pane.fade{ "role" => "tabpanel" }
                     %div.clearfix
                     = f.select :mail_to_id, options_for_select(f.object.stakeholders.map { |stakeholder| [stakeholder.name, stakeholder.id]}, selected: f.object.mail_to_id )
                     = f.select :acting_seller_id, options_for_select(f.object.stakeholders.map { |stakeholder| [stakeholder.name, stakeholder.id]}, selected: f.object.acting_seller_id )
                     = render 'discount', f: f
+
                     %h3
                       %strong.pull-right.padding-10
-                        Load Total:
-                        %span.text-success= to_dollars(@order.total_price)
+                        Total:
+                        %span.text-success= to_dollars(@order.total_price_less_discount_plus_commission)
+                    %h3
+                      %strong.pull-right.padding-10
+                        Commission(s):
+                        %span.text-success= "+ #{ to_dollars(@order.total_commission_cents)}"
+                    %h3
+                      %strong.pull-right.padding-10
+                        Discount:
+                        %span.text-success= "( #{to_dollars(@order.discount) } )"
+
                     %div.clearfix
                     %fieldset
                       %div.panel.panel-primary

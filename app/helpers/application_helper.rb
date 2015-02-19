@@ -32,7 +32,8 @@ module ApplicationHelper
   end
 
   def to_dollars(cents)
-    number_to_currency (cents / 100)
+    dollars = (cents / BigDecimal("100"))
+    number_to_currency( dollars )
   end
   
   def invoice_bank_collection(order)

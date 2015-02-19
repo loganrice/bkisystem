@@ -7,7 +7,8 @@
     %td
       = f.object.payee.name
     %td
-      = link_to f.object.invoice_number ||= f.object.id, edit_invoice_path(f.object), remote: true
+      - invoice_number = f.object.invoice_number.blank? ? "blank" : f.object.invoice_number
+      = link_to invoice_number, edit_invoice_path(f.object), remote: true
     %td
       %strong
         = number_to_currency(f.object.invoice_line_items.first.amount_dollars)

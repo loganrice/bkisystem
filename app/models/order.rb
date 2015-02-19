@@ -29,6 +29,30 @@ class Order < ActiveRecord::Base
     end
   end
 
+  def discount
+    total = BigDecimal("0")
+    total += total_percent_discount if total_percent_discount
+    total += total_discount_cents_per_pound if total_discount_cents_per_pound
+    total += discount_cents if discount_cents 
+    total.round(2).to_i
+  end
+
+  def discount_dollars_per_pound
+    self.discount_cents_per_pound.to_f / 100
+  end
+
+  def discount_dollars_per_pound=(dollars)
+    self.discount_cents_per_pound = (dollars.to_f * 100).to_i
+  end
+
+  def discount_dollars
+    self.discount_cents.to_f / 100 
+  end
+
+  def discount_dollars=(dollars)
+    self.discount_cents = (dollars.to_f * 100).to_i
+  end
+
   def stakeholders
     stake_hldrs = []
     stake_hldrs << self.contract.seller
@@ -36,7 +60,7 @@ class Order < ActiveRecord::Base
     self.commissions.each do |commission|
       stake_hldrs << commission.broker
     end 
-    stake_hldrs
+    stake_hldrs.select { |x| !x.blank? }
   end
 
   def total_pounds
@@ -53,6 +77,30 @@ class Order < ActiveRecord::Base
       cents += line_item.invoice_total
     end
     cents
+  end
+
+  def total_price_less_discount
+    if total_price
+      total_price - discount
+    else
+      0
+    end
+  end
+
+  def total_price_less_discount_plus_commission
+    if total_price_less_discount
+      total_price_less_discount + total_commission_cents
+    else
+      0
+    end
+  end
+
+  def total_commission_cents
+    cents = 0
+    self.commissions.each do |commission|
+      cents += commission.total 
+    end    
+    cents 
   end
 
   def price_dollars(cents)
@@ -112,6 +160,22 @@ class Order < ActiveRecord::Base
 
   private
 
+  def round_money(cents)
+    cents.round(2).to_i 
+  end
+
+  def total_percent_discount
+    percentify(discount_percent) * BigDecimal(total_price.to_s)
+  end
+
+  def percentify(number)
+    BigDecimal.new(number.to_s) / BigDecimal.new("100")
+  end
+
+  def total_discount_cents_per_pound
+    discount_cents_per_pound * total_pounds if discount_cents_per_pound && total_pounds
+  end
+
   def copy_container_size(order)
     update_attribute(:container_size, order.container_size)
   end
@@ -127,4 +191,6 @@ class Order < ActiveRecord::Base
   def copy_mail_to(order)
     update_attribute(:mail_to_id, order.mail_to_id)
   end
+
+
 end

@@ -23,4 +23,14 @@ $('form').on('click', '.add_fields', function(event) {
   regexp = new RegExp($(this).data('id'), 'g');
   $(this).before($(this).data('fields').replace(regexp, time));
   event.preventDefault();
-})
+});
+
+$('#default-invoice-amount').on('click', '.amount', function() {
+  var amount = $(this).data('amount');
+  amount = to_dollars(amount)
+  $('#invoice_invoice_line_items_attributes_0_amount_dollars').val(amount);
+});
+
+var to_dollars = function(cents) {
+  return (cents / 100).toFixed(2)
+}

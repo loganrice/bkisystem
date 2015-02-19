@@ -1,7 +1,8 @@
 %div.well.well-sm.bg-color-darken.txt-color-white.no-border
   %div.row.text-danger
-    %section.col-sm-3.col-sm-offset-9
+    %section.col-sm-3
       %span.pull-right
+
         = f.text_field :amount_dollars, prepend: "$", label: "Total Amount", label: "INVOICE AMOUNT"
         
 - @order.order_line_items.each do |line_item|
@@ -22,7 +23,7 @@
     %td
       = number_to_currency line_item.price_dollars
     %td
-      = to_dollars(line_item.commission_total)
+      = to_dollars(@order.discount)
     %td
       %strong= to_dollars(line_item.invoice_total)
 

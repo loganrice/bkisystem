@@ -57,6 +57,17 @@
                     = f.select :bank_id, invoice_bank_collection(@order), include_blank: true, label: "Remit Funds to Bank"
                   %section.col-sm-6
                     = f.select :address_id, invoice_address_collection(@order) 
+                %div.btn-group#default-invoice-amount{ "role" => "group"}
+                  %a.btn.btn-default.amount{ "data-amount" => "#{@order.total_price_less_discount}"}
+                    %strong= "Total - Discount"
+                  %a.btn.btn-default.amount{ "data-amount" => "#{@order.total_price_less_discount_plus_commission}"}
+                    %strong= "Total + Commission"
+                  %a.btn.btn-default.amount{ "data-amount" => "#{@order.total_commission_cents}"}
+                    %strong= "Commission"
+                  - @order.commissions.each do |commission|
+                    %a.btn.btn-default.amount{ "data-amount" => "#{commission.total}"}
+                      %strong="#{commission.broker.name}" 
+
 
                 %table.table.table-hover
                   %thead
@@ -65,9 +76,10 @@
                       %th.text-center WEIGHT
                       %th ITEM
                       %th PRICE
-                      %th COMMISSION
+                      %th DISCOUNT
                       %th TOTAL
                   %tbody
+
                     = f.fields_for :invoice_line_items do |builder|
                       = render 'invoice_line_item_fields', f: builder
 
@@ -78,3 +90,14 @@
                   = button_tag(type: 'submit', class: "btn btn-primary") do
                     %i.fa.fa-lg.fa-fw.fa-save
                     %span=  @invoice.new_record? ? "Save" : "Update"
+
+
+                %h3
+                  %strong.pull-right.padding-10
+                    Discount:
+                    %span.text-success= "( #{to_dollars(@order.discount)} )"
+
+                %h3
+                  %strong.pull-right.padding-10
+                    Sub Total:
+                    %span.text-success= "( #{to_dollars(@order.total_price_less_discount)} )"

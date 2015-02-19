@@ -26,6 +26,82 @@ describe Order do
 
   end
 
+  describe "#discount" do 
+    it "multiplies discount_percent by total_price" do 
+      order = Fabricate(:order, discount_percent: 10)
+      line_item1 = Fabricate(:order_line_item, order_id: order.id, price_cents: 100, pack_weight_pounds: 1, pack_count: 1)
+      line_item2 = Fabricate(:order_line_item, order_id: order.id, price_cents: 100, pack_weight_pounds: 1, pack_count: 1)
+      expect(order.discount).to eq(20)
+    end
+
+    it "multiplies discount_cents_per_pound by total_pounds" do
+      order = Fabricate(:order, discount_cents_per_pound: 2)
+      line_item1 = Fabricate(:order_line_item, order_id: order.id, price_cents: 100, pack_weight_pounds: 100, pack_count: 1)
+      line_item2 = Fabricate(:order_line_item, order_id: order.id, price_cents: 100, pack_weight_pounds: 100, pack_count: 1)
+      expect(order.discount).to eq(400)      
+    end
+    it "subtracts discount_cents by total_price" do 
+      order = Fabricate(:order, discount_cents: 500)
+      line_item1 = Fabricate(:order_line_item, order_id: order.id, price_cents: 100, pack_weight_pounds: 100, pack_count: 1)
+      line_item2 = Fabricate(:order_line_item, order_id: order.id, price_cents: 100, pack_weight_pounds: 100, pack_count: 1)
+      expect(order.discount).to eq(500)  
+    end
+    it "returns the total of the 3 types of discount options into a single amount" do 
+      order = Fabricate(:order, discount_percent: 10, discount_cents: 500, discount_cents_per_pound: 2)
+      line_item1 = Fabricate(:order_line_item, order_id: order.id, price_cents: 100, pack_weight_pounds: 100, pack_count: 1)
+      line_item2 = Fabricate(:order_line_item, order_id: order.id, price_cents: 100, pack_weight_pounds: 100, pack_count: 1)
+      expect(order.discount).to eq(2900) 
+    end
+
+  end
+
+  describe "#total_price_less_discount" do 
+    it "should subtract 2900 cents from a 20000 cent order" do 
+      order = Fabricate(:order, discount_percent: 10, discount_cents: 500, discount_cents_per_pound: 2)
+      line_item1 = Fabricate(:order_line_item, order_id: order.id, price_cents: 100, pack_weight_pounds: 100, pack_count: 1)
+      line_item2 = Fabricate(:order_line_item, order_id: order.id, price_cents: 100, pack_weight_pounds: 100, pack_count: 1)
+      expect(order.total_price_less_discount).to eq(17100) 
+    end
+  end
+
+  describe "#discount_dollars_per_pound" do 
+    it "should convert 200 to 2 dollars" do 
+      order = Fabricate(:order, discount_cents_per_pound: 200)
+      line_item1 = Fabricate(:order_line_item, order_id: order.id, price_cents: 100, pack_weight_pounds: 100, pack_count: 1)
+      line_item2 = Fabricate(:order_line_item, order_id: order.id, price_cents: 100, pack_weight_pounds: 100, pack_count: 1)
+      expect(order.discount_dollars_per_pound).to eq(2) 
+    end
+  end
+
+  describe "#discount_dollars_per_pound=" do
+    it "should store 150 cents given 1.497777 dollars" do  
+      order = Fabricate(:order)
+      line_item1 = Fabricate(:order_line_item, order_id: order.id, price_cents: 100, pack_weight_pounds: 100, pack_count: 1)
+      line_item2 = Fabricate(:order_line_item, order_id: order.id, price_cents: 100, pack_weight_pounds: 100, pack_count: 1)
+      order.discount_dollars_per_pound = 1.50  
+      expect(order.discount_dollars_per_pound).to eq(1.50)
+    end 
+  end
+
+  describe "#discount_dollars" do 
+    it "converts 200 to 2 dollars" do 
+      order = Fabricate(:order, discount_cents: 200)
+      line_item1 = Fabricate(:order_line_item, order_id: order.id, price_cents: 100, pack_weight_pounds: 100, pack_count: 1)
+      line_item2 = Fabricate(:order_line_item, order_id: order.id, price_cents: 100, pack_weight_pounds: 100, pack_count: 1)
+      expect(order.discount_dollars).to eq(2) 
+    end
+  end
+
+  describe "#discount_dollars=" do 
+    it "should store 200 cents given 2 dollars" do 
+      order = Fabricate(:order)
+      line_item1 = Fabricate(:order_line_item, order_id: order.id, price_cents: 100, pack_weight_pounds: 100, pack_count: 1)
+      line_item2 = Fabricate(:order_line_item, order_id: order.id, price_cents: 100, pack_weight_pounds: 100, pack_count: 1)
+      order.discount_dollars = 2   
+      expect(order.discount_cents).to eq(200)
+    end
+  end
+
   describe "#stakeholders" do 
     it "returns an array of all the accounts on the contract" do 
       buyer = Fabricate(:account)
@@ -86,6 +162,21 @@ describe Order do
       expect(order.total_price).to eq(10102200)     
     end
   end
+
+  describe "#total_commission_cents" do 
+    context "with associated Commission" do 
+      it "adds all of the commissions" do 
+        order = Fabricate(:order)
+        item = OrderLineItem.create(order_id: order.id, price_cents: 100, pack_weight_pounds: 10, pack_count: 1)
+        commission1 = Commission.create(percent: 2, broker_id: Fabricate(:account).id, order_id: order.id)
+        commission2 = Commission.create(cents_per_pound: 3, broker_id: Fabricate(:account).id, order_id: order.id)
+        commission2 = Commission.create(cents: 100, broker_id: Fabricate(:account).id, order_id: order.id)
+        expect(order.total_commission_cents).to eq(150)      
+      end
+    end
+  end
+
+
   describe "#copy_first_order_line_items" do 
     it "copies the fields from the first order on the contract" do
       order = Fabricate(:order)
