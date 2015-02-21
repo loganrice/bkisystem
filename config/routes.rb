@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   resources :orders
   resources :invoices
   get 'contracts/:id/contract_report' => 'contracts#contract_report', as: :contract_report
+  get 'invoices/:id/invoice_report' => 'invoices#invoice_report', as: :invoice_report 
+
   get 'orders/:id/shipping_report' => 'orders#shipping_report', as: :shipping_report
 
   resources :documents

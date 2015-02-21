@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150217231505) do
+ActiveRecord::Schema.define(version: 20150220185321) do
 
   create_table "accounts", force: true do |t|
     t.string "name"
@@ -208,6 +208,7 @@ ActiveRecord::Schema.define(version: 20150217231505) do
     t.decimal  "discount_percent"
     t.integer  "discount_cents_per_pound"
     t.integer  "discount_cents"
+    t.string   "buyer_po"
   end
 
   create_table "pack_types", force: true do |t|

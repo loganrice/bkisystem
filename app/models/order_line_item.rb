@@ -3,6 +3,7 @@ class OrderLineItem < ActiveRecord::Base
   belongs_to :item 
   belongs_to :quote_line_item
   belongs_to :weight
+  belongs_to :pack_type
   before_save :default_values
   has_many :commissions, through: :order
   before_save :default_values

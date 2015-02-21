@@ -44,6 +44,18 @@ class InvoicesController < ApplicationController
     end
   end
 
+  def invoice_report
+    invoice = Invoice.find(params[:id])
+    respond_to do |format|
+      format.pdf do
+        pdf = InvoicePdf.new(invoice, view_context)
+        send_data pdf.render, filename: "invoice_#{invoice.id}.pdf",
+                              type: "application/pdf",
+                              disposition: "inline"
+      end
+    end
+  end
+
   private
 
   def invoice_params

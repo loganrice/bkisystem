@@ -13,4 +13,5 @@ Fabricator(:order) do
   commodity { Faker::Lorem.word }
   shipping_company_reference_number { Faker::Number.number(10) }
   automated_export_number { Faker::Number.number(10) }
+  buyer_po { Faker::Number.number(10) }
 end

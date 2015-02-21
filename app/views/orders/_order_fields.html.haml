@@ -4,6 +4,7 @@
   %tbody
     %tr 
       %td
+        = f.text_field :buyer_po
         = f.select :container_size, options_for_select(["20 FCL", "40 FCL", "Truck"], f.object.container_size)
         = f.text_area :ship_delivery
         = f.text_area :ship_pick_up
