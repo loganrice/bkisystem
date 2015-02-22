@@ -3,7 +3,6 @@ class Order < ActiveRecord::Base
   belongs_to :bank
   belongs_to :address
   belongs_to :mail_to, class_name: "Account"
-  belongs_to :acting_seller, class_name: "Account"
   validates_presence_of :contract
   has_many :order_line_items, -> { order("created_at DESC")}
   has_many :commissions
@@ -17,7 +16,6 @@ class Order < ActiveRecord::Base
   after_create :copy_first_order_line_items_on_contract, :copy_first_order_commissions, :copy_first_order_values, :default_values
 
   def default_values
-    self.acting_seller = self.contract.seller unless contract_has_at_least_1_order?
     self.mail_to = self.contract.seller unless contract_has_at_least_1_order?
   end
 

@@ -12,7 +12,11 @@
     %td
       %strong
         = number_to_currency(f.object.invoice_line_items.first.amount_dollars)
-    %td.col-md-2
+    %td
+      = link_to invoice_report_path(f.object, format: "pdf"), target: "_blank", class: "btn btn-default" do 
+        %i.fa.fa-lg.fa-fw.fa-file-pdf-o
+        %span.menu-item-parent Invoice
+    %td
       = f.hidden_field :_destroy
       %a.btn.btn-danger.pull-right.remove_fields{"href" => "#"}
         %i.fa.fa-remove

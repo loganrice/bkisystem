@@ -66,6 +66,8 @@ class InvoicesController < ApplicationController
       :payee_id, 
       :payer_id,
       :invoice_number,
+      :show_bank_wire_info,
+      :hide_commission,
       invoice_line_items_attributes: [:id, :amount_cents, :amount_dollars, :_destroy])
   end
 end

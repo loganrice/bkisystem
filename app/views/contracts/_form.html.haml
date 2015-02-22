@@ -47,12 +47,15 @@
                           = f.select :buyer_id, options_for_select(Account.all.order("name ASC").map { |buyer| [buyer.name, buyer.id]}, selected: f.object.buyer_id )
                         %section.col-sm-6
                           = f.select :seller_id, options_for_select(Account.all.order("name ASC").map { |seller| [seller.name, seller.id]}, selected: f.object.seller_id )
-
+                      %div.row
+                        %section.col-sm-6
+                          = f.select :acting_seller_id, options_for_select(Account.all.order("name ASC").map { |seller| [seller.name, seller.id]}, selected: f.object.acting_seller_id )
                       %div.row
                         %section.col-sm-4
                           = f.text_field :buyer_contract
                         %section.col-sm-4
                           = f.text_field :seller_contract
+
                       %div.row
                         %section.col-sm-6
                           = f.text_field :ship_date_note

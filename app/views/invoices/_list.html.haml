@@ -25,13 +25,19 @@
               %table#recordTable.table.table-striped.table-bordered.table-hover{ :width => "100%" }
                 %thead
                   %tr
-                    %th ID
-                    %th Payee
-                    %th Payer
+                    %th Invoice
+                    %th Contract
+                    %th Load
+                    %th Bill To
+                    %th From
+                    %th Amount
                 %tbody
                   - @invoices.each do |invoice|
                     %tr
-                      %td= link_to invoice.id, edit_invoice_path(invoice), remote: true
-                      %td= invoice.payee.name
+                      %td= link_to invoice.invoice_number.blank? ? "Blank" : invoice.invoice_number, edit_invoice_path(invoice), remote: true
+                      %td= link_to invoice.order.contract.seller_contract, edit_contract_path(invoice.order.contract), remote: true
+                      %td= link_to invoice.order.row_on_contract, edit_order_path(invoice.order), remote: true 
                       %td= invoice.payer.name
+                      %td= invoice.payee.name
 
+                      %td= to_dollars invoice.invoice_line_items.first.amount_cents

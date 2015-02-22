@@ -59,7 +59,12 @@
                   %section.col-sm-6
                     = f.select :bank_id, invoice_bank_collection(@order), include_blank: true, label: "Remit Funds to Bank"
                   %section.col-sm-6
-                    = f.select :address_id, invoice_address_collection(@order) 
+                    = f.select :address_id, invoice_address_collection(@order)
+                %div.row
+                  %section.col-sm-3
+                    = f.check_box :show_bank_wire_info
+                  %section.col-sm-3
+                    = f.check_box :hide_commission
                 %div.btn-group#default-invoice-amount{ "role" => "group"}
                   %a.btn.btn-default.amount{ "data-amount" => "#{@order.total_price_less_discount}"}
                     %strong= "Total - Discount"

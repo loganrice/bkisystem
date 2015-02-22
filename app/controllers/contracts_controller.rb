@@ -64,6 +64,7 @@ class ContractsController < ApplicationController
       :payment_terms,
       :remarks,
       :ship_date_note,
+      :acting_seller_id,
       orders_attributes: [:ship_date, :id, :_destroy,
         order_line_items_attributes: [:item_id, :price_dollars, :weight_id, :pack_weight_pounds, :item_size_indicator_id, :pack_weight_kilograms, :pack_count, :pack_type_id, :id, :_destroy]
       ],

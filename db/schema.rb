@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150222204101) do
+ActiveRecord::Schema.define(version: 20150222230731) do
 
   create_table "accounts", force: true do |t|
     t.string "name"
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 20150222204101) do
     t.text     "payment_terms"
     t.text     "remarks"
     t.string   "ship_date_note"
+    t.integer  "acting_seller_id"
   end
 
   create_table "document_orders", force: true do |t|
@@ -135,6 +136,8 @@ ActiveRecord::Schema.define(version: 20150222204101) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "invoice_number"
+    t.boolean  "show_bank_wire_info", limit: 255
+    t.boolean  "hide_commission"
   end
 
   create_table "item_size_indicators", force: true do |t|
@@ -210,9 +213,7 @@ ActiveRecord::Schema.define(version: 20150222204101) do
     t.text     "ship_pick_up"
     t.integer  "bank_id"
     t.integer  "address_id"
-    t.boolean  "show_bank_wire_info"
     t.integer  "mail_to_id"
-    t.integer  "acting_seller_id"
     t.decimal  "discount_percent"
     t.integer  "discount_cents_per_pound"
     t.integer  "discount_cents"

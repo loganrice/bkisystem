@@ -11,7 +11,6 @@ describe Order do
   it { should belong_to(:bank) }
   it { should belong_to(:address) }
   it { should belong_to(:mail_to) }
-  it { should belong_to(:acting_seller) }
   it { should have_many(:invoices) }
   it { should accept_nested_attributes_for(:invoices)}
 

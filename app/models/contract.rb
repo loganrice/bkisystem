@@ -4,6 +4,7 @@ class Contract < ActiveRecord::Base
   has_many :orders
   has_one :quote
   has_many :quote_line_items, through: :quote
+  belongs_to :acting_seller, class_name: "Account"
   accepts_nested_attributes_for :orders, allow_destroy: true
   accepts_nested_attributes_for :quote, allow_destroy: true
   before_create :create_quote

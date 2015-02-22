@@ -83,7 +83,6 @@ class OrdersController < ApplicationController
       :state,
       :zip,
       :mail_to_id,
-      :acting_seller_id,
       :shipping_instructions,
       :discount_dollars_per_pound,
       :discount_percent,

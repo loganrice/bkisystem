@@ -6,6 +6,7 @@ describe Contract do
   it { should have_one(:quote) }
   it { should have_many(:quote_line_items).through(:quote)}
   it { should have_many(:orders) }
+  it { should belong_to(:acting_seller) }
   it { should accept_nested_attributes_for(:orders) }
   it { should validate_presence_of(:buyer)}
   it { should validate_presence_of(:seller)}

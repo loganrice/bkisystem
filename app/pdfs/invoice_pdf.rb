@@ -81,7 +81,7 @@ class InvoicePdf
     y_position -= @line_space
 
     address(@invoice.order.contract.buyer, @invoice.order.contract.buyer.addresses.first, 0, y_position) unless @invoice.order.contract.buyer.addresses.blank?
-    address(@invoice.order.contract.seller, @invoice.order.contract.seller.addresses.first, 300, y_position) unless @invoice.order.contract.seller.addresses.blank?
+    address(@invoice.order.contract.acting_seller, @invoice.order.contract.acting_seller.addresses.first, 300, y_position) unless @invoice.order.contract.seller.addresses.blank?
     y_position -= @line_space
 
     move_cursor_to y_position 
@@ -118,23 +118,27 @@ class InvoicePdf
       text_box "#{@view.to_dollars(line_item.invoice_total)}", at: [column6, y_position]
       y_position -= @line_space
     end 
- 
 
-    text_box "<em><b>Discount</b></em>", inline_format:true, at: [column1, y_position]
-    text_box "(#{@view.to_dollars(@invoice.order.discount)})", inline_format:true, at: [column6, y_position]
-    y_position -= @line_space
-
-    text_box "<em><b>Commission</b></em>", inline_format:true, at: [column1, y_position]
-    text_box "#{@view.to_dollars(@invoice.order.total_commission_cents)}", inline_format:true, at: [column6, y_position]
-
-    y_position -= @line_space
     line [column6, y_position], [column6 + 80, y_position]
     stroke
     y_position -= (0.5 * @line_space)
 
     text_box "<em>Load Total:</em>", inline_format:true, at: [column5, y_position]
     text_box "<em>#{@view.to_dollars(@invoice.order.total_price_less_discount_plus_commission)}</em>", inline_format:true, at: [column6, y_position]
-    # y_postion -= @line_space
+ 
+    y_position -= @line_space
+
+    if @invoice.order.discount > 0
+      text_box "<em>Discount</em>", inline_format:true, at: [column5, y_position]
+      text_box "(#{@view.to_dollars(@invoice.order.discount)})", inline_format:true, at: [column6, y_position]
+      y_position -= @line_space
+    end
+
+    unless @invoice.hide_commission
+      text_box "<em>Commission</em>", inline_format:true, at: [column5, y_position]
+      text_box "#{@view.to_dollars(@invoice.order.total_commission_cents)}", inline_format:true, at: [column6, y_position]
+    end
+
     y_position -= @double_space
 
 
@@ -193,25 +197,26 @@ class InvoicePdf
     text_box "<b><em>Remit Funds To:</em></b>", inline_format: true, at: [x_position, y_position]
     address(@invoice.payee, @invoice.payee.addresses.first, x_position_description, y_position) unless @invoice.payee.addresses.blank?
 
-    text_box "<b><em>Bank Wire Information:</em></b>", inline_format: true, at: [x_position_bank, y_position]
-    bank_address(@invoice.bank, x_position_bank_description, y_position) unless @invoice.bank.blank?
+    if @invoice.show_bank_wire_info
+      text_box "<b><em>Bank Wire Information:</em></b>", inline_format: true, at: [x_position_bank, y_position]
+      bank_address(@invoice.bank, x_position_bank_description, y_position) unless @invoice.bank.blank?
 
-    y_position -= @line_space * 5
-    text_box "<b><em>ABA:</em></b>", inline_format: true, at: [x_position_bank, y_position]
-    text_box "#{@invoice.bank.aba}", inline_format: true, at: [x_position_bank_description, y_position]
-    y_position -= @line_space
-     
-    text_box "<b><em>Swift Code:</em></b>", inline_format: true, at: [x_position_bank, y_position]
-    text_box "#{@invoice.bank.swift}", inline_format: true, at: [x_position_bank_description, y_position]
-    y_position -= @line_space
-    
-    text_box "<b><em>Beneficiary Account:</em></b>", inline_format: true, at: [x_position_bank, y_position]
-    text_box "#{@invoice.bank.account_number}", inline_format: true, at: [x_position_bank_description, y_position]
-    y_position -= @line_space
+      y_position -= @line_space * 5
+      text_box "<b><em>ABA:</em></b>", inline_format: true, at: [x_position_bank, y_position]
+      text_box "#{@invoice.bank.aba}", inline_format: true, at: [x_position_bank_description, y_position]
+      y_position -= @line_space
+       
+      text_box "<b><em>Swift Code:</em></b>", inline_format: true, at: [x_position_bank, y_position]
+      text_box "#{@invoice.bank.swift}", inline_format: true, at: [x_position_bank_description, y_position]
+      y_position -= @line_space
+      
+      text_box "<b><em>Beneficiary Account:</em></b>", inline_format: true, at: [x_position_bank, y_position]
+      text_box "#{@invoice.bank.account_number}", inline_format: true, at: [x_position_bank_description, y_position]
+      y_position -= @line_space
 
-    text_box "<b><em>Attention:</em></b>", inline_format: true, at: [x_position_bank, y_position]
-    text_box "#{@invoice.bank.attention}", inline_format: true, at: [x_position_bank_description, y_position]
-
+      text_box "<b><em>Attention:</em></b>", inline_format: true, at: [x_position_bank, y_position]
+      text_box "#{@invoice.bank.attention}", inline_format: true, at: [x_position_bank_description, y_position]
+    end
     move_cursor_to y_position
   end
 
