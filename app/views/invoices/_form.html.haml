@@ -39,9 +39,10 @@
                         INVOICE DATE :
                         %i.fa.fa-calendar
                         / = @invoice.created_at.strftime("%m/%d/%Y")
-                    = link_to invoice_report_path(@invoice, format: "pdf"), target: "_blank", class: "btn btn-default" do 
-                      %i.fa.fa-lg.fa-fw.fa-file-pdf-o
-                      %span.menu-item-parent Invoice
+                    - unless @invoice.new_record?
+                      = link_to invoice_report_path(@invoice, format: "pdf"), target: "_blank", class: "btn btn-default" do 
+                        %i.fa.fa-lg.fa-fw.fa-file-pdf-o
+                        %span.menu-item-parent Invoice
               = bootstrap_form_for @invoice, layout: :default, control_col: "col-sm-4", label_errors: true, remote: true do |f|
                 = f.hidden_field :order_id
                 %div.padding-10

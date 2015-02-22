@@ -53,7 +53,7 @@ class AccountsController < ApplicationController
       :email, addresses_attributes: 
       [:line1, :line2, :line3, :city, :country, :zip, :id, :_destroy], 
       banks_attributes:
-      [:name, :aba, :swift, :attention, :id, :_destroy]
+      [:name, :aba, :swift, :attention, :line1, :line2, :line3, :city, :state, :zip, :country, :id, :_destroy]
       )
   end
 end

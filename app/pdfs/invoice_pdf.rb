@@ -20,7 +20,6 @@ class InvoicePdf
     move_down 100
 
     order_details
-    stroke_axis
 
     container_information
     move_down 50
@@ -119,14 +118,7 @@ class InvoicePdf
       text_box "#{@view.to_dollars(line_item.invoice_total)}", at: [column6, y_position]
       y_position -= @line_space
     end 
-    y_position -= (0.1 * @line_space)
-
-    line [15, y_position], [100, y_position]
-    stroke
-    y_position -= (0.5 * @line_space)
-    text_box "<em>Total Lbs:</em>", inline_format: true, at: [column1, y_position]
-    text_box "<em>#{@view.number_with_delimiter(@invoice.order.total_pounds)}</em>", inline_format: true, at: [column2, y_position]
-    y_position -= @double_space
+ 
 
     text_box "<em><b>Discount</b></em>", inline_format:true, at: [column1, y_position]
     text_box "(#{@view.to_dollars(@invoice.order.discount)})", inline_format:true, at: [column6, y_position]
@@ -148,6 +140,13 @@ class InvoicePdf
 
     text_box "<em>Total Due:</em>", inline_format:true, at: [column5, y_position], size: 15
     text_box "<em>#{@view.to_dollars(@invoice.invoice_line_items.first.amount_cents)}</em>", inline_format:true, at: [column6, y_position], size: 15
+
+    line [15, y_position], [100, y_position]
+    stroke
+    y_position -= (0.5 * @line_space)
+    text_box "<em>Total Lbs:</em>", inline_format: true, at: [column1, y_position]
+    text_box "<em>#{@view.number_with_delimiter(@invoice.order.total_pounds)}</em>", inline_format: true, at: [column1 + 80, y_position]
+
     y_position -= @double_space
 
     move_cursor_to y_position 
@@ -177,7 +176,7 @@ class InvoicePdf
     y_position -= @line_space
 
     text_box "Terms:", inline_format: true, at: [x_position, y_position]
-    text_box "#{@invoice.order.contract.payment_terms}", inline_format: true, at: [x_position_description, y_position], height: 45, overflow: :shrink_to_fit
+    text_box "#{@invoice.order.contract.payment_terms}", inline_format: true, at: [x_position_description, y_position], height: 35, overflow: :shrink_to_fit
     y_position -= @line_space
     move_cursor_to y_position
   end
@@ -185,16 +184,63 @@ class InvoicePdf
   def remit_funds_to
     x_position = 0
     y_position = cursor  
-    x_position_description =  150
+    x_position_description =  100
+    x_position_bank = 200
+    x_position_bank_description = 350
 
-    text_box "<b><em>Remit Funds To</em></b>", inline_format: true, at: [x_position, y_position]
+    stroke_horizontal_rule
+    y_position -= @line_space
+    text_box "<b><em>Remit Funds To:</em></b>", inline_format: true, at: [x_position, y_position]
     address(@invoice.payee, @invoice.payee.addresses.first, x_position_description, y_position) unless @invoice.payee.addresses.blank?
 
+    text_box "<b><em>Bank Wire Information:</em></b>", inline_format: true, at: [x_position_bank, y_position]
+    bank_address(@invoice.bank, x_position_bank_description, y_position) unless @invoice.bank.blank?
+
+    y_position -= @line_space * 5
+    text_box "<b><em>ABA:</em></b>", inline_format: true, at: [x_position_bank, y_position]
+    text_box "#{@invoice.bank.aba}", inline_format: true, at: [x_position_bank_description, y_position]
     y_position -= @line_space
+     
+    text_box "<b><em>Swift Code:</em></b>", inline_format: true, at: [x_position_bank, y_position]
+    text_box "#{@invoice.bank.swift}", inline_format: true, at: [x_position_bank_description, y_position]
+    y_position -= @line_space
+    
+    text_box "<b><em>Beneficiary Account:</em></b>", inline_format: true, at: [x_position_bank, y_position]
+    text_box "#{@invoice.bank.account_number}", inline_format: true, at: [x_position_bank_description, y_position]
+    y_position -= @line_space
+
+    text_box "<b><em>Attention:</em></b>", inline_format: true, at: [x_position_bank, y_position]
+    text_box "#{@invoice.bank.attention}", inline_format: true, at: [x_position_bank_description, y_position]
+
     move_cursor_to y_position
   end
 
+  def bank_address(bank, x_position, y_position)
+    text_box bank.name, at: [x_position, y_position]
+    y_position -= @line_space
+    unless bank.line1.blank?
+      text_box bank.line1, inline_format: true, at: [x_position, y_position]
+      y_position -= @line_space
+      
+    end
 
+    unless bank.line2.blank?
+      text_box bank.line2, inline_format: true, at: [x_position, y_position]
+      y_position -= @line_space 
+    end
+
+    unless bank.line3.blank?
+      text_box bank.line3, inline_format: true, at: [x_position, y_position]
+      y_position -= @line_space
+    end
+    text_box "#{bank.city} " +
+             "#{bank.state} " +
+             "#{bank.zip}", inline_format: true, at: [x_position, y_position]
+ 
+
+    y_position -= @line_space
+    move_cursor_to y_position 
+  end
 
   def address(account, address, x_position, y_position)
     text_box account.name, at: [x_position, y_position]
