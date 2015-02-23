@@ -7,7 +7,15 @@ class OrderLineItem < ActiveRecord::Base
   before_save :default_values
   has_many :commissions, through: :order
   before_save :default_values
-  
+
+  def item_name
+    item.try(:name)
+  end
+
+  def item_name=(name)
+    self.item = Item.find_by_name(name) if name.present?
+  end
+
   def price_dollars=(dollars)
     dollars = dollars.to_s
     dollars = BigDecimal.new(dollars)

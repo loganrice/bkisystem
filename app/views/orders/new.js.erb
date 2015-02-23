@@ -22,4 +22,14 @@ $('form').on('click', '.add_fields', function(event) {
   regexp = new RegExp($(this).data('id'), 'g');
   $(this).before($(this).data('fields').replace(regexp, time));
   event.preventDefault();
-})
+  auto_complete_items();
+});
+
+var auto_complete_items = function() {
+  $(".item_name" ).autocomplete({
+    source: "/ajax/item_names"
+  });
+}
+
+
+auto_complete_items();

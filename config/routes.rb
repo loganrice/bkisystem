@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   get 'invoices/:id/invoice_report' => 'invoices#invoice_report', as: :invoice_report 
 
   get 'orders/:id/shipping_report' => 'orders#shipping_report', as: :shipping_report
-
+  get 'ajax/item_names' => 'ajax#item_names', as: :item_names
   resources :documents
   get 'sign_in' => 'sessions#new'
   get 'sign_out' => 'sessions#destroy'

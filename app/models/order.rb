@@ -129,7 +129,6 @@ class Order < ActiveRecord::Base
       end
 
       copy_mail_to(first_order_on_contract)
-      copy_acting_seller(first_order_on_contract)
 
     end
   end
@@ -180,10 +179,6 @@ class Order < ActiveRecord::Base
 
   def copy_documents(order)
     update_attribute(:documents, order.documents)
-  end
-
-  def copy_acting_seller(order)
-    update_attribute(:acting_seller_id, order.acting_seller_id)
   end
 
   def copy_mail_to(order)

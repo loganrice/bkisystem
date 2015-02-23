@@ -5,11 +5,11 @@
       %tbody
         %tr
           %td.col-xs-5
-            = f.select :item_id, options_for_select(Item.all.order("name ASC").map { |item| [item.name, item.id]}, selected: f.object.item_id), hide_label: true
+            = f.text_field :item_name, class: 'item_name'
           %td.col-xs-2
-            = f.collection_select :item_size_indicator_id, ItemSizeIndicator.all, :id, :name, hide_label: true
+            = f.collection_select :item_size_indicator_id, ItemSizeIndicator.all, :id, :name
           %td.col-xs-2
-            = f.text_field :price_dollars, prepend: "$", value: f.object.price_dollars ||= 0.00, hide_label: true
+            = f.text_field :price_dollars, prepend: "$", value: f.object.price_dollars ||= 0.00
           %td.col-md-2
             = f.hidden_field :_destroy
             %a.btn.btn-danger.pull-right.remove_item_fields{"href" => "#"}
@@ -31,7 +31,7 @@
               %td.col-xs-2
                 = f.number_field :pack_weight_pounds, step: 0.001
             %td.col-xs-2
-              = f.collection_select :weight_id, Weight.all, :id, :weight_unit_of_measure
+              = f.collection_select :weight_id, Weight.all.reverse, :id, :weight_unit_of_measure
 
             %td.col-xs-2
               = f.collection_select :pack_type_id, PackType.all, :id, :name
