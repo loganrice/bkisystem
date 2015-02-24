@@ -4,4 +4,5 @@ Fabricator(:item) do
   size { Fabricate(:size) }
   variety { Fabricate(:variety) }
   grade { Fabricate(:grade)}
+  origin { Fabricate(:origin)}
 end

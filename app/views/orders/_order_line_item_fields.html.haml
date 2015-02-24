@@ -9,6 +9,9 @@
           %td.col-xs-2
             = f.collection_select :item_size_indicator_id, ItemSizeIndicator.all, :id, :name
           %td.col-xs-2
+            - season_default = f.object.season.blank? ? Time.now.year - 1 : f.object.season
+            = f.select :season, options_for_select(((Time.now.year - 3)..(Time.now.year)).to_a, season_default)
+          %td.col-xs-2
             = f.text_field :price_dollars, prepend: "$", value: f.object.price_dollars ||= 0.00
           %td.col-md-2
             = f.hidden_field :_destroy

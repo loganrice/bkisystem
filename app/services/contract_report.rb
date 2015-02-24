@@ -17,6 +17,17 @@ class ContractReport
     items
   end
 
+  def commodity_season
+    commodities = []
+    @line_items.each do |line_item|
+      origin = line_item.item.origin.name
+      commodity = line_item.item.commodity.name
+      season = line_item.season
+      commodities << "#{origin} #{commodity} - #{season}"
+    end
+    commodities.uniq
+  end
+
   def number_of_shipments(item)
     shipment_count = 0 
     @items.each do |key, value|

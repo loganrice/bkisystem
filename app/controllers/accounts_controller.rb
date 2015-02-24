@@ -51,9 +51,9 @@ class AccountsController < ApplicationController
     params.require(:account).permit(
       :name, :phone1, :phone2, :fax, :first_name, :last_name,
       :email, addresses_attributes: 
-      [:line1, :line2, :line3, :city, :country, :zip, :id, :_destroy], 
+      [:line1, :line2, :line3, :city, :state, :country, :zip, :id, :_destroy], 
       banks_attributes:
-      [:name, :aba, :swift, :attention, :line1, :line2, :line3, :city, :state, :zip, :country, :id, :_destroy]
+      [:name, :aba, :swift, :account_number, :attention, :line1, :line2, :line3, :city, :state, :zip, :country, :id, :_destroy]
       )
   end
 end

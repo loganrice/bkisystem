@@ -13,10 +13,11 @@ describe ContractReport do
     almonds = Commodity.create(name: "Almonds")
     grade = Grade.create(name: "US Extra No. 1")
     size = Size.create(name: "22/24")
+    origin = Origin.create(name: "California")
     lbs = Weight.create(weight_unit_of_measure: "Lbs")
     carton = PackType.create(name: "carton")
     item1 = Item.create(name: "Nonpariel Almonds US Extra No. 1 22/24", variety_id: nonpareil.id,
-                          commodity_id: almonds.id, grade_id: grade.id, size_id: size.id)
+                          commodity_id: almonds.id, origin_id: origin.id, grade_id: grade.id, size_id: size.id)
 
     order1_line1 = Fabricate(:order_line_item, item_id: item1.id, order_id: order1.id, pack_weight_pounds: "500", pack_count: "10", item_size_indicator_id: size_indicator.id, weight_id: lbs.id, pack_type_id: carton.id)
     order1_line2 = Fabricate(:order_line_item, item_id: item1.id, order_id: order2.id, pack_weight_pounds: "500", pack_count: "10", item_size_indicator_id: size_indicator.id, weight_id: lbs.id, pack_type_id: carton.id)

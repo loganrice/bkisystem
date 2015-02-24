@@ -52,7 +52,7 @@ class OrderPdf
   end
 
   def contract_number
-    text "<b>Date:</b> #{@contract.date.strftime("%m/%d/%Y")}", inline_format: true
+    text "<b>Date:</b> #{@contract.date.try(:strftime, ("%m/%d/%Y"))}", inline_format: true
     text "<b>Contract No:</b> #{@contract.id}", inline_format: true
     text "<b>Customer Contract No:</b> #{@contract.buyer_contract}", inline_format: true
   end
@@ -94,8 +94,11 @@ class OrderPdf
     line_space = 15
 
     text_box "<i><b>Commodity:</b></i>", inline_format: true, at: [0, y_position]
-    text_box "California Shelled Almonds - 2014", inline_format: true, at: [x_description_position, y_position]
-
+    @contract_report.commodity_season.each do |commodity|
+      text_box "#{commodity}", inline_format: true, at: [x_description_position, y_position]
+      y_position -= line_space
+    end
+    
 
 
     y_position -= line_space

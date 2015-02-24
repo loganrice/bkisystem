@@ -10,7 +10,6 @@ describe Order do
   it { should have_many(:documents).through(:document_orders)}
   it { should belong_to(:bank) }
   it { should belong_to(:address) }
-  it { should belong_to(:mail_to) }
   it { should have_many(:invoices) }
   it { should accept_nested_attributes_for(:invoices)}
 

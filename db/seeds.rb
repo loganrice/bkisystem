@@ -28,9 +28,13 @@ User.delete_all
 ItemSizeIndicator.delete_all
 PackType.delete_all
 Document.delete_all
+Origin.delete_all
+Invoice.delete_all
+InvoiceLineItem.delete_all
 
 almonds = Commodity.create(name: "Almonds")
 walnuts = Commodity.create(name: "Walnuts")
+california = Origin.create(name: "California")
 
 def sizes
   sizes = []
@@ -81,7 +85,7 @@ end
 varieties.each do |variety|
   sizes.each do |size|
     grades.each do |grade|
-      Item.create(name: "#{variety.name} #{size.name} #{grade.name}", commodity_id: almonds.id, size_id: size.id, variety_id: variety.id, grade_id: grade.id)
+      Item.create(name: "#{variety.name} #{size.name} #{grade.name}", commodity_id: almonds.id, origin_id: california.id, size_id: size.id, variety_id: variety.id, grade_id: grade.id)
     end
   end
 end

@@ -36,7 +36,7 @@ class InvoicePdf
     x_position = 0
     y_position = cursor  
     x_position_description =  150
-    x_position_bill_to = 350
+    x_position_bill_to = 250
 
     text_box "<b><em>Bill To:</em></b>", inline_format: true, at: [x_position_bill_to, y_position]
     address(@invoice.payer, @invoice.payer.addresses.first, (x_position_bill_to + 50), y_position) unless @invoice.payer.addresses.blank?
@@ -124,7 +124,7 @@ class InvoicePdf
     y_position -= (0.5 * @line_space)
 
     text_box "<em>Load Total:</em>", inline_format:true, at: [column5, y_position]
-    text_box "<em>#{@view.to_dollars(@invoice.order.total_price_less_discount_plus_commission)}</em>", inline_format:true, at: [column6, y_position]
+    text_box "<em>#{@view.to_dollars(@invoice.order.total_price)}</em>", inline_format:true, at: [column6, y_position]
  
     y_position -= @line_space
 

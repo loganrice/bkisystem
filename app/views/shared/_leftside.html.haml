@@ -59,6 +59,8 @@
           %li.nav-item
             = link_to 'Commodities', commodities_path, remote: true
           %li.nav-item
+            = link_to 'Origins', origins_path, remote: true
+          %li.nav-item
             = link_to 'Sizes', sizes_path, remote: true
           %li.nav-item
             = link_to 'Varieties', varieties_path, remote: true
@@ -76,10 +78,6 @@
         = link_to documents_path, remote: true do
           %i.fa.fa-lg.fa-fw.fa-file-text-o
           %span.menu-item-parent Documents
-          
-  %span.minifyme{ "data-action" => "minifyMenu" }
-    = link_to sign_in_path, remote: true do 
-      %i.fa.fa-arrow-circle-left.hit
-      %span Sign In
+
 
       

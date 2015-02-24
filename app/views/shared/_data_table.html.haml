@@ -11,7 +11,8 @@
           %header
             %span.widget-icon
               %i.fa.fa-table
-            %h2= "#{data.first.class.name} List"
+            - if data.first
+              %h2= "#{data.first.class.name} List"
           -#- widget div-->
           %div
             -# widget edit box -->
@@ -21,9 +22,10 @@
             -#- widget content -->
             %div.widget-body
               %div.widget-body-toolbar
-                = link_to new_polymorphic_path(data.first), class: "btn btn-success", remote: true do 
-                  %i.fa.fa-plus
-                  %span= "New #{data.first.class.name}"
+                - if data.first
+                  = link_to new_polymorphic_path(data.first), class: "btn btn-success", remote: true do 
+                    %i.fa.fa-plus
+                    %span= "New #{data.first.class.name}"
 
               %table#recordTable.table.table-striped.table-bordered.table-hover{ :width => "100%" }
                 %thead

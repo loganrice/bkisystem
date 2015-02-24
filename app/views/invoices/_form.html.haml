@@ -52,7 +52,8 @@
 
                 %div.row
                   %section.col-sm-6
-                    = f.select :payer_id, @order.stakeholders.collect { |stakeholder| [stakeholder.name, stakeholder.id]}, label: "Bill to Account:"
+                    - select_payer_id = f.object.payer_id.blank? ? @order.contract.buyer.id : f.object.payer_id
+                    = f.select :payer_id, @order.stakeholders.collect { |stakeholder| [stakeholder.name, stakeholder.id]}, selected: select_payer_id, label: "Bill to Account:"
                   %section.col-sm-6
                     = f.select :payee_id, @order.stakeholders.collect { |stakeholder| [stakeholder.name, stakeholder.id] }, label: "Remit Funds to Account:"
                 %div.row
@@ -91,21 +92,20 @@
                     = f.fields_for :invoice_line_items do |builder|
                       = render 'invoice_line_item_fields', f: builder
 
+
                 %h3
                   %strong.pull-right.padding-10
-                    Total:
-                    %span.text-success= to_dollars(@order.total_price)
-                  = button_tag(type: 'submit', class: "btn btn-primary") do
-                    %i.fa.fa-lg.fa-fw.fa-save
-                    %span=  @invoice.new_record? ? "Save" : "Update"
-
+                    Grand Total:
+                    %span.text-success= "( #{to_dollars(@order.total_price_less_discount_plus_commission)} )"
 
                 %h3
                   %strong.pull-right.padding-10
                     Discount:
                     %span.text-success= "( #{to_dollars(@order.discount)} )"
-
                 %h3
                   %strong.pull-right.padding-10
-                    Sub Total:
-                    %span.text-success= "( #{to_dollars(@order.total_price_less_discount)} )"
+                    Commission(s):
+                    %span.text-success= "#{to_dollars(@order.total_commission_cents)}"
+                = button_tag(type: 'submit', class: "btn btn-primary") do
+                  %i.fa.fa-lg.fa-fw.fa-save
+                  %span=  @invoice.new_record? ? "Save" : "Update"

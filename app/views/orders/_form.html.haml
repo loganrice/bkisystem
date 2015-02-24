@@ -83,7 +83,6 @@
                         %span.text-success= to_dollars(@order.total_commission_cents)
                   %div#invoice.tab-pane.fade{ "role" => "tabpanel" }
                     %div.clearfix
-                    = f.select :mail_to_id, options_for_select(f.object.stakeholders.map { |stakeholder| [stakeholder.name, stakeholder.id]}, selected: f.object.mail_to_id )
 
                     = render 'discount', f: f
 

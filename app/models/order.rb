@@ -2,7 +2,6 @@ class Order < ActiveRecord::Base
   belongs_to :contract
   belongs_to :bank
   belongs_to :address
-  belongs_to :mail_to, class_name: "Account"
   validates_presence_of :contract
   has_many :order_line_items, -> { order("created_at DESC")}
   has_many :commissions
@@ -16,7 +15,6 @@ class Order < ActiveRecord::Base
   after_create :copy_first_order_line_items_on_contract, :copy_first_order_commissions, :copy_first_order_values, :default_values
 
   def default_values
-    self.mail_to = self.contract.seller unless contract_has_at_least_1_order?
   end
 
   def row_on_contract
@@ -128,7 +126,6 @@ class Order < ActiveRecord::Base
         copy_documents(first_order_on_contract)
       end
 
-      copy_mail_to(first_order_on_contract)
 
     end
   end
@@ -180,10 +177,5 @@ class Order < ActiveRecord::Base
   def copy_documents(order)
     update_attribute(:documents, order.documents)
   end
-
-  def copy_mail_to(order)
-    update_attribute(:mail_to_id, order.mail_to_id)
-  end
-
 
 end

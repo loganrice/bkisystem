@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150222230731) do
+ActiveRecord::Schema.define(version: 20150224231210) do
 
   create_table "accounts", force: true do |t|
     t.string "name"
@@ -155,6 +155,7 @@ ActiveRecord::Schema.define(version: 20150222230731) do
     t.integer  "size_id"
     t.integer  "variety_id"
     t.integer  "grade_id"
+    t.integer  "origin_id"
   end
 
   create_table "order_line_items", force: true do |t|
@@ -169,6 +170,7 @@ ActiveRecord::Schema.define(version: 20150222230731) do
     t.decimal  "pack_weight_pounds"
     t.integer  "pack_count"
     t.integer  "pack_type_id"
+    t.string   "season"
   end
 
   create_table "orders", force: true do |t|
@@ -213,11 +215,16 @@ ActiveRecord::Schema.define(version: 20150222230731) do
     t.text     "ship_pick_up"
     t.integer  "bank_id"
     t.integer  "address_id"
-    t.integer  "mail_to_id"
     t.decimal  "discount_percent"
     t.integer  "discount_cents_per_pound"
     t.integer  "discount_cents"
     t.string   "buyer_po"
+  end
+
+  create_table "origins", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "pack_types", force: true do |t|
