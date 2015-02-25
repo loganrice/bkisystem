@@ -38,6 +38,12 @@ describe ContractsController do
         expect(assigns(:terms)).to be_present
       end
 
+      it "sets @remarks" do
+        Fabricate(:remark)
+        xhr :get, :new
+        expect(assigns(:remarks)).to be_present
+      end
+
       it "renders the new template" do
         xhr :get, :new
         expect(response).to render_template :new
@@ -64,6 +70,12 @@ describe ContractsController do
         Fabricate(:term)
         xhr :get, :edit, id: contract.id
         expect(assigns(:terms)).to be_present
+      end
+
+      it "sets @remarks" do
+        Fabricate(:remark)
+        xhr :get, :edit, id: contract.id
+        expect(assigns(:remarks)).to be_present
       end
 
       it "renders the edit template" do

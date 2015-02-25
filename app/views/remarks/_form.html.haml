@@ -1,0 +1,29 @@
+%div#content
+  -# widget grid -->
+  %section#widget-grid
+    -# row -->
+    %div.row
+      -# NEW WIDGET START -->
+      %article.col-xs-12.col-sm-12.col-md-12.col-lg-12
+        -#- end widget -->
+        -#- Widget ID (each widget will need unique ID)-->
+        %div.jarviswidget.jarviswidget-color-blueDark#remarki{ "data-widget-editbutton" => "false" }
+          %header
+            %span.widget-icon
+              %i.fa.fa-table
+            %h2 Term
+          -#- widget div-->
+          %div
+            -# widget edit box -->
+            %div.jarviswidget-editbox
+              -# This area used as dropdown edit box -->
+            -#- end widget edit box -->
+            -#- widget content -->
+            %div.widget-body.no-padding
+              %div.well
+                = bootstrap_form_for(@remark, class: "login-form smart-form client-form", layout: :horizontal, label_errors: true, remote: true) do |f|
+
+                  = f.text_field :name
+                  = f.text_area :description
+
+                  = f.submit @remark.new_record? ? "Add" : "Update"

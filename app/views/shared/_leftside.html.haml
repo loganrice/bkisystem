@@ -82,4 +82,14 @@
         = link_to terms_path, remote: true do
           %i.fa.fa-lg.fa-fw.fa-file-text-o
           %span.menu-item-parent Terms
-      
+      %li.nav-item
+        %a{ :href => "#" }
+          %i.fa.fa-lg.fa-fw.fa-gear
+          %span.menu-item-parent Table Maintenance
+        %ul
+          -#%li.nav-item
+            -#= link_to 'New Contract', new_contract_path, remote: true
+          %li.nav-item
+            = link_to 'Terms', terms_path, remote: true
+          %li.nav-item
+            = link_to 'Remarks', remarks_path, remote: true

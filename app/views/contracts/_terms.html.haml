@@ -7,7 +7,9 @@
           Defaults
     %tr
       %td= f.text_area :remarks
-
+      %td
+        %button.btn.btn-primary.btn-lg{ "type" => "button", "data-toggle" => "modal", "data-target" => "#remarksModal" }
+          Defaults
 
 %div.modal.fade#termsModal{ "tabindex" => "-1", "role" => "dialog", "aria-labelledby" => "termsModalLabel", "aria-hidden" => "true" }
   %div.modal-dialog
@@ -23,4 +25,20 @@
               = term.name
       %div.modal-footer
         %button.btn.btn-default#closeTermsModal{ "type" => "button", "data-dismiss" => "modal"}
+          Close
+
+%div.modal.fade#remarksModal{ "tabindex" => "-1", "role" => "dialog", "aria-labelledby" => "remarksModalLabel", "aria-hidden" => "true" }
+  %div.modal-dialog
+    %div.modal-content
+      %div.modal-header
+        %button.close{ "type" => "button", "data-dismiss" => "modal", "aria-label" => "Close"}
+          %span{ "aria-hidden" => "true"} &times;
+        %h4.modal-title#remarksModalLabel Remarks
+      %div.modal-body
+        %div.list-group
+          - @remarks.each do |remark|
+            %a.list-group-item.js-remark{ "href" => "#", "data-remark-description" => "#{remark.description}"}
+              = remark.name
+      %div.modal-footer
+        %button.btn.btn-default#closeRemarksModal{ "type" => "button", "data-dismiss" => "modal"}
           Close

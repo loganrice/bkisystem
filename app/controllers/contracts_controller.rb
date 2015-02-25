@@ -9,12 +9,13 @@ class ContractsController < ApplicationController
   def new
     @contract = Contract.new
     @terms = Term.all 
-    
+    @remarks = Remark.all
   end
 
   def edit
     @contract = Contract.find(params[:id])
-    @terms = Term.all 
+    @terms = Term.all
+    @remarks = Remark.all
   end
 
   def update

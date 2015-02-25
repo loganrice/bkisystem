@@ -32,6 +32,7 @@ Origin.delete_all
 Invoice.delete_all
 InvoiceLineItem.delete_all
 Term.delete_all
+Remark.delete_all
 
 almonds = Commodity.create(name: "Almonds")
 walnuts = Commodity.create(name: "Walnuts")
@@ -238,8 +239,11 @@ Term.create(name: "TT", description: "Cash - T/T against faxed documents 5 days 
 Term.create(name: "30 Days", description: "30 Days From Truck Bill of Lading / Ship Date.")
 Term.create(name: "45 Days", description: "45 Days From Truck Bill of Lading / Ship Date.")
 
-
-
+Remark.create(name: "UAEC terms and conditions. Quality certificate...", description: "UAEC terms and conditions. Quality and Weight certificates are required and are final as to quality and weight. ")
+Remark.create(name: "Sliding Scale Inshell", description: "UAEC terms and conditions. Quality and Weight certificates are required and are final as to quality and weight. Price will be determined by USDA or DFA certificate to determine sliding scale for meat basis.")
+Remark.create(name: "CERT TO STATE", description: "UAEC terms and conditions. Quality and Weight certificates are required and are final as to quality and weight. Price will be determined by USDA or DFA certificate to determine sliding scale for meat basis. USDA Cert to state the % of external/internal defect and % of loose meat.")
+Remark.create(name: "Shing Hing", description: "UAEC terms and conditions. Quality and Weight certificates are required and are final as to quality and weight. Price is based on 70% sliding scale, Minimum 68%, Maximum payable 72%. Price will be determined by USDA or DFA certificate to determine sliding scale for meat basis. USDA Cert to state the % of external/internal defect and % of loose meat. Max 2% Loose Meats. Packed in plain bags.")
+Remark.create(name: "SCTC", description: "SCTC terms and conditions. Quality and Weight certificates are required and are final as to quality and weight.")
 
 
 
