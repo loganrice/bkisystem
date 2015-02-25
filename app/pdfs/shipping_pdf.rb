@@ -49,28 +49,29 @@ class ShippingPdf
   end
 
   def address(account, address, x_position, y_position)
-    text_box account.name, at: [x_position, y_position]
-    y_position -= 15  
-    unless address.line1.blank?
-      text_box address.line1, inline_format: true, at: [x_position, y_position]
-      y_position -= 15
-    end
+    if address
+      text_box account.name, at: [x_position, y_position]
+      y_position -= 15  
+      unless address.line1.blank?
+        text_box address.line1, inline_format: true, at: [x_position, y_position]
+        y_position -= 15
+      end
 
-    unless address.line2.blank?
-      text_box address.line2, inline_format: true, at: [x_position, y_position]
-      y_position -= 15 
-    end
+      unless address.line2.blank?
+        text_box address.line2, inline_format: true, at: [x_position, y_position]
+        y_position -= 15 
+      end
 
-    unless address.line3.blank?
-      text_box address.line3, inline_format: true, at: [x_position, y_position]
+      unless address.line3.blank?
+        text_box address.line3, inline_format: true, at: [x_position, y_position]
+        y_position -= 15
+      end
+      text_box "#{address.city} " +
+               "#{address.state} " +
+               "#{address.zip}", inline_format: true, at: [x_position, y_position]
       y_position -= 15
-    end
-    text_box "#{address.city} " +
-             "#{address.state} " +
-             "#{address.zip}", inline_format: true, at: [x_position, y_position]
-    y_position -= 15
-    text_box "#{account.phone1}", at: [x_position, y_position]
-  
+      text_box "#{account.phone1}", at: [x_position, y_position]
+    end 
   end
 
   def shipper

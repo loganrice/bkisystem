@@ -8,7 +8,7 @@
         = f.select :container_size, options_for_select(["20 FCL", "40 FCL", "Truck"], f.object.container_size)
         = f.text_area :ship_delivery
         = f.text_area :ship_pick_up
-
+        = f.collection_select :mail_to_id, @order.stakeholders, :id, :name
     %tr
       %td
         = f.date_field :ship_date

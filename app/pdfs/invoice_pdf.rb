@@ -248,31 +248,33 @@ class InvoicePdf
   end
 
   def address(account, address, x_position, y_position)
-    text_box account.name, at: [x_position, y_position]
-    y_position -= @line_space
-    unless address.line1.blank?
-      text_box address.line1, inline_format: true, at: [x_position, y_position]
+    if address
+      text_box account.name, at: [x_position, y_position]
       y_position -= @line_space
-      
-    end
+      unless address.line1.blank?
+        text_box address.line1, inline_format: true, at: [x_position, y_position]
+        y_position -= @line_space
+        
+      end
 
-    unless address.line2.blank?
-      text_box address.line2, inline_format: true, at: [x_position, y_position]
-      y_position -= @line_space 
-    end
+      unless address.line2.blank?
+        text_box address.line2, inline_format: true, at: [x_position, y_position]
+        y_position -= @line_space 
+      end
 
-    unless address.line3.blank?
-      text_box address.line3, inline_format: true, at: [x_position, y_position]
+      unless address.line3.blank?
+        text_box address.line3, inline_format: true, at: [x_position, y_position]
+        y_position -= @line_space
+      end
+      text_box "#{address.city} " +
+               "#{address.state} " +
+               "#{address.zip}", inline_format: true, at: [x_position, y_position]
       y_position -= @line_space
-    end
-    text_box "#{address.city} " +
-             "#{address.state} " +
-             "#{address.zip}", inline_format: true, at: [x_position, y_position]
-    y_position -= @line_space
-    text_box "#{account.phone1}", at: [x_position, y_position]
+      text_box "#{account.phone1}", at: [x_position, y_position]
 
-    y_position -= @line_space
-    move_cursor_to y_position 
+      y_position -= @line_space
+      move_cursor_to y_position 
+    end 
   end
 
 end

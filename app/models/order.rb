@@ -2,6 +2,7 @@ class Order < ActiveRecord::Base
   belongs_to :contract
   belongs_to :bank
   belongs_to :address
+  belongs_to :mail_to, class_name: "Account", foreign_key: "mail_to_id"
   validates_presence_of :contract
   has_many :order_line_items, -> { order("created_at DESC")}
   has_many :commissions

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150224231210) do
+ActiveRecord::Schema.define(version: 20150225012806) do
 
   create_table "accounts", force: true do |t|
     t.string "name"
@@ -219,6 +219,7 @@ ActiveRecord::Schema.define(version: 20150224231210) do
     t.integer  "discount_cents_per_pound"
     t.integer  "discount_cents"
     t.string   "buyer_po"
+    t.integer  "mail_to_id"
   end
 
   create_table "origins", force: true do |t|

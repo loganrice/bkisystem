@@ -12,7 +12,7 @@ describe Order do
   it { should belong_to(:address) }
   it { should have_many(:invoices) }
   it { should accept_nested_attributes_for(:invoices)}
-
+  it { should belong_to(:mail_to)}
   
   it "sort OrderDetails sort descending order by creation date" do 
     order = Fabricate(:order)
