@@ -31,5 +31,14 @@ var auto_complete_items = function() {
   });
 }
 
+$('.js-shipDelivery').click(function() {
+  var shipDelivery = $(this).data("location-description");
+  $('#order_ship_delivery').val(shipDelivery);
+});
+
+$('.js-pickupDelivery').click(function() {
+  var pickupDelivery = $(this).data("location-description");
+  $('#order_ship_pick_up').val(pickupDelivery);
+});
 
 auto_complete_items();

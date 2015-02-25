@@ -46,6 +46,11 @@ describe OrdersController do
           xhr :get, :new, contract_id: contract.id
           expect(contract.orders.count).to eq(1) 
         end
+
+        it "sets @locations" do 
+          xhr :get, :new, contract_id: contract.id
+          expect(contract.orders.count).to eq(1) 
+        end
       end
     end
   end
