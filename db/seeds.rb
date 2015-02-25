@@ -31,6 +31,7 @@ Document.delete_all
 Origin.delete_all
 Invoice.delete_all
 InvoiceLineItem.delete_all
+Term.delete_all
 
 almonds = Commodity.create(name: "Almonds")
 walnuts = Commodity.create(name: "Walnuts")
@@ -232,7 +233,10 @@ Document.create(name: "EU Pallet Cert")
 Document.create(name: "Packing Certificate")
 
 
-
+Term.create(name: "Cash against documents upon first sight...", description: "Cash against documents upon first sight, through buyers bank. Other freight and insurance for buyers account. Transfer cost and bank fees for payment for buyer account.")
+Term.create(name: "TT", description: "Cash - T/T against faxed documents 5 days prior to vessel arrival. Once payment is received documents sent directly to buyer.")
+Term.create(name: "30 Days", description: "30 Days From Truck Bill of Lading / Ship Date.")
+Term.create(name: "45 Days", description: "45 Days From Truck Bill of Lading / Ship Date.")
 
 
 

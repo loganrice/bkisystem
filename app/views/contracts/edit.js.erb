@@ -21,3 +21,8 @@ $('form').on('click', '.add_fields', function(event) {
   $(this).before($(this).data('fields').replace(regexp, time));
   event.preventDefault();
 });
+
+$('.js-term').click(function() {
+  var termDescription = $(this).data("term-description");
+  $('#contract_payment_terms').val(termDescription);
+});

@@ -2,5 +2,25 @@
   %tbody
     %tr
       %td= f.text_area :payment_terms
+      %td
+        %button.btn.btn-primary.btn-lg{ "type" => "button", "data-toggle" => "modal", "data-target" => "#termsModal" }
+          Defaults
     %tr
       %td= f.text_area :remarks
+
+
+%div.modal.fade#termsModal{ "tabindex" => "-1", "role" => "dialog", "aria-labelledby" => "termsModalLabel", "aria-hidden" => "true" }
+  %div.modal-dialog
+    %div.modal-content
+      %div.modal-header
+        %button.close{ "type" => "button", "data-dismiss" => "modal", "aria-label" => "Close"}
+          %span{ "aria-hidden" => "true"} &times;
+        %h4.modal-title#termsModalLabel Terms
+      %div.modal-body
+        %div.list-group
+          - @terms.each do |term|
+            %a.list-group-item.js-term{ "href" => "#", "data-term-description" => "#{term.description}"}
+              = term.name
+      %div.modal-footer
+        %button.btn.btn-default#closeTermsModal{ "type" => "button", "data-dismiss" => "modal"}
+          Close

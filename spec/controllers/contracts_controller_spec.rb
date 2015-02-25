@@ -32,6 +32,12 @@ describe ContractsController do
         expect(assigns(:contract)).to be_instance_of(Contract)
       end
 
+      it "sets @terms" do
+        Fabricate(:term)
+        xhr :get, :new
+        expect(assigns(:terms)).to be_present
+      end
+
       it "renders the new template" do
         xhr :get, :new
         expect(response).to render_template :new
@@ -53,6 +59,13 @@ describe ContractsController do
         xhr :get, :edit, id: contract.id
         expect(assigns(:contract)).to be_instance_of(Contract)
       end
+
+      it "sets @terms" do
+        Fabricate(:term)
+        xhr :get, :edit, id: contract.id
+        expect(assigns(:terms)).to be_present
+      end
+
       it "renders the edit template" do
         xhr :get, :edit, id: contract.id
         expect(response).to render_template :edit
