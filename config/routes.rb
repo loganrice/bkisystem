@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :origins
   resources :terms
   resources :remarks
+  resources :delivery_locations
   get 'contracts/:id/contract_report' => 'contracts#contract_report', as: :contract_report
   get 'invoices/:id/invoice_report' => 'invoices#invoice_report', as: :invoice_report 
 

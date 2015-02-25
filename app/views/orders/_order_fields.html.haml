@@ -1,46 +1,55 @@
-%table.table.table-hover
-  %thead
-
-  %tbody
-    %tr 
-      %td
-        = f.text_field :buyer_po
-        = f.select :container_size, options_for_select(["20 FCL", "40 FCL", "Truck"], f.object.container_size)
-        = f.text_area :ship_delivery
-        = f.text_area :ship_pick_up
-        = f.collection_select :mail_to_id, @order.stakeholders, :id, :name
-    %tr
-      %td
-        = f.date_field :ship_date
-      %td
-        = f.date_field :last_received_date
-      %td 
-        = f.date_field :estimated_arrival_date
-      %td 
-        = f.date_field :doc_cut_off
-    %tr
-      %td
-        = f.text_field :shipping_company
-      %td
-        = f.text_field :voyage
-      %td
-        = f.text_field :port_of_discharge
-      %td
-        = f.text_field :vessel
-    %tr
-      %td
-        = f.text_field :ship_in_name_of
-      %td
-        = f.text_field :booking_number
-      %td
-        = f.text_field :commodity
-      %td
-        = f.date_field :estimated_arrival_date
-    %tr
-      %td
-        = f.text_field :shipping_company_reference_number
-      %td
-        = f.text_field :automated_export_number
+%div.well
+  %div.row
+    %section.col-xs-9
+      = f.text_area :ship_delivery
+    %section.col-xs-3
+      %button.btn.btn-primary.btn-lg{ "type" => "button", "data-toggle" => "modal", "data-target" => "#shipDeliveryModal" }
+        Defaults
+  %div.row
+    %section.col-xs-9 
+      = f.text_area :ship_pick_up
+    %section.col-xs-3
+      %button.btn.btn-primary.btn-lg{ "type" => "button", "data-toggle" => "modal", "data-target" => "#pickupDeliveryModal" }
+        Defaults
+  %div.row 
+    %section.col-xs-3
+      = f.text_field :buyer_po
+    %section.col-xs-3
+      = f.select :container_size, options_for_select(["20 FCL", "40 FCL", "Truck"], f.object.container_size)
+    %section.col-xs-3
+      = f.collection_select :mail_to_id, @order.stakeholders, :id, :name
+  %div.row
+    %section.col-xs-3
+      = f.date_field :ship_date
+    %section.col-xs-3
+      = f.date_field :last_received_date
+    %section.col-xs-3
+      = f.date_field :estimated_arrival_date
+    %section.col-xs-3
+      = f.date_field :doc_cut_off
+  %div.row
+    %section.col-xs-3
+      = f.text_field :shipping_company
+    %section.col-xs-3
+      = f.text_field :voyage
+    %section.col-xs-3
+      = f.text_field :port_of_discharge
+    %section.col-xs-3
+      = f.text_field :vessel
+  %div.row
+    %section.col-xs-3
+      = f.text_field :ship_in_name_of
+    %section.col-xs-3
+      = f.text_field :booking_number
+    %section.col-xs-3
+      = f.text_field :commodity
+    %section.col-xs-3
+      = f.date_field :estimated_arrival_date
+  %div.row
+    %section.col-xs-3
+      = f.text_field :shipping_company_reference_number
+    %section.col-xs-3
+      = f.text_field :automated_export_number
 
 %table.table.table-hover
   %thead
@@ -71,4 +80,34 @@
         = f.text_field :amount_received
 
 
+%div.modal.fade#shipDeliveryModal{ "tabindex" => "-1", "role" => "dialog", "aria-labelledby" => "shipDeliveryModalLabel", "aria-hidden" => "true" }
+  %div.modal-dialog
+    %div.modal-content
+      %div.modal-header
+        %button.close{ "type" => "button", "data-dismiss" => "modal", "aria-label" => "Close"}
+          %span{ "aria-hidden" => "true"} &times;
+        %h4.modal-title#shipDeliveryModalLabel Ship Locations
+      %div.modal-body
+        %div.list-group
+          - @locations.each do |location|
+            %a.list-group-item.js-shipDelivery{ "href" => "#", "data-location-description" => "#{location.description}"}
+              = location.name
+      %div.modal-footer
+        %button.btn.btn-default#closeshipDeliveryModal{ "type" => "button", "data-dismiss" => "modal"}
+          Close
 
+%div.modal.fade#pickupDeliveryModal{ "tabindex" => "-1", "role" => "dialog", "aria-labelledby" => "pickupDeliveryModalLabel", "aria-hidden" => "true" }
+  %div.modal-dialog
+    %div.modal-content
+      %div.modal-header
+        %button.close{ "type" => "button", "data-dismiss" => "modal", "aria-label" => "Close"}
+          %span{ "aria-hidden" => "true"} &times;
+        %h4.modal-title#pickupDeliveryModalLabel Pick Up Locations
+      %div.modal-body
+        %div.list-group
+          - @locations.each do |location|
+            %a.list-group-item.js-pickupDelivery{ "href" => "#", "data-location-description" => "#{location.description}"}
+              = location.name
+      %div.modal-footer
+        %button.btn.btn-default#closeshipDeliveryModal{ "type" => "button", "data-dismiss" => "modal"}
+          Close

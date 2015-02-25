@@ -33,6 +33,7 @@ Invoice.delete_all
 InvoiceLineItem.delete_all
 Term.delete_all
 Remark.delete_all
+DeliveryLocation.delete_all
 
 almonds = Commodity.create(name: "Almonds")
 walnuts = Commodity.create(name: "Walnuts")
@@ -245,8 +246,8 @@ Remark.create(name: "CERT TO STATE", description: "UAEC terms and conditions. Qu
 Remark.create(name: "Shing Hing", description: "UAEC terms and conditions. Quality and Weight certificates are required and are final as to quality and weight. Price is based on 70% sliding scale, Minimum 68%, Maximum payable 72%. Price will be determined by USDA or DFA certificate to determine sliding scale for meat basis. USDA Cert to state the % of external/internal defect and % of loose meat. Max 2% Loose Meats. Packed in plain bags.")
 Remark.create(name: "SCTC", description: "SCTC terms and conditions. Quality and Weight certificates are required and are final as to quality and weight.")
 
-
-
+DeliveryLocation.create(name: "SSA", description: "SSA Terminal  Oakland, Berth 57-58, 1717 Middle Ha")
+DeliveryLocation.create(name: "OAK TOTAL", description: "OAK Total Terminal Berth 55/Z855, 2505 Middle Harb")
 
 
 

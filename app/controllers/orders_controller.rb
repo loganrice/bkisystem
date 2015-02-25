@@ -10,6 +10,7 @@ class OrdersController < ApplicationController
     contract = Contract.find(params[:contract_id])
     if contract
       @order = contract.orders.create()
+      @locations = DeliveryLocation.all
       redirect_to edit_order_path(@order)
     else
       redirect_to root_path
@@ -18,6 +19,8 @@ class OrdersController < ApplicationController
 
   def edit
     @order = Order.find(params[:id])
+    @locations = DeliveryLocation.all
+    
     if @order.commissions.count == 0
       @order.commissions.create()
     end

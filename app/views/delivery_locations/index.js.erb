@@ -1,0 +1,9 @@
+$('#content').replaceWith( '<%= j render("shared/data_table", data: @locations) %>');
+
+$('#content').before('<%= j render("shared/messages", flash: flash) %>');
+
+pageSetUp();
+$('#recordTable').DataTable({});
+setTimeout(function() {
+  $('.flash-messages').remove();
+}, 10000);

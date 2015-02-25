@@ -22,3 +22,12 @@ $('form').on('click', '.add_fields', function(event) {
   event.preventDefault();
 });
 
+$('.js-term').click(function() {
+  var termDescription = $(this).data("term-description");
+  $('#contract_payment_terms').val(termDescription);
+});
+
+$('.js-remark').click(function() {
+  var remarkDescription = $(this).data("remark-description");
+  $('#contract_remarks').val(remarkDescription);
+});
