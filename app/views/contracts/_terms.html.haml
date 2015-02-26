@@ -21,7 +21,7 @@
       %div.modal-body
         %div.list-group
           - @terms.each do |term|
-            %a.list-group-item.js-term{ "href" => "#", "data-locatiom-description" => "#{term.description}"}
+            %a.list-group-item.js-term{ "href" => "#", "data-term-description" => "#{term.description}"}
               = term.name
       %div.modal-footer
         %button.btn.btn-default#closeTermsModal{ "type" => "button", "data-dismiss" => "modal"}
