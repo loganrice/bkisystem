@@ -13,7 +13,7 @@ class ShippingPdf
     header
     move_down 15
 
-    address(@order.acting_seller, @order.acting_seller.addresses.first, 0, cursor) unless @order.contract.seller.addresses.blank?
+    address(@order.contract.acting_seller, @order.contract.acting_seller.addresses.first, 0, cursor) unless @order.contract.try(:acting_seller).try(:addresses).blank?
     sub_header
     move_down 15
 
