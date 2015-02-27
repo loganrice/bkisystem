@@ -1,5 +1,5 @@
 class OrderLineItem < ActiveRecord::Base
-  belongs_to :order
+  belongs_to :order, inverse_of: :order_line_items
   belongs_to :item 
   belongs_to :quote_line_item
   belongs_to :weight
@@ -7,6 +7,7 @@ class OrderLineItem < ActiveRecord::Base
   before_save :default_values
   has_many :commissions, through: :order
   before_save :default_values
+  validates_presence_of :item
 
   def item_name
     item.try(:name)
@@ -114,7 +115,7 @@ class OrderLineItem < ActiveRecord::Base
   end
 
   def weight_total
-    self.pack_weight_pounds * self.pack_count
+    self.pack_weight_pounds * self.pack_count ||= "0"
   end
 
   private

@@ -6,6 +6,7 @@ describe OrderLineItem do
   it { should belong_to(:quote_line_item) }
   it { should belong_to(:weight) }
   it { should have_many(:commissions).through(:order)}
+  it { should validate_presence_of(:item)}
 
   it "converts 5000 kgs to pounds and then back to 5000 kgs" do 
     item = OrderLineItem.create()
@@ -225,7 +226,7 @@ describe OrderLineItem do
 
     it "equals zero if pack_count or pack_weight_pounds is nil" do 
       order = Fabricate(:order)
-      item = OrderLineItem.create(order_id: order.id, price_cents: 452, pack_count: 447)
+      item = OrderLineItem.create(order_id: order.id, item_id: Fabricate(:item).id, price_cents: 452, pack_count: 447)
       expect(item.weight_total).to eq(BigDecimal.new("0")) 
     end
   end

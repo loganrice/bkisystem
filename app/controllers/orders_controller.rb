@@ -32,10 +32,11 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     if @order.update(order_params)
       flash[:success] = "Updated"
+      redirect_to edit_order_path(@order)
     else
-
+      flash[:error] = @order.errors.full_messages
+      redirect_to edit_order_path(@order)
     end
-    redirect_to edit_order_path(@order)
   end
 
   def shipping_report
