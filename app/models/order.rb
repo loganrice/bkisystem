@@ -92,6 +92,14 @@ class Order < ActiveRecord::Base
     end
   end
 
+  def total_price_less_discount_less_commission
+    if total_price_less_discount
+      total_price_less_discount - total_commission_cents
+    else
+      0
+    end
+  end
+
   def total_commission_cents
     cents = 0
     self.commissions.each do |commission|

@@ -88,8 +88,8 @@
 
                     %h3
                       %strong.pull-right.padding-10
-                        Total:
-                        %span.text-success= to_dollars(@order.total_price_less_discount_plus_commission)
+                        Total (less Commission):
+                        %span.text-success= to_dollars(@order.total_price_less_discount_less_commission)
                     %h3
                       %strong.pull-right.padding-10
                         Commission(s):

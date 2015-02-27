@@ -136,7 +136,7 @@ class InvoicePdf
 
     unless @invoice.hide_commission
       text_box "<em>Commission</em>", inline_format:true, at: [column5, y_position]
-      text_box "#{@view.to_dollars(@invoice.order.total_commission_cents)}", inline_format:true, at: [column6, y_position]
+      text_box "(#{@view.to_dollars(@invoice.order.total_commission_cents)})", inline_format:true, at: [column6, y_position]
     end
 
     y_position -= @double_space

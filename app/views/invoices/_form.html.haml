@@ -69,8 +69,8 @@
                 %div.btn-group#default-invoice-amount{ "role" => "group"}
                   %a.btn.btn-default.amount{ "data-amount" => "#{@order.total_price_less_discount}"}
                     %strong= "Total - Discount"
-                  %a.btn.btn-default.amount{ "data-amount" => "#{@order.total_price_less_discount_plus_commission}"}
-                    %strong= "Total + Commission"
+                  %a.btn.btn-default.amount{ "data-amount" => "#{@order.total_price_less_discount_less_commission}"}
+                    %strong= "Total - Commission"
                   %a.btn.btn-default.amount{ "data-amount" => "#{@order.total_commission_cents}"}
                     %strong= "Commission"
                   - @order.commissions.each do |commission|
@@ -95,8 +95,8 @@
 
                 %h3
                   %strong.pull-right.padding-10
-                    Grand Total:
-                    %span.text-success= "( #{to_dollars(@order.total_price_less_discount_plus_commission)} )"
+                    Total (less Commission):
+                    %span.text-success= "( #{to_dollars(@order.total_price_less_discount_less_commission)} )"
 
                 %h3
                   %strong.pull-right.padding-10
