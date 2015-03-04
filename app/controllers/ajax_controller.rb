@@ -2,7 +2,7 @@ class AjaxController < ApplicationController
   def item_names
     if params[:term]
       like = "%".concat(params[:term].concat("%"))
-      items = Item.where("name like ?", like)
+      items = Item.where("name @@ ?", like)
     else
       items = Item.all
     end
