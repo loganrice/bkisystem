@@ -37,5 +37,11 @@
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 
-
 //= require turbolinks
+
+$('#items-table').dataTable({
+  processing: true,
+  serverSide: true,
+  ajaxSource: $('#items-table').data('source'),
+  pagingType: 'full_numbers'
+});

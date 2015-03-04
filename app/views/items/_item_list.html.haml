@@ -34,22 +34,15 @@
                 = link_to new_item_path, class: "btn btn-success", remote: true do 
                   %i.fa.fa-plus
                   %span New Item
-              %table#items.table.table-striped.table-bordered.table-hover{ :width => "100%" }
+              %table#items-table.table.table-striped.table-bordered.table-hover{ :width => "100%", 'data-source' => "#{items_path(format: "json")}" }
                 %thead
                   %tr
-                    %th ID
                     %th Name
                     %th Commodity
-                    %th Variety
                     %th Size
+                    %th Variety
+                    %th Grade
                 %tbody
-                  - @items.each do |item|
-                    %tr
-                      %td= item.id
-                      %td
-                        = link_to item.name, edit_item_path(item), remote: true
-                      %td= item.commodity.name if item.commodity
-                      %td= item.variety.name if item.variety
-                      %td= item.size.name if item.size
+ 
 
 

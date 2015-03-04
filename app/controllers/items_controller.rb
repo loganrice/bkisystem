@@ -4,6 +4,12 @@ class ItemsController < ApplicationController
   
   def index
     @items = Item.all
+    respond_to do |format|
+      format.js
+      # format.json { render json: ItemDatatable.new(view_context) }
+      format.json { render json: ItemsDatatable.new(view_context) }
+
+    end
   end
 
   def new

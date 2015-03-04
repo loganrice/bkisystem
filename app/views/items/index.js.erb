@@ -2,8 +2,15 @@ $('#content').replaceWith( '<%= j render("item_list") %>');
 $('#content').before('<%= j render("shared/messages", flash: flash) %>');
 pageSetUp();
 
-$('#items').DataTable({});
 
 setTimeout(function() {
   $('.flash-messages').remove();
 }, 10000);
+
+
+$('#items-table').dataTable({
+  processing: true,
+  serverSide: true,
+  ajaxSource: $('#items-table').data('source'),
+  pagingType: 'full_numbers'
+});
