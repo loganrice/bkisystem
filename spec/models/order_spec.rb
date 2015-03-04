@@ -142,8 +142,8 @@ describe Order do
   describe "#total_pounds" do 
     it "sums up all the pounds in the order line items" do 
       order = Fabricate(:order)
-      line_item1 = Fabricate(:order_line_item, order_id: order.id, pack_count: 1, pack_weight_pounds: 1000)
-      line_item2 = Fabricate(:order_line_item, order_id: order.id, pack_count: 1, pack_weight_pounds: 1000) 
+      line_item1 = Fabricate(:order_line_item, item_id: Fabricate(:item).id, order_id: order.id, pack_count: 1, pack_weight_pounds: 1000)
+      line_item2 = Fabricate(:order_line_item, item_id: Fabricate(:item).id, order_id: order.id, pack_count: 1, pack_weight_pounds: 1000) 
       expect(order.total_pounds).to eq(2000)     
     end
   end
@@ -151,7 +151,7 @@ describe Order do
   describe "#total_price" do 
     it "sums up all the price in dollars of the order line items" do 
       order = Fabricate(:order)
-      item = OrderLineItem.create(order_id: order.id, price_cents: 452, pack_weight_pounds: 50, pack_count: 447)
+      item = OrderLineItem.create(order_id: order.id, item_id: Fabricate(:item).id, price_cents: 452, pack_weight_pounds: 50, pack_count: 447)
       commission1 = Commission.create(percent: 2, broker_id: Fabricate(:account).id)
       commission2 = Commission.create(cents_per_pound: 3, broker_id: Fabricate(:account).id)
       order.commissions << commission1
@@ -165,7 +165,7 @@ describe Order do
     context "with associated Commission" do 
       it "adds all of the commissions" do 
         order = Fabricate(:order)
-        item = OrderLineItem.create(order_id: order.id, price_cents: 100, pack_weight_pounds: 10, pack_count: 1)
+        item = OrderLineItem.create(order_id: order.id, item_id: Fabricate(:item).id, price_cents: 100, pack_weight_pounds: 10, pack_count: 1)
         commission1 = Commission.create(percent: 2, broker_id: Fabricate(:account).id, order_id: order.id)
         commission2 = Commission.create(cents_per_pound: 3, broker_id: Fabricate(:account).id, order_id: order.id)
         commission2 = Commission.create(cents: 100, broker_id: Fabricate(:account).id, order_id: order.id)

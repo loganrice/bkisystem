@@ -30,10 +30,11 @@ describe Commission do
   end
 
   describe "#total_cents" do
-    context "with accociated Order" do  
+    context "with accociated Order" do 
+      let(:product) { Fabricate(:item) }
       it "multiplies commission percent by the order total cents" do 
         order = Fabricate(:order)
-        item = OrderLineItem.create(order_id: order.id, price_cents: 100, pack_weight_pounds: 10, pack_count: 1)
+        item = OrderLineItem.create(order_id: order.id, item_id: product.id, price_cents: 100, pack_weight_pounds: 10, pack_count: 1)
         commission1 = Commission.create(percent: 2, broker_id: Fabricate(:account).id, order_id: order.id)
         order.commissions << commission1
         order.save
@@ -42,7 +43,7 @@ describe Commission do
       
       it "multiplies commission cents per pound by the total pounds" do 
         order = Fabricate(:order)
-        item = OrderLineItem.create(order_id: order.id, price_cents: 100, pack_weight_pounds: 10, pack_count: 1)
+        item = OrderLineItem.create(order_id: order.id, item_id: product.id, price_cents: 100, pack_weight_pounds: 10, pack_count: 1)
         commission1 = Commission.create(cents_per_pound: 3, broker_id: Fabricate(:account).id, order_id: order.id)
         order.commissions << commission1
         order.save
@@ -51,7 +52,7 @@ describe Commission do
 
       it "returns the total of the 3 types of discount options into a single amount" do 
         order = Fabricate(:order)
-        item = OrderLineItem.create(order_id: order.id, price_cents: 100, pack_weight_pounds: 10, pack_count: 1)
+        item = OrderLineItem.create(order_id: order.id, item_id: product.id, price_cents: 100, pack_weight_pounds: 10, pack_count: 1)
         commission1 = Commission.create(cents_per_pound: 3, cents: 100, percent: 10, broker_id: Fabricate(:account).id, order_id: order.id)
         order.commissions << commission1
         order.save
