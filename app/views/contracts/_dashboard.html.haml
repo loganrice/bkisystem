@@ -72,8 +72,8 @@
                 %div.tab-pane.fade.active.in.padding-10.no-padding-bottom#s1
                   %div.row.no-space
                     %div.col-xs-12.col-sm-12.col-md-8.col-lg-8
+                      = content_tag :div, "", id: "pounds-by-month-chart", class: "chart-large txt-color-blue", data: {pounds: @pounds.chart_data}
 
-                      %div#updating-chart.chart-large.txt-color-blue
                     %div.col-xs-12.col-sm-12.col-md-4.col-lg-4.show-stats
                       %div.row
                         %div.col-xs-6.col-sm-6.col-md-12.col-lg-12
@@ -293,4 +293,4 @@
               -# end content -->
           -# end widget div -->
         -# end widget -->
-        
+= javascript_include_tag "pounds.chart.js"

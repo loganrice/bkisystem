@@ -197,7 +197,7 @@ def generate_random_string
 end
 
 a14_193 = Contract.create(buyer_id: dynasty.id, seller_id: roche.id, date: Date.new(2014,12,22), seller_contract: generate_random_string)
-a14_193_load_1 = Order.create(contract_id: a14_193.id)
+a14_193_load_1 = Order.create(contract_id: a14_193.id )
 a14_193_commission = Commission.create(cents_per_pound: 3, order_id: a14_193_load_1.id, broker_id: bki.id)
 a14_193_load_1_line_1 = OrderLineItem.create(
   order_id: a14_193_load_1.id, 

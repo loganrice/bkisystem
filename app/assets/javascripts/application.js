@@ -20,6 +20,9 @@
 //= require smartwidgets/jarvis.widget
 //= require plugin/sparkline/jquery.sparkline
 //= require plugin/jquery-validate/jquery.validate
+//= require plugin/morris/morris
+//= require plugin/morris/raphael
+
 //= require plugin/easy-pie-chart/jquery.easy-pie-chart
 //= require plugin/bootstrap-timepicker/bootstrap-timepicker
 //= require plugin/flot/jquery.flot.cust
@@ -30,6 +33,7 @@
 //= speech/voicecommand
 //= require app.config
 //= require app.js
+//= require pounds.chart
 //= require main
 
 //= require plugin/fullcalendar/jquery.fullcalendar.backup
@@ -44,4 +48,19 @@ $('#items-table').dataTable({
   serverSide: true,
   ajaxSource: $('#items-table').data('source'),
   pagingType: 'full_numbers'
+});
+
+var chart = new Morris.Line({
+  // ID of the element in which to draw the chart.
+  element: 'pounds-by-month-chart',
+  // Chart data records -- each entry in this array corresponds to a point on
+  // the chart.
+  data: $('#pounds-by-month-chart').data('pounds'),
+  // The name of the data record attribute that contains x-values.
+  xkey: 'date',
+  // A list of names of data record attributes that contain y-values.
+  ykeys: ['pounds'],
+  // Labels for the ykeys -- will be displayed when you hover over the
+  // chart.
+  xLabels: 'month'
 });

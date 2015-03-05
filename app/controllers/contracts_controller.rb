@@ -2,6 +2,14 @@ class ContractsController < ApplicationController
   before_filter :require_user
   respond_to :js
 
+  def home
+    @pounds = TotalPoundsByMonthChart.new
+    respond_to do |format|
+      format.html 
+      format.js { render 'dashboard.js'}
+    end
+  end
+
   def index
     @contracts = Contract.all
   end
