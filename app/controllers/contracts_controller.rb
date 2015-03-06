@@ -4,6 +4,7 @@ class ContractsController < ApplicationController
 
   def home
     @pounds = TotalPoundsByMonthChart.new
+    @top_varieties = TotalPoundsChart.new.chart_data
     respond_to do |format|
       format.html 
       format.js { render 'dashboard.js'}
