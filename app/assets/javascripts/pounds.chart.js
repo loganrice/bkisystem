@@ -17,3 +17,7 @@ var poundsChart = Morris.Line({
 });
 
 
+$(".easy-pie-chart").easyPieChart({
+    animate: "true",
+    barColor: "#337ab7"
+});

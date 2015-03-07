@@ -86,76 +86,16 @@
                               %div.progress-bar.bg-color-blueDark{ :style => "width: #{data['percentage']}%;" }
 
 
+                  %div.row
+                    -@top_varieties.each do |variety, data|
+                      %div.col-xs-12.col-sm-3.col-md-3.col-lg-3
+                        %div.easy-pie-chart.txt-color-orangeDark{ "data-percent" => "#{data['percentage']}", "data-pie-size" => "20" }
+                          %span.percent.percent-sign "#{data['percentage'].to_i}"
+                        %span.easy-pie-title 
+                          = variety
+                        %div.clear-fix
 
-                  %div.show-stat-microcharts
-                    %div.col-xs-12.col-sm-3.col-md-3.col-lg-3
-                      %div.easy-pie-chart.txt-color-orangeDark{ "data-percent" => "33", "data-pie-size" => "50" }
-                        %span.percent.percent-sign 35
-                      %span.easy-pie-title 
-                        16 / 18
-                        %i.fa.fa-caret-up.icon-color-good
-                      %ul.smaller-stat.hidden-sm.pull-right
-                        %li
-                          %span.label.bg-color-greenLight
-                            %i.fa.fa-caret-up
-                            97%
-                        %li
-                          %span.label.bg-color-blueLight
-                            %i.fa.fa-caret-down
-                            44%
-                      %div.sparkline.txt-color-greenLight.hidden-sm.hidden-md.pull-right{ "data-sparkline-type" => "line", "data-sparkline-height" => "33px", "data-sparkline-width" => "70px", "data-fill-color" => "transparent" }
-                        130, 187, 250, 257, 200, 210, 300, 270, 363, 247, 270, 363, 247
-                    %div.col-xs-12.col-sm-3.col-md-3.col-lg-3
-                      %div.easy-pie-chart.txt-color-greenLight{ "data-percent" => "78.9", "data-pie-size" => "50" }
-                        %span.percent.percent-sign 78.9
-                      %span.easy-pie-title
-                        20/22
-                        %i.fa.fa-caret-down.icon-color-good
-                      %ul.smaller-stat.hidden-sm.pull-right
-                        %li
-                          %span.label.bg-color-blueDark
-                            %i.fa.fa-caret-up
-                            76%
-                        %li
-                          %span.label.bg-color-blue
-                            %i.fa.fa-caret-down
-                            3%
-                      %div.sparkline.txt-color-blue.hidden-sm.hidden-md.pull-right{ "data-sparkline-type" => "line", "data-sparkline-height" => "33px", "data-sparkline-width" => "70px", "data-fill-color" => "transparent" }
-                        257, 200, 210, 300, 270, 363, 130, 187, 250, 247, 270, 363, 247
-                    %div.col-xs-12.col-sm-3.col-md-3.col-lg-3
-                      %div.easy-pie-chart.txt-color-blue{ "data-percent" => "23", "data-pie-size" => "50" }
-                        %span.percent.percent-sign 23
-                      %span.easy-pie-title
-                        30/34 
-                        %i.fa.fa-caret-up.icon-color-good
-                      %ul.smaller-stat.hidden-sm.pull-right
-                        %li
-                          %span.label.bg-color-darken 10GB
-                        %li
-                          %span.label.bg-color-blueDark
-                            %i.fa.fa-caret-up
-                            10%
-                      %div.sparkline.txt-color-darken.hidden-sm.hidden-md.pull-right{ "data-sparkline-type" => "line", "data-sparkline-height" => "33px", "data-sparkline-width" => "70px", "data-fill-color" => "transparent" }
-                        200, 210, 363, 247, 300, 270, 130, 187, 250, 257, 363, 247, 270
-                    %div.col-xs-12.col-sm-3.col-md-3.col-lg-3
-                      %div.easy-pie-chart.txt-color-darken{ "data-percent" => "36", "data-pie-size" => "50" }
-                        %span.percent.percent-sign
-                          36
-                          %i.fa.fa-caret-up
-                      %span.easy-pie-title 
-                        40/50
-                        %i.fa.fa-caret-down.icon-color-good
-                      %ul.smaller-stat.hidden-sm.pull-right
-                        %li
-                          %span.label.bg-color-red
-                            %i.fa.fa-caret-up
-                            124
-                        %li
-                          %span.label.bg-color-blue
-                            40
-                            %i.fa.fa-caret-down
-                      %div.sparkline.txt-color-red.hidden-sm.hidden-md.pull-right{ "data-sparkline-type" => "line", "data-sparkline-height" => "33px", "data-sparkline-width" => "70px", "data-fill-color" => "transparent" }
-                        2700, 3631, 2471, 2700, 3631, 2471, 1300, 1877, 2500, 2577, 2000, 2100, 3000
+
                 -#- end s1 tab pane -->
 
                 %div.tab-pane.fade#s2
