@@ -21,3 +21,5 @@ $(".easy-pie-chart").easyPieChart({
     animate: "true",
     barColor: "#337ab7"
 });
+
+$('.sparkline').sparkline(); 
