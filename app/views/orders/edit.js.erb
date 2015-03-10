@@ -1,3 +1,5 @@
+
+
 $('#content').replaceWith( '<%= j render("form") %>');
 pageSetUp();
 
@@ -49,5 +51,71 @@ $('.js-pickupDelivery').click(function() {
 });
 
 auto_complete_items();
+
+
+
+
+var filterBySelect = function(update_select, search) {
+  var regex = new RegExp(search, 'gi');
+  $(update_select).empty();
+
+  $("#hidden_select").find('option').each(function(){
+    var new_description = $(this).text();
+    console.log(regex);
+    var new_value = $(this).val();
+    if(new_description.match(regex) !== null) {
+      $(update_select).append($("<option value=" + new_value + ">" + new_description + "</option>"));
+    }     
+  });
+}
+
+$('form').on("change", ".variety", function(){
+  var grade = $(this).closest(".item-select-helpers").find(".grade").find(":selected").html();
+  var size = $(this).closest(".item-select-helpers").find(".size").find(":selected").html();
+  var variety = $(this).closest(".item-select-helpers").find(".variety").find(":selected").html();
+  var update_select = $(this).parent().parent().next("tr").find(".item-select").first();
+  var search = getSearchArgs(grade, size, variety);
+  filterBySelect(update_select, search);
+});
+
+$('form').on("change", ".grade", function(){
+  var grade = $(this).closest(".item-select-helpers").find(".grade").find(":selected").html();
+  var size = $(this).closest(".item-select-helpers").find(".size").find(":selected").html();
+  var variety = $(this).closest(".item-select-helpers").find(".variety").find(":selected").html();
+  var update_select = $(this).parent().parent().next("tr").find(".item-select").first();
+  var search = getSearchArgs(grade, size, variety);
+  filterBySelect(update_select, search);
+});
+
+$('form').on("change", ".size", function(){
+  var grade = $(this).closest(".item-select-helpers").find(".grade").find(":selected").html();
+  var size = $(this).closest(".item-select-helpers").find(".size").find(":selected").html();
+  var variety = $(this).closest(".item-select-helpers").find(".variety").find(":selected").html();
+  var update_select = $(this).parent().parent().next("tr").find(".item-select").first();
+  var search = getSearchArgs(grade, size, variety);
+  filterBySelect(update_select, search);
+});
+
+
+var getSearchArgs = function(grade, size, variety) {
+
+  var search = [];
+
+  if(grade !== ""){
+    search.push("(?=.*\\b" + grade + "\\b)");
+  }
+
+  if(variety !== ""){
+    search.push("(?=.*\\b" + variety + "\\b)");
+  }
+
+  if(size !== ""){
+    search.push("(?=.*\\b" + size + "\\b)");
+  }
+
+  searchArg = (search.length==1)?search:search.join("");
+
+  return searchArg;
+};
 
 

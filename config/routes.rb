@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 
   get 'orders/:id/shipping_report' => 'orders#shipping_report', as: :shipping_report
   get 'ajax/item_names' => 'ajax#item_names', as: :item_names
+  get 'ajax/filter_items_by_variety' => 'ajax#filter_items_by_variety', as: :filter_items_by_variety
+
   resources :documents
   get 'sign_in' => 'sessions#new'
   get 'sign_out' => 'sessions#destroy'

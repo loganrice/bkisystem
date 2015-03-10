@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
   def edit
     @order = Order.find(params[:id])
     @locations = DeliveryLocation.all
-    
+    @items = Item.all
     if @order.commissions.count == 0
       @order.commissions.create()
     end
@@ -35,7 +35,8 @@ class OrdersController < ApplicationController
       redirect_to edit_order_path(@order)
     else
       flash[:error] = @order.errors.full_messages
-      redirect_to edit_order_path(@order)
+      # redirect_to edit_order_path(@order)
+      render :edit
     end
   end
 

@@ -10,4 +10,7 @@ class AjaxController < ApplicationController
     render json: list
   end
 
+  def filter_items_by_variety
+    Item.where("variety_id = #{params[:variety]}")
+  end
 end

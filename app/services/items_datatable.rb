@@ -19,6 +19,7 @@ class ItemsDatatable
   def data
     items.map do |item|
       [
+        item.id,
         item.name,
         item.commodity.name.to_s,
         item.size.name.to_s,

@@ -3,9 +3,38 @@
     %table.table.order_detail_table
       %thead
       %tbody
+        %tr.item-select-helpers
+          %select#hidden_select.hide
+            - @items.each do |item| 
+              %option{ "value" => "#{item.id}"}= item.name
+
+          %td.col-xs-2.form-group.has-warning
+            %label
+              Variety
+            %select.form-control.variety
+              %option
+              - Variety.all.each do |variety|
+                %option{"value" => variety.id}= variety.name
+          %td.col-xs-2.form-group.has-warning         
+            %label
+              Grade
+            %select.form-control.grade
+              %option
+              - Grade.all.each do |grade|
+                %option{"value" => grade.id}= grade.name
+          %td.col-xs-2.form-group.has-warning
+            %label
+              Size
+            %select.form-control.size
+              %option
+              - Size.all.each do |size|
+                %option{"value" => size.id}= size.name
         %tr
-          %td.col-xs-5
-            = f.text_field :item_name, class: 'item_name'
+          %td.col.xs-5
+
+            = f.collection_select(:item_id, @items, :id, :name, {prompt: "Select an Item"}, {class: "item-select"})
+          / %td.col-xs-5
+          /   = f.text_field :item_name, class: 'item_name'
           %td.col-xs-2
             = f.collection_select :item_size_indicator_id, ItemSizeIndicator.all, :id, :name
           %td.col-xs-2

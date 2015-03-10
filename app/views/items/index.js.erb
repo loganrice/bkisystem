@@ -12,5 +12,13 @@ $('#items-table').dataTable({
   processing: true,
   serverSide: true,
   ajaxSource: $('#items-table').data('source'),
-  pagingType: 'full_numbers'
+  pagingType: 'full_numbers',
+  aoColumnDefs: [{
+    aTargets: [1],
+    mRender: function(data, type, full){
+      return '<a data-remote="true" href="/items/' + full[0] + '/edit"' + '>' + data + '</a>'
+    }
+  }]
 });
+
+
