@@ -9,7 +9,6 @@
 # Clear Table
 
 require 'open-uri'
-require 'csv'
 
 Item.delete_all
 Commodity.delete_all
@@ -34,65 +33,6 @@ InvoiceLineItem.delete_all
 Term.delete_all
 Remark.delete_all
 DeliveryLocation.delete_all
-
-almonds = Commodity.create(name: "Almonds")
-walnuts = Commodity.create(name: "Walnuts")
-california = Origin.create(name: "California")
-
-def sizes
-  sizes = []
-  sizes << Size.create(name: "16/18")
-  sizes << Size.create(name: "18/20")
-  sizes << Size.create(name: "20/22")
-  sizes << Size.create(name: "22/24")
-  sizes << Size.create(name: "23/25")
-  sizes << Size.create(name: "24/26")
-  sizes << Size.create(name: "26/28")
-  sizes << Size.create(name: "27/30")
-  sizes << Size.create(name: "30/34")
-  sizes << Size.create(name: "34/40")
-  sizes << Size.create(name: "40/50")
-  sizes << Size.create(name: "50 AOS")
-  sizes << Size.create(name: "inshell")
-  sizes << Size.create(name: "pieces")
-  sizes << Size.create(name: "UNS")
-end
-
-def grades
-  grades = []
-  grades << Grade.create(name: "US Fancy", description: "US Fancy")
-  grades << Grade.create(name: "Extra No. 1", description: "US Extra No. 1")
-  grades << Grade.create(name: "SUP", description: "US No. 1 (Supreme")
-  grades << Grade.create(name: "SSR", description: "US Select Sheller Run")
-  grades << Grade.create(name: "Std 5%", description: "US Standard Sheller Run")
-  grades << Grade.create(name: "Whole and Broken", description: "US No. 1 Whole & Broken")
-  grades << Grade.create(name: "US No. 1 Pieces", description: "US No. 1 Pieces")
-  grades
-end
-
-def varieties
-  varieties = []
-  varieties << Variety.create(name: "nonpareil")
-  varieties << Variety.create(name: "butte")
-  varieties << Variety.create(name: "carmel")
-  varieties << Variety.create(name: "fritz")
-  varieties << Variety.create(name: "mission")
-  varieties << Variety.create(name: "monterey")
-  varieties << Variety.create(name: "padre")
-  varieties << Variety.create(name: "peerless")
-  varieties << Variety.create(name: "price")
-  varieties << Variety.create(name: "sonora")
-  varieties
-end
-
-varieties.each do |variety|
-  sizes.each do |size|
-    grades.each do |grade|
-      Item.create(name: "#{variety.name} #{size.name} #{grade.name}", commodity_id: almonds.id, origin_id: california.id, size_id: size.id, variety_id: variety.id, grade_id: grade.id)
-    end
-  end
-end
-
 
 roche = Account.create(
   name: "Roche Brothers",
@@ -191,22 +131,6 @@ PackType.create(name: "Carton")
 PackType.create(name: "Bags")
 PackType.create(name: "Big Bags")
 PackType.create(name: "b/ss")
-
-def generate_random_string
-  (0...8).map { (65 + rand(26)).chr }.join
-end
-
-a14_193 = Contract.create(buyer_id: dynasty.id, seller_id: roche.id, date: Date.new(2014,12,22), seller_contract: generate_random_string)
-a14_193_load_1 = Order.create(contract_id: a14_193.id )
-a14_193_commission = Commission.create(cents_per_pound: 3, order_id: a14_193_load_1.id, broker_id: bki.id)
-a14_193_load_1_line_1 = OrderLineItem.create(
-  order_id: a14_193_load_1.id, 
-  item_id: Item.first.id,
-  weight_id: pounds.id,
-  pack_weight_pounds: 50,
-  pack_count: 900,
-  price_cents: 316)
-
 
 Document.create(name: "Fumigation Certificate")
 Document.create(name: "Aflaxtoxin Certificate")

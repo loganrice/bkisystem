@@ -56,18 +56,31 @@ auto_complete_items();
 
 
 var filterBySelect = function(update_select, search) {
-  var regex = new RegExp(search, 'gi');
+  // var regex = new RegExp(search, 'gi');
   $(update_select).empty();
 
   $("#hidden_select").find('option').each(function(){
     var new_description = $(this).text();
-    console.log(regex);
     var new_value = $(this).val();
-    if(new_description.match(regex) !== null) {
+
+    console.log("search: " + search + "new value: " + new_value);
+    console.log($(this).text());
+    if(new_description.match(search) !== null) {
       $(update_select).append($("<option value=" + new_value + ">" + new_description + "</option>"));
     }     
   });
 }
+
+function itemData() {
+  var optionElements = []
+
+  $("#hidden_select").find('option').each(function(){
+    var description = $(this).text();
+    var value = $(this).val();
+    optionElements.push($("<option value=" + value + ">" + description + "</option>"));
+  });
+  return optionElements;
+};
 
 $('form').on("change", ".variety", function(){
   var grade = $(this).closest(".item-select-helpers").find(".grade").find(":selected").html();
@@ -97,25 +110,32 @@ $('form').on("change", ".size", function(){
 });
 
 
-var getSearchArgs = function(grade, size, variety) {
+var getSearchArgs = function(string) {
 
   var search = [];
 
-  if(grade !== ""){
-    search.push("(?=.*\\b" + grade + "\\b)");
+  if(string !== ""){
+    grade = "(^|\\W)(" + escapeRegExp(string) + ")(?!\\w)";
+    search.push(grade);
   }
 
   if(variety !== ""){
-    search.push("(?=.*\\b" + variety + "\\b)");
+    variety = "(^|\\W)(" + escapeRegExp(variety) + ")(?!\\w)";
+    search.push(variety);
   }
 
   if(size !== ""){
-    search.push("(?=.*\\b" + size + "\\b)");
+    size = "(^|\\W)" + escapeRegExp(size) + "(?!\\w)";
+    search.push(size);
   }
 
-  searchArg = (search.length==1)?search:search.join("");
+  // searchArg = (search.length==1)?search:search.join("");
+  searchArg = search.join("");
 
   return searchArg;
 };
 
-
+function escapeRegExp(str) {
+  var r = str.replace(/[\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|\-]/g, "\\$&");
+  return r;
+}
