@@ -1,4 +1,4 @@
-$('#content').replaceWith( '<%= j render("dashboard") %>');
+$('#content').replaceWith( '<%= j render("dashboard") %>').create_chart();
 // dashboard.js.erb
 var chart = new Morris.Line({
   // ID of the element in which to draw the chart.
