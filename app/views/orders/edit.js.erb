@@ -38,7 +38,7 @@ var itemData = function () {
   "<%- @items.each do |item| %>"
     items.push({"id": "<%= item.id %>", "name":"<%= item.name %>", "variety":"<%= item.variety.name %>", "grade":"<%= item.grade.name %>", "size":"<%= item.size.name %>"});
   "<%- end %>"
-  return items;
+  return _.sortByAll(items, ['name']);
 };
 
 // var itemOptionSelect = function (items) {
