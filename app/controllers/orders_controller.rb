@@ -21,6 +21,7 @@ class OrdersController < ApplicationController
     @order = Order.find(params[:id])
     @locations = DeliveryLocation.all
     @items = Item.all
+
     if @order.commissions.count == 0
       @order.commissions.create()
     end

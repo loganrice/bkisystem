@@ -23,6 +23,8 @@ gem 'faker'
 gem 'prawn'
 gem 'prawn-table'
 gem 'will_paginate'
+gem 'lodash-rails'
+
 group :development do
   gem 'sqlite3'
   gem 'pry'

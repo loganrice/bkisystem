@@ -35,7 +35,7 @@
 //= require app.js
 //= require pounds.chart
 //= require main
-
+//= require lodash
 //= require plugin/fullcalendar/jquery.fullcalendar.backup
 //= require plugin/fullcalendar/jquery.fullcalendar
 //= require dataTables/jquery.dataTables

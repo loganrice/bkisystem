@@ -34,3 +34,8 @@ $('form').on('click', '.add_fields', function(event) {
   auto_complete_items();
 });
 
+var items = [];
+"<%- @items.each do |item| %>"
+items.push({"id": "<%= item.id %>", "name":"<%= item.name %>", "variety":"<%= item.variety.name %>", "grade":"<%= item.grade.name %>", "size":"<%= item.size.name %>"});
+"<%- end %>"
+
