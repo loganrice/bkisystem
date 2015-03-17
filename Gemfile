@@ -24,6 +24,7 @@ gem 'prawn'
 gem 'prawn-table'
 gem 'will_paginate'
 gem 'lodash-rails'
+gem 'htmltoword'
 
 group :development do
   gem 'sqlite3'
