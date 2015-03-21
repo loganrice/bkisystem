@@ -148,9 +148,41 @@ class ShippingInstruction
       @doc.replace("[[PACK_WEIGHT#{index}]]", line_item.pack_weight_pounds)
       @doc.replace("[[PACK_TYPE#{index}]]", line_item.pack_type.name)
       @doc.replace("[[ITEM#{index}]]", line_item.item.name)
+    end
 
+    item_count = @order.order_line_items.count rescue nil 
+    clear_extra_items(item_count)
+  end
+
+  def clear_extra_items(count)
+    case count
+    when 0
+      counter = 0
+      3.times do
+        @doc.replace("[[PACK_COUNT#{counter}]]", "")
+        @doc.replace("[[PACK_WEIGHT#{counter}]]", "")
+        @doc.replace("[[PACK_TYPE#{counter}]]", "")
+        @doc.replace("[[ITEM#{counter}]]", "")
+        counter += 1
+      end
+    when 1
+      counter = 1
+      2.times do
+        @doc.replace("[[PACK_COUNT#{counter}]]", "")
+        @doc.replace("[[PACK_WEIGHT#{counter}]]", "")
+        @doc.replace("[[PACK_TYPE#{counter}]]", "")
+        @doc.replace("[[ITEM#{counter}]]", "")
+        counter += 1
+      end
+    when 2
+      counter = 2
+      @doc.replace("[[PACK_COUNT#{counter}]]", "")
+      @doc.replace("[[PACK_WEIGHT#{counter}]]", "")
+      @doc.replace("[[PACK_TYPE#{counter}]]", "")
+      @doc.replace("[[ITEM#{counter}]]", "")
     end
   end
+
 
   def shipping_company
     @order.shipping_company rescue ""
