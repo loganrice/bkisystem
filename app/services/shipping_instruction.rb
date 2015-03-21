@@ -47,6 +47,9 @@ class ShippingInstruction
     @doc.replace("[[MAIL_STATE]]", mail_to_state)
     @doc.replace("[[MAIL_ZIP]]", mail_to_zip)
     @doc.replace("[[SHIPPING_INSTRUCTIONS]]", shipping_instructions)
+    @doc.replace("[[ORIGIN]]", origin)
+    @doc.replace("[[COMMODITY]]", commodity)
+
     item_detail
     temp_file
   end 
@@ -251,5 +254,13 @@ class ShippingInstruction
 
   def shipping_instructions
     @order.shipping_instructions rescue ""
+  end
+
+  def origin
+    @order.order_line_items.first.item.origin.name rescue ""
+  end
+
+  def commodity
+    @order.order_line_items.first.item.commodity.name rescue ""
   end
 end

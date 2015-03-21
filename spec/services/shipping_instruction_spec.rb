@@ -335,4 +335,20 @@ describe ShippingInstruction do
       expect(report.shipping_instructions).to eq(instructions)
     end
   end
+
+  describe "#origin" do 
+    it "returns the origin of the first item on the order" do 
+      origin = order.order_line_items.first.item.origin.name
+      report = ShippingInstruction.new(order)
+      expect(report.origin).to eq(origin)
+    end
+  end
+
+  describe "#commodity" do 
+    it "returns the commodity of the first item on the order" do 
+      commodity = order.order_line_items.first.item.commodity.name
+      report = ShippingInstruction.new(order)
+      expect(report.commodity).to eq(commodity)
+    end
+  end
 end
