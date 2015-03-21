@@ -145,7 +145,7 @@ class ShippingInstruction
   def item_detail
     @order.order_line_items.each_with_index do |line_item, index|
       @doc.replace("[[PACK_COUNT#{index}]]", line_item.pack_count)
-      @doc.replace("[[PACK_WEIGHT#{index}]]", line_item.pack_weight_pounds)
+      @doc.replace("[[PACK_WEIGHT#{index}]]", "X #{line_item.pack_weight_pounds} Lb")
       @doc.replace("[[PACK_TYPE#{index}]]", line_item.pack_type.name)
       @doc.replace("[[ITEM#{index}]]", line_item.item.name)
     end
