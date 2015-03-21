@@ -14,7 +14,11 @@ def set_up_contract
   contract = Fabricate(:contract)
   order1 = Fabricate(:order, contract_id: contract.id, container_size: "40FCL")
   order2 = Fabricate(:order, contract_id: contract.id, container_size: "40FCL")
-  
+  buyer_address = Fabricate(:address)
+  seller_address = Fabricate(:address)
+  contract.seller.addresses << seller_address
+  contract.buyer.addresses << buyer_address 
+
   size_indicator = ItemSizeIndicator.create(name: "AOL")
   nonpareil = Variety.create(name: "Nonpareil")
   almonds = Commodity.create(name: "Almonds")

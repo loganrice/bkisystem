@@ -43,6 +43,13 @@
                       = link_to invoice_report_path(@invoice, format: "pdf"), target: "_blank", class: "btn btn-default" do 
                         %i.fa.fa-lg.fa-fw.fa-file-pdf-o
                         %span.menu-item-parent Invoice
+
+                      = link_to print_path(@invoice), target: "_blank", class: "btn btn-default" do 
+                        %i.fa.fa-lg.fa-fw.fa-file-pdf-o
+                        %span.menu-item-parent Invoice
+
+
+
               = bootstrap_form_for @invoice, layout: :default, control_col: "col-sm-4", label_errors: true, remote: true do |f|
                 = f.hidden_field :order_id
                 %div.padding-10
@@ -109,3 +116,4 @@
                 = button_tag(type: 'submit', class: "btn btn-primary") do
                   %i.fa.fa-lg.fa-fw.fa-save
                   %span=  @invoice.new_record? ? "Save" : "Update"
+

@@ -14,4 +14,12 @@ Fabricator(:order) do
   shipping_company_reference_number { Faker::Number.number(10) }
   automated_export_number { Faker::Number.number(10) }
   buyer_po { Faker::Number.number(10) }
+  consignee { Faker::Name.name }
+  line1 { Faker::Address.street_address }
+  line2 { Faker::Address.secondary_address }
+  line3 { Faker::Address.building_number }
+  city { Faker::Address.city }
+  state { Faker::Address.state }
+  zip { Faker::Address.postcode }
+  mail_to_id { Fabricate(:account).id }
 end

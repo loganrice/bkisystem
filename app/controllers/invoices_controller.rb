@@ -1,6 +1,7 @@
 class InvoicesController < ApplicationController
   before_filter :require_user
   respond_to :js
+  respond_to :docx
 
   def index
     @invoices = Invoice.all 
@@ -45,16 +46,36 @@ class InvoicesController < ApplicationController
   end
 
   def invoice_report
-    invoice = Invoice.find(params[:id])
+    @invoice = Invoice.find(params[:id])
     respond_to do |format|
       format.pdf do
-        pdf = InvoicePdf.new(invoice, view_context)
+        pdf = InvoicePdf.new(@invoice, view_context)
         send_data pdf.render, filename: "invoice_#{invoice.id}.pdf",
                               type: "application/pdf",
                               disposition: "inline"
       end
     end
   end
+
+  def print
+    word = /Lorem \r
+        insert break here \n 
+        ipsum dolor sit amet,\r\n consectetur adipisicing elit. Quas nulla nostrum aliquid laboriosam quo. Saepe, consequuntur ut rerum hic! Minus accusamus ut in, dolorem unde sequi autem eos? Maiores, odio.
+        Lorem ipsum dolor sit amet\v, consectetur adipisicing elit. Quas nulla nostrum aliquid laboriosam quo. Saepe, consequuntur ut rerum hic! Minus accusamus ut in, dolorem unde sequi autem eos? Maiores, odio.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas nulla nostrum aliquid laboriosam quo. Saepe, consequuntur ut rerum hic! Minus accusamus ut in, dolorem unde sequi autem eos? Maiores, odio.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas nulla nostrum aliquid laboriosam quo. Saepe, consequuntur ut rerum hic! Minus accusamus ut in, dolorem unde sequi autem eos? Maiores, odio.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas nulla nostrum aliquid laboriosam quo. Saepe, consequuntur ut rerum hic! Minus accusamus ut in, dolorem unde sequi autem eos? Maiores, odio.
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas nulla nostrum aliquid laboriosam quo. Saepe, consequuntur ut rerum hic! Minus accusamus ut in, dolorem unde sequi autem eos? Maiores, odio./
+    report = ODFReport::Report.new(Rails.root.join('app', 'reports', 'test2.odt')) do |r|
+      r.add_field(:test_id, word)
+    end
+
+    send_data report.generate,
+      type: 'application/vnd.oasis.opendocument.text',
+      disposition: 'attachment',
+      filename: 'work.odt'
+  end
+
 
   private
 

@@ -1,4 +1,8 @@
 %div.well
+  = link_to shipping_instruction_path(@order, format: "docx"), target: "_blank", class: "btn btn-default" do 
+    %i.fa.fa-lg.fa-fw.fa-file-pdf-o
+    %span.menu-item-parent DOCx
+
   %div.row
     %section.col-xs-9
       = f.text_area :ship_delivery
@@ -43,8 +47,6 @@
       = f.text_field :booking_number
     %section.col-xs-3
       = f.text_field :commodity
-    %section.col-xs-3
-      = f.date_field :estimated_arrival_date
   %div.row
     %section.col-xs-3
       = f.text_field :shipping_company_reference_number

@@ -31,6 +31,148 @@ $('form').on('click', '.add_fields', function(event) {
   regexp = new RegExp($(this).data('id'), 'g');
   $(this).before($(this).data('fields').replace(regexp, time));
   event.preventDefault();
-  auto_complete_items();
 });
 
+var itemData = function () {
+  var items = [];
+  "<%- @items.each do |item| %>"
+    items.push({"id": "<%= item.id %>", "name":"<%= item.name %>", "variety":"<%= item.variety.name %>", "grade":"<%= item.grade.name %>", "size":"<%= item.size.name %>"});
+  "<%- end %>"
+  return _.sortByAll(items, ['name']);
+};
+
+// var itemOptionSelect = function (items) {
+//   var optionElements = [];
+
+//   items.forEach( function (item) {
+//     optionElements.push(
+//       $("<option value=" + item.id + ">" + item.name + "</option>")
+//     );
+//   });
+//   return optionElements;
+// };
+
+var selectFilter = function (search) {
+  var filterData = itemData();
+
+  if (search.grade !== "") {
+    filterData = _.filter(filterData, { 'grade': search.grade});
+  }
+
+  if (search.size !== "") {
+    filterData = _.filter(filterData, { 'size': search.size});
+  }
+
+  if (search.variety !== "") {
+    filterData = _.filter(filterData, { 'variety': search.variety});
+  }
+
+  return filterData;
+}
+
+var updateDomItemSelect = function(update_select, items) {
+  $(update_select).empty();
+  console.log(items);
+  for (var i= 0; i < items.length; i++) {
+    console.log(items[i].name); 
+    $(update_select).append($("<option value=" + items[i].id + ">" + items[i].name + "</option>"));
+  }
+};
+
+var getSearchArgs = function (grade, size, variety) {
+  search = {
+    grade: '',
+    variety: '',
+    size: ''
+  };
+
+  if(grade !== ""){
+    search.grade = grade
+  }
+
+  if(variety !== ""){
+    search.variety = variety
+  }
+
+  if(size !== ""){
+    search.size = size
+  }
+
+  return search 
+};
+
+$('form').on("change", ".grade", function(){
+  var grade = $(this).closest(".item-select-helpers").find(".grade").find(":selected").html();
+  var size = $(this).closest(".item-select-helpers").find(".size").find(":selected").html();
+  var variety = $(this).closest(".item-select-helpers").find(".variety").find(":selected").html();
+  var update_select = $(this).parent().parent().next("tr").find(".item-select").first();
+
+  if(grade == undefined){
+    grade = "";
+  }
+
+  if(variety == undefined){
+    variety = "";
+  }
+
+  if(size == undefined){
+    size = "";
+  }
+  var search = getSearchArgs(grade, size, variety);
+  var filter = selectFilter(search);
+  updateDomItemSelect(update_select, filter);
+});
+
+$('form').on("change", ".variety", function(){
+  var grade = $(this).closest(".item-select-helpers").find(".grade").find(":selected").html();
+  var size = $(this).closest(".item-select-helpers").find(".size").find(":selected").html();
+  var variety = $(this).closest(".item-select-helpers").find(".variety").find(":selected").html();
+  var update_select = $(this).parent().parent().next("tr").find(".item-select").first();
+
+  if(grade == undefined){
+    grade = "";
+  }
+
+  if(variety == undefined){
+    variety = "";
+  }
+
+  if(size == undefined){
+    size = "";
+  }
+  var search = getSearchArgs(grade, size, variety);
+  var filter = selectFilter(search);
+  updateDomItemSelect(update_select, filter);
+});
+
+$('form').on("change", ".size", function(){
+  var grade = $(this).closest(".item-select-helpers").find(".grade").find(":selected").html();
+  var size = $(this).closest(".item-select-helpers").find(".size").find(":selected").html();
+  var variety = $(this).closest(".item-select-helpers").find(".variety").find(":selected").html();
+  var update_select = $(this).parent().parent().next("tr").find(".item-select").first();
+
+  if(grade == undefined){
+    grade = "";
+  }
+
+  if(variety == undefined){
+    variety = "";
+  }
+
+  if(size == undefined){
+    size = "";
+  }
+  var search = getSearchArgs(grade, size, variety);
+  var filter = selectFilter(search);
+  updateDomItemSelect(update_select, filter);
+});
+
+$('.js-shipDelivery').click(function() {
+  var location = $(this).data("location-description");
+  $('#order_ship_delivery').val(location);
+});
+
+$('.js-pickupDelivery').click(function() {
+  var location = $(this).data("location-description");
+  $('#order_ship_pick_up').val(location);
+});

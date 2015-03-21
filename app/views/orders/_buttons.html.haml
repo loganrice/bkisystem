@@ -7,12 +7,19 @@
   = button_tag(type: 'submit', class: "btn btn-primary") do
     %i.fa.fa-lg.fa-fw.fa-save
     %span Save
+
   =link_to new_invoice_path(order_id: @order.id), class: 'btn btn-success', remote: true do 
     %i.fa.fa-lg.fa-money
     %i.fa.fa-plus
     %span INVOICE
+    
   %span.text-muted.pull-right
     %em= "Load #{@order.row_on_contract} of #{@order.contract.orders.count}"
-  = link_to shipping_report_path(@order, format: "pdf"), target: "_blank", class: "btn btn-default" do 
-    %i.fa.fa-lg.fa-fw.fa-file-pdf-o
-    %span.menu-item-parent Shipping Information
+
+  = link_to shipping_instruction_path(@order, format: "docx"), target: "_blank", class: "btn btn-default" do 
+    %i.fa.fa-lg.fa-fw.fa-cloud-download
+    %span.menu-item-parent Shipping Instructions
+
+  / = link_to shipping_report_path(@order, format: "pdf"), target: "_blank", class: "btn btn-default" do 
+  /   %i.fa.fa-lg.fa-fw.fa-file-pdf-o
+  /   %span.menu-item-parent Shipping Information

@@ -166,3 +166,13 @@ $('form').on("change", ".size", function(){
   var filter = selectFilter(search);
   updateDomItemSelect(update_select, filter);
 });
+
+$('.js-shipDelivery').click(function() {
+  var location = $(this).data("location-description");
+  $('#order_ship_delivery').val(location);
+});
+
+$('.js-pickupDelivery').click(function() {
+  var location = $(this).data("location-description");
+  $('#order_ship_pick_up').val(location);
+});
