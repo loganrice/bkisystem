@@ -5,30 +5,7 @@
         %i.fa-fw.fa.fa-home
         Dashboard
         %span > My Dashboard
-    %div.col-xs-12.col-sm-5.col-md-5.col-lg-8
-      %ul#sparks
-        %li.sparks-info
-          %h5
-            Sales
-            %span.txt-color-blue $47,171
-          %div.sparkline.txt-color-blue.hidden-mobile.hidden-md.hidden-sm
-            1300, 1877, 2500, 2577, 2000, 2100, 3000, 2700, 3631, 2471, 2700, 3631, 2471
-        %li.sparks-info
-          %h5
-            Open Contracts
-            %span.txt-color-purple
-              %i.fa.fa-arrow-circle-up
-              &nbsp;45%
-          %div.sparkline.txt-color-purple.hidden-mobile.hidden-md.hidden-sm
-            110,150,300,130,400,240,220,310,220,300, 270, 210
-        %li.sparks-info
-          %h5
-            Contracts
-            %span.txt-color-greenDark
-            %i.fa.fa-shopping-cart
-            &nbsp;2447
-          %div.sparkline.txt-color-greenDark.hidden-mobile.hidden-md.hidden-sm
-            110,150,300,130,400,240,220,310,220,300, 270, 210
+
 
   %section#widget-grid
     %div.row
@@ -56,10 +33,6 @@
                   %i.fa.fa-line-chart
                   %span.hidden-mobile.hidden-tablet
                     Total lbs
-              %li
-                %a{ "data-toggle" => "tab", :href => "#s3" }
-                  %i.fa.fa-dollar
-                  %span.hidden-mobile.hidden-tablet Revenue
           -#- widget div-->
           %div.no-padding
             -#- widget edit box -->
@@ -98,120 +71,6 @@
 
                 -#- end s1 tab pane -->
 
-                %div.tab-pane.fade#s2
-                  %div.widget-body-toolbar.bg-color-white
-                    %form.form-inline{ :role => "form" }
-                      %div.form-group
-                        %label.sr-only{ :for => "s123" }
-                          Show From
-                        %input.form-control.input-sm#s123{ :type => "email", :placeholder => "Show From" }
-                      %div.form-group
-                        %input.form-control.input-sm#s124{ :type => "email", :placeholder => "To" }
-                      %div.btn-group.hidden-phone.pull-right
-                        %a.btn.dropdown-toggle.btn-xs.btn-default{ "data-toggle" => "dropdown" }
-                          %i.fa.fa-cog
-                          More
-                          %span.caret
-                        %ul.dropdown-menu.pull-right
-                          %li
-                            %a{ :href => "javascript:void(0);" }
-                              %i.fa.fa-file-text-alt
-                              Export to PDF
-                          %li
-                            %a{ :href => "javascript:void(0);" }
-                              %i.fa.fa-question-sign
-                              Help
-                  %div.padding-10
-                    %div#statsChart.chart-large.has-legend-unique
-                -#- end s2 tab pane -->
-                %div.tab-pane.fade#s3
-                  %div.widget-body-toolbar.bg-color-white.smart-form#rev-toggles
-                    %div.inline-group
-                      %label.checkbox{ :for => "gra-0" }
-                        %input#gra-0{ :type => "checkbox", :name => "gra-0", :checked => "checked" }
-                        %i
-                        Target
-                      %label.checkbox{ :for => "gra-1" }
-                        %input#gra-1{ :type => "checkbox", :name => "gra-1", :checked => "checked" }
-                        %i
-                        Actual
-                      %label.checkbox{ :for => "gra-2" }
-                        %input#gra-2{ :type => "checkbox", :name => "gra-2", :checked => "checked" }
-                        %i
-                        Signups
-                    %div.btn-group.hidden-phone.pull-right
-                      %a.btn.dropdown-toggle.btn-xs.btn-default{ "data-toggle" => "dropdown" }
-                        %i.fa.fa-cog
-                        More
-                        %span.caret
-                      %ul.dropdown-menu.pull-right
-                        %li
-                          %a{ :href => "javascript:void(0);" }
-                            %i.fa.fa-file-text-alt
-                            Export to PDF
-                        %li
-                          %a{ :href => "javascript:void(0);" }
-                            %i.fa.fa-question-sign
-                            Help
-                  %div.padding-10
-                    %div#flotcontainer.chart-large.has-legend-unique
-                -#- end s3 tab pane -->
-              -#- end content -->
-          -#- end widget div -->
-        -#- end widget -->
-    -#- end row -->
 
-    -#- row -->
-
-    %div.row
-      %article.col-sm-12.col-md-12.col-lg-6
-        -#- new widget -->
-        %div.jarviswidget.jarviswidget-color-blueDark#wid-id-3{ "data-widget-colorbutton" => "false" }
-          -#- widget options:
-          -#usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-
-          -#data-widget-colorbutton="false"
-          -#data-widget-editbutton="false"
-          -#data-widget-togglebutton="false"
-          -#data-widget-deletebutton="false"
-          -#data-widget-fullscreenbutton="false"
-          -#data-widget-custombutton="false"
-          -#data-widget-collapsed="true"
-          -#data-widget-sortable="false"
-          %header
-            %span.widget-icon
-              %i.fa.fa-calendar
-            %h2 My Events
-            %div.widget-toolbar
-              -#- add: non-hidden - to disable auto hide -->
-              %div.btn-group
-                %button.btn.dropdown-toggle.btn-xs.btn-default{ "data-toggle" =>"dropdown" }
-                  Showing 
-                  %i.fa.fa-caret-down
-                %ul.dropdown-menu.js-status-update.pull-right
-                  %li
-                    %a#mt{ :href => "javascript:void(0);" } Month
-                  %li
-                    %a#ag{ :href => "javascript:void(0);" } Agenda
-                  %li
-                    %a#td{ :href => "javascript:void(0);" } Today
-          -#- widget div-->
-          %div
-            -#- widget edit box -->
-            %div.jarviswidget-editbox
-              %input.form-control{ :type => "text" }
-            -# end widget edit box -->
-            %div.widget-body.no-padding
-              -# content goes here -->
-              %div.widget-body-toolbar
-                %div#calendar-buttons
-                  %div.btn-group
-                    %a#btn-prev.btn.btn-default.btn-xs{ :href => "javascript:void(0)" }
-                      %i.fa.fa-chevron-left
-                    %a#btn-next.btn.btn-default.btn-xs{ :href => "javascript:void(0)" }
-                      %i.fa.fa-chevron-right
-              %div#calendar
-              -# end content -->
-          -# end widget div -->
-        -# end widget -->
+ 
 = javascript_include_tag "pounds.chart.js"

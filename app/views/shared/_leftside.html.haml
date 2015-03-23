@@ -29,23 +29,7 @@
         = link_to invoices_path, remote: true do 
           %i.fa.fa-lg.fa-fw.fa-money
           %span.menu-item-parent Invoices      
-      %li.nav-item
-        %a{ :href => "#" }
-          %i.fa.fa-lg.fa-fw.fa-bar-chart-o 
-          %span.menu-item-parent Reports
-        %ul
-          %li.nav-item
-            %a{ :href => "#" } Sales Summary Report
-          %li.nav-item
-            %a{ :href => "#" } Contract Status Report
-          %li.nav-item
-            %a{ :href => "#" } Grower Pay Report
-          %li.nav-item
-            %a{ :href => "#" } Pay Report
-          %li.nav-item
-            %a{ :href => "#" }
-              Shipping Report
-              %span.badge.pull-right.inbox-badge.bg-color-yellow new
+
 
       %li.nav-item
         %a{ :href => "#" }
@@ -75,14 +59,6 @@
           %i.fa.fa-lg.fa-fw.fa-users        
           %span.menu-item-parent Users
       %li.nav-item
-        = link_to documents_path, remote: true do
-          %i.fa.fa-lg.fa-fw.fa-file-text-o
-          %span.menu-item-parent Documents
-      %li.nav-item
-        = link_to terms_path, remote: true do
-          %i.fa.fa-lg.fa-fw.fa-file-text-o
-          %span.menu-item-parent Terms
-      %li.nav-item
         %a{ :href => "#" }
           %i.fa.fa-lg.fa-fw.fa-gear
           %span.menu-item-parent Table Maintenance
@@ -95,3 +71,9 @@
             = link_to 'Remarks', remarks_path, remote: true
           %li.nav-item
             = link_to 'Delivery Locations', delivery_locations_path, remote: true
+          %li.nav-item
+            = link_to 'Documents', documents_path, remote: true 
+      %li.nav-item
+        = link_to sign_out_path do
+          %i.fa.fa-sign-out
+          %span Sign Out

@@ -47,11 +47,7 @@ describe Contract do
       expect(contract.total_pounds).to eq(BigDecimal("10500"))
 
     end
-
-    it "returns a hash of the total weight in kilograms" do 
-
-    end
-
   end
+
 end
 
