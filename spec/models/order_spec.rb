@@ -231,4 +231,20 @@ describe Order do
     end
   end
 
+  describe "#copy_first_order_consignee" do 
+    it "copies the consignee name and address from the first order" do 
+      contract = Fabricate(:contract)
+      order = Fabricate(:order, contract_id: contract.id)
+
+      new_order = contract.orders.create()
+
+      expect(new_order.consignee).to eq(order.consignee)
+      expect(new_order.line1).to eq(order.line1)
+      expect(new_order.line2).to eq(order.line2)
+      expect(new_order.line3).to eq(order.line3)
+      expect(new_order.city).to eq(order.city)
+      expect(new_order.state).to eq(order.state)
+      expect(new_order.zip).to eq(order.zip)
+    end
+  end
 end

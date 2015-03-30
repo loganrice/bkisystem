@@ -12,9 +12,12 @@ class Order < ActiveRecord::Base
   accepts_nested_attributes_for :order_line_items, allow_destroy: true
   accepts_nested_attributes_for :commissions, allow_destroy: true
   accepts_nested_attributes_for :invoices, allow_destroy: true
-  after_create :copy_first_order_line_items_on_contract, :copy_first_order_commissions, :copy_first_order_values, :default_values
+  after_create :default_values
 
   def default_values
+    copy_first_order_line_items_on_contract
+    copy_first_order_commissions
+    copy_first_order_values
   end
 
   def row_on_contract
@@ -111,6 +114,7 @@ class Order < ActiveRecord::Base
     cents.to_f / 100
   end
 
+
   def copy_first_order_line_items_on_contract
     if contract_has_at_least_1_order?
       self.copy_line_items(first_order_on_contract)
@@ -126,17 +130,13 @@ class Order < ActiveRecord::Base
 
   def copy_first_order_values
     if contract_has_at_least_1_order?
-      if first_order_on_contract.container_size
-        copy_container_size(first_order_on_contract)
-      end
-
-      if first_order_on_contract.documents
-        copy_documents(first_order_on_contract)
-      end
-
-
+      copy_container_size(first_order_on_contract) if first_order_on_contract.container_size
+      copy_documents(first_order_on_contract) if first_order_on_contract.documents
+      copy_first_order_consignee(first_order_on_contract) if first_order_on_contract.consignee
     end
   end
+
+
 
   def copy_commissions(order)
     order.commissions.each do |commission|
@@ -161,6 +161,17 @@ class Order < ActiveRecord::Base
   end
 
   private
+
+  def copy_first_order_consignee(order)
+    self.update_attributes(consignee: order.consignee) 
+    self.update_attributes(line1: order.line1)
+    self.update_attributes(line2: order.line2)
+    self.update_attributes(line3: order.line3)
+    self.update_attributes(city: order.city)
+    self.update_attributes(state: order.state)
+    self.update_attributes(zip: order.zip) 
+    self.update_attributes(country: order.country) 
+  end
 
   def round_money(cents)
     cents.round(2).to_i 
