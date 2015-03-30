@@ -1,4 +1,4 @@
-%div.well.well-sm.bg-color-darken.txt-color-white.no-border
+%div.well.well-sm.bg-color-darken.txt-color-white.no-border#button-header
   = link_to edit_contract_path(@order.contract), remote: true, class: "btn btn-info" do 
     %i.fa.fa-lg.fa-fw.fa-pencil-square-o
     %span.menu-item-parent 
@@ -12,13 +12,18 @@
     %i.fa.fa-lg.fa-money
     %i.fa.fa-plus
     %span INVOICE
-    
-  %span.text-muted.pull-right
-    %em= "Load #{@order.row_on_contract} of #{@order.contract.orders.count}"
 
   = link_to shipping_instruction_path(@order, format: "docx"), target: "_blank", class: "btn btn-default" do 
     %i.fa.fa-lg.fa-fw.fa-cloud-download
     %span.menu-item-parent Shipping Instructions
+
+  %span.pull-right
+    %em.text-info= "Seller: #{@order.contract.seller.name}"
+    %br
+    %em.text-info= "Buyer: #{@order.contract.buyer.name}"
+    %br
+    %em.text-muted= "Load #{@order.row_on_contract} of #{@order.contract.orders.count}"
+
 
   / = link_to shipping_report_path(@order, format: "pdf"), target: "_blank", class: "btn btn-default" do 
   /   %i.fa.fa-lg.fa-fw.fa-file-pdf-o
