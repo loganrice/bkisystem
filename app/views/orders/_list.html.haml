@@ -52,7 +52,7 @@
                       %td
                         = order.contract.seller.name
                       %td
-                        = link_to order.contract.id, edit_contract_path(order.contract), remote: true
+                        = link_to order.contract.seller_contract, edit_contract_path(order.contract), remote: true
                       %td
                         = link_to order.row_on_contract, edit_order_path(order), remote: true
                       %td 

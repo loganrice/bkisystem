@@ -28,13 +28,15 @@ class ContractsController < ApplicationController
   end
 
   def update
+    @terms = Term.all 
+    @remarks = Remark.all
     check_each_quote_line_weight
     @contract = Contract.find(params[:id])
     if @contract.update(contract_params)
       flash[:success] = "Updated"
       redirect_to edit_contract_path(@contract)
     else
-      flash[:error] = "Something went wrong"
+      flash[:error] = @contract.errors.full_messages.join(" ")
       render :edit
     end
   end

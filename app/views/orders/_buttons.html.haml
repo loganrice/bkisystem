@@ -2,7 +2,7 @@
   = link_to edit_contract_path(@order.contract), remote: true, class: "btn btn-info" do 
     %i.fa.fa-lg.fa-fw.fa-pencil-square-o
     %span.menu-item-parent 
-      = "Contract - #{@order.contract.id}"
+      = "Contract - #{@order.contract.seller_contract}"
 
   = button_tag(type: 'submit', class: "btn btn-primary") do
     %i.fa.fa-lg.fa-fw.fa-save
