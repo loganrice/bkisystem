@@ -50,7 +50,7 @@ class InvoicePdf
     y_position -= @line_space
 
     text_box "<b>Contract No:</b>", inline_format: true, at: [x_position, y_position]
-    text_box "#{@invoice.order.contract.id}", inline_format: true, at: [x_position_description, y_position]
+    text_box "#{@invoice.order.contract.seller_contract}", inline_format: true, at: [x_position_description, y_position]
     y_position -= @line_space
 
     text_box "<b>Load No:</b>", inline_format: true, at: [ x_position, y_position]

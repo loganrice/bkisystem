@@ -53,7 +53,7 @@ class OrderPdf
 
   def contract_number
     text "<b>Date:</b> #{@contract.date.try(:strftime, ("%m/%d/%Y"))}", inline_format: true
-    text "<b>Contract No:</b> #{@contract.id}", inline_format: true
+    text "<b>Contract No:</b> #{@contract.seller_contract}", inline_format: true
     text "<b>Customer Contract No:</b> #{@contract.buyer_contract}", inline_format: true
   end
 

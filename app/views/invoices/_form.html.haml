@@ -44,10 +44,6 @@
                         %i.fa.fa-lg.fa-fw.fa-file-pdf-o
                         %span.menu-item-parent Invoice
 
-                      = link_to print_path(@invoice), target: "_blank", class: "btn btn-default" do 
-                        %i.fa.fa-lg.fa-fw.fa-file-pdf-o
-                        %span.menu-item-parent Invoice
-
 
 
               = bootstrap_form_for @invoice, layout: :default, control_col: "col-sm-4", label_errors: true, remote: true do |f|
