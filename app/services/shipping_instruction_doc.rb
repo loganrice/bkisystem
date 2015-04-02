@@ -142,7 +142,7 @@ class ShippingInstructionDoc
   def origin_shell_commodity
     @order.order_line_items.map { |line_item|
       [line_item.item.origin.name, line_item.item.shell.name, line_item.item.commodity.name].join(' ')
-    }.join(", ")
+    }.uniq.join(", ")
   end
 
   def shipping_company
