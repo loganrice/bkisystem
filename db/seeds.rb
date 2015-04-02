@@ -10,11 +10,6 @@
 
 require 'open-uri'
 
-Item.delete_all
-Commodity.delete_all
-Size.delete_all
-Variety.delete_all
-Grade.delete_all
 Contract.delete_all
 Account.delete_all
 Address.delete_all 
@@ -27,7 +22,6 @@ User.delete_all
 ItemSizeIndicator.delete_all
 PackType.delete_all
 Document.delete_all
-Origin.delete_all
 Invoice.delete_all
 InvoiceLineItem.delete_all
 Term.delete_all

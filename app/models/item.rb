@@ -4,6 +4,7 @@ class Item < ActiveRecord::Base
   belongs_to :variety
   belongs_to :grade
   belongs_to :origin
+  belongs_to :shell
   has_many :quote_line_items
   has_many :order_line_items
   validates_presence_of :name

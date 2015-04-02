@@ -37,5 +37,7 @@
                 = f.select :variety_id, options_for_select(Variety.all.map { |variety| [variety.name, variety.id]}, selected: f.object.variety_id )
                 = f.select :size_id, options_for_select(Size.all.map { |size| [size.name, size.id]}, selected: f.object.size_id )
                 = f.select :grade_id, options_for_select(Grade.all.map { |grade| [grade.name, grade.id]}, selected: f.object.grade_id)
+                = f.select :shell_id, options_for_select(Shell.all.map { |shell| [shell.name, shell.id]}, selected: f.object.shell_id)
+                
                 = f.submit @item.new_record? ? "Create new item" : "Update item"
 

@@ -43,6 +43,8 @@ class ContractsController < ApplicationController
 
   def create
     @contract = Contract.new(contract_params)
+    @terms = Term.all 
+    @remarks = Remark.all 
     if @contract.save
       flash[:success] = "Updated"
       redirect_to edit_contract_path(@contract)
