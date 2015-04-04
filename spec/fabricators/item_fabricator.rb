@@ -5,4 +5,5 @@ Fabricator(:item) do
   variety { Fabricate(:variety) }
   grade { Fabricate(:grade)}
   origin { Fabricate(:origin)}
+  shell { Fabricate(:shell)}
 end

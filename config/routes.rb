@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get 'invoices/:id/invoice_report' => 'invoices#invoice_report', as: :invoice_report 
   # get 'shipping_instructions/:id' => 'shipping_instructions#show'
   get 'orders/:id/shipping_report' => 'orders#shipping_report', as: :shipping_report
+  get 'contracts/:id/contract_doc' => 'contracts#contract_doc', as: :contract_doc
   get 'ajax/item_names' => 'ajax#item_names', as: :item_names
   get 'ajax/filter_items_by_variety' => 'ajax#filter_items_by_variety', as: :filter_items_by_variety
 

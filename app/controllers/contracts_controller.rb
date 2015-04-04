@@ -66,7 +66,16 @@ class ContractsController < ApplicationController
     end
   end
 
-
+  def contract_doc
+    @contract = Contract.find(params[:id])
+    respond_to do |format|
+      format.docx do
+        report = ContractDoc.new(@contract)
+        # Respond to the request by sending the temp file
+        send_file report.temp_file, filename: "contract_report.docx", disposition: 'inline'
+      end
+    end
+  end
 
   private
 
