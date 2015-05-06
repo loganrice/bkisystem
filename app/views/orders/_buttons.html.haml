@@ -17,6 +17,11 @@
     %i.fa.fa-lg.fa-fw.fa-cloud-download
     %span.menu-item-parent Shipping Instructions
 
+  = link_to new_order_certificate_of_origins_path(@order), remote: true, class: "btn btn-info" do 
+    %i.fa.fa-lg.fa-fw.fa-pencil-square-o
+    %span.menu-item-parent 
+      = "Add Certificate of Origin"
+
   %span.pull-right
     %em.text-info= "Seller: #{@order.contract.seller.name}"
     %br

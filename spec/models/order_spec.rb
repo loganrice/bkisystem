@@ -13,7 +13,8 @@ describe Order do
   it { should have_many(:invoices) }
   it { should accept_nested_attributes_for(:invoices)}
   it { should belong_to(:mail_to)}
-  
+  it { should have_one :certificate_of_origin}
+
   it "sort OrderDetails sort descending order by creation date" do 
     order = Fabricate(:order)
     month_ago = Fabricate(:order_line_item, created_at: 1.month.ago, order_id: order.id)

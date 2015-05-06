@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150402223106) do
+ActiveRecord::Schema.define(version: 20150506201905) do
 
   create_table "accounts", force: true do |t|
     t.string "name"
@@ -66,6 +66,20 @@ ActiveRecord::Schema.define(version: 20150402223106) do
     t.string   "zip"
     t.string   "country"
     t.string   "account_number"
+  end
+
+  create_table "certificate_of_origins", force: true do |t|
+    t.string   "hs_code"
+    t.string   "treatment"
+    t.string   "place_of_initial_receipt"
+    t.string   "port_of_loading"
+    t.string   "forwarding_agent"
+    t.string   "initial_carriage_by"
+    t.string   "vessel"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "order_id"
+    t.text     "routing_instructions"
   end
 
   create_table "commissions", force: true do |t|
@@ -143,8 +157,8 @@ ActiveRecord::Schema.define(version: 20150402223106) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "invoice_number"
-    t.boolean  "show_bank_wire_info", limit: 255
     t.boolean  "hide_commission"
+    t.boolean  "show_bank_wire_info"
   end
 
   create_table "item_size_indicators", force: true do |t|

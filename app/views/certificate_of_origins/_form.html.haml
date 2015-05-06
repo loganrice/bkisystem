@@ -1,0 +1,33 @@
+%div#content
+  -# widget grid -->
+  %section#widget-grid
+    -# row -->
+    %div.row
+      -# NEW WIDGET START -->
+      %article.col-xs-12.col-sm-12.col-md-12.col-lg-12
+        -#- end widget -->
+        -#- Widget ID (each widget will need unique ID)-->
+        %div.jarviswidget.jarviswidget-color-blueDark#remarki{ "data-widget-editbutton" => "false" }
+          %header
+            %span.widget-icon
+              %i.fa.fa-table
+            %h2 Certificate of Origin
+          -#- widget div-->
+          %div
+            -# widget edit box -->
+            %div.jarviswidget-editbox
+              -# This area used as dropdown edit box -->
+            -#- end widget edit box -->
+            -#- widget content -->
+            %div.widget-body.no-padding
+              %div.well
+                = bootstrap_form_for(@certificate_of_origin, class: "login-form smart-form client-form", layout: :horizontal, label_errors: true, remote: true) do |f|
+                  = f.text_field :order_id
+                  = f.text_field :hs_code
+                  = f.text_field :treatment
+                  = f.text_field :place_of_initial_receipt
+                  = f.text_field :forwarding_agent
+                  = f.text_field :initial_carriage_by
+                  = f.text_field :vessel
+                  = f.text_area :routing_instructions
+                  = f.submit @certificate_of_origin.new_record? ? "Add" : "Update"
