@@ -141,7 +141,7 @@ class ShippingInstructionDoc
 
   def origin_shell_commodity
     @order.order_line_items.map { |line_item|
-      [line_item.item.origin.name, line_item.item.shell.name, line_item.item.commodity.name].join(' ')
+      [line_item.item.origin.try(:name), line_item.item.shell.try(:name), line_item.item.commodity.try(:name)].join(' ')
     }.uniq.join(", ")
   end
 
@@ -201,7 +201,7 @@ class ShippingInstructionDoc
   def origin
     origins = @order.order_line_items.map { |line_item| line_item.try(:item).try(:origin).try(:name) }
     origins.exclude? "NA" 
-    origins.join(", ")
+    origins.uniq.join(", ")
   end
 
   def commodity

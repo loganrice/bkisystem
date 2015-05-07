@@ -70,38 +70,6 @@ describe ShippingInstructionDoc do
     end
   end
 
-  describe "#buyer_address_line1" do 
-    it "returns the buyer's first address line1" do
-      line1 = order.contract.buyer.addresses.first.line1
-      report = ShippingInstructionDoc.new(order)
-      expect(report.buyer_address_line1).to eq(line1)
-    end
-  end
-
-  describe "#buyer_address_city" do 
-    it "returns city of the first address associated with the buyer" do 
-      city = "#{order.contract.buyer.addresses.first.city},"
-      report = ShippingInstructionDoc.new(order)
-      expect(report.buyer_address_city).to eq(city)
-    end
-  end
-
-  describe "#buyer_address_state" do 
-    it "returns state of the first address associated with the buyer" do 
-      state = order.contract.buyer.addresses.first.state 
-      report = ShippingInstructionDoc.new(order)
-      expect(report.buyer_address_state).to eq(state)
-    end
-  end
-
-  describe "#buyer_address_zip" do 
-    it "returns zip of the first address associated with the buyer" do 
-      zip = order.contract.buyer.addresses.first.zip 
-      report = ShippingInstructionDoc.new(order)
-      expect(report.buyer_address_zip).to eq(zip)
-    end
-  end
-
   describe "#consignee" do 
     it "returns name of consignee" do 
       consignee = order.consignee 
@@ -120,7 +88,7 @@ describe ShippingInstructionDoc do
 
   describe "#city" do 
     it "returns city of the consignee's address" do 
-      city = "#{order.city},"
+      city = "#{order.city}"
       report = ShippingInstructionDoc.new(order)
       expect(report.city).to eq(city)
     end
@@ -154,7 +122,7 @@ describe ShippingInstructionDoc do
     it "returns the number of orders(aka loads) associated with the contract" do 
       count = order.contract.orders.count 
       report = ShippingInstructionDoc.new(order)
-      expect(report.load_count).to eq(count)
+      expect(report.load_count).to eq(count.to_s)
     end
   end
 
@@ -162,7 +130,7 @@ describe ShippingInstructionDoc do
     it "returns the pack count of the first item on the order" do 
       count = order.contract.orders.count
       report = ShippingInstructionDoc.new(order)
-      expect(report.load_count).to eq(count)
+      expect(report.load_count).to eq(count.to_s)
     end
   end
 
@@ -239,18 +207,18 @@ describe ShippingInstructionDoc do
   end
 
   describe "#ship_pick_up" do 
-    it "returns the ship pick up  on the order" do 
-      note = order.ship_pick_up
+    it "returns the ship pick up on the order" do 
+      note = order.ship_pick_up = "Pick Up ASAP"
       report = ShippingInstructionDoc.new(order)
       expect(report.ship_pick_up).to eq(note)
     end
   end
 
   describe "#ship_delivery" do 
-    it "returns the ship_delivery up  on the order" do 
+    it "returns the ship_delivery up on the order" do 
       note = order.ship_delivery
       report = ShippingInstructionDoc.new(order)
-      expect(report.ship_delivery).to eq(note)
+      expect(report.ship_delivery).to eq(note.to_s)
     end
   end
 
@@ -314,7 +282,7 @@ describe ShippingInstructionDoc do
 
   describe "#shipping_instructions" do 
     it "returns order's shipping instructions" do
-      instructions = order.shipping_instructions
+      instructions = order.shipping_instructions = "Attach PO"
       report = ShippingInstructionDoc.new(order)
       expect(report.shipping_instructions).to eq(instructions)
     end

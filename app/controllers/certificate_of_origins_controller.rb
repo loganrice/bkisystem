@@ -15,7 +15,6 @@ class CertificateOfOriginsController < ApplicationController
     @certificate_of_origin = CertificateOfOrigin.new(certificate_of_origins_params)
     if @certificate_of_origin.save
       flash[:success] = "Updated"
-      binding.pry
       redirect_to edit_certificate_of_origin_path(@certificate_of_origin)
     else
       flash[:error] = @certificate_of_origin.errors.full_messages
