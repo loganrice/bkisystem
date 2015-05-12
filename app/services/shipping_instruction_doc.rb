@@ -1,14 +1,18 @@
 class ShippingInstructionDoc
   include DocxReplace
+  include ActionView::Helpers::NumberHelper
+  
+  FILE_TEMPLATE_PATH = "#{Rails.root}/app/reports/shipping_instructions.docx"
 
   def initialize(order)
-    @doc = DocxReplace::Doc.new("#{Rails.root}/app/reports/shipping_instructions.docx", "#{Rails.root}/tmp")
     @order = order
     @contract = @order.contract
-    create_shipping_report
+    @items = items
+    create_report
   end
 
-  def create_shipping_report
+  def create_report
+    @doc = DocxReplace::Doc.new(FILE_TEMPLATE_PATH, "#{Rails.root}/tmp")
     @doc.replace( "[[SHIP_DATE]]", ship_date)
     @doc.replace("[[SELLER_CONTRACT]]", seller_contract)
     @doc.replace("[[LOAD_NUMBER]]", load_number)
@@ -206,5 +210,59 @@ class ShippingInstructionDoc
 
   def commodity
     @order.order_line_items.first.item.commodity.name rescue ""
+  end
+
+  def items
+    #  pack_count X pack_weight_pounds Lb. pack_type origin commodity
+    # { "California Almonds pack_weight_pounds" => 
+    #   count: 880, 
+    #   origin: "California",
+    #   commodity: "Almonds",
+    #   pack_weight_pounds: 50  }
+    items = []
+
+    @order.order_line_items.each do |line_item|
+      items << get_item_properties(line_item)
+    end
+    items
+  end
+
+  def uniq_items
+    uniq_items = {}
+    @items.each do |item|
+      if uniq_items.has_key? item[:description]
+        uniq_items[item[:description]][:pack_count] += item[:pack_count]
+        if item[:order_id] != uniq_items[item[:description]][:order_id]
+          uniq_items[item[:description]][:shipments_count] += 1
+        end
+      else
+        uniq_items[item[:description]] = { pack_count: item[:pack_count],
+                                        pack_weight: item[:pack_weight],
+                                        commodity: item[:commodity],
+                                        pack_type: item[:pack_type],
+                                      }
+      end 
+    end
+    uniq_items
+  end
+
+  def get_item_properties(line_item)
+    item = {}
+
+    description = <<-EOF
+      "#{line_item.item.try(:commodity).try(:name)}"
+      #{line_item.pack_weight_pounds}"
+      #{line_item.pack_type.try(:name)}"
+    EOF
+
+    item[:description] = description.gsub(/\n/, " ")
+    item[:pack_count] = line_item.pack_count
+    item[:pack_weight] = line_item.pack_weight_pounds
+    item[:pack_type] = line_item.pack_type.try(:name).to_s
+    item[:origin] = line_item.item.try(:origin).try(:name).to_s
+    item[:commodity] = line_item.item.try(:commodity).try(:name).to_s
+
+    item
+
   end
 end

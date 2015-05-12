@@ -22,6 +22,27 @@ class CertificateOfOriginsController < ApplicationController
     end
   end
 
+  def update
+    @certificate_of_origin = CertificateOfOrigin.find(params[:id])
+    if @certificate_of_origin.update(certificate_of_origins_params)
+      flash[:success] = "Updated"
+      redirect_to edit_certificate_of_origin_path(@certificate_of_origin)
+    else
+      render :edit
+    end
+  end
+
+  def show
+    @order = CertificateOfOrigin.find(params[:id]).order 
+    respond_to do |format|
+      format.docx do
+        report = CertificateOfOriginDoc.new(@order)
+        # Respond to the request by sending the temp file
+        send_file report.create_report, filename: "certificate_of_origin.docx", disposition: 'inline'
+      end
+    end
+  end
+
   private
 
   def certificate_of_origins_params
@@ -32,7 +53,9 @@ class CertificateOfOriginsController < ApplicationController
       :initial_carriage_by,
       :vessel,
       :hs_code,
-      :order_id
+      :order_id,
+      :routing_instructions,
+      :port_of_loading
       )
   end
 end

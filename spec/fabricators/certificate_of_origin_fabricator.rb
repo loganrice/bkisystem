@@ -7,4 +7,5 @@ Fabricator(:certificate_of_origin) do
   initial_carriage_by { Faker::Lorem.word }
   vessel { Faker::Lorem.word }
   order_id { Fabricate(:order).id }
+  routing_instructions { Faker::Lorem.word }
 end

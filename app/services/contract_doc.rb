@@ -212,7 +212,7 @@ class ContractDoc
     item = Item.find(item_id)
     size_indicator = ItemSizeIndicator.find(size_indicator_id)
     if item
-      description = "#{item.variety.name} #{item.commodity.name} #{item.shell.name} #{item.grade.name} #{item.size.name} #{size_indicator.name}"
+      description = "#{item.variety.try(:name)} #{item.commodity.try(:name)} #{item.shell.try(:name)} #{item.grade.try(:name)} #{item.size.name} #{size_indicator.name}"
     end 
   end
 
@@ -226,12 +226,12 @@ class ContractDoc
       item_properties[:description] = "#{item.variety.name} #{item.commodity.name} #{item.grade.name} #{item.size.name} #{size_indicator.name} #{line_item.pack_weight_pounds}"
       item_properties[:weight] = line_item.pack_weight_pounds
       item_properties[:pack_count] = line_item.pack_count
-      item_properties[:variety] = item.variety.name
-      item_properties[:commodity] = item.commodity.name
-      item_properties[:grade] = item.grade.name
-      item_properties[:size] = item.size.name
-      item_properties[:shell] = item.shell.name
-      item_properties[:size_indicator] = size_indicator.name
+      item_properties[:variety] = item.variety.try(:name)
+      item_properties[:commodity] = item.commodity.try(:name)
+      item_properties[:grade] = item.grade.try(:name)
+      item_properties[:size] = item.size.try(:name)
+      item_properties[:shell] = item.shell.try(:name)
+      item_properties[:size_indicator] = size_indicator.try(:name)
       item_properties[:pack_type] = pack_type
       item_properties[:uom] = uom
       item_properties[:order_id] = line_item.order.id

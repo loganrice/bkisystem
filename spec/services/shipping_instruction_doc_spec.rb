@@ -303,4 +303,78 @@ describe ShippingInstructionDoc do
       expect(report.commodity).to eq(commodity)
     end
   end
+
+  describe "#get_item_properties" do 
+    let!(:order) { Fabricate(:order)}
+    before(:each) do 
+      certificate = CertificateOfOrigin.create(order_id: order.id, forwarding_agent: "Bob")
+      california = Origin.create(name: "california")
+      almonds = Commodity.create(name: "almonds")
+      item = Fabricate(:item, commodity_id: almonds.id, origin_id: california.id)
+      line_item1 = OrderLineItem.create(order_id: order.id, item_id: item.id, price_cents: 452, pack_weight_pounds: 50, pack_count: 447)
+      line_item2 = OrderLineItem.create(order_id: order.id, item_id: item.id, price_cents: 452, pack_weight_pounds: 50, pack_count: 433)
+    end
+
+
+    it "includes the item's pack_count" do
+      line_item = order.order_line_items.first
+      line_item.pack_count = 880
+      report = CertificateOfOriginDoc.new(order)
+      expect(report.get_item_properties(line_item)[:pack_count]).to eq(880) 
+    end
+
+    it "contains the item pack weight pounds" do
+      line_item = order.order_line_items.first
+      line_item.pack_weight_pounds = 50
+      report = CertificateOfOriginDoc.new(order)
+      expect(report.get_item_properties(line_item)[:pack_weight]).to eq(50) 
+    end
+
+    it "contains the item origin" do 
+      line_item = order.order_line_items.first
+      line_item.item.origin.name = "california"
+      report = CertificateOfOriginDoc.new(order)
+      expect(report.get_item_properties(line_item)[:origin]).to eq("california") 
+    end 
+    it "contains the item commodity" do 
+      line_item = order.order_line_items.first
+      line_item.item.commodity.name = "almonds"
+      report = CertificateOfOriginDoc.new(order)
+      expect(report.get_item_properties(line_item)[:commodity]).to eq("almonds") 
+    end
+  end
+
+  describe "#uniq_items" do
+
+    before(:each) do 
+      order2 = Fabricate(:order)
+      bags = PackType.create(name: "bags")
+      california = Origin.create(name: "california")
+      almonds = Commodity.create(name: "almonds")
+      item = Fabricate(:item)
+      item.commodity = almonds
+      item.origin = california
+      item.save
+      order2.order_line_items.delete_all
+      line_item1 = OrderLineItem.create(order_id: order2.id, item_id: item.id, pack_type_id: bags.id, price_cents: 452, pack_weight_pounds: 50, pack_count: 447)
+      line_item2 = OrderLineItem.create(order_id: order2.id, item_id: item.id, pack_type_id: bags.id, price_cents: 452, pack_weight_pounds: 50, pack_count: 433)
+    end
+
+    it "only includes each @item once" do 
+      boxes = PackType.create(name: "boxes")
+      order = Order.last
+      item = Item.first
+      line_item2 = OrderLineItem.create(order_id: order.id, item_id: item.id, pack_type_id: boxes.id, price_cents: 452, pack_weight_pounds: 50, pack_count: 433)
+      report = ShippingInstructionDoc.new(order)
+      expect(report.uniq_items.count).to eq(2)
+    end
+
+    it "adds the pack_count to items with the same name" do
+      order = Order.last
+      report = ShippingInstructionDoc.new(order)
+      expect(order.order_line_items.count).to eq(2)
+      expect(report.uniq_items.count).to eq(1)
+    end
+
+  end
 end

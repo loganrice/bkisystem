@@ -23,7 +23,7 @@
       %span.menu-item-parent 
         = "Edit Certificate of Origin"
   - else
-    = link_to new_order_certificate_of_origins_path(@order), remote: true, class: "btn btn-info" do 
+    = link_to new_certificate_of_origin_path(order_id: @order.id), remote: true, class: "btn btn-info" do 
       %i.fa.fa-lg.fa-fw.fa-pencil-square-o
       %span.menu-item-parent 
         = "Add Certificate of Origin"
