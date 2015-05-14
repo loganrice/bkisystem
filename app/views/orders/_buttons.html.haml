@@ -17,6 +17,10 @@
     %i.fa.fa-lg.fa-fw.fa-cloud-download
     %span.menu-item-parent Shipping Instructions
 
+  = link_to packing_list_path(@order, format: "docx"), target: "_blank", class: "btn btn-default" do 
+    %i.fa.fa-lg.fa-fw.fa-cloud-download
+    %span.menu-item-parent Packing List
+    
   - if @order.certificate_of_origin
     = link_to edit_certificate_of_origin_path(@order.certificate_of_origin), remote: true, class: "btn btn-info" do 
       %i.fa.fa-lg.fa-fw.fa-pencil-square-o
