@@ -305,6 +305,3 @@ DEPENDENCIES
   vcr
   webmock
   will_paginate
-
-BUNDLED WITH
-  1.10.0.pre
