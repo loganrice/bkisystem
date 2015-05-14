@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   resources :remarks
   resources :delivery_locations
   resources :shipping_instructions, only: [:show]
+  resources :packing_lists, only: [:show]
+
   resources :certificate_of_origins  
   get 'contracts/:id/contract_report' => 'contracts#contract_report', as: :contract_report
   get 'invoices/:id/invoice_report' => 'invoices#invoice_report', as: :invoice_report 
