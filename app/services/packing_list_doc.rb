@@ -19,7 +19,7 @@ class PackingListDoc < ShippingInstructionDoc
     @doc.replace("[[BOOKING]]", @order.booking_number.to_s)
     @doc.replace("[[TOTAL_POUNDS]]", number_with_precision(@order.total_pounds.to_i, precision: 0, delimiter: ",", strip_insignificant_zeros: true))
 
-    @doc.replace("[[GROSS_TRUCK_WEIGHT]]", number_with_precision(@order.gross_truck_weight.to_i, precision: 0, delimiter: ",", strip_insignificant_zeros: true))
+    @doc.replace("[[GROSS_TRUCK_WEIGHT]]", number_with_precision(@order.truck_gross_weight.to_i, precision: 0, delimiter: ",", strip_insignificant_zeros: true))
 
     temp_file 
   end
