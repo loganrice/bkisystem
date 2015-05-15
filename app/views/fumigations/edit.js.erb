@@ -1,0 +1,10 @@
+$('#content').replaceWith( '<%= j render "form", fumigation: @fumigation %>');
+pageSetUp();
+
+<% if flash.any? %>
+  $('#content').before('<%= j render("shared/messages") %>');
+<% end %>
+
+setTimeout(function() {
+  $('.flash-messages').remove();
+}, 10000);

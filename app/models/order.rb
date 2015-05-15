@@ -10,6 +10,7 @@ class Order < ActiveRecord::Base
   has_many :documents, :through => :document_orders
   has_many :invoices
   has_one :certificate_of_origin
+  has_one :fumigation
   accepts_nested_attributes_for :order_line_items, allow_destroy: true
   accepts_nested_attributes_for :commissions, allow_destroy: true
   accepts_nested_attributes_for :invoices, allow_destroy: true
