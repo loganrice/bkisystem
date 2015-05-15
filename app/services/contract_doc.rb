@@ -1,8 +1,8 @@
 class ContractDoc
   include DocxReplace
+  FILE_TEMPLATE_PATH = "#{Rails.root}/app/reports/contract.docx"
 
   def initialize(contract)
-    @doc = DocxReplace::Doc.new("#{Rails.root}/app/reports/contract.docx", "#{Rails.root}/tmp")
     @contract = contract
     @line_items = each_line_item
     @order_items = order_items
@@ -12,6 +12,7 @@ class ContractDoc
   end
 
   def create_contract
+    @doc = DocxReplace::Doc.new(FILE_TEMPLATE_PATH, "#{Rails.root}/tmp")
     @doc.replace( "[[CONTRACT_NO]]", @contract.seller_contract.to_s)
     @doc.replace( "[[CUSTOMER_CONTRACT_NO]]", @contract.buyer_contract.to_s)
     @doc.replace( "[[SELLER_NAME]]", @contract.seller.try(:name).to_s)
@@ -35,6 +36,8 @@ class ContractDoc
     @doc.replace( "[[PAYMENT]]", @contract.payment_terms.to_s)
     @doc.replace( "[[REMARKS]]", @contract.remarks.to_s)
     @doc.replace( "[[SIGNATURE]]", @contract.seller.try(:name).to_s)
+    @doc.replace( "[[DATE]]", @contract.contract_date.to_s)
+
 
     temp_file
   end

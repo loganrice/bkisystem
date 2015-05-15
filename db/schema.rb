@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150514211235) do
+ActiveRecord::Schema.define(version: 20150515210932) do
 
   create_table "accounts", force: true do |t|
     t.string "name"
@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(version: 20150514211235) do
     t.text     "remarks"
     t.string   "ship_date_note"
     t.integer  "acting_seller_id"
+    t.date     "contract_date"
   end
 
   create_table "delivery_locations", force: true do |t|
