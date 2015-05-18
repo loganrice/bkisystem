@@ -52,9 +52,9 @@
                       %td
                         = order.contract.seller.name
                       %td
-                        = link_to order.contract.seller_contract, edit_contract_path(order.contract), remote: true
+                        = link_to order.contract.seller_contract, edit_contract_path(order.contract), remote: true, data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..."}
                       %td
-                        = link_to order.row_on_contract, edit_order_path(order), remote: true
+                        = link_to order.row_on_contract, edit_order_path(order), remote: true, data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..."}
                       %td 
                         = order.contract.date
                       %td

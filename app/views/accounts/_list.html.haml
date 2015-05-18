@@ -50,7 +50,7 @@
                     %tr
                       %td= account.id
                       %td
-                        = link_to account.name, edit_account_path(account), remote: true
+                        = link_to account.name, edit_account_path(account), remote: true, data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..."}
                       %td= account.first_name
                       %td= account.last_name
                       %td= account.email

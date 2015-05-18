@@ -47,7 +47,7 @@
                   - @contracts.each do |contract|
                     %tr
                       %td
-                        = link_to contract.seller_contract, edit_contract_path(contract), remote: true
+                        = link_to contract.seller_contract, edit_contract_path(contract), remote: true, data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..."}
                       %td= contract.buyer.try(:name)
                       %td= contract.seller.try(:name)
                       %td= contract.seller_contract 

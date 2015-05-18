@@ -18,10 +18,10 @@ class OrdersController < ApplicationController
   end
 
   def edit
-    @order = Order.find(params[:id])
+    @order = Order.includes(:order_line_items).find(params[:id])
     @locations = DeliveryLocation.all
-    @items = Item.all
-
+    @items = Item.includes(:variety, :grade, :size).all
+    
     if @order.commissions.count == 0
       @order.commissions.create()
     end
@@ -30,7 +30,7 @@ class OrdersController < ApplicationController
   end
 
   def update
-    @order = Order.find(params[:id])
+    @order = Order.includes(:order_line_items).find(params[:id])
     if @order.update(order_params)
       flash[:success] = "Updated"
       redirect_to edit_order_path(@order)

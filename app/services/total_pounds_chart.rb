@@ -1,7 +1,7 @@
 class TotalPoundsChart
   def initialize(start = 1.months.ago.to_date)
     @start = start
-    @orders = Order.where(created_at: @start.beginning_of_day..Time.zone.now)
+    @orders = Order.includes(:order_line_items).where(created_at: @start.beginning_of_day..Time.zone.now)
     @data = self.pounds
   
   end

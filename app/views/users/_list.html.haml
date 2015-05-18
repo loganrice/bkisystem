@@ -45,7 +45,7 @@
                     %tr
                       %td= user.id
                       %td
-                        = link_to user.name, edit_user_path(user), remote: true
+                        = link_to user.name, edit_user_path(user), remote: true, data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..."}
 
 
 

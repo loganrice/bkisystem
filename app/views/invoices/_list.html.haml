@@ -34,9 +34,9 @@
                 %tbody
                   - @invoices.each do |invoice|
                     %tr
-                      %td= link_to invoice.invoice_number.blank? ? "Blank" : invoice.invoice_number, edit_invoice_path(invoice), remote: true
-                      %td= link_to invoice.order.contract.seller_contract, edit_contract_path(invoice.order.contract), remote: true
-                      %td= link_to invoice.order.row_on_contract, edit_order_path(invoice.order), remote: true 
+                      %td= link_to invoice.invoice_number.blank? ? "Blank" : invoice.invoice_number, edit_invoice_path(invoice), remote: true, data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..."}
+                      %td= link_to invoice.order.contract.seller_contract, edit_contract_path(invoice.order.contract), remote: true, data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..."}
+                      %td= link_to invoice.order.row_on_contract, edit_order_path(invoice.order), remote: true, data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..."}
                       %td= invoice.payer.name
                       %td= invoice.payee.name
 
