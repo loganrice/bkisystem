@@ -30,7 +30,7 @@ class BrokerContractDoc < ContractDoc
     @doc.replace( "[[PAYMENT]]", @contract.payment_terms.to_s)
     @doc.replace( "[[REMARKS]]", @contract.remarks.to_s)
     @doc.replace( "[[SIGNATURE]]", @contract.seller.try(:name).to_s)
-    @doc.replace( "[[DATE]]", @contract.contract_date.to_s)
+    @doc.replace( "[[DATE]]", @contract.contract_date.try(:strftime, '%m/%d%Y'))
 
 
     temp_file

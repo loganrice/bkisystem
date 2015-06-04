@@ -13,6 +13,10 @@ class ContractsController < ApplicationController
 
   def index
     @contracts = Contract.all
+    respond_to do |format|
+      format.html { render 'home' }
+      format.js
+    end
   end
 
   def new

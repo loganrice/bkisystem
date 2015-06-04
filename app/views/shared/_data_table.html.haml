@@ -5,14 +5,12 @@
     %div.row
       -# NEW WIDGET START -->
       %article.col-xs-12.col-sm-12.col-md-12.col-lg-12
-        -#- end widget -->
-        -#- Widget ID (each widget will need unique ID)-->
-        %div.jarviswidget.jarviswidget-color-blueDark#itemlist{ "data-widget-editbutton" => "true", "data-widget-colorbutton" => "false" }
+        %div.jarviswidget.jarviswidget-color-blueDark{ "data-widget-editbutton" => "true", "data-widget-deletebutton" => "false", "data-widget-togglebutton" => "false", "data-widget-fullscreenbutton" => "false", "data-widget-colorbutton" => "false" }
           %header
             %span.widget-icon
               %i.fa.fa-table
             - if data.first
-              %h2= "#{data.first.class.name} List"
+              %h2.widget-header= "#{data.first.class.name} List"
           -#- widget div-->
           %div
             -# widget edit box -->

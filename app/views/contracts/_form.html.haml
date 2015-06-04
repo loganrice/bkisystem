@@ -11,7 +11,7 @@
           %header
             %span.widget-icon
               %i.fa.fa-table
-            %h2= @contract.id if @contract.id
+            %h2.widget-header= @contract.seller_contract.to_s
             %ul.nav.nav-tabs.pull-right{ "role" => "tablist" }
               %li.active{ "role" => "presentation"}
                 %a{ "href" => "#contract-profile", "aria-controls" => "contract-profile", "role" => "tab", "data-toggle" => "tab" } Contract Profile
@@ -72,7 +72,7 @@
                       %div.panel.panel-default
                         %div.panel-heading
                           - if !@contract.new_record?
-                            = link_to new_contract_orders_path(@contract), class: 'btn btn-success', remote: true do
+                            = link_to new_contract_orders_path(@contract), class: 'btn btn-success', remote: true, data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..." } do
                               %i.fa.fa-truck
                               %i.fa.fa-plus
 

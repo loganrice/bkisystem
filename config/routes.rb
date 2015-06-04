@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   # root to: 'contracts#home'
   root 'sessions#new'
-  get 'home', to: 'contracts#home'
+  get 'home' => 'contracts#index'
   
   resources :items
   resources :commodities

@@ -11,7 +11,7 @@
           %header
             %span.widget-icon
               %i.fa.fa-table
-            %h2 Fumigation
+            %h2.widget-header Fumigation
           -#- widget div-->
           %div
             -# widget edit box -->
@@ -23,12 +23,12 @@
               = bootstrap_form_for(@fumigation, class: "login-form smart-form client-form", layout: :horizontal, label_errors: true, remote: true) do |f|
 
                 %div.well.well-sm.bg-color-darken.txt-color-white.no-border#button-header
-                  = link_to edit_contract_path(@fumigation.order.contract), remote: true, class: "btn btn-info" do 
+                  = link_to edit_contract_path(@fumigation.order.contract), remote: true, class: "btn btn-info", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..."} do 
                     %i.fa.fa-lg.fa-fw.fa-pencil-square-o
                     %span.menu-item-parent 
                       = "Contract - #{@fumigation.order.contract.seller_contract}"
 
-                  = link_to edit_order_path(@fumigation.order), remote: true, class: "btn btn-info" do 
+                  = link_to edit_order_path(@fumigation.order), remote: true, class: "btn btn-info", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..." } do 
                     %i.fa.fa-lg.fa-fw.fa-truck
                     %span.menu-item-parent 
                       = "Load - #{@fumigation.order.row_on_contract}"
@@ -39,7 +39,7 @@
 
 
                   - unless @fumigation.new_record?
-                    = link_to fumigation_path(@fumigation, format: "docx"), target: "_blank", class: "btn btn-default" do 
+                    = link_to fumigation_path(@fumigation, format: "docx"), target: "_blank", class: "btn btn-default", data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..." } do 
                       %i.fa.fa-lg.fa-fw.fa-cloud-download
                       %span.menu-item-parent Fumigation 
 

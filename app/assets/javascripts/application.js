@@ -16,13 +16,9 @@
 //= require bootstrap
 //= require plugin/jquery-touch/jquery.ui.touch-punch
 //= require notification/SmartNotification
-//= require demo
 //= require smartwidgets/jarvis.widget
-//= require plugin/sparkline/jquery.sparkline
 //= require plugin/jquery-validate/jquery.validate
-//= require plugin/morris/morris
-//= require plugin/morris/raphael
-
+//= demo
 //= require plugin/easy-pie-chart/jquery.easy-pie-chart
 //= require plugin/bootstrap-timepicker/bootstrap-timepicker
 //= require plugin/flot/jquery.flot.cust
@@ -33,13 +29,12 @@
 //= speech/voicecommand
 //= require app.config
 //= require app.js
-//= require pounds.chart
 //= require main
 //= require lodash
 //= require plugin/fullcalendar/jquery.fullcalendar.backup
 //= require plugin/fullcalendar/jquery.fullcalendar
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
-
+//= require contracts
 //= require turbolinks
 

@@ -7,21 +7,21 @@
       %article.col-xs-12.col-sm-12.col-md-12.col-lg-12
         -#- end widget -->
         -#- Widget ID (each widget will need unique ID)-->
-        %div.jarviswidget.jarviswidget-color-blueDark#itemlist{ "data-widget-editbutton" => "true", "data-widget-colorbutton" => "false" }
+        %div.jarviswidget.jarviswidget-color-blueDark{ "data-widget-editbutton" => "true", "data-widget-deletebutton" => "false", "data-widget-togglebutton" => "false", "data-widget-fullscreenbutton" => "false", "data-widget-colorbutton" => "false" }
           -# widget options:
           -#usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
           -#data-widget-colorbutton="false"
           -#data-widget-editbutton="false"
           -#data-widget-togglebutton="false"
           -#data-widget-deletebutton="false"
-          -#data-widget-fullscreenbutton="false"
+          -#data-widget-fullscreenbutton="true"
           -#data-widget-custombutton="false"
           -#data-widget-collapsed="true"
           -#data-widget-sortable="false"
           %header
             %span.widget-icon
               %i.fa.fa-table
-            %h2 Contract List
+            %h2.widget-header Contract List
           -#- widget div-->
           %div
             -# widget edit box -->
@@ -41,8 +41,8 @@
                     %th Seller Contract
                     %th Buyer
                     %th Seller
-                    %th Items
-                    %th Date
+                    %th Total Lbs
+                    %th Contract Date
                 %tbody
                   - @contracts.each do |contract|
                     %tr
@@ -50,5 +50,5 @@
                         = link_to contract.seller_contract, edit_contract_path(contract), remote: true, data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..."}
                       %td= contract.buyer.try(:name)
                       %td= contract.seller.try(:name)
-                      %td= contract.seller_contract 
-                      %td= contract.date
+                      %td= number_with_precision(contract.total_pounds, delimiter: ",", precision: 2)
+                      %td= contract.contract_date.try(:strftime, '%m/%d/%Y')

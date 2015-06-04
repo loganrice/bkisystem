@@ -10,7 +10,7 @@ describe ShippingInstructionDoc do
     it "returns the ship_date" do
       order.update_attributes(ship_date: Date.new(2014, 1, 1))
       report = ShippingInstructionDoc.new(order)
-      expect(report.ship_date).to eq("2014-01-01")
+      expect(report.ship_date).to eq("01/01/2014")
     end
   end
 

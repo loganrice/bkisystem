@@ -5,23 +5,11 @@
     %div.row
       -# NEW WIDGET START -->
       %article.col-xs-12.col-sm-12.col-md-12.col-lg-12
-        -#- end widget -->
-        -#- Widget ID (each widget will need unique ID)-->
-        %div.jarviswidget.jarviswidget-color-blueDark#itemindex{ "data-widget-editbutton" => "false",  "data-widget-colorbutton" => "false", "data-widget-deletebutton" => "false" }
-          -# widget options:
-          -#usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-          -#data-widget-colorbutton="false"
-          -#data-widget-editbutton="false"
-          -#data-widget-togglebutton="false"
-          -#data-widget-deletebutton="false"
-          -#data-widget-fullscreenbutton="false"
-          -#data-widget-custombutton="false"
-          -#data-widget-collapsed="true"
-          -#data-widget-sortable="false"
+        %div.jarviswidget.jarviswidget-color-blueDark{ "data-widget-editbutton" => "true", "data-widget-deletebutton" => "false", "data-widget-togglebutton" => "false", "data-widget-fullscreenbutton" => "false", "data-widget-colorbutton" => "false" }
           %header
             %span.widget-icon
               %i.fa.fa-table
-            %h2= @account.name
+            %h2.widget-header= @account.name
             %ul.nav.nav-tabs.pull-right{ "role" => "tablist" }
               %li.active{ "role" => "presentation" }
                 %a{ "href" => "#profile", "aria-controls" => "profile", "role" => "tab", "data-toggle" => "tab" } Profile
@@ -29,8 +17,6 @@
                 %a{ "href" => "#address", "aria-controls" => "address", "role" => "tab", "data-toggle" => "tab" } Address
               %li{ "role" => "presentation" }
                 %a{ "href" => "#bank", "aria-controls" => "bank", "role" => "tab", "data-toggle" => "tab" } Bank
-              %li{ "role" => "presentation" }
-                %a{ "href" => "#settings", "aria-controls" => "settings", "role" => "tab", "data-toggle" => "tab" }Settings            
           -#- widget div-->
           %div
             -# widget edit box -->
@@ -68,9 +54,4 @@
                           = render 'bank_fields', f: builder
                       = link_to_add_fields "Add Bank", f, :banks
 
-                    %div.tab-pane.fade#settings{ "role" => "tabpanel" }
-                      %header
-                        %span.widget-icon
-                          %i.fa.fa-edit
-                        %h2 Place Holder   
 

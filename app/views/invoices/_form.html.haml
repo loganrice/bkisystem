@@ -5,13 +5,11 @@
     %div.row
       -# NEW WIDGET START -->
       %article.col-xs-12.col-sm-12.col-md-12.col-lg-12
-        -#- end widget -->
-        -#- Widget ID (each widget will need unique ID)-->
-        %div.jarviswidget.jarviswidget-color-blueDark#itemindex{ "data-widget-editbutton" => "false" }
+        %div.jarviswidget.jarviswidget-color-blueDark{ "data-widget-editbutton" => "true", "data-widget-deletebutton" => "false", "data-widget-togglebutton" => "false", "data-widget-fullscreenbutton" => "false", "data-widget-colorbutton" => "false" }
           %header
             %span.widget-icon
               %i.fa.fa-table
-            %h2 Invoice
+            %h2.widget-header Invoice
 
           -#- widget div-->
           %div
@@ -27,12 +25,12 @@
                     %div.font-md
                       %strong
                         LOAD NO :
-                        = link_to @order.row_on_contract, edit_order_path(@order), remote: true
+                        = link_to @order.row_on_contract, edit_order_path(@order), remote: true, data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..."}
                   %div
                     %div.font-md
                       %strong
                         CONTRACT # :
-                        = link_to @order.contract.seller_contract, edit_contract_path(@order.contract), remote: true
+                        = link_to @order.contract.seller_contract, edit_contract_path(@order.contract), remote: true, data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Loading..."}
                   %div
                     %div.font-md
                       %strong

@@ -59,7 +59,7 @@ class ShippingInstructionDoc
   end 
 
   def ship_date
-    @order.ship_date.to_s
+    @order.ship_date.try(:strftime, '%m/%d/%Y')
   end
 
   def seller_contract

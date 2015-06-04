@@ -2,7 +2,7 @@ $(document).on( "page:change", function() {
   // DO NOT REMOVE : GLOBAL FUNCTIONS!
   pageSetUp();
 
-  /*
+    /*
    * PAGE RELATED SCRIPTS
    */
 
