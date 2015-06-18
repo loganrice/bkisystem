@@ -124,6 +124,7 @@ class OrderLineItem < ActiveRecord::Base
     self.price_cents ||= 0
     self.pack_count ||= 0
     self.pack_weight_pounds ||= 0
+    self.weight ||= Weight.find_by(weight_unit_of_measure: "lbs")
   end
 
 end

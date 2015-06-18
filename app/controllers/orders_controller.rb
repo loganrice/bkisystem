@@ -21,11 +21,9 @@ class OrdersController < ApplicationController
     @order = Order.includes(:order_line_items).find(params[:id])
     @locations = DeliveryLocation.all
     @items = Item.includes(:variety, :grade, :size).all
-    
     if @order.commissions.count == 0
       @order.commissions.create()
     end
-    # @quote_line_items = quote_items(@order)
     render :edit
   end
 
