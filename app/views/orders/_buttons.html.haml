@@ -5,7 +5,7 @@
       %span.menu-item-parent 
         = "Contract - #{@order.contract.seller_contract}"
 
-    = button_tag(type: 'submit', class: "btn btn-primary") do
+    = button_tag(type: 'submit', class: "btn btn-primary", remote: true, data: { disable_with: "<i class='fa fa-spinner fa-spin'></i> Saving..." })do
       %i.fa.fa-lg.fa-fw.fa-save
       %span Save
 

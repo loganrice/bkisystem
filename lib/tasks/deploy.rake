@@ -10,10 +10,8 @@ namespace :deploy do
 
  desc 'Deploy app in production environment'
  task :production do
-   deployment = Paratrooper::Deploy.new("bki") do |deploy|
-     deploy.tag              = 'production',
-     deploy.match_tag        = 'staging'
-   end
+   deployment = Paratrooper::Deploy.new("bki", tag: "production")   
+  
    deployment.deploy
  end
 end
