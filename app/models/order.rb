@@ -23,7 +23,7 @@ class Order < ActiveRecord::Base
   end
 
   def row_on_contract
-    self.contract.orders.each_with_index do |order, index|
+    self.contract.orders.order(:created_at).each_with_index do |order, index|
       if order == self
         return index + 1
       end
