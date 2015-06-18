@@ -15,6 +15,7 @@ class Order < ActiveRecord::Base
   accepts_nested_attributes_for :commissions, allow_destroy: true
   accepts_nested_attributes_for :invoices, allow_destroy: true
   after_create :default_values
+  default_scope { order('created_at ASC') }
 
   def default_values
     copy_first_order_line_items_on_contract
@@ -159,7 +160,7 @@ class Order < ActiveRecord::Base
   end
 
   def first_order_on_contract
-    self.contract.orders.first
+    self.contract.orders.order(created_at: :asc).first
   end
 
   private

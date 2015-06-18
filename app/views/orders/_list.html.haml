@@ -37,7 +37,7 @@
                     %th Sale
 
                 %tbody
-                  - @orders.each do |order|
+                  - @orders.order(:created_at).each do |order|
                     %tr
                       %td
                         = order.contract.seller.name
