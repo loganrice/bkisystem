@@ -257,7 +257,6 @@ ActiveRecord::Schema.define(version: 20150515210932) do
     t.integer  "discount_cents"
     t.string   "buyer_po"
     t.integer  "mail_to_id"
-    t.string   "gross_truck_weight"
     t.string   "truck_gross_weight"
   end
 
